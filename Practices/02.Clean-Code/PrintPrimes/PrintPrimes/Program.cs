@@ -19,7 +19,26 @@ namespace PrintPrimes
 
     private static void PrintPrimes(int number)
     {
-      throw new NotImplementedException();
+        try
+        {
+          for (int i = 0; i <= number; i++)
+          {
+            for (int j = 1; j < i; j++)
+            {
+              if (i%j==0)
+              {
+                Console.WriteLine(number);
+              }
+            }
+          }
+        }
+        catch (System.Exception)
+        {
+          Console.WriteLine("no funca");
+          throw;
+        }
+        
+      }
     }
   }
 }
