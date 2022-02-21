@@ -6,6 +6,7 @@ namespace PrintPrimes
   {
     static void Main(string[] args)
     {
+
       PrintPrimes(13);
       // 2,3,5,7,11,13
       PrintPrimes(10);
@@ -19,7 +20,36 @@ namespace PrintPrimes
 
     private static void PrintPrimes(int number)
     {
-      throw new NotImplementedException();
+      int num=0,divisible=0;
+
+      while(num<=number)
+      {
+        for(int i=1; i<=number;i++){
+
+          if(num%i==0){
+            divisible++;
+          }
+
+          
+        }
+        if(divisible==2){
+          Console.WriteLine(num + ", ");
+        }
+
+        if(number==0){
+          Console.WriteLine("Invalid Number");
+        }
+
+         if(number==1){
+          Console.WriteLine("Is nor Prime");
+        }
+
+        divisible=0;
+        num++;
+
+      }
+
+      //Console.WriteLine(i + " , ");
     }
   }
 }
