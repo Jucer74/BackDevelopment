@@ -36,18 +36,20 @@ namespace PrintPrimes
           Console.WriteLine(num + ", ");
         }
 
-        if(number==0){
-          Console.WriteLine("Invalid Number");
-        }
-
-         if(number==1){
-          Console.WriteLine("Is nor Prime");
-        }
 
         divisible=0;
         num++;
 
       }
+
+
+        if(number==0){
+          Console.WriteLine("Error : Invalid Number");
+        }
+
+         if(number==1){
+          Console.WriteLine("Error : 1 Is not Prime");
+        }
 
       //Console.WriteLine(i + " , ");
     }
