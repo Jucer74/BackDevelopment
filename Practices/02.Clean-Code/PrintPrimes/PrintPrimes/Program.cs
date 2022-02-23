@@ -19,14 +19,31 @@ namespace PrintPrimes
 
     private static void PrintPrimes(int number)
     {
-      Console.WriteLine("Real World");
+     
       // Loop to iterate until the number
-        // Validate is the index is Prime
+      for (int i = 2; i <= number; i++)
+      {
+          // Validate is the index is Prime
+          bool flag=false;
           // loop from 2 to number 
+          for (int j = 2; j <= i; j++)
+          {
             // validate if multipleOf
+            if (i % j == 0)
+            {
               // return True =>> Not Prime
+              flag = true;
+              break;
+            }
+          }
+
             // If IsPrime
-              // Write Number
+          if(flag == false)
+          {
+            // Write Number
+            Console.WriteLine(i);
+          }
+      }
     }
   }
 }
