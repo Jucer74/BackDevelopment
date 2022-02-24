@@ -19,7 +19,17 @@ namespace PrintPrimes
 
     private static void PrintPrimes(int number)
     {
-     
+      if(number==0)
+      {
+        Console.WriteLine("Error: Invalid Number");
+        return;
+      }
+      if(number==1)
+      {
+        Console.WriteLine("Error: 1 Is not Prime");
+        return;
+      }
+
       // Loop to iterate until the number
       for (int i = 2; i <= number; i++)
       {
@@ -29,7 +39,7 @@ namespace PrintPrimes
           for (int j = 2; j <= i; j++)
           {
             // validate if multipleOf
-            if (i % j == 0)
+            if (i % j == 0 && i != j)
             {
               // return True =>> Not Prime
               flag = true;
