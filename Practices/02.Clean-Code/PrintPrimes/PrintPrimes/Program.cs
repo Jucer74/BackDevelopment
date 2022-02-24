@@ -29,7 +29,7 @@ namespace PrintPrimes{
           for (int i = 2; i <= number; i++){
             for (int j = 1; j <= i; j++){ 
               if (i % j == 0){ 
-                cont = cont + 1;
+                cont += 1;
               }
             }
             if (cont <= 2){ 
