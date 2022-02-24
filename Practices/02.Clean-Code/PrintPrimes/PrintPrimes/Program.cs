@@ -36,7 +36,7 @@ namespace PrintPrimes{
               Console.Write(i+",");
             }      
             cont = 0;
-          } 
+          } //asdasdas
         }
       }
       catch (System.Exception){
