@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Text;
 
 namespace PrintPrimes
 {
   internal class Program
   {
+    private const int INITIAL_PRIME = 2;
     static void Main(string[] args)
     {
       PrintPrimes(13);
@@ -19,41 +21,56 @@ namespace PrintPrimes
 
     private static void PrintPrimes(int number)
     {
+
       if(number==0)
       {
         Console.WriteLine("Error: Invalid Number");
         return;
       }
+
       if(number==1)
       {
         Console.WriteLine("Error: 1 Is not Prime");
         return;
       }
 
-      // Loop to iterate until the number
-      for (int i = 2; i <= number; i++)
-      {
-          // Validate is the index is Prime
-          bool flag=false;
-          // loop from 2 to number 
-          for (int j = 2; j <= i; j++)
+      Console.WriteLine(GetPrimes(number));
+    }
+    private static bool IsMultipleOf(int currentNumber, int baseMultiple)
+    {
+      return currentNumber % baseMultiple == 0 && currentNumber != baseMultiple;
+    }
+
+    private static bool IsPrime(int currentNumber)
+    {
+        for (int baseMultiple = INITIAL_PRIME; baseMultiple <= currentNumber; baseMultiple++)
+        {
+          if (IsMultipleOf(currentNumber, baseMultiple))
           {
-            // validate if multipleOf
-            if (i % j == 0 && i != j)
+            return false;
+          }
+        }
+        return true;
+    }
+
+    private static string GetPrimes(int number)
+    {
+      StringBuilder sbPrimes= new StringBuilder();
+
+      for (int currentNumber = INITIAL_PRIME; currentNumber <= number; currentNumber++)
+      {
+          if(IsPrime(currentNumber))
+          {
+            sbPrimes.Append(currentNumber);
+            if(currentNumber < number)
             {
-              // return True =>> Not Prime
-              flag = true;
-              break;
+              sbPrimes.Append(",");
             }
           }
-
-            // If IsPrime
-          if(flag == false)
-          {
-            // Write Number
-            Console.WriteLine(i);
-          }
       }
+
+      return sbPrimes.ToString();
     }
   }
 }
+
