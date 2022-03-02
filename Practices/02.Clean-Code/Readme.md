@@ -1,7 +1,7 @@
 # Crear el Proyecto
 
 ```
-dotnet new console --framework net5.0 -n PrintMultiples`
+dotnet new console --framework net5.0 -n PrintMultiples
 ````
 # Descargar Nugets y restaurar el proyecto
 
