@@ -4,8 +4,7 @@ En esta sesión se describe cómo utilizar las clases de seguimiento y depuraci�
 
 ## Ejemplo usando la clase DEBUG
 
-- Inicie Visual Studio o Visual C# Express.
-- Cree un nuevo proyecto de aplicación de consola denominado **Debugging**.
+- Inicie Visual Studio y en la terminal cree una nueva aplicacion de consola llamada **Debugging**.
 - Agregue el siguiente espacio de nombres en parte superior en **Program.cs**.
 
 ``` csharp
@@ -269,8 +268,6 @@ namespace Debugging
         }
     }
 }
-
-
 ``` 
 ## Solucionar Problemas
 
