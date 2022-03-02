@@ -16,9 +16,7 @@ using System.Diagnostics;
 
 ``` csharp
 string sProdName = "Widget";
-
 int iUnitQty = 100;
-
 double dUnitCost = 1.03;
 ```
 
@@ -38,16 +36,13 @@ Debug.Indent();
 
 ``` csharp
 Debug.WriteLine("El Nombre del producto es: " + sProdName);
-
 Debug.WriteLine("El numero de unidades es: " + iUnitQty.ToString());
-
 Debug.WriteLine("El valor por unidad es: " + dUnitCost.ToString());
 ``` 
 - También puede utilizar el método **WriteLine** para mostrar el espacio de nombres y el nombre de clase para un objeto existente. Por ejemplo, el código siguiente muestra el espacio de nombres de System.Xml.XmlDocument en la ventana resultados:
 
 ``` csharp
 System.Xml.XmlDocument oxml = new System.Xml.XmlDocument();
-
 Debug.WriteLine(oxml);
 ```
 
@@ -55,11 +50,8 @@ Debug.WriteLine(oxml);
 
 ``` csharp
 Debug.WriteLine("El Nombre del producto es: " + sProdName,"Categoria:");
-
 Debug.WriteLine("El numero de unidades es: " + iUnitQty.ToString(),"Categoria:");
-
 Debug.WriteLine("El valor por unidad es: " + dUnitCost.ToString(), "Categoria:");
-
 Debug.WriteLine ("El Costo total es:" + (iUnitQty \* dUnitCost),"Calculo");
 ``` 
 
@@ -67,7 +59,6 @@ Debug.WriteLine ("El Costo total es:" + (iUnitQty \* dUnitCost),"Calculo");
 
 ``` csharp
 Debug.WriteLineIf(iUnitQty >; 50, "Este mensaje si aparecera");
-
 Debug.WriteLineIf(iUnitQty < 50, "Este mensaje NO aparecera");
 ```
 
@@ -75,7 +66,6 @@ Debug.WriteLineIf(iUnitQty < 50, "Este mensaje NO aparecera");
 
 ``` csharp
 Debug.Assert(dUnitCost >; 1, "Este mensaje no aparecera");
-
 Debug.Assert(dUnitCost< 1, "Este mensaje aparece si dUnitcost < 1 es falso");
 
 ```
@@ -83,24 +73,17 @@ Debug.Assert(dUnitCost< 1, "Este mensaje aparece si dUnitcost < 1 es falso");
 
 ``` csharp
 TextWriterTraceListener tr1 = newTextWriterTraceListener(System.Console.Out);
-
 Debug.Listeners.Add(tr1);
-
 TextWriterTraceListener tr2 = new
-
 TextWriterTraceListener(System.IO.File.CreateText("Output.txt"))
-
 Debug.Listeners.Add(tr2);
 ``` 
 
 - Para mejorar la legibilidad, utilice el método Quitar sangría para quitar la sangría para los mensajes posteriores que genera la clase Debug . Cuando se utiliza la sangría y los métodos de Quitar sangría juntos, el lector puede distinguir los resultados como grupo.
 
 ``` csharp
-
 Debug.Unindent();
-
 Debug.WriteLine("Debug: Finaliza la informacion de producto");
-
 ``` 
 
 -Para asegurarse de que cada objeto de escucha recibe todo su salida, llamar al método Flush para los búferes de clase Debug :
@@ -152,23 +135,14 @@ Puede utilizar el seguimiento y las clases **Debug** por separado o conjuntament
 
 ``` csharp
 Trace.WriteLine("Trace: Iniciando Informacion de Producto");
-
 Trace.Indent();
-
 Trace.WriteLine("El nombre del producto es:"+sProdName);
-
 Trace.WriteLine("El nombre del producto es:"+sProdName,"Categoria:" );
-
 Trace.WriteLineIf(iUnitQty >; 50, "Este mensaje si aparecera");
-
 Trace.Assert(dUnitCost >; 1, "Este mensaje no aparecera");
-
 Trace.Unindent();
-
 Trace.WriteLine("Trace: Finaliza la informacion de producto");
-
 Trace.Flush();
-
 Console.ReadLine();
 ``` 
 
@@ -306,11 +280,8 @@ namespace Debugging
 
 ``` csharp
 TextWriterTraceListener myWriter = new TextWriterTraceListener(System.Console.Out);
-
 Debug.Listeners.Add(myWriter);
-
 TextWriterTraceListener myCreator = new TextWriterTraceListener(System.Console.Out);
-
 Trace.Listeners.Add(myCreator);
 ``` 
 
