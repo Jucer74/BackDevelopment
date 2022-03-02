@@ -49,8 +49,6 @@ namespace PrimtMultiples
             return currentNumber % baseNumber == 0;
         }
 
-
-
     }
 
 }
