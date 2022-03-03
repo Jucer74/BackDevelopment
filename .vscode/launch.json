@@ -1,7 +1,4 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
@@ -13,9 +10,9 @@
       "request": "launch",
       "preLaunchTask": "build",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/Practices/02.Clean-Code/PrintPrimes/PrintPrimes/bin/Debug/net5.0/PrintPrimes.dll",
+      "program": "${workspaceFolder}/Practices/02.Clean-Code/Debugging/bin/Debug/net5.0/Debugging.dll",
       "args": [],
-      "cwd": "${workspaceFolder}/Practices/02.Clean-Code/PrintPrimes/PrintPrimes",
+      "cwd": "${workspaceFolder}/Practices/02.Clean-Code/Debugging",
       // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
       "console": "internalConsole",
       "stopAtEntry": false
