@@ -31,12 +31,16 @@ namespace Debugging
             Debug.Assert(dUnitCost< 1, "Este mensaje aparece si dUnitcost < 1 es falso");
 
             TextWriterTraceListener tr1 = new TextWriterTraceListener(System.Console.Out);
-            Debug.Listeners.Add(tr1);
+            Trace.Listeners.Add(tr1);
+
+            TextWriterTraceListener tr2 = new TextWriterTraceListener(System.IO.File.CreateText("Output.txt"));
+            Trace.Listeners.Add(tr2);
+            //TextWriterTraceListener tr1 = new TextWriterTraceListener(System.Console.Out);
             //Debug.Listeners.Add(tr1);
             //TextWriterTraceListener tr2 = new TextWriterTraceListener(System.IO.File.CreateText("Output.txt"));
             //Debug.Listeners.Add(tr2);
 
-            /*  Debug.WriteLine("El Nombre del producto es: " + sProdName);
+             Debug.WriteLine("El Nombre del producto es: " + sProdName);
             Debug.WriteLine("El numero de unidades es: " + iUnitQty.ToString());
             Debug.WriteLine("El valor por unidad es: " + dUnitCost.ToString());
             Debug.Unindent();
@@ -56,7 +60,7 @@ namespace Debugging
 
             Trace.Flush();
 
-            Console.ReadLine(); */
+            Console.ReadLine();
             
            
 
