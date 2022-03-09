@@ -1,0 +1,9 @@
+    El Nombre del producto es: Widget
+    El numero de unidades es: 100
+    El valor por unidad es: 1,03
+Debug: Finaliza la informacion de producto
+Trace: Iniciando Informacion de Producto
+    El nombre del producto es:Widget
+    Categoria:: El nombre del producto es:Widget
+    Este mensaje si aparecera
+Trace: Finaliza la informacion de producto
