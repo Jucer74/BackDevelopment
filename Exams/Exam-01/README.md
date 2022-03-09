@@ -1,6 +1,8 @@
 # Evaluación Teórica (40%)
 Responda las preguntas del siguiente Enlace:
 
+[https://forms.gle/5U2iFVRoyVXRbo828](https://forms.gle/5U2iFVRoyVXRbo828 "Evaluacion Teorica")
+
 # Ejercicio (60%)
 Implemente un método para realizar la compresión básica de cadenas utilizando el recuento de caracteres repetidos. 
 
