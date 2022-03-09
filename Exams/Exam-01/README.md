@@ -47,4 +47,4 @@ Error: Only alphabetic characters [A-Z,a-z] are allowed
 ```
 
 # Nota
-RECUERDE SUBIR SU SOLUCIÓN A SU RAMA DEL REPOSITORIO.
+RECUERDE SUBIR SU SOLUCIÓN A SU RAMA DE ESTE REPOSITORIO.
