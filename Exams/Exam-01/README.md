@@ -43,3 +43,6 @@ Error: the string must not be null or empty
 Error: The length of the string must be less than 255 characters.
 Error: Only alphabetic characters [A-Z,a-z] are allowed
 ```
+
+# Nota
+RECUERDE SUBIR SU SOLUCIÓN A SU RAMA DEL REPOSITORIO.
