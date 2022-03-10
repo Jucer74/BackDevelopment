@@ -35,9 +35,9 @@ namespace CompressString
 
         private static bool AlphabetCheck(string input)
         {
-            foreach (char a in input)
+            foreach (var character in input)
             {
-                if(!Char.IsLetter(a)) 
+                if(!Char.IsLetter(character)) 
                 {
                     return false;
                 }
