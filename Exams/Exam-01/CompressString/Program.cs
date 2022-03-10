@@ -45,6 +45,8 @@ namespace CompressString
             return true;
         }
 
+
+
       private static void Compress(string input)
       {
         int MaxValue=255;
@@ -53,21 +55,24 @@ namespace CompressString
         int CaracterActual= input[0]; */
 
         
-        
+
 
         if(string.IsNullOrEmpty(input)) 
         {
         Console.WriteLine("Error: the string must not be null or empty");
+        return;
         } 
 
         if(input.Length > MaxValue)
         {
         Console.WriteLine("Error: The length of the string must be less than 255 characters.");
+        return;
         } 
 
         if(!AlphabetCheck(input)) 
         {
         Console.WriteLine("Error: Only alphabetic characters [A-Z,a-z] are allowed");
+        return;
         }
 
         
