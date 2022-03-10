@@ -71,6 +71,8 @@ namespace CompressString
 
             if (ResultadoComprension==""){
                 Console.WriteLine("Error: the string must not be null or empty");
+                Console.WriteLine("-------------------------------------------");
+                return ResultadoComprension;
             }
 
             if(ResultadoComprension.Length<TamañoCadena){
@@ -79,7 +81,6 @@ namespace CompressString
             else{
                 return input;
             }
-
 
         }
         public static bool IsAlpabethic(string input){
@@ -92,10 +93,7 @@ namespace CompressString
           }
           return true;
          }
-        /* public static bool IsNullOrEmpy(string input){
-            string s="";
-            return"is null or empy";
-        } */
+        
       }
 
    }
