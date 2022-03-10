@@ -16,7 +16,7 @@ namespace PrintPrimes
       // Error: 1 Is not Prime
 
     }
-
+   ///prueba
     private static void PrintPrimes(int number)
     {
       throw new NotImplementedException();
