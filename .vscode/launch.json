@@ -13,9 +13,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Practices/02.Clean-Code/Debugging/Debugging/bin/Debug/net5.0/Debugging.dll",
+            "program": "${workspaceFolder}/Practices/02.Clean-Code/Exams/Exam-01/bin/Debug/net5.0/CompressString.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/Practices/02.Clean-Code/Debugging",
+            "cwd": "${workspaceFolder}/Practices/02.Clean-Code/Exams/Exam-01/CompressString/",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false

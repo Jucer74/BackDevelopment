@@ -11,6 +11,8 @@
 /// </summary>
 
 using System;
+using System.IO;
+using System.Text;
 
 namespace CompressString
 {
@@ -19,7 +21,7 @@ namespace CompressString
       public static void Main()
       {
         Compress("aabcccccaaa");
-        // aabcccccaaa => a2b1c5a3
+        //aabcccccaaa => a2b1c5a3
         Compress("XXXoooxxxOOO");
         // XXXoooxxxOOO => X3o3x3O3
         Compress("abbcca");
@@ -35,9 +37,16 @@ namespace CompressString
       }
 
       private static void Compress(string input)
-      {
-        throw new NotImplementedException();
+      { 
+      //   int numberOfCharacter= 0;
+      //   string currentCompress = "";
+          for (int currentCharacter = 0; currentCharacter <= input.Length; currentCharacter++)
+          {
+            throw new NotImplementedException();
+          }
+          Console.WriteLine(input + " => "+ input.Length);
+        
       }
-
+      
    }
 }
