@@ -21,6 +21,8 @@ namespace PrintPrimes
     {
       //prueba
       throw new NotImplementedException();
+
+      System.OutOfMemoryException();
     }
   }
 }
