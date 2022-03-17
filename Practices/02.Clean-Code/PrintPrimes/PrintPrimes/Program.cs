@@ -20,9 +20,11 @@ namespace PrintPrimes
     private static void PrintPrimes(int number)
     {
       //prueba
+      /*
+      hola esto es prueba de commit
+      */
       throw new NotImplementedException();
 
-      System.OutOfMemoryException();
     }
   }
 }
