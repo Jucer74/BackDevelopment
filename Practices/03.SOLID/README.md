@@ -30,19 +30,13 @@ El proyecto es una sencilla aplicación de consola, con las siguientes opciones:
 
 Cada una de la opciones realiza acciones sobre una pequeña base de datos SQLite con la siguiente estructura:
 
-![Modelo De Datos](https://github.com/Jucer74/SOLID/blob/develop/Images/SOLIDDB-MER.png)
+![Modelo De Datos](https://github.com/Jucer74/BackDevelopment/blob/main/Practices/03.SOLID/Images/SOLIDDB-MER.png)
 
 El proyecto tiene la siguiente estructura:
 
-![Modelo De Datos](https://github.com/Jucer74/SOLID/blob/develop/Images/Project-Structure.png)
+![Modelo De Datos](https://github.com/Jucer74/BackDevelopment/blob/main/Practices/03.SOLID/Images/Project-Structure.png)
 
 Cada folder tiene la versión inicial del proyecto antes de aplicar cada principio (ejemplo: #.1 Principio sin aplicar) la idea es que se tome este proyecto y copie en la cartepa #.2 y se aplique cada principio en esa versión.
-
-Puede crear una rama nueva a partir de la version de **develop** y nombrela segun el siguiente formato:
-
-**Curso-##/1erNombre-1erApellido**
-
-ej: Curso-01/Julio-Robles
 
 Dentro de cada folder se encuentra la explicación de cada principio y la forma de aplicarlo al proyecto.
 
