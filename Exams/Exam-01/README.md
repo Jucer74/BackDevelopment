@@ -64,11 +64,11 @@ RECUERDE SUBIR SU SOLUCIÓN A SU RAMA DE ESTE REPOSITORIO.
   - Usan Sustantivos para Clases y Verbos para Metodos?               = OK
   - Una sola palabra por concepto?                                    = OK
   - No usan combinaciones o juegos de palabras?                       = OK
-  - No tiene copntexto adicional o superfluo?                         = OK
+  - No tiene contexto adicional o superfluo?                          = OK
   - Usan Datos del dominio, del negocio, problema o solucion ?        = OK
   - Cumplen con el Estandar de Pascal y Camel Case?                   = OK
   Las Funciones                                                         
   - Son pequeñas y su logica esta bien separada?                      = OK
   - Las Funciones hacen una sola cosa?                                = OK
   - Tieen Logica de Retorno directo y correcto o hay If para retornar = OK
-  - Existen Multiples If anidados o hay instrucciones Switch          = OK
+  - No Existen Multiples If anidados o SI hay instrucciones Switch    = OK
