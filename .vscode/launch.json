@@ -5,14 +5,17 @@
             // Use IntelliSense to find out which attributes exist for C# debugging
             // Use hover for the description of the existing attributes
             // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+            // ${workspaceFolder}/Practices/02.Clean-Code/Debugging/bin/Debug/net5.0/Debugging.dll
+            // ${workspaceFolder}/Practices/02.Clean-Code/Debugging
+           
             "name": ".NET Core Launch (console)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Practices/02.Clean-Code/Debugging/bin/Debug/net5.0/Debugging.dll",
+            "program": "${workspaceFolder}/Exams/Exam-01/CompressString/bin/Debug/net5.0/Debugging.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/Practices/02.Clean-Code/Debugging",
+            "cwd": "${workspaceFolder}/Exams/Exam-01/CompressString",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
             "console": "internalConsole",
             "stopAtEntry": false
@@ -21,6 +24,32 @@
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach"
-        }
+        },
+        {
+            "name": ".NET Core (Debuging)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/Practices/02.Clean-Code/Debugging/bin/Debug/net5.0/Debugging.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Exams/Exam-01/CompressString",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },         
+        {
+            "name": ".NET Core (Exam-1)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            // If you have changed target frameworks, make sure to update the program path.
+            "program": "${workspaceFolder}/Exams/Exam-01/CompressString/bin/Debug/net5.0/CompressString.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Practices/02.Clean-Code/Debugging",
+            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
+            "console": "internalConsole",
+            "stopAtEntry": false
+        }        
     ]
 }
