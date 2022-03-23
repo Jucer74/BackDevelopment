@@ -21,7 +21,7 @@ dotnet build .\PrintPrimes.csproj
 dotnet run .\PrintPrimes.csproj
 ```
 # Notas
-## PrintPrimes
+## PrintPrimes (0.0)
 - No tiene Errores Ni Warnings (0.5)      = 
 - No tiene Codigo Innecesario  (0.5)      = 
 - Funciona y Cumple con el Objetivo (1.0) = 
@@ -39,7 +39,7 @@ dotnet run .\PrintPrimes.csproj
   - Usan Nombres del dominio, del negocio, problema o solucion ?      = 
   - Cumplen con el Estandar de Pascal y Camel Case?                   = 
 
-## Print Multiples
+## Print Multiples (0.0)
 - No tiene Errores Ni Warnings (0.5)      = 
 - No tiene Codigo Innecesario  (0.5)      = 
 - Funciona y Cumple con el Objetivo (1.0) = 
@@ -57,7 +57,7 @@ dotnet run .\PrintPrimes.csproj
   - Usan Nombres del dominio, del negocio, problema o solucion ?      = 
   - Cumplen con el Estandar de Pascal y Camel Case?                   = 
 
-## Debugging
+## Debugging (0.0)
 - No tiene Errores Ni Warnings (0.5)      = 
 - No tiene Codigo Innecesario  (0.5)      = 
 - Funciona y Cumple con el Objetivo (1.0) = 
