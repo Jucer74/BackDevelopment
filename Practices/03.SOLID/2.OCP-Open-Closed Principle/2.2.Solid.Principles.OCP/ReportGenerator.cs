@@ -27,6 +27,7 @@
     }
   }
 
+
   public class ReportXML : IReportGenerator
   {
     public void Generate(string reportFilename, List<EmployeeDto> employees)
@@ -39,6 +40,9 @@
       sw.Close();
     }
   }
+
+  
+
   public class ReportGenerator
   {
     /// <summary>
@@ -81,4 +85,5 @@
       sw.Close();
     }
   }
+  
 }
