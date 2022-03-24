@@ -123,7 +123,7 @@
     /// <summary>
     /// Method to generate report
     /// </summary>
-    public static void GenerateReport(string reportFilename, List<EmployeeDto> employees)
+    public static void Generate(string reportFilename, List<EmployeeDto> employees)
     {
       var fullReportFileName = $"{Constants.ReportsPath}{reportFilename}";
       var sw = new StreamWriter(fullReportFileName);
