@@ -4,21 +4,31 @@
   using Dto;
   using System;
   using System.Globalization;
+  using SOLID.Common.SQLData;
+  using SOLID.Common.SQLData.Interface;
+  using System.Data.SQLite;
 
   internal class Program
   {
-    private static readonly EmployeeData employeeData = new EmployeeData();
-    private static readonly ProjectData projectData = new ProjectData();
+    private static readonly ISqlDatabase sqlDatabase = new SqlDatabase(GetConnectionString());
+    private static readonly EmployeeData employeeData = new EmployeeData(sqlDatabase);
+    private static readonly ProjectData projectData = new ProjectData(sqlDatabase);
 
     private static void Main(string[] args)
     {
       try
       {
+        Console.WriteLine("Starting...");
+        sqlDatabase.CreateAndOpenConnection();
         Menu();
       }
       catch (Exception e)
       {
         Console.WriteLine(e);
+      }
+      finally
+      {
+        sqlDatabase.CloseConnection();
       }
     }
 
@@ -101,7 +111,6 @@
 
       Console.WriteLine();
     }
-
     private static void GetEmployees()
     {
       Console.Clear();
@@ -143,7 +152,6 @@
         Console.WriteLine("\nThe Employee was not inserted\n");
       }
     }
-
     private static EmployeeDto CreateEmployeDto()
     {
       Console.Write("First Name             : ");
@@ -173,7 +181,6 @@
 
       return employeeDto;
     }
-
     private static void GenerateReport()
     {
       Console.Clear();
@@ -205,12 +212,19 @@
           reportGenerator = new ReportXML();
           break;
       }
-
-      ;
-
       reportGenerator.Generate(reportFileName, employees);
 
       Console.WriteLine("the report was generated.");
+    }
+
+    private static string GetConnectionString()
+    {
+      var sqlConnectionStringBuilder = new SQLiteConnectionStringBuilder
+      {
+        DataSource = Constants.DatabaseFileName
+      };
+
+      return sqlConnectionStringBuilder.ToString();
     }
   }
 }

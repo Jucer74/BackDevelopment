@@ -10,7 +10,6 @@
   {
     void Generate(string reportFilename, List<EmployeeDto> employees);
   }
-
   public class ReportCSV : IReportGenerator
   {
     public void Generate(string reportFilename, List<EmployeeDto> employees)
@@ -27,7 +26,6 @@
       sw.Close();
     }
   }
-
     public class ReportXML : IReportGenerator
   {
     public void Generate(string reportFilename, List<EmployeeDto> employees)
