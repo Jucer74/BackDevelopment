@@ -136,40 +136,41 @@
       return employeeDto;
     }
 
-private static void GenerateReport()
-{
-  Console.Clear();
-  Console.WriteLine("Generate Report");
-  Console.WriteLine("---------------");
-  Console.WriteLine();
+    private static void GenerateReport()
+    {
+      Console.Clear();
+      Console.WriteLine("Generate Report");
+      Console.WriteLine("---------------");
+      Console.WriteLine();
 
-  Console.Write("Report File Name         : ");
-  var reportFileName = Console.ReadLine();
-  Console.Write("Report Type (1-CSV 2-XML): ");
-  var reportTypeOption = ' ';
-  while (reportTypeOption != (char)ReportType.CSV && reportTypeOption != (char)ReportType.XML)
-  {
-    reportTypeOption = Console.ReadKey().KeyChar;
-  }
+      Console.Write("Report File Name         : ");
+      var reportFileName = Console.ReadLine();
+      Console.Write("Report Type (1-CSV 2-XML): ");
+      var reportTypeOption = ' ';
+      while (reportTypeOption != (char)ReportType.CSV && reportTypeOption != (char)ReportType.XML)
+      {
+        reportTypeOption = Console.ReadKey().KeyChar;
+      }
 
-  Console.WriteLine();
+      Console.WriteLine();
 
-  var employees = applicationData.GetEmployees();
+      var employees = applicationData.GetEmployees();
 
-  IReportGenerator reportGenerator = null;
-  switch ((ReportType)reportTypeOption)
-  {
-    case ReportType.CSV:
-      reportGenerator = new ReportCSV();
-      break;
-    case ReportType.XML:
-      reportGenerator = new ReportXML();
-      break;
-  };
+      IReportGenerator reportGenerator = null;
+      switch ((ReportType)reportTypeOption)
+      {
+      case ReportType.CSV:
+        reportGenerator = new ReportCSV();
+        break;
+      case ReportType.XML:
+        reportGenerator = new ReportXML();
+        break;
+      };
 
-  reportGenerator.Generate(reportFileName, employees);
+      reportGenerator.Generate(reportFileName, employees);
 
-  Console.WriteLine("the report was generated.");
-}
+      Console.WriteLine("the report was generated.");
+    }
+  
   }
 }

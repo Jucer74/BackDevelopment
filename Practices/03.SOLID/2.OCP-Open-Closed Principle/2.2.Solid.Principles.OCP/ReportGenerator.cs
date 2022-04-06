@@ -2,8 +2,8 @@
 {
   using System.Collections.Generic;
   using System.IO;
-    using System.Xml.Serialization;
-    using Define;
+  using System.Xml.Serialization;
+  using Define;
   using Dto;
 
   public interface IReportGenerator
@@ -40,7 +40,7 @@
       sw.Close();
     }
   }
-
+  
   public class ReportGenerator
   {
     /// <summary>
