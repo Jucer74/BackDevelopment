@@ -47,10 +47,6 @@
       }
     }
 
-    /// <summary>
-    /// Get the Employees from table
-    /// </summary>
-    /// <returns>a employees Dto List</returns>
     public List<EmployeeDto> GetEmployees()
     {
       try
@@ -83,25 +79,6 @@
       {
         sqlDatabase.CloseConnection();
       }
-    }
-
-    /// <summary>
-    /// Method to generate report
-    /// </summary>
-    public void GenerateReport(string reportFilename)
-    {
-      var fullReportFileName = $"{Constants.ReportsPath}{reportFilename}";
-      var sw = new StreamWriter(fullReportFileName);
-
-      var employees = GetEmployees();
-
-      foreach (var emp in employees)
-      {
-        sw.WriteLine($"{emp.Id},{emp.FirstName},{emp.LastName},{emp.HireDate},{emp.Email},{emp.Phone}");
-      }
-
-      sw.Flush();
-      sw.Close();
     }
 
     /// <summary>
