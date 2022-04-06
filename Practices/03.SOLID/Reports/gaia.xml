@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfEmployeeDto xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <EmployeeDto>
+    <Id>1</Id>
+    <FirstName>Julio</FirstName>
+    <LastName>Robles</LastName>
+    <HireDate>2020-10-11T22:57:38</HireDate>
+    <Email>julio.robles@email.com</Email>
+    <Phone>+573185526543</Phone>
+  </EmployeeDto>
+  <EmployeeDto>
+    <Id>2</Id>
+    <FirstName>Pilar</FirstName>
+    <LastName>Lopez</LastName>
+    <HireDate>2020-10-11T22:57:38</HireDate>
+    <Email>pilar.lopez@email.com</Email>
+    <Phone>+573203538351</Phone>
+  </EmployeeDto>
+  <EmployeeDto>
+    <Id>3</Id>
+    <FirstName>Felipe</FirstName>
+    <LastName>Robles</LastName>
+    <HireDate>2020-07-27T00:00:00</HireDate>
+    <Email>felipe.robles@email.com</Email>
+    <Phone>+573165265340</Phone>
+  </EmployeeDto>
+  <EmployeeDto>
+    <Id>4</Id>
+    <FirstName>Carlos</FirstName>
+    <LastName>Rios</LastName>
+    <HireDate>2020-10-11T00:00:00</HireDate>
+    <Email>carlos.rios@email.com</Email>
+    <Phone>+573187894561</Phone>
+  </EmployeeDto>
+  <EmployeeDto>
+    <Id>5</Id>
+    <FirstName>nahohito</FirstName>
+    <LastName>casa</LastName>
+    <HireDate>2200-11-24T00:00:00</HireDate>
+    <Email>cacacacac</Email>
+    <Phone>321654</Phone>
+  </EmployeeDto>
+</ArrayOfEmployeeDto>
