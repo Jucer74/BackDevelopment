@@ -23,7 +23,7 @@
     /// </summary>
     /// <param name="empDto">Employee object</param>
     /// <returns>Successfully inserted or not</returns>
-    public bool InsertEmployee(EmployeeDto empDto)
+    public bool InsertEmployee(EmployeeData empDto)
     {
       try
       {
@@ -51,7 +51,7 @@
     /// Get the Employees from table
     /// </summary>
     /// <returns>a employees Dto List</returns>
-    public List<EmployeeDto> GetEmployees()
+    public List<EmployeeData> GetEmployees()
     {
       try
       {
@@ -60,11 +60,11 @@
         var command = sqlDatabase.CreateCommand(Constants.SelectEmployees);
         var dataReader = sqlDatabase.ExecuteReader(command);
 
-        var employees = new List<EmployeeDto>();
+        var employees = new List<EmployeeData>();
 
         while (dataReader.Read())
         {
-          var emp = new EmployeeDto
+          var emp = new EmployeeData
           {
             Id = Convert.ToInt32(dataReader["Id"].ToString()),
             FirstName = dataReader["FirstName"].ToString(),
