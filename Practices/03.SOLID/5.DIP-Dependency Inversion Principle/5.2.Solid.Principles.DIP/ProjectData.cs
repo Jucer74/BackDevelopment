@@ -1,6 +1,6 @@
 ﻿namespace Solid.Principles
 {
-   using System;
+  using System;
   using System.Collections.Generic;
   using Define;
   using Dto;
