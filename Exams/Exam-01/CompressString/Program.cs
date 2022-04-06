@@ -1,161 +1,93 @@
-﻿
-/// <summary>
-/// Implemente un método para realizar la compresión básica de cadenas utilizando el recuento de caracteres repetidos.
-/// Criterios de Aceptación:
-/// - la cadena aabcccccaaa se convertiría en a2b1c5a3.
-/// - Si la longitud de la cadena "comprimida" es mayor la longitud de la cadena original, su método debería devolver la cadena original.
-/// - La cadena no puede ser nula o vacia
-/// - La longitud de la cadena debe ser menor o igual a 255 caracteres
-/// - La cadena solo debe permitir caracteres alfabeticos ([A-Z,a-z])
-/// - Los caracteres se diferencian por mayusculas o minusculas (Case Sensitive)
-/// </summary>
-
-using System;
+﻿using System;
 
 namespace CompressString
 {
-    public class Program
-    {
-
-        static int MAXIMO_CARACTERES = 255;
-        public static void Main()
-        {
-            Compress("aabcccccaaa");
+   public class Program
+   {
+      public static void Main(string[] args)
+      {
+        
+            Console.WriteLine(Compress("aabcccccaaa"));
             // aabcccccaaa => a2b1c5a3
-            //Compress("XXXoooxxxOOO");
+            Console.WriteLine(Compress("XXXoooxxxOOO"));
             // XXXoooxxxOOO => X3o3x3O3
-            //Compress("abbcca");
+            Console.WriteLine(Compress("abbcca"));
             // abbcca => abbcca
-            //Compress("aabbcc");
+            Console.WriteLine(Compress("aabbcc"));
             // aabbcc => aabbcc
             //Compress("");
             // Error: the string must not be null or empty
-            //Compress("X".PadRight(256, 'X'));
+            //Console.WriteLine(Compress("X".PadRight(256, 'X')));
             // Error: The length of the string must be less than 255 characters.
-            //Compress("a1b2c5a3");
+            Console.WriteLine(Compress("a1b2c5a3"));
             // Error: Only alphabetic characters [A-Z,a-z] are allowed
         }
 
-        private static void Compress(string input)
+        static string Compress(string input)
         {
-            Char[] listaDeCaracteres = input.ToCharArray();
+
+            int chainSize = input.Length;
+            string stringCompressed = "";
+            int MAX_LENGTH = 100;
+            char charComparison = input[0];
+            int count = 0;
 
 
-            int posicionInicialDelCaracter = 0;
-            int contadorDePalabraRepetidas = 0;
-
-
-            String cadenaAuxiliar = "";
-            String cadenaComprimida = "";
-
-            if (String.IsNullOrEmpty(input))
+            /* if (string.IsNullOrEmpty(input))
             {
-                Console.Write("the string must not be null or empty");
-                return;
+                Console.WriteLine("Error: The length of the string must be less than 255 characters.");
+            } */
+            if (input.Length>MAX_LENGTH){
+                Console.WriteLine("Error: The length of the string must be less than 255 characters.");
             }
 
-            if (input.Length > MAXIMO_CARACTERES)
-            {
-                Console.Write("The length of the string must be less than 255 characters.");
-                return;
+            else if (!IsAlpabethic(input)){
+                Console.WriteLine("Error: Only alphabetic characters [A-Z,a-z] are allowed");
             }
 
-            if (esAlfabetico(input))
-            {
-                Console.Write("Only alphabetic characters [A-Z,a-z] are allowed.");
-                return;            }
-
-
-            foreach (Char caracter in listaDeCaracteres)
-            {
-
-
-                if (posicionInicialDelCaracter < listaDeCaracteres.Length)
-                {
-
-
-                    if (listaDeCaracteres[posicionInicialDelCaracter].Equals(caracter))
-                    {
-                        contadorDePalabraRepetidas = contadorDePalabraRepetidas + 1;
-                        //Console.Write(listaDeCaracteres[posicionInicialDelCaracter] + "\n");
-                        // Console.Write(caracter + contadorDePalabraRepetidas.ToString() + "\n");
-                        cadenaAuxiliar = caracter.ToString();
-                        //  Console.Write(listaDeCaracteres[posicionInicialDelCaracter]);
-
-
-                        //  Console.Write(contadorDePalabraRepetidas);
-
+            else{
+                for (int pointer = 0; pointer < chainSize; pointer++){
+                    if (charComparison == input[pointer]){
+                        count += 1;
                     }
-                    else
-                    {
-
-                        cadenaAuxiliar = cadenaAuxiliar + contadorDePalabraRepetidas.ToString();
-                        cadenaAuxiliar = "";
-                        //cadenaAuxiliar = caracter.ToString() + contadorDePalabraRepetidas.ToString();
-                        contadorDePalabraRepetidas = 0;
-                        Console.Write(contadorDePalabraRepetidas + "\n");
-
+                    else{
+                        stringCompressed += charComparison;
+                        stringCompressed += count.ToString();
+                        if ( pointer + 1 < chainSize){
+                            charComparison = input[pointer];
+                        }
+                        else{
+                            break;
+                        }
+                        count = 1;
                     }
-                    cadenaComprimida += cadenaAuxiliar;
-                    posicionInicialDelCaracter = posicionInicialDelCaracter + 1;
                 }
-
-
-
-
-
-
-
-
             }
 
-            Console.Write(cadenaComprimida);
+        stringCompressed += charComparison;
+        stringCompressed += count.ToString();
+
+        if(stringCompressed.Length<chainSize){
+            Console.Write(input+ " => ");
+            return stringCompressed;
         }
-
-        public static bool esAlfabetico(string input)
-        {
-            string cadenaEnMinuscula = input.ToLower();
-            foreach (var caracter in cadenaEnMinuscula)
-            {
-                if (!Char.IsLetter(caracter))
-                {
-                    return false;
-                }
-            }
+        else{
+            Console.Write(input+ " => ");
+            return input;
         }
 
     }
+
+        public static bool IsAlpabethic(string input){
+            string lowerString = input.ToLower();
+            foreach (var character in lowerString){
+                if(!Char.IsLetter(character)){
+                    return false;
+                }
+            }
+            return true;
+        }
+
+    }
+
 }
-
-
-/* Char[] listaDeCaracteres = input.ToCharArray();
-
-
-           int posicionInicialDelCaracter = 0;
-           int contadorDePalabraRepetidas = 0;
-
-           String cadenaComprimida = "";
-                               Console.Write(contadorDePalabraRepetidas[0]);
-
-           foreach (Char caracter in listaDeCaracteres)
-           {
-
-               if (caracter == listaDeCaracteres[posicionInicialDelCaracter])
-               {
-                   contadorDePalabraRepetidas += 1;
-               }
-               else
-               {
-                   cadenaComprimida = caracter.ToString() + contadorDePalabraRepetidas.ToString();
-                   contadorDePalabraRepetidas = 0;
-                               Console.Write(contadorDePalabraRepetidas);
-
-
-               }
-
-               posicionInicialDelCaracter += 1;
-
-
-           }
-
-           Console.Write(cadenaComprimida); */
