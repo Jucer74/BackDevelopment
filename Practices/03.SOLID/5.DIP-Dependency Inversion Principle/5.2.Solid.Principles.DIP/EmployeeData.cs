@@ -6,15 +6,15 @@
   using System.Data.SQLite;
   using Define;
   using Dto;
-  using SOLID.Common.SQLData;
+  using SOLID.Common.SQLData.Interface;
 
   public class EmployeeData: IEmployeeData
   {
-    private readonly SqlDatabase sqlDatabase;
+    private readonly ISqlDatabase _sqlDatabase;
 
-    public EmployeeData()
+    public EmployeeData(ISqlDatabase sqlDatabase)
     {
-      sqlDatabase = new SqlDatabase(GetConnectionString());
+      _sqlDatabase = sqlDatabase;
     }
 
     /// <summary>
@@ -24,26 +24,17 @@
     /// <returns>Successfully inserted or not</returns>
     public bool InsertEmployee(EmployeeDto empDto)
     {
-      try
-      {
-        sqlDatabase.CreateAndOpenConnection();
+      var command = _sqlDatabase.CreateCommand(Constants.InsertEmployee);
 
-        var command = sqlDatabase.CreateCommand(Constants.InsertEmployee);
+      _sqlDatabase.AddInParameter(command, "FirstName", empDto.FirstName, 50, DbType.String);
+      _sqlDatabase.AddInParameter(command, "LastName", empDto.LastName, 50, DbType.String);
+      _sqlDatabase.AddInParameter(command, "HireData", empDto.HireDate, 50, DbType.DateTime);
+      _sqlDatabase.AddInParameter(command, "Email", empDto.Email, 50, DbType.String);
+      _sqlDatabase.AddInParameter(command, "Phone", empDto.Phone, 50, DbType.String);
 
-        sqlDatabase.AddInParameter(command, "FirstName", empDto.FirstName, 50, DbType.String);
-        sqlDatabase.AddInParameter(command, "LastName", empDto.LastName, 50, DbType.String);
-        sqlDatabase.AddInParameter(command, "HireData", empDto.HireDate, 50, DbType.DateTime);
-        sqlDatabase.AddInParameter(command, "Email", empDto.Email, 50, DbType.String);
-        sqlDatabase.AddInParameter(command, "Phone", empDto.Phone, 50, DbType.String);
+      var rowsAffects = _sqlDatabase.ExecuteNonQuery(command);
 
-        var rowsAffects = sqlDatabase.ExecuteNonQuery(command);
-
-        return rowsAffects > 0;
-      }
-      finally
-      {
-        sqlDatabase.CloseConnection();
-      }
+      return rowsAffects > 0;
     }
 
     /// <summary>
@@ -52,50 +43,27 @@
     /// <returns>a employees Dto List</returns>
     public List<EmployeeDto> GetEmployees()
     {
-      try
+      var command = _sqlDatabase.CreateCommand(Constants.SelectEmployees);
+      var dataReader = _sqlDatabase.ExecuteReader(command);
+
+      var employees = new List<EmployeeDto>();
+
+      while (dataReader.Read())
       {
-        sqlDatabase.CreateAndOpenConnection();
-
-        var command = sqlDatabase.CreateCommand(Constants.SelectEmployees);
-        var dataReader = sqlDatabase.ExecuteReader(command);
-
-        var employees = new List<EmployeeDto>();
-
-        while (dataReader.Read())
+        var emp = new EmployeeDto
         {
-          var emp = new EmployeeDto
-          {
-            Id = Convert.ToInt32(dataReader["Id"].ToString()),
-            FirstName = dataReader["FirstName"].ToString(),
-            LastName = dataReader["LastName"].ToString(),
-            HireDate = Convert.ToDateTime(dataReader["HireDate"].ToString()),
-            Email = dataReader["Email"].ToString(),
-            Phone = dataReader["Phone"].ToString()
-          };
+          Id = Convert.ToInt32(dataReader["Id"].ToString()),
+          FirstName = dataReader["FirstName"].ToString(),
+          LastName = dataReader["LastName"].ToString(),
+          HireDate = Convert.ToDateTime(dataReader["HireDate"].ToString()),
+          Email = dataReader["Email"].ToString(),
+          Phone = dataReader["Phone"].ToString()
+        };
 
-          employees.Add(emp);
-        }
-
-        return employees;
+        employees.Add(emp);
       }
-      finally
-      {
-        sqlDatabase.CloseConnection();
-      }
-    }
 
-    /// <summary>
-    /// Build the Connection String to the database
-    /// </summary>
-    /// <returns>Connection String</returns>
-    private static string GetConnectionString()
-    {
-      var sqlConnectionStringBuilder = new SQLiteConnectionStringBuilder
-      {
-        DataSource = Constants.DatabaseFileName
-      };
-
-      return sqlConnectionStringBuilder.ToString();
+      return employees;
     }
   }
 }

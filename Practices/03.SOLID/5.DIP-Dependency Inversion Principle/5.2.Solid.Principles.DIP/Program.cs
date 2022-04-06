@@ -4,21 +4,31 @@
   using Dto;
   using System;
   using System.Globalization;
+  using SOLID.Common.SQLData;
+  using SOLID.Common.SQLData.Interface;
+  using System.Data.SQLite;
 
   internal class Program
   {
-    private static readonly EmployeeData employeeData = new EmployeeData();
-    private static readonly ProjectData projectData = new ProjectData();
+    private static readonly ISqlDatabase sqlDatabase = new SqlDatabase(GetConnectionString());
+    private static readonly EmployeeData employeeData = new EmployeeData(sqlDatabase);
+    private static readonly ProjectData projectData = new ProjectData(sqlDatabase);
 
     private static void Main(string[] args)
     {
       try
       {
+        Console.WriteLine("Starting...");
+        sqlDatabase.CreateAndOpenConnection();
         Menu();
       }
       catch (Exception e)
       {
         Console.WriteLine(e);
+      }
+      finally
+      {
+        sqlDatabase.CloseConnection();
       }
     }
 
@@ -211,6 +221,20 @@
       reportGenerator.Generate(reportFileName, employees);
 
       Console.WriteLine("the report was generated.");
+    }
+
+    /// <summary>
+    /// Build the Connection String to the database
+    /// </summary>
+    /// <returns>Connection String</returns>
+    private static string GetConnectionString()
+    {
+      var sqlConnectionStringBuilder = new SQLiteConnectionStringBuilder
+      {
+        DataSource = Constants.DatabaseFileName
+      };
+
+      return sqlConnectionStringBuilder.ToString();
     }
   }
 }
