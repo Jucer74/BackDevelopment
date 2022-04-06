@@ -3,11 +3,6 @@
   using Solid.Principles.Dto;
   using System;
 
-  public interface IInternalDetails
-  {
-    void ShowInternal(ProjectDto projectDto);
-  }
-
   public class InternalProject: Project, IInternalDetails
   {
     public override void ShowDetails(ProjectDto projectDto)

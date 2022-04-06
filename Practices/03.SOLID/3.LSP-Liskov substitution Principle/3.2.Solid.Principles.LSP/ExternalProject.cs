@@ -2,13 +2,7 @@
 {
   using Solid.Principles.Dto;
   using System;
-
-  interface IExternalDetails
-  {
-    void ShowExternal(ProjectDto projectDto);
-  }
-
-   public class ExternalProject:Project, IInternalDetails, IExternalDetails
+  public class ExternalProject:Project, IInternalDetails, IExternalDetails
   {
     public override void ShowDetails(ProjectDto projectDto)
     {
