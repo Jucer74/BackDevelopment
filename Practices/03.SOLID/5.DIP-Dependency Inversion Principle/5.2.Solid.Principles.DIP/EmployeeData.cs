@@ -40,7 +40,7 @@
     /// <summary>
     /// Get the Employees from table
     /// </summary>
-    /// <returns>a employees Dto List</returns>
+    /// <returns>a employees Dto List</returns> 
     public List<EmployeeDto> GetEmployees()
     {
       var command = _sqlDatabase.CreateCommand(Constants.SelectEmployees);
