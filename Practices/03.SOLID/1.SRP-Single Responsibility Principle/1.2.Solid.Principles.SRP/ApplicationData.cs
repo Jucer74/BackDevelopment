@@ -84,30 +84,6 @@
         sqlDatabase.CloseConnection();
       }
     }
-
-    /// <summary>
-    /// Method to generate report
-    /// </summary>
-    public void GenerateReport(string reportFilename)
-    {
-      var fullReportFileName = $"{Constants.ReportsPath}{reportFilename}";
-      var sw = new StreamWriter(fullReportFileName);
-
-      var employees = GetEmployees();
-
-      foreach (var emp in employees)
-      {
-        sw.WriteLine($"{emp.Id},{emp.FirstName},{emp.LastName},{emp.HireDate},{emp.Email},{emp.Phone}");
-      }
-
-      sw.Flush();
-      sw.Close();
-    }
-
-    /// <summary>
-    /// Build the Connection String to the database
-    /// </summary>
-    /// <returns>Connection String</returns>
     private static string GetConnectionString()
     {
       var sqlConnectionStringBuilder = new SQLiteConnectionStringBuilder

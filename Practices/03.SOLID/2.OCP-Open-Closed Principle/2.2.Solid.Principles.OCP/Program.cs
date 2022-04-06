@@ -2,12 +2,12 @@
 {
   using System;
   using System.Globalization;
-  using Define;
   using Dto;
 
   internal class Program
   {
     private static readonly ApplicationData applicationData = new ApplicationData();
+    private static readonly ReportGenerator reportGenerator = new ReportGenerator();
 
     private static void Main(string[] args)
     {
@@ -143,25 +143,11 @@
       Console.WriteLine("---------------");
       Console.WriteLine();
 
-      Console.Write("Report File Name         : ");
+      Console.Write("Report File Name : ");
+
       var reportFileName = Console.ReadLine();
-      Console.Write("Report Type (1-CSV 2-XML): ");
-      char reportTypeOption = ' ';
-      while ((reportTypeOption != (char)ReportType.CSV) && (reportTypeOption != (char)ReportType.XML))
-      {
-        reportTypeOption = Console.ReadKey().KeyChar;
-      }
-      Console.WriteLine();
-
       var employees = applicationData.GetEmployees();
-
-      var reportType = ReportType.CSV;
-      if(reportTypeOption == (char) ReportType.XML)
-      {
-        reportType = ReportType.XML;
-      }
-
-      ReportGenerator.Generate(reportFileName, employees, reportType);
+      ReportGenerator.Generate(reportFileName, employees);
 
       Console.WriteLine("the report was generated.");
     }

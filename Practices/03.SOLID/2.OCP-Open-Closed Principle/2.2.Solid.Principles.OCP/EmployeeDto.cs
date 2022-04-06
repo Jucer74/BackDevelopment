@@ -3,7 +3,6 @@
   using System;
   using System.ComponentModel.DataAnnotations;
 
-  [Serializable]
   public class EmployeeDto
   {
     public int Id { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace Solid.Principles
+namespace Solid.Principles
 {
   using System.Collections.Generic;
   using System.IO;
