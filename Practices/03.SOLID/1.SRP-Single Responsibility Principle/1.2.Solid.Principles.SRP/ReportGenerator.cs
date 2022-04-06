@@ -14,6 +14,7 @@ namespace Solid.Principles
     {
       var fullReportFileName = $"{Constants.ReportsPath}{reportFilename}";
       var sw = new StreamWriter(fullReportFileName);
+      
 
       foreach (var emp in employees)
       {
