@@ -228,7 +228,7 @@
     /// </summary>
     /// <returns>Connection String</returns>
     private static string GetConnectionString()
-    {
+    { 
       var sqlConnectionStringBuilder = new SQLiteConnectionStringBuilder
       {
         DataSource = Constants.DatabaseFileName
