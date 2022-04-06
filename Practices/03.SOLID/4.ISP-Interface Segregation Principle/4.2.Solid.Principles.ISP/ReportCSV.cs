@@ -8,7 +8,7 @@
 
   public class ReportCSV : IReportGenerator
   {
-    public void Generate(string reportFilename, List<EmployeeDto> employees)
+    public void Generate(string reportFilename, List<EmployeeData> employees)
     {
       var fullReportFileName = $"{Constants.ReportsPath}{reportFilename}.csv";
       var sw = new StreamWriter(fullReportFileName);

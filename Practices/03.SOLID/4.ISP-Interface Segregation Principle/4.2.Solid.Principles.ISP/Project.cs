@@ -1,21 +1,86 @@
 ﻿namespace Solid.Principles
 {
-  using Solid.Principles.Define;
-  using Solid.Principles.Dto;
+  
   using System;
+  using System.Collections.Generic;
+  using System.Data.SQLite;
+  using Define;
+  using Dto;
+  using SOLID.Common.SQLData;
 
-  public class Project
+   public interface IProjectData
   {
-    public virtual void ShowDetails(ProjectDto projectDto)
-    {
-      ProjectType projectType = projectDto.Type == (char)ProjectType.Internal? ProjectType.Internal: ProjectType.External;
+    /// <summary>
+    /// Get the Pjoects from table
+    /// </summary>
+    /// <returns>Projects Dto List</returns>
+    List<ProjectDto> GetProjects();
+  }
 
-      Console.WriteLine("{0}", "".PadRight(100, '-'));
-      Console.WriteLine("Project Details");
-      Console.WriteLine("---------------");
-      Console.WriteLine($"Id : {projectDto.Id}\t\t\tType : {projectDto.Type}-{projectType.ToString()}\n");
-      Console.WriteLine($"Name : {projectDto.Name}\n");
-      Console.WriteLine($"Description :\n{projectDto.Description}\n");
+  public class ProjectData: IProjectData
+  {
+
+    private readonly SqlDatabase sqlDatabase;
+
+    public ProjectData()
+    {
+      sqlDatabase = new SqlDatabase(GetConnectionString());
     }
+
+    /// <summary>
+    /// Get the Pjoects from table
+    /// </summary>
+    /// <returns>Projects Dto List</returns>
+    public List<ProjectDto> GetProjects()
+    {
+      try
+      {
+        sqlDatabase.CreateAndOpenConnection();
+
+        var command = sqlDatabase.CreateCommand(Constants.SelectProjects);
+        var dataReader = sqlDatabase.ExecuteReader(command);
+
+        var projects = new List<ProjectDto>();
+
+        while (dataReader.Read())
+        {
+          var prj = new ProjectDto
+          {
+            Id = Convert.ToInt32(dataReader["Id"].ToString()),
+            Name = dataReader["Name"].ToString(),
+            Description = dataReader["Description"].ToString(),
+            Type = dataReader["Type"].ToString()[0],
+            DepartmentName = dataReader["DepartmentName"].ToString(),
+            StartDate = Convert.ToDateTime(dataReader["StartDate"].ToString()),
+            Budget = Convert.ToDecimal(dataReader["Budget"].ToString()),
+            ContractorName = dataReader["ContractorName"].ToString()
+          };
+
+          projects.Add(prj);
+        }
+
+        return projects;
+      }
+      finally
+      {
+        sqlDatabase.CloseConnection();
+      }
+    }
+
+
+    /// <summary>
+    /// Build the Connection String to the database
+    /// </summary>
+    /// <returns>Connection String</returns>
+    private static string GetConnectionString()
+    {
+      var sqlConnectionStringBuilder = new SQLiteConnectionStringBuilder
+      {
+        DataSource = Constants.DatabaseFileName
+      };
+
+      return sqlConnectionStringBuilder.ToString();
+    }
+
   }
 }
