@@ -1,16 +1,18 @@
-﻿namespace Solid.Principles
+namespace Solid.Principles
 {
-  using System;
   using System.Collections.Generic;
   using System.IO;
   using Define;
   using Dto;
 
-  public class ReportCSV : IReportGenerator
+  public class ReportGenerator
   {
-    public void Generate(string reportFilename, List<EmployeeData> employees)
+    /// <summary>
+    /// Method to generate report
+    /// </summary>
+    public static void Generate(string reportFilename, List<EmployeeDto> employees)
     {
-      var fullReportFileName = $"{Constants.ReportsPath}{reportFilename}.csv";
+      var fullReportFileName = $"{Constants.ReportsPath}{reportFilename}";
       var sw = new StreamWriter(fullReportFileName);
 
       foreach (var emp in employees)

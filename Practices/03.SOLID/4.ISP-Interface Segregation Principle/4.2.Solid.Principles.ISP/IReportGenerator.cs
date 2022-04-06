@@ -6,6 +6,6 @@
 
   public interface IReportGenerator
   {
-    void Generate(string reportFilename, List<EmployeeDto> employees);
+    void Generate(string reportFilename, List<EmployeeData> employees);
   }
 }

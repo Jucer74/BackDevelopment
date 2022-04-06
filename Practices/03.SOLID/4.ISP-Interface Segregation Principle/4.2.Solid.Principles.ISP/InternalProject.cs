@@ -3,7 +3,7 @@
   using Solid.Principles.Dto;
   using System;
 
-  public class InternalProject: Project, IInternalDetails
+  public class InternalProject: ProjectData, IInternalDetails
   {
     public override void ShowDetails(ProjectDto projectDto)
     {
