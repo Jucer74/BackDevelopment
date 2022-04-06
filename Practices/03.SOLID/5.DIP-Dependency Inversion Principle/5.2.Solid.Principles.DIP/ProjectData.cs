@@ -2,11 +2,9 @@
 {
   using System;
   using System.Collections.Generic;
-  using System.Data.SQLite;
   using Define;
   using Dto;
   using SOLID.Common.SQLData.Interface;
-  
   public class ProjectData: IProjectData
   {
 
@@ -47,6 +45,5 @@
 
       return projects;
     }
-    
   }
 }

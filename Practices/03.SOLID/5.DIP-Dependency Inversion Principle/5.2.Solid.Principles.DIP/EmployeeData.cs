@@ -6,7 +6,7 @@
   using System.Data.SQLite;
   using Define;
   using Dto;
-  using SOLID.Common.SQLData;
+  using SOLID.Common.SQLData.Interface;
 
   public class EmployeeData: IEmployeeData
   {
