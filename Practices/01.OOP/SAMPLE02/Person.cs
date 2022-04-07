@@ -29,13 +29,17 @@ public class Person
 
     
     //Constructors
-    public Persona()
+    public Person()
     {
         
     }
-    public Persona(int id, string firstName,string lastName, DateTime dateOfBirth, char sex)
+    public Person(int id, string firstName,string lastName, DateTime dateOfBirth, char sex)
     {
-        
+        this.Id = id;
+        this.FirstName = firstName;
+        this.LastName = lastName;
+        this.DateOfBirth = dateOfBirth;
+        this.Sex = sex;
     }
     //Methods - Publics
     //Methods - Privates
