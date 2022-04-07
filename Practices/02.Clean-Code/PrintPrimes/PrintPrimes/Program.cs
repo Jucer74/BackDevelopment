@@ -26,7 +26,7 @@ namespace PrintPrimes
         public static string ObtenerPrimes(int numero)
         {
 
-            int contadornumero = 0;
+          
             string imprimerPrimo = "";
 
             if (numero == 0)
