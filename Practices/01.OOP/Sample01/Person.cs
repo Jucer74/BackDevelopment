@@ -3,6 +3,6 @@ public class Person{
     private string gender;
     private string name;
     private string lastName;
-    private DateTime dateOfBirth;
+    private DateTime dateOfBirth; 
     private double phoneNumber;
 }
