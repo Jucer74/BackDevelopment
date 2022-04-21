@@ -22,11 +22,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
  
-namespace Ejemplo_menu
+namespace BankApp
 {
     class Program
     {
-        private static void Main(string[] args)
+        static void Main(string[] args)
         {
             try
             {
@@ -40,6 +40,7 @@ namespace Ejemplo_menu
 
         private static void Menu()
         {
+            BankAccount bankAccount = new BankAccount();
             var option = ' ';
 
             while (option != '5')
@@ -62,7 +63,7 @@ namespace Ejemplo_menu
 
                     case '1':
                         Console.WriteLine("You have chosen Create Account");  
-                        CreateAccount();     
+                        bankAccount.CreateAccount();     
                         break;
  
                     case '2':
@@ -90,14 +91,6 @@ namespace Ejemplo_menu
                 Console.ReadKey();
             }
 
-        }
-
-        private static void CreateAccount()
-        {
-            Console.Clear();
-            Console.WriteLine("Insert new Employee");
-            Console.WriteLine("-------------------");
-            Console.WriteLine();
         }
     }
 }
