@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Text;
 
 namespace PrintPrimes
 {
   internal class Program
   {
-    private const int INITIAL_PRIME = 2;
     static void Main(string[] args)
     {
+
       PrintPrimes(13);
       // 2,3,5,7,11,13
       PrintPrimes(10);
@@ -21,56 +20,38 @@ namespace PrintPrimes
 
     private static void PrintPrimes(int number)
     {
+      int num=0,divisible=0;
 
-      if(number==0)
+      while(num<=number)
       {
-        Console.WriteLine("Error: Invalid Number");
-        return;
-      }
+        for(int i=1; i<=number;i++){
 
-      if(number==1)
-      {
-        Console.WriteLine("Error: 1 Is not Prime");
-        return;
-      }
-
-      Console.WriteLine(GetPrimes(number));
-    }
-    private static bool IsMultipleOf(int currentNumber, int baseMultiple)
-    {
-      return currentNumber % baseMultiple == 0 && currentNumber != baseMultiple;
-    }
-
-    private static bool IsPrime(int currentNumber)
-    {
-        for (int baseMultiple = INITIAL_PRIME; baseMultiple <= currentNumber; baseMultiple++)
-        {
-          if (IsMultipleOf(currentNumber, baseMultiple))
-          {
-            return false;
+          if(num%i==0){
+            divisible++;
           }
+
+          
         }
-        return true;
-    }
+        if(divisible==2){
+          Console.WriteLine(num + ", ");
+        }
 
-    private static string GetPrimes(int number)
-    {
-      StringBuilder sbPrimes= new StringBuilder();
 
-      for (int currentNumber = INITIAL_PRIME; currentNumber <= number; currentNumber++)
-      {
-          if(IsPrime(currentNumber))
-          {
-            sbPrimes.Append(currentNumber);
-            if(currentNumber < number)
-            {
-              sbPrimes.Append(",");
-            }
-          }
+        divisible=0;
+        num++;
+
       }
 
-      return sbPrimes.ToString();
+
+        if(number==0){
+          Console.WriteLine("Error : Invalid Number");
+        }
+
+         if(number==1){
+          Console.WriteLine("Error : 1 Is not Prime");
+        }
+
+      //Console.WriteLine(i + " , ");
     }
   }
 }
-

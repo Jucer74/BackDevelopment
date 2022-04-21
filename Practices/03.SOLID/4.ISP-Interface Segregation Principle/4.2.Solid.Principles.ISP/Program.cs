@@ -7,7 +7,8 @@
 
   internal class Program
   {
-    private static readonly ApplicationData applicationData = new ApplicationData();
+    private static readonly EmployeeData employeeData = new EmployeeData();
+    private static readonly ProjectData projectData = new ProjectData();
 
     private static void Main(string[] args)
     {
@@ -80,7 +81,7 @@
       Console.WriteLine("-------------");
       Console.WriteLine();
 
-      var projectList = applicationData.GetProjects();
+      var projectList = projectData.GetProjects();
 
       Project project=null;
 
@@ -108,7 +109,7 @@
       Console.WriteLine("-------------");
       Console.WriteLine();
 
-      var employees = applicationData.GetEmployees();
+      var employees = employeeData.GetEmployees();
 
       foreach (var emp in employees)
       {
@@ -133,7 +134,7 @@
 
       var employeeDto = CreateEmployeDto();
 
-      if (applicationData.InsertEmployee(employeeDto))
+      if (employeeData.InsertEmployee(employeeDto))
       {
         Console.WriteLine("\nThe Employee was insert Successfully\n");
       }
@@ -191,7 +192,7 @@
 
       Console.WriteLine();
 
-      var employees = applicationData.GetEmployees();
+      var employees = employeeData.GetEmployees();
 
       IReportGenerator reportGenerator = null;
       switch ((ReportType)reportTypeOption)
@@ -203,7 +204,9 @@
         case ReportType.XML:
           reportGenerator = new ReportXML();
           break;
-      };
+      }
+
+      ;
 
       reportGenerator.Generate(reportFileName, employees);
 
