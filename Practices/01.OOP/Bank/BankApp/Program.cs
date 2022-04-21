@@ -26,59 +26,72 @@ namespace Ejemplo_menu
 {
     class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-             
-            bool exit = false;
- 
-            while (!exit) {
- 
-                try
+            try
+            {
+                Menu();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+
+        private static void Menu()
+        {
+            var option = ' ';
+
+            while (option != '5')
+            {
+                Console.Clear();
+                Console.WriteLine("     WELCOME TO YOUR BANK     ");
+                Console.WriteLine("--------------------------------"); 
+                Console.WriteLine("1. Create Account");
+                Console.WriteLine("2. Get Balance Account");
+                Console.WriteLine("3. Deposit Account");
+                Console.WriteLine("4. Withdrawal Account");
+                Console.WriteLine("5. Exit");
+                Console.WriteLine("Choose one of the options");
+                Console.WriteLine("--------------------------------"); 
+                option = Console.ReadKey().KeyChar;
+                Console.WriteLine();
+
+                switch (option)
                 {
 
-                    Console.WriteLine("     WELCOME TO YOUR BANK     ");
-                    Console.WriteLine("--------------------------------"); 
-                    Console.WriteLine("1. Create Account");
-                    Console.WriteLine("2. Get Balance Account");
-                    Console.WriteLine("3. Deposit Account");
-                    Console.WriteLine("4. Withdrawal Account");
-                    Console.WriteLine("5. Exit");
-                    Console.WriteLine("Choose one of the options");
-                    int option = Convert.ToInt32(Console.ReadLine());
+                    case '1':
+                        Console.WriteLine("You have chosen Create Account");  
+                        CreateAccount();     
+                        break;
  
-                    switch (option)
-                    {
-                        case 1:
-                            Console.WriteLine("You have chosen Create Account");
-                            CreateAccount();
-                            break;
+                    case '2':
+                        Console.WriteLine("You have chosen Get Balance Account");
+                        break;
  
-                        case 2:
-                            Console.WriteLine("You have chosen Get Balance Account");
-                            break;
- 
-                        case 3:
-                            Console.WriteLine("You have chosen Deposit Account");
-                            break;
-                        case 4:
-                            Console.WriteLine("You have chosen Withdrawal Account");
-                            break;
-                        case 5:
-                            Console.WriteLine("You have chosen to Exit");
-                            exit = true;
-                            break;
-                    }
- 
+                    case '3':
+                        Console.WriteLine("You have chosen Deposit Account");
+                        break;
+
+                    case '4':
+                        Console.WriteLine("You have chosen Withdrawal Account");
+                        break;
+
+                    case '5':
+                        Console.WriteLine("You have chosen to Exit");
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid Option");
+                        break;
                 }
-                catch (FormatException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+
+                Console.WriteLine("\nPress any key to continue... ");
+                Console.ReadKey();
             }
- 
-            Console.ReadLine();
- 
+
         }
+
         private static void CreateAccount()
         {
             Console.Clear();
