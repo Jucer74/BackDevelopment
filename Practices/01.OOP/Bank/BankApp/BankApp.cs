@@ -11,6 +11,7 @@ namespace BankApp
         private string accountNumber;
         private string placeHolder;
         private string balance;
+        private string accountType;
 
         public string AccountNumber
         {
@@ -38,21 +39,32 @@ namespace BankApp
         {
             List<string> BankAccount = new List<string>();
 
-            Console.WriteLine("\nGive me your account number");
+            Console.WriteLine("\nAccount number:");
 
             accountNumber = Console.ReadLine();
 
-            Console.WriteLine("\nGive me your placeholder");
+            Console.WriteLine("\nAccount Owner:");
 
             placeHolder = Console.ReadLine();
 
-            Console.WriteLine("\nGive me your balance");
-            
+            Console.WriteLine("\nWhats your balance:");
+
             balance = Console.ReadLine();
+
+            Console.WriteLine("\nAccount Type:");
+
+            accountType = Console.ReadLine();
 
             BankAccount.Add(accountNumber);
             BankAccount.Add(placeHolder);
             BankAccount.Add(balance);
+            BankAccount.Add(accountType);
+
+            for (int i = 0; i < BankAccount.Count; i++)
+            {
+                Console.WriteLine(BankAccount[i]);
+                
+            }
         }
     }
 }
