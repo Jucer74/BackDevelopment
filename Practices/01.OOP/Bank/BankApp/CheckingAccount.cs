@@ -14,11 +14,10 @@ namespace BankApp
       public CheckingAccount(int accountNumber,
                               string placeHolder,
                               decimal balanceAmount,
-                              int accountType, 
-                              bool overdrafAmount):
-      base(accountNumber,placeHolder,balanceAmount,accountType,overdrafAmount)
+                              int accountType):
+      base(accountNumber,placeHolder,balanceAmount,accountType)
       {
-         this.OverdrafAmount = overdrafAmount;
+         this.OverdrafAmount = false;
       }
 
       public void Deposit(decimal despositValue)
