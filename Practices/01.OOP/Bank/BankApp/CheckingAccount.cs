@@ -4,7 +4,7 @@ namespace BankApp
    public class CeckingAccount: BankAccount
    {
       #region Properties
-      public decimal AvoerdraftAmount { get; set; }   
+      public decimal OverdraftAmount { get; set; }   
       #endregion Properties
       
 
