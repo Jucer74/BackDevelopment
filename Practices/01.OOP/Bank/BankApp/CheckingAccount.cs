@@ -6,9 +6,24 @@ namespace BankApp
     {
         public bool OverdraftAmount { get; set; }
 
-        public CheckingAccount(int accountNumber, string placeHolder, int balanceAmount, string accountType) /* : base(accountNumber, placeHolder, balanceAmount, accountType, overdraftAmount) */
-        {
-           /*  this.OverdraftAmount = overdrafAmount; */
+        public CheckingAccount(){
+
         }
+
+        public CheckingAccount(string accountNumber, string placeHolder, int balanceAmount, int accountType) : base(accountNumber, placeHolder, balanceAmount, accountType)
+        {
+            this.OverdraftAmount = false;
+        }
+
+
+        /* public void Deposit(decimal despositValue)
+        {
+         this.BalanceAmount = this.BalanceAmount + despositValue;
+            if(isOverdrafAmount()) {
+             OverdrafAmount = true;
+            }
+        } */
+
+
     }
 }
