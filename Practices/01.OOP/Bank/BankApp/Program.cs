@@ -13,6 +13,8 @@ namespace BankApp
         {
             string option;
             int counter = 0;
+            int searchAccountNumber = 0;
+
             bool isExit = false;
             List<BankAccount> accountList = new List<BankAccount>();
 
@@ -83,11 +85,11 @@ namespace BankApp
 
                     case "3":
                         Console.WriteLine("\n Enter the number account: ");
-                        int accountNumber = int.Parse(Console.ReadLine());
+                        searchAccountNumber = int.Parse(Console.ReadLine());
 
                         foreach (BankAccount account in accountList)
                         {
-                            if(account.AccountNumber == accountNumber)
+                            if(account.AccountNumber == searchAccountNumber)
                             {
                                 Console.WriteLine("   - Enter the amount: ");
                                 int amount = int.Parse(Console.ReadLine());
@@ -104,11 +106,11 @@ namespace BankApp
 
                     case "4":
                         Console.WriteLine("\n Enter the number account: ");
-                        int accountNumber = int.Parse(Console.ReadLine());
+                        searchAccountNumber = int.Parse(Console.ReadLine());
 
                         foreach (BankAccount account in accountList)
                         {
-                            if(account.AccountNumber == accountNumber)
+                            if(account.AccountNumber == searchAccountNumber)
                             {
                                 Console.WriteLine("   - Enter the amount: ");
                                 int amount = int.Parse(Console.ReadLine());
