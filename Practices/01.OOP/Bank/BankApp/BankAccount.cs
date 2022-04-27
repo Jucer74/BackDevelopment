@@ -13,13 +13,13 @@ namespace BankApp
 
         private int accountType;
 
-        public string AccountNumber { get => accountNumber; set => accountNumber = value; }
+        public string AccountNumber { get  {accountNumber;} set  {accountNumber = value;} }
 
-        public string PlaceHolder { get => placeHolder; set => placeHolder = value; }
+        public string PlaceHolder { get { placeHolder;} set { placeHolder = value;} }
 
-        public double BalanceAmount { get => balanceAmount; set => balanceAmount = value; }
+        public double BalanceAmount { get { balanceAmount;} set { balanceAmount = value;} }
 
-        public int AccountType { get => accountType; set => accountType = value; }
+        public int AccountType { get { accountType;} set { accountType = value;} }
 
         public BankAccount()
         {
