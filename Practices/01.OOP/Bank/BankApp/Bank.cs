@@ -36,11 +36,11 @@ namespace BankApp
             
         }
 
-        public decimal GetBalance(int accountType)
+        public decimal GetBalance(int accountNumber)
         {
             try
             {
-                BankAccount userAccount = GetThisAccount(accountType);
+                BankAccount userAccount = GetThisAccount(accountNumber);
                 return userAccount.Balance();
             }
             catch (ArgumentException)
@@ -50,11 +50,11 @@ namespace BankApp
         }
 
 
-        public void DepositAccount(int accountType, decimal amount)
+        public void DepositAccount(int accountNumber, decimal amount)
         { 
             try
             {
-                BankAccount userAccount = GetThisAccount(accountType);
+                BankAccount userAccount = GetThisAccount(accountNumber);
                 userAccount.Deposit(amount);
             }
             catch (ArgumentException)
@@ -63,12 +63,12 @@ namespace BankApp
             }
         }
 
-        public bool WithdrawalAccount(int accountType, decimal amount)
+        public bool WithdrawalAccount(int accountNumber, decimal amount)
         {
             try
             {
-                BankAccount userAccount = GetThisAccount(accountType);
-                if(userAccount.AccountType == 1 && userAccount.Balance() >= amount)
+                BankAccount userAccount = GetThisAccount(accountNumber);
+                if(userAccount.AccountType == 1 && userAccount.Balance() >= amount)//-----
                 {
                     userAccount.WithDrawal(amount);
                     return true;
@@ -84,11 +84,11 @@ namespace BankApp
             }
         }
 
-        public BankAccount GetThisAccount(int accountType)
+        public BankAccount GetThisAccount(int accountNumber)
         {
             foreach (BankAccount Account in listBankAccounts)
             {
-                if(Account.AccountType == accountType)
+                if(Account.AccountNumber == accountNumber)
                 {
                     return Account;
                 }
