@@ -28,7 +28,7 @@ namespace BankApp
             Console.WriteLine("-------------------");
             Console.WriteLine();
 
-            var account = utilityAccountValidation.SelectAccountType();
+            var account = utilityAccountValidation.SelectAccountType(accountList);
             accountList = new List<BankAccount>();
             accountList.Add(account);
 
@@ -41,6 +41,7 @@ namespace BankApp
                 Console.WriteLine("\nError created account\n");
             }
         }
+
         private static void Menu()
         {
         var option = ' ';
