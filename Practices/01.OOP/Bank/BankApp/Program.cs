@@ -131,11 +131,11 @@ namespace BankApp
             int accountNumber;
             bool Op = true;
 
+            do
+            {
             Console.Clear();
             Console.WriteLine("Digite su numero de cuenta.");
             Console.Write("Cuenta: ");
-            do
-            {
                 try
                 {
                     accountNumber = int.Parse(Console.ReadLine());
@@ -148,16 +148,15 @@ namespace BankApp
                 catch (ArgumentException e)
                 {
                     Console.WriteLine($"{e.Message}");
+                    Console.WriteLine("Digite cualquier tecla para repetir.");
                 }
                 catch (FormatException)
                 {
                     Console.WriteLine("Error. eso No es un numero");
-                }
-                finally
-                {
                     Console.WriteLine("Digite cualquier tecla para repetir.");
-                    Console.ReadKey();
                 }
+                Console.WriteLine("Digite cualquier tecla para continuar.");
+                Console.ReadKey();
             } while (Op);
         }
 
@@ -195,13 +194,12 @@ namespace BankApp
                 catch (ArgumentException e)
                 {
                     Console.WriteLine($"{e.Message}");
+                    Console.WriteLine("Digite cualquier tecla para repetir.");
+                    Console.ReadKey();
                 }
                 catch (FormatException)
                 {
                     Console.WriteLine("Error. eso No es un numero");
-                }
-                finally
-                {
                     Console.WriteLine("Digite cualquier tecla para repetir.");
                     Console.ReadKey();
                 }
@@ -257,12 +255,12 @@ namespace BankApp
                         Console.WriteLine($"1. Repetir retiro.");
                         Console.WriteLine($"2. Salir.");
                         Console.Write("Opcion: ");
-                        char opcion = Console.ReadKey().KeyChar;
+                        opcion = Console.ReadKey().KeyChar;
                         if (opcion == '2')
                         {
                             Op = false;
                         }
-                        else if(Op == '1')
+                        else if(opcion == '1')
                         {
                             Op = true;
                         }
@@ -282,13 +280,12 @@ namespace BankApp
                 catch (ArgumentException e)
                 {
                     Console.WriteLine($"{e.Message}");
+                    Console.WriteLine("Digite cualquier tecla para repetir.");
+                    Console.ReadKey();
                 }
                 catch (FormatException)
                 {
                     Console.WriteLine("Error. eso No es un numero");
-                }
-                finally
-                {
                     Console.WriteLine("Digite cualquier tecla para repetir.");
                     Console.ReadKey();
                 }
