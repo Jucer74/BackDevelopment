@@ -1,8 +1,17 @@
 using System;
 
-public class SavingAccount : BankAccount
+
+namespace BankApp
 {
-    public SavingAccount(){
+    public class SavingAccount : BankAccount
+    {
+        public SavingAccount(){
+            
+        }
         
+         public SavingAccount(int accountNumber, string placeHolder, int balanceAmount, string accountType) /* : base(accountNumber,placeHolder,balanceAmount,accountType,overdrafAmount) */
+        {
+            
+        }
     }
 }

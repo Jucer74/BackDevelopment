@@ -1,11 +1,14 @@
 using System;
 
-public class CheckingAccount : BankAccount
+namespace BankApp
 {
-    public bool OverdraftAmount { get; set; }
-
-    public CheckingAccount(int accountNumber, string placeHolder, int balanceAccount, string accountType, bool overdraftAmount) : base(accountNumber, placeHolder, balanceAccount, accountType, overdraftAmount)
+    public class CheckingAccount : BankAccount
     {
-        this.OverdraftAmount = overdraftAmount;
+        public bool OverdraftAmount { get; set; }
+
+        public CheckingAccount(int accountNumber, string placeHolder, int balanceAmount, string accountType) /* : base(accountNumber, placeHolder, balanceAmount, accountType, overdraftAmount) */
+        {
+           /*  this.OverdraftAmount = overdrafAmount; */
+        }
     }
 }
