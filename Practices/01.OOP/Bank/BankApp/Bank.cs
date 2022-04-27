@@ -40,8 +40,8 @@ namespace BankApp
         {
             try
             {
-                BankAccount Account = GetThisAccount(accountType);
-                return Account.BalanceAmount;
+                BankAccount userAccount = GetThisAccount(accountType);
+                return userAccount.Balance();
             }
             catch (ArgumentException)
             {
@@ -54,8 +54,8 @@ namespace BankApp
         { 
             try
             {
-                BankAccount Account = GetThisAccount(accountType);
-                Account.BalanceAmount;
+                BankAccount userAccount = GetThisAccount(accountType);
+                userAccount.Deposit(amount);
             }
             catch (ArgumentException)
             {
