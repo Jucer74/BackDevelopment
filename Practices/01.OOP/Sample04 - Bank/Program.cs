@@ -203,7 +203,7 @@ namespace BankApp
                     Console.Write("\nBalance account: ");
                     Console.Write(searchAccount.Balanceaccount);
 
-                    Console.Write("Enter the balance to withdraw: ");
+                    Console.Write("\nEnter the balance to withdraw: ");
                     int balanceAccount = int.Parse(Console.ReadLine());
 
                     searchAccount.Withdrawal(balanceAccount);

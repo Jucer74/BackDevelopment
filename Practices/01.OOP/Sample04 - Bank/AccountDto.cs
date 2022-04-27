@@ -17,11 +17,25 @@ namespace BankApp
         }
 
         public void Withdrawal(int balanceWithdrawal){
-            if(Balanceaccount>=balanceWithdrawal){
-                Balanceaccount = Balanceaccount-balanceWithdrawal;
-            }else{
-                Console.WriteLine("Insufficient balance");
+
+            if(Accountype=="Checking"){
+               if(Balanceaccount>=-1000000 && balanceWithdrawal<=1000000 && (Balanceaccount-balanceWithdrawal>=-1000000)){
+                    Balanceaccount = Balanceaccount-balanceWithdrawal;
+                }
+                else{
+                    Console.WriteLine("Insufficient balance");
+                }
             }
+
+            if(Accountype=="Saving"){
+               if(Balanceaccount>=balanceWithdrawal){
+                    Balanceaccount = Balanceaccount-balanceWithdrawal;
+                }
+                else{
+                    Console.WriteLine("Insufficient balance");
+                } 
+            }
+            
         }
     }
 
