@@ -6,13 +6,13 @@ namespace BankApp
     {
         public int AccountNumber { get; set; }
         public string PlaceHolder { get; set; }
-        public decimal BalanceAmount { get; set; }
+        public double BalanceAmount { get; set; }
         public int AccountType { get; private set; }
         public BankAccount()
         {
             
         }
-        public BankAccount(int accountNumber, string placeHolder, decimal balanceAmount, int accountType)
+        public BankAccount(int accountNumber, string placeHolder, double balanceAmount, int accountType)
         {
             this.AccountNumber = accountNumber;
             this.PlaceHolder = placeHolder;
@@ -20,9 +20,18 @@ namespace BankApp
             this.AccountType = accountNumber;
         }
 
-        public void Deposit(decimal despositValue);
-        public void Balance();
-        public void WithDrawal(decimal withdrawalValue);
+        public void Deposit(double despositValue)
+        {
+
+        }
+        public double Balance()
+        {
+            return 0.0;
+        }
+        public void WithDrawal(double withdrawalValue)
+        {
+
+        }
     }
     
 }

@@ -13,14 +13,14 @@ namespace BankApp
 
       public CheckingAccount(int accountNumber,
                               string placeHolder,
-                              decimal balanceAmount,
+                              double balanceAmount,
                               int accountType):
       base(accountNumber,placeHolder,balanceAmount,accountType)
       {
          this.OverdrafAmount = false;
       }
 
-      public void Deposit(decimal despositValue)
+      public void Deposit(double despositValue)
       {
          this.BalanceAmount = this.BalanceAmount + despositValue;
          if(isOverdrafAmount()){
@@ -28,12 +28,12 @@ namespace BankApp
          }
       }
 
-      public decimal Balance()
+      public double Balance()
       {
-         return this.balanceAmount;
+         return this.BalanceAmount;
       }
 
-      public void WithDrawal(decimal withdrawalValue)
+      public void WithDrawal(double withdrawalValue)
       {
          this.BalanceAmount = this.BalanceAmount - withdrawalValue;
          if(isOverdrafAmount()){

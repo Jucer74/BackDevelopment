@@ -5,15 +5,15 @@ namespace BankApp
     class Program
     {
         private static Bank BankUsb = new Bank();
+        private static int cont = 1000;
         static void Main(string[] args)
         {
-
+            Menu();
         }
 
         public static void Menu()
         {
             char opcion = ' ';
-            int cont = 1000;
 
             do
             {
@@ -42,7 +42,7 @@ namespace BankApp
                         GetBalanceAccount();
                     break;
                     case '3':
-
+                        Deposit();
                     break;
                     case '4':
 
@@ -53,6 +53,7 @@ namespace BankApp
                 }
 
             } while (opcion != '0');
+            Console.ReadKey();
             Console.WriteLine("");
             Console.WriteLine("----------Programa finalizado----------");
             
@@ -60,18 +61,18 @@ namespace BankApp
 
         public static void CreateAcount()
         {
-            cont++;
+            cont = cont + 1;
             bool Op = true;
             int accountNumber;
             string placeHolder;
-            decimal balanceAmount;
-            int accountType;
+            double balanceAmount;
+            int accountType = 1;
 
 
             Console.Clear();
             Console.WriteLine("Digite su Nombre.");
             placeHolder = Console.ReadLine();
-            Console.WriteLine("Digite su balance inicial.");
+            Console.Clear();
             do
             {
                 Console.WriteLine("Digite el tipo de cuenta.");
@@ -90,9 +91,11 @@ namespace BankApp
                         Op = true;
                     }
                 }
-                catch (ArgumentException e)
+                catch (FormatException)
                 {
+                    Console.WriteLine("");
                     Console.WriteLine("Error. Opcion invalida");
+                    Console.WriteLine("");
                 }
 
                 
@@ -119,23 +122,82 @@ namespace BankApp
         public static void GetBalanceAccount()
         {
             int accountNumber;
-
+            bool Op = true;
 
             Console.Clear();
             Console.WriteLine("Digite su numero de cuenta.");
             Console.Write("Cuenta: ");
-            try
+            do
             {
-                accountNumber = int.Parse(Console.ReadLine());
+                try
+                {
+                    accountNumber = int.Parse(Console.ReadLine());
 
-                Console.WriteLine($"Su balance es: {BankUsb.GetBalance()}$");
-            }
-            catch (ArgumentException e)
+                    Console.WriteLine("");
+                    Console.WriteLine($"Su balance es: {BankUsb.GetBalance(accountNumber)}$");
+                    Console.WriteLine("");
+                    Op=false;
+                }
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine($"{e.Message}");
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error. eso No es un numero");
+                }
+                finally
+                {
+                    Console.WriteLine("Digite cualquier tecla para repetir.");
+                    Console.ReadKey();
+                }
+            } while (Op);
+        }
+
+        public static void Deposit()
+        {
+            int accountNumber;
+            double amount = 0.0;
+            bool Op = true;
+
+            Console.Clear();
+            Console.WriteLine("Digite su numero de cuenta.");
+            Console.Write("Cuenta: ");
+            do
             {
-                Console.WriteLine($"{e.Message}");
-            }
+                try
+                {
+                    accountNumber = int.Parse(Console.ReadLine());
 
+                    Console.WriteLine("");
+                    Console.WriteLine("Digite el monto a depositar");
+                    amount = double.Parse(Console.ReadLine());
 
+                    BankUsb.DepositAccount(accountNumber,amount);
+
+                    
+                    Console.Clear();
+                    Console.WriteLine("");
+                    Console.WriteLine("transacion correcta");
+                    Console.WriteLine("");
+                    Console.WriteLine($"Digite cualquier tecla para continuar");
+                    Console.ReadKey();
+                    Op=false;
+                }
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine($"{e.Message}");
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error. eso No es un numero");
+                }
+                finally
+                {
+                    Console.WriteLine("Digite cualquier tecla para repetir.");
+                    Console.ReadKey();
+                }
+            } while (Op);
         }
     }
 }

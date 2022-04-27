@@ -11,24 +11,24 @@ namespace BankApp
 
       public SavingAccount(int accountNumber,
                               string placeHolder,
-                              decimal balanceAmount,
+                              double balanceAmount,
                               int accountType):
-      base(accountNumber,placeHolder,balanceAmount,accountType,overdrafAmount)
+      base(accountNumber,placeHolder,balanceAmount,accountType)
       {
 
       }
 
-      public void Deposit(decimal despositValue)
+      public void Deposit(double despositValue)
       {
         this.BalanceAmount = this.BalanceAmount + despositValue;
       }
 
-      public decimal Balance()
+      public double Balance()
       {
-        return this.balanceAmount;
+        return this.BalanceAmount;
       }
 
-      public void WithDrawal(decimal withdrawalValue)
+      public void WithDrawal(double withdrawalValue)
       {
         this.BalanceAmount = this.BalanceAmount - withdrawalValue;
       }

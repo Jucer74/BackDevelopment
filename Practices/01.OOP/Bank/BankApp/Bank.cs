@@ -1,5 +1,5 @@
-using System.Linq;
 using System;
+using System.Collections.Generic;
 
 namespace BankApp
 {
@@ -14,7 +14,7 @@ namespace BankApp
 
         public void CreateAccount(int accountNumber,
                                 string placeHolder,
-                                decimal balanceAmount,
+                                double balanceAmount,
                                 int accountType)
         {
             BankAccount newAccount;
@@ -36,7 +36,7 @@ namespace BankApp
             
         }
 
-        public decimal GetBalance(int accountNumber)
+        public double GetBalance(int accountNumber)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace BankApp
         }
 
 
-        public void DepositAccount(int accountNumber, decimal amount)
+        public void DepositAccount(int accountNumber, double amount)
         { 
             try
             {
@@ -63,7 +63,7 @@ namespace BankApp
             }
         }
 
-        public bool WithdrawalAccount(int accountNumber, decimal amount)
+        public bool WithdrawalAccount(int accountNumber, double amount)
         {
             try
             {
