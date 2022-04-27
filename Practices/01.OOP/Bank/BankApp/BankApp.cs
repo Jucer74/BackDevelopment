@@ -10,60 +10,81 @@ namespace BankApp
     {
         private string accountNumber;
         private string placeHolder;
-        private string balance;
+        private double balance = 0.0;
         private string accountType;
 
-        public string AccountNumber
+        public class Item
         {
-            get; set;
+            public string AccountNumber { get; set; }
+            public string Placeholder { get; set; }
+            public double Balance { get; set; }
+            public string AccountType { get; set; }
+
         }
 
-        public string Placeholder
-        {
-            get; set;
-        }
-
-        public string Balance
-        {
-            get; set;
-        }
-
-        //public BankAccount()
-        //{
-        //    AccountNumber = accountNumber;
-        //    Placeholder = placeHolder;
-        //    Balance = balance;
-        //}
+        List<Item> Bankaccount = new List<Item>();
 
         public void CreateAccount()
         {
-            List<string> BankAccount = new List<string>();
-
-            Console.WriteLine("\nAccount number:");
-
+            Console.WriteLine("\nEnter your account number");
             accountNumber = Console.ReadLine();
 
-            Console.WriteLine("\nAccount Owner:");
-
+            Console.WriteLine("\nEnter the placeholder");
             placeHolder = Console.ReadLine();
 
-            Console.WriteLine("\nWhats your balance:");
-
-            balance = Console.ReadLine();
-
-            Console.WriteLine("\nAccount Type:");
-
+            Console.WriteLine("\nEnter your account type: 1 for Savings Account or 2 for Checking Account");
             accountType = Console.ReadLine();
 
-            BankAccount.Add(accountNumber);
-            BankAccount.Add(placeHolder);
-            BankAccount.Add(balance);
-            BankAccount.Add(accountType);
-
-            for (int i = 0; i < BankAccount.Count; i++)
+            if(accountType == "2")
             {
-                Console.WriteLine(BankAccount[i]);
-                
+                Console.WriteLine("Your OverdraftAmount is 1'000.000");
+            }
+
+            Console.WriteLine("\nEnter your balance");
+            balance = Convert.ToDouble(Console.ReadLine());
+
+            Bankaccount.Add(new Item { AccountNumber = accountNumber, Placeholder = placeHolder, Balance = balance, AccountType = accountType });
+        }
+
+        public void GetBalanceAccount()
+        {
+            string accountNumber = "0";
+            string showInfoBalanceAccount = "";
+            Console.WriteLine("\nPlease enter your account number");
+            accountNumber = Console.ReadLine();
+
+            
+            for (int i = 0; i < Bankaccount.Count; i++)
+            {
+                if (accountNumber == Bankaccount[i].AccountNumber)
+                {
+                    showInfoBalanceAccount = "\nYour Balance is: " + Bankaccount[i].Balance;
+                    Console.WriteLine(showInfoBalanceAccount);
+                    break;
+                }           
+            }
+        }
+
+        public void DepositAccount()
+        {
+            string accountNumber = "0";
+            double newAmount = 0.0;
+
+            Console.WriteLine("\nPlease enter your account number");
+            accountNumber = Console.ReadLine();
+
+            for (int i = 0; i < Bankaccount.Count; i++)
+            {
+                if (accountNumber == Bankaccount[i].AccountNumber)
+                {
+                    Console.WriteLine("\nHow much money you wish to deposit?");
+                    newAmount = Convert.ToDouble(Console.ReadLine());
+
+                    Bankaccount[i].Balance += newAmount;
+
+                    Console.WriteLine("Your new balance is: " + Bankaccount[i].Balance);
+                    break;
+                }
             }
         }
     }

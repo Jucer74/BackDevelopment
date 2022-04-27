@@ -45,8 +45,8 @@ namespace BankApp
 
             while (option != '5')
             {
-                Console.Clear();
-                Console.WriteLine("     WELCOME TO YOUR BANK     ");
+        
+                Console.WriteLine(" \n    WELCOME TO YOUR BANK     ");
                 Console.WriteLine("--------------------------------"); 
                 Console.WriteLine("1. Create Account");
                 Console.WriteLine("2. Get Balance Account");
@@ -68,10 +68,12 @@ namespace BankApp
  
                     case '2':
                         Console.WriteLine("You have chosen Get Balance Account");
+                        bankAccount.GetBalanceAccount();
                         break;
  
                     case '3':
                         Console.WriteLine("You have chosen Deposit Account");
+                        bankAccount.DepositAccount();
                         break;
 
                     case '4':
@@ -86,11 +88,7 @@ namespace BankApp
                         Console.WriteLine("Invalid Option");
                         break;
                 }
-
-                Console.WriteLine("\nPress any key to continue... ");
-                Console.ReadKey();
             }
-
         }
     }
 }
