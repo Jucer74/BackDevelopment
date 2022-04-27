@@ -8,11 +8,11 @@ namespace BankApp
     {
     
 
-         public List<BankAccount> listBankAccounts { get; set; }
+         public List<BankAccount> listBankAccount { get; set; }
 
          public Bank()
         {
-            this.listBankAccounts = new List<BankAccount>();
+            this.listBankAccount = new List<BankAccount>();
         }
 
          public void CreateAccount(string accountNumber, string placeHolder, int balanceAmount, int accountType) {
@@ -32,15 +32,15 @@ namespace BankApp
                 throw new ArgumentException("ERROR Cuenta no encontrada");
                 break;
             }
-            this.listBankAccounts.Add(newAccount);
+            this.listBankAccount.Add(newAccount);
         } 
-/* 
-        public static void GetBalance(int accountNumber) {
+
+       /*  public static void GetBalanceAccount(string accountNumber) {
 
             BankAccount userAccount = GetThisAccount(accountNumber);
             return userAccount.Balance();
-        }
-
+        } */
+/* 
          public void DepositAccount(int accountNumber, decimal amount) { 
 
             BankAccount userAccount = GetThisAccount(accountNumber);
@@ -60,8 +60,10 @@ namespace BankApp
                 {
                     return false;
                 }
-        }
- */
+        } */
+
+
+
        /*  private static void GetBalance()
         {
             Console.Clear();

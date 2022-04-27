@@ -1,16 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BankApp
 {
     public class Program
     {
         
-        private static Bank BankSociety = new Bank();
+        private static Bank BankCompany = new Bank();
 
 
         static void Main(string[] args)
         { 
-        Console.WriteLine("Inciando...");
+        Console.WriteLine("Iniciando...");
           
             try
             {
@@ -33,7 +34,7 @@ namespace BankApp
             {
                  
                 Console.Clear();
-                Console.WriteLine("         Bank Society         ");
+                Console.WriteLine("         Bank Company        ");
                 Console.WriteLine("------------------------------");
                 Console.WriteLine("1. Crear Cuenta");
                 Console.WriteLine("2. Obtener el saldo de la cuenta");
@@ -56,7 +57,7 @@ namespace BankApp
 
                     
                     case '2':
-                    Console.WriteLine("2");
+                    GetBalanceAccount();
                     break;
 
                     
@@ -87,7 +88,7 @@ namespace BankApp
             bool option2 = true;
             string accountNumber;
             string placeHolder;
-            int balanceAmount;
+            int balanceAmount = 0;
             int accountType = 1 ;
            
 
@@ -98,6 +99,8 @@ namespace BankApp
 
             Console.WriteLine("\nDigite el nombre del titular de la cuenta: ");
             placeHolder = Console.ReadLine();
+
+            balanceAmount = 0;
 
             do
             {
@@ -111,20 +114,41 @@ namespace BankApp
                     if (accountType >= 1 && accountType <= 2)
                     {
                         option2 = false;
+                        
                     }
                     else
                     {
                         option2 = true;
+                        Console.WriteLine("ERORR Opción no válida");
                     }
                 
                
             }while (option2);
 
-            balanceAmount = 0;
-
-            BankSociety.CreateAccount(accountNumber,placeHolder,balanceAmount,accountType);
-
+            List<BankAccount> listBankAccount = new List<BankAccount>();
             
+            accountNumber = listBankAccount(accountNumber); 
+            /* BankCompany.CreateAccount(accountNumber,placeHolder,balanceAmount,accountType); */
+            
+        } //crear cuenta
+
+        public static void GetBalanceAccount() 
+        {
+
+            string accountNumber;
+            int balanceAmount = 0;
+
+            Console.Clear();
+            Console.WriteLine("Saldo de Cuenta");
+            Console.WriteLine("---------------");
+            Console.WriteLine("Digite el numero de la cuenta");
+            accountNumber = (Console.ReadLine());
+            List<BankAccount> listBankAccount = new List<BankAccount>();
+            
+            accountNumber = listBankAccount(accountNumber); 
+            Console.WriteLine("\nSu numero de cuenta es:");
+            Console.WriteLine(accountNumber);
+            Console.WriteLine(balanceAmount);
         }
 
     }   

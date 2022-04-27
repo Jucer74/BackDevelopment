@@ -6,7 +6,7 @@ namespace BankApp
     {
         public bool OverdraftAmount { get; set; }
 
-        public CheckingAccount(){
+        public CheckingAccount(): base(){
 
         }
 

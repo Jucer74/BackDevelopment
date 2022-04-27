@@ -5,11 +5,11 @@ namespace BankApp
 {
     public class SavingAccount : BankAccount
     {
-        public SavingAccount(){
+        public SavingAccount() : base() {
             
         }
         
-        public SavingAccount(string accountNumber, string placeHolder, int balanceAmount, int accountType) : base       (accountNumber,placeHolder,balanceAmount,accountType)
+        public SavingAccount(string accountNumber, string placeHolder, int balanceAmount, int accountType) : base (accountNumber,placeHolder,balanceAmount,accountType)
         {
             
         }
