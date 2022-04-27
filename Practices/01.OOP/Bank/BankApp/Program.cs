@@ -69,11 +69,11 @@ namespace BankApp
 
                     case "2":
                         Console.WriteLine("\n Enter the number account: ");
-                        int accountNumber = int.Parse(Console.ReadLine());
+                        searchAccountNumber = int.Parse(Console.ReadLine());
 
                         foreach (BankAccount account in accountList)
                         {
-                            if(account.AccountNumber == accountNumber)
+                            if(account.AccountNumber == searchAccountNumber)
                             {
                                 Console.WriteLine("   ********** Balance Account = " + account.BalanceAmount + "**********");
                             } else
