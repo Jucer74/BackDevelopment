@@ -6,6 +6,7 @@ namespace BankApp
     public class Bank
     {
         private static List<BankAccount> accountList;
+        
         private static void Main(string[] args)
         {
             try
@@ -25,7 +26,7 @@ namespace BankApp
             Console.WriteLine("-------------------");
             Console.WriteLine();
 
-            var account = CreateAccount();
+            var account = SelectAccountType();
             accountList = new List<BankAccount>();
             accountList.Add(account);
 
@@ -39,54 +40,38 @@ namespace BankApp
             }
         }
 
-        private static void Withdrawal()
-        {
-            Console.Write("Account Number             : ");
-            string accountNumber = Console.ReadLine();
-            BankAccount bankAccount = searchAccount(accountNumber);
-            Console.Write("Enter amount to withdraw           : ");
-            double amountWithdrawal = double.Parse(Console.ReadLine());
-            double subtractionBalance = bankAccount.BalanceAmount - amountWithdrawal;
-            bankAccount.BalanceAmount = subtractionBalance;
-            Console.Write("New Balance Amount: " + "$" + bankAccount.BalanceAmount);
-        }
 
-        private static void Deposit()
+        public static CheckingAccount CreateCheckingAccount(string accountNumber, string placeHolder,
+       double balanceAmount, int accountType, double overdraftAmount)
         {
-            Console.Write("Account Number             : ");
-            string accountNumber = Console.ReadLine();
-            BankAccount bankAccount = searchAccount(accountNumber);
-            Console.Write("Enter amount to deposit           : ");
-            double amountDeposit = double.Parse(Console.ReadLine());
-            double sumDepositAndBalance = bankAccount.BalanceAmount + amountDeposit;
-            bankAccount.BalanceAmount = sumDepositAndBalance;
-            Console.Write("New Balance Amount: " + "$" + bankAccount.BalanceAmount);
-        }
-
-        private static void GetBalance()
-        {
-            Console.Write("Account Number             : ");
-            string accountNumber = Console.ReadLine();
-            BankAccount bankAccount = searchAccount(accountNumber);
-            double balanceAmount = bankAccount.BalanceAmount;
-            Console.WriteLine("The balance amount is = " + "$" + balanceAmount); ;
-        }
-
-        private static BankAccount searchAccount(string textAccount)
-        {
-            BankAccount bankAccount = null;
-            for (int i = 0; i < accountList.Count; i++)
+            var checkingAccount = new CheckingAccount
             {
-                if (accountList[i].AccountNumber.Contains(textAccount))
-                {
-                    bankAccount = accountList[i];
-                }
-            }
-            return bankAccount;
+                AccountNumber = accountNumber,
+                PlaceHolder = placeHolder,
+                BalanceAmount = balanceAmount,
+                AccountType = accountType,
+                OverDraftAmount = overdraftAmount
+            };
 
+            return checkingAccount;
         }
 
-        private static BankAccount CreateAccount()
+
+        private static SavingAccount CreateSavingAccount(string accountNumber, string placeHolder,
+            double balanceAmount, int accountType)
+        {
+            var savingAccount = new SavingAccount
+            {
+                AccountNumber = accountNumber,
+                PlaceHolder = placeHolder,
+                BalanceAmount = balanceAmount,
+                AccountType = accountType
+            };
+
+            return savingAccount;
+        }
+
+        private static BankAccount SelectAccountType()
         {
             BankAccount bankAccount = null;
             Console.Write("Account Type                  : ");
@@ -99,13 +84,7 @@ namespace BankApp
                 var placeHolder = Console.ReadLine();
                 Console.Write("Balance amount : ");
                 double balanceAmount = double.Parse(Console.ReadLine());
-                bankAccount = new SavingAccount
-                {
-                    AccountNumber = accountNumber,
-                    PlaceHolder = placeHolder,
-                    BalanceAmount = balanceAmount,
-                    AccountType = accountType
-                };
+                bankAccount = CreateSavingAccount(accountNumber, placeHolder, balanceAmount, accountType);
             }
             else if (accountType == 2)
             {
@@ -117,14 +96,8 @@ namespace BankApp
                 double balanceAmount = double.Parse(Console.ReadLine());
                 Console.Write("Overdraft amount : ");
                 double overdraftAmount = double.Parse(Console.ReadLine());
-                bankAccount = new CheckingAccount
-                {
-                    AccountNumber = accountNumber,
-                    PlaceHolder = placeHolder,
-                    BalanceAmount = balanceAmount,
-                    AccountType = accountType,
-                    OverDraftAmount = overdraftAmount
-                };
+                bankAccount = CreateCheckingAccount(accountNumber, placeHolder, balanceAmount,
+                    accountType, overdraftAmount);
             }
 
             return bankAccount;
@@ -132,8 +105,7 @@ namespace BankApp
 
         private static void Menu()
         {
-            var option = ' ';
-
+        var option = ' ';
             while (option != '0')
             {
                 Console.Clear();
@@ -147,7 +119,7 @@ namespace BankApp
                 Console.WriteLine("Select Option:");
                 option = Console.ReadKey().KeyChar;
                 Console.WriteLine();
-
+                TransactionAccount transactionAccount = new TransactionAccount();
                 switch (option)
                 {
                     case '0':
@@ -159,15 +131,15 @@ namespace BankApp
                         break;
 
                     case '2':
-                        GetBalance();
+                        transactionAccount.GetBalance(accountList);
                         break;
 
                     case '3':
-                        Deposit();
+                        transactionAccount.Deposit(accountList);
                         break;
 
                     case '4':
-                        Withdrawal();
+                        transactionAccount.Withdrawal(accountList);
                         break;
 
                     default:
