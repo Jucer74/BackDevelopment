@@ -137,13 +137,13 @@ namespace BankAccount
                 if(searchInAccount.AccountNumber == accountNumber){
                     Console.Write("Account Place Holder: ");
                     Console.WriteLine(searchInAccount.AccountPlaceHolder);
-                    Console.Write("Your Account Balance: ");
+                    Console.Write("Your Account Balance: $");
                     Console.WriteLine(searchInAccount.AccountBalance);
                     Console.Write("Account Type: ");
                     Console.WriteLine(searchInAccount.AccountType);
                     if(searchInAccount.AccountType == "Checking")
                     {
-                        Console.Write("Account Overdraft: ");
+                        Console.Write("Account Overdraft: $");
                         Console.WriteLine("-"+searchInAccount.AccountOverdraft);
                     }
                 }
@@ -160,12 +160,12 @@ namespace BankAccount
             foreach (AccountDto searchInAccount in listAccount)
             {
                 if(searchInAccount.AccountNumber == accountNumber){
-                    Console.Write("Your Account Balance: ");
+                    Console.Write("Your Account Balance: $");
                     Console.WriteLine(searchInAccount.AccountBalance);
-                    Console.Write("Please enter the balance to deposit: ");
+                    Console.Write("Please enter the balance to deposit: $");
                     int accountBalance = int.Parse(Console.ReadLine());
                     searchInAccount.Deposit(accountBalance);
-                    Console.Write("Current Account Balance: ");
+                    Console.Write("Current Account Balance: $");
                     Console.WriteLine(searchInAccount.AccountBalance);
                 }
             }
@@ -180,14 +180,14 @@ namespace BankAccount
             foreach (AccountDto searchInAccount in listAccount)
             {
                 if(searchInAccount.AccountNumber == accountNumber){
-                    Console.Write("Your Account Balance: ");
+                    Console.Write("Your Account Balance: $");
                     Console.WriteLine(searchInAccount.AccountBalance);
 
-                    Console.Write("Enter the balance to be withdrawn: ");
+                    Console.Write("Enter the balance to be withdrawn: $");
                     int accountBalance = int.Parse(Console.ReadLine());
                     searchInAccount.Withdrawal(accountBalance);
 
-                    Console.Write("Current Account Balance: ");
+                    Console.Write("Current Account Balance: $");
                     Console.WriteLine(searchInAccount.AccountBalance);
                 }
             }
