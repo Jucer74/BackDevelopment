@@ -1,41 +1,38 @@
-public class BankAccount
+using System;
+
+
+namespace BankApp
 {
-public int AccountNumber{ get; set; }
+   public class BankAccount
+    {
+        private string accountNumber;
 
-public string PlaceHolder{ get; set; }
+        private string placeHolder;
 
-public double BalanceAmount{ get; set; }
+        private double balanceAmount;
 
-public int AccountType{ get; set; }
+        private int accountType;
 
-public BankAccount()
-{
+        public string AccountNumber { get => accountNumber; set => accountNumber = value; }
+
+        public string PlaceHolder { get => placeHolder; set => placeHolder = value; }
+
+        public double BalanceAmount { get => balanceAmount; set => balanceAmount = value; }
+
+        public int AccountType { get => accountType; set => accountType = value; }
+
+        public BankAccount()
+        {
+
+        }
+
+        public BankAccount(string accountNumber, string placeHolder, double balanceAmount, int accountType)
+        {
+            this.accountNumber = accountNumber;
+            this.placeHolder = placeHolder;
+            this.balanceAmount = balanceAmount;
+            this.accountType = accountType;
+        }
+    }
+}
     
-}
-
-public BankAccount(int accountNumber, string placeholder, double balanceamount, int accounttype)
-{
-    this.accountnumber = AccountNumber;
-    this.placeholder = PlaceHolder;
-    this.balanceamount = BalanceAmount;
-    this.accounttype = AccountType;
-}
-
-public static void CheckBalance()
-{
-    return BalanceAmount;
-}
-public static void Deposit(double quantity)
-{
-balanceamount = balanceamount + quantity;
-
-return Console.WriteLine("Your New Balance is: "+ balanceamount);
-
-}
-public static void Withraw(double quantity)
-{
-balanceamount = balanceamount - quantity;
-
-return Console.WriteLine("Thank you for withrawing, your new balance is" + balanceamount);
-}
-}
