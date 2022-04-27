@@ -1,19 +1,19 @@
+using System;
+namespace BankApp
+{
+    
+}
 public class BankAccount
 {
-    public int AccountNumber { get; set; }
+    public string NumberAccount { get; set; }
     public string PlaceHolder { get; set; }
-
     public double BalanceAmount { get; set; }
+    public int AccountType { get; set; }
 
-    public enum AccountType
-  {
-    SavingAccount='2',
-    CheckingAccount='2'
-  }
 
-    public BankAccount(int accountNumber, string placeHolder, double balanceAmount, int accountType)
+    public BankAccount(string numberAccount, string placeHolder, double balanceAmount, int accountType)
     {
-        this.AccountNumber = accountNumber;
+        this.NumberAccount = numberAccount;
         this.PlaceHolder = placeHolder;
         this.BalanceAmount = balanceAmount;
         this.AccountType = accountType;
@@ -24,13 +24,13 @@ public class BankAccount
 
     //methods
 
-    public void deposit(double value)
+    public void deposit(double amountToDposit)
     {
-        BalanceAmount = BalanceAmount+value;
+        BalanceAmount = BalanceAmount+amountToDposit;
     }
-    public void Withdrawal(double value)
+    public void Withdrawal(double amountToWithDrawal)
     {
-        BalanceAmount = BalanceAmount-value;
+        BalanceAmount = BalanceAmount-amountToWithDrawal;
     }
     public double checkBalance()
     {
