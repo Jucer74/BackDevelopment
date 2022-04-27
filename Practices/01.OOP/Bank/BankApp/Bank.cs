@@ -68,8 +68,15 @@ namespace BankApp
             try
             {
                 BankAccount userAccount = GetThisAccount(accountType);
-                userAccount.WithDrawal(amount);
-                return true;
+                if(userAccount.AccountType == 1 && userAccount.Balance() >= amount)
+                {
+                    userAccount.WithDrawal(amount);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             catch (ArgumentException)
             {
