@@ -6,7 +6,7 @@ namespace BankApp
 {
     class Program
     {     
-        public static List<SavingAccount> listAccount = new List<SavingAccount>();    
+        public static List<SavingAccount> listSavingAccount = new List<SavingAccount>();    
         private static void Main(string[] args)
         {
            try
@@ -64,6 +64,7 @@ namespace BankApp
                     case '4':
                         
                         WithdrawalAccount();
+                        break;
                         
                     default:
                         Console.WriteLine("Invalid Option");
@@ -111,17 +112,17 @@ namespace BankApp
         private static SavingAccount CreateAccount(int accountNumber, 
                                                 string placeHolder, 
                                                 int balanceAccount, 
-                                                string accountType)
+                                                int numberA)
         {
            
-            SavingAccount accountDto = new SavingAccount();
+            SavingAccount Ac = new SavingAccount();
 
-            accountDto.Accountnumber = accountNumber;
-            accountDto.Placeholder = placeHolder;
-            accountDto.Balanceaccount = balanceAccount;
-            accountDto.Accountype = accountType;
+            Ac.Accountnumber = accountNumber;
+            Ac.Placeholder = placeHolder;
+            Ac.Balanceaccount = balanceAccount;
+            Ac.NumberA = numberA;
 
-        return accountDto;
+        return Ac;
         }
         private static void GetBalanceAccount()
         {
@@ -130,7 +131,7 @@ namespace BankApp
             Console.WriteLine("Account number: ");
             int accountNumber = int.Parse(Console.ReadLine());
             
-            foreach (SavingAccount Ac in listAccount)
+            foreach (SavingAccount Ac in listSavingAccount)
             {
                 if(Ac.Accountnumber == accountNumber){
 
@@ -149,11 +150,11 @@ namespace BankApp
               Console.WriteLine("option 3 --------> Withdrawal");
 
             Console.Write("Account number: ");
-            int NumberA = int.Parse(Console.ReadLine());
+            int numberA = int.Parse(Console.ReadLine());
             
-            foreach (SavingAccount Ac in listAccount)
+            foreach (SavingAccount Ac in listSavingAccount)
             {
-                if(Ac.NumberA == NumberA){
+                if(Ac.NumberA == numberA){
                     Console.Write($"Balance account:{Ac.Balanceaccount} ");
                 
                     Console.Write("Enter the balance to withdraw: ");
@@ -167,12 +168,13 @@ namespace BankApp
         }
         private static void DepositAccount()
         {
-             Console.WriteLine("option 2 --------> Deposit");
+            Console.WriteLine("option 2 --------> Deposit");
 
             Console.Write("\nAccount number: ");
+
             int accountNumber = int.Parse(Console.ReadLine());
             
-            foreach (SavingAccount Ac in listAccount)
+            foreach (SavingAccount Ac in listSavingAccount)
             {
                 if (Ac.Accountnumber == accountNumber){
                   
