@@ -29,7 +29,7 @@ namespace BankApp
                 break;
 
                 default:
-                throw new ArgumentException("ERROR: No existe ese tipo de cuenta.");
+                    throw new ArgumentException("ERROR: No existe ese tipo de cuenta.");
                 break;
             }
             this.listBankAccounts.Add(newAccount);

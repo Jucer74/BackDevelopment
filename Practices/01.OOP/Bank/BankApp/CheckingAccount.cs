@@ -38,6 +38,7 @@ namespace BankApp
          this.BalanceAmount = this.BalanceAmount - withdrawalValue;
          if(isOverdrafAmount()){
             OverdrafAmount = true;
+            this.BalanceAmount = this.BalanceAmount - 1000.00;
          }
       }
 

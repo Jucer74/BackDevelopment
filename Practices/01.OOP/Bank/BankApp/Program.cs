@@ -45,7 +45,7 @@ namespace BankApp
                         Deposit();
                     break;
                     case '4':
-
+                        Withdrawal();
                     break;
                     default:
                         Console.WriteLine("ERROR. Opción incorrecta");
@@ -104,8 +104,15 @@ namespace BankApp
 
             balanceAmount = 0.0;
             accountNumber = cont;
-
-            BankUsb.CreateAccount(accountNumber,placeHolder,balanceAmount,accountType);
+            try
+            {
+                BankUsb.CreateAccount(accountNumber,placeHolder,balanceAmount,accountType);
+                
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine($"{e.Message}");
+            }
 
             Console.Clear();
             Console.WriteLine($"---------------------------");
@@ -171,6 +178,7 @@ namespace BankApp
 
                     Console.WriteLine("");
                     Console.WriteLine("Digite el monto a depositar");
+                    Console.Write("Monto: ");
                     amount = double.Parse(Console.ReadLine());
 
                     BankUsb.DepositAccount(accountNumber,amount);
@@ -198,6 +206,94 @@ namespace BankApp
                     Console.ReadKey();
                 }
             } while (Op);
+        }
+
+        public static void Withdrawal()
+        {
+            int accountNumber;
+            double amount = 0.0;
+            bool Op = true;
+            string accountType = "";
+            bool iswithdrawal = false;
+            char opcion = ' ';
+
+            Console.Clear();
+            Console.WriteLine("Digite su numero de cuenta.");
+            Console.Write("Cuenta: ");
+            do
+            {
+                try
+                {
+                    accountNumber = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("");
+                    Console.WriteLine($"Su balance es: {BankUsb.GetBalance(accountNumber)}$");
+                    Console.WriteLine("");
+                    Console.WriteLine("Digite el monto que desea retirar");
+                    Console.Write("Monto: ");
+                    amount = double.Parse(Console.ReadLine());
+
+                    iswithdrawal = BankUsb.WithdrawalAccount(accountNumber,amount);
+
+                    if (iswithdrawal)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("");
+                        Console.WriteLine("transacion correcta");
+                        Console.WriteLine("");
+                        Console.WriteLine($"Digite cualquier tecla para continuar");
+                        Console.ReadKey();
+                        Op=false;
+                        
+                    }
+                    else
+                    {
+                        Console.WriteLine("");
+                        Console.WriteLine("!!!CUIDADO!!!");
+                        Console.WriteLine("transacion incorrecta");
+                        Console.WriteLine("");
+                        Console.WriteLine("no puede retirar esa suma ya que su cuenta, es una cuenta de ahorros y no puede retirar mas de lo que tiene.");
+                        Console.WriteLine($"Digite la opcion.");
+                        Console.WriteLine($"1. Repetir retiro.");
+                        Console.WriteLine($"2. Salir.");
+                        Console.Write("Opcion: ");
+                        char opcion = Console.ReadKey().KeyChar;
+                        if (opcion == '2')
+                        {
+                            Op = false;
+                        }
+                        else if(Op == '1')
+                        {
+                            Op = true;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Error. esa no es una opcion valida, saliendo al menu.");
+                            Op = false;
+                            Console.WriteLine("");
+                            Console.WriteLine($"Digite cualquier tecla para continuar");
+                            Console.ReadKey();
+                        }
+                        
+                    }
+
+                    
+                }
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine($"{e.Message}");
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error. eso No es un numero");
+                }
+                finally
+                {
+                    Console.WriteLine("Digite cualquier tecla para repetir.");
+                    Console.ReadKey();
+                }
+            } while (Op);
+
         }
     }
 }
