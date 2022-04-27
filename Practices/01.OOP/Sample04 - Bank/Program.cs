@@ -82,6 +82,7 @@ namespace BankApp
                 Console.ReadKey();
             }
         }
+
         private static void InsertAccount()
         {
             
@@ -124,6 +125,7 @@ namespace BankApp
 
             listAccount.Add(newAccount);
         }
+
         private static AccountDto CreateAccount(int accountNumber, string placeHolder, int balanceAccount, string accountType)
         {
            
@@ -196,7 +198,6 @@ namespace BankApp
             Console.Write("Account number: ");
             int accountNumber = int.Parse(Console.ReadLine());
             
-            //se debe comparar el numero de cuenta con el de la lista
             foreach (AccountDto searchAccount in listAccount)
             {
                 if(searchAccount.Accountnumber == accountNumber){
