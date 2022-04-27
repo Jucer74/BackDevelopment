@@ -1,8 +1,4 @@
-namespace BankApp
-{
-    using System;
-
-    public class AccoutDto
+ public class SavingAccount
     {
         public int Accountnumber { get; set;}
         public string Placeholder { get; set;}
@@ -19,10 +15,7 @@ namespace BankApp
                 Balanceaccount = Balanceaccount-balanceWithdrawal;
             }else
             {
-                Console.WriteLine("------:(---------");
+                Console.WriteLine("------:(insufficient funds ---------");
             }
         }
     }
-
-    
-}
