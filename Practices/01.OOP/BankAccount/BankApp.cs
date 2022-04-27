@@ -43,7 +43,9 @@ namespace BankAccount
                 switch(menuOption)
                 {
                     case '0':
-                        Console.WriteLine("Exit App...");
+                        Console.WriteLine("Exiting App...");
+                        Console.WriteLine("App by Juan Felipe Osorio.");
+                        
                         break;
                     case '1':
                         InsertAccount();
@@ -63,7 +65,7 @@ namespace BankAccount
                 }
                 ;
 
-                Console.WriteLine("Press any key to continue");
+                Console.WriteLine("Press any key to continue...");
                 Console.ReadKey();
             }
         }
@@ -71,6 +73,9 @@ namespace BankAccount
         {
             var SideMenuOption = ' ';
             var accountType = " ";
+            int accountBalance = 0;
+            int accountOverdraft = 0;
+
             Console.Write("Set Account Number: ");
             int accountNumber = int.Parse(Console.ReadLine());
             Console.Write("Set Place Holder: ");
@@ -83,28 +88,29 @@ namespace BankAccount
             {
                 case '1':
                     accountType = "Saving Account";
-                    Console.WriteLine("You selected a "+ accountType);
+                    Console.WriteLine("\nYou selected a "+ accountType);
                     break;
                 case '2':                   
                     accountType = "Checking Account";
-                    Console.WriteLine("You selected a "+ accountType);
+                    Console.WriteLine("\nYou selected a "+ accountType+"\n");
+
+                    Console.Write("\nSet the account Overdraft Amount: ");
+                    int setAccountOverdraft = int.Parse(Console.ReadLine());
+                    accountOverdraft = -(accountOverdraft + setAccountOverdraft);
                     break;
                 default:
                     Console.WriteLine("Account type not found. Try Again...");
                     break;
             }
+            //Made By Juan Felipe Osorio
 
-            Console.Write("\nSet the account Overdraft Amount: ");
-            int accountOverdraft = int.Parse(Console.ReadLine());
-            int accountBalance = 0;
-            accountBalance = accountBalance + accountOverdraft;
 
             AccountDto newAccount = new AccountDto();
-            newAccount = CreateAccount(accountNumber, accountPlaceHolder, accountBalance, accountType);
+            newAccount = CreateAccount(accountNumber, accountPlaceHolder, accountBalance, accountType, accountOverdraft);
 
             listAccount.Add(newAccount);
         }
-        private static AccountDto CreateAccount(int accountNumber, string accountPlaceHolder, int accountBalance, string accountType)
+        private static AccountDto CreateAccount(int accountNumber, string accountPlaceHolder, int accountBalance, string accountType, int accountOverdraft)
         {
            
             AccountDto AccountDto = new AccountDto();
@@ -112,6 +118,7 @@ namespace BankAccount
             AccountDto.AccountPlaceHolder = accountPlaceHolder;
             AccountDto.AccountType = accountType;
             AccountDto.AccountBalance = accountBalance;
+            AccountDto.AccountOverdraft = accountOverdraft;
 
         return AccountDto;
         }
@@ -122,15 +129,17 @@ namespace BankAccount
             Console.WriteLine("---------------");
             Console.Write("Please put your Account Number: ");
             int accountNumber = int.Parse(Console.ReadLine());
-            foreach (AccountDto searchAccount in listAccount)
+            foreach (AccountDto searchInAccount in listAccount)
             {
-                if(searchAccount.AccountNumber == accountNumber){
+                if(searchInAccount.AccountNumber == accountNumber){
                     Console.Write("Account Place Holder: ");
-                    Console.WriteLine(searchAccount.AccountPlaceHolder);
+                    Console.WriteLine(searchInAccount.AccountPlaceHolder);
                     Console.Write("Your Account Balance: ");
-                    Console.WriteLine(searchAccount.AccountBalance);
+                    Console.WriteLine(searchInAccount.AccountBalance);
                     Console.Write("Account Type: ");
-                    Console.WriteLine(searchAccount.AccountType);
+                    Console.WriteLine(searchInAccount.AccountType);
+                    Console.Write("Account Overdraft: ");
+                    Console.WriteLine(searchInAccount.AccountOverdraft);
                 }
             }
         }
@@ -142,14 +151,16 @@ namespace BankAccount
             Console.Write("Please put your Account Number: ");
             int accountNumber = int.Parse(Console.ReadLine());
             
-            foreach (AccountDto searchAccount in listAccount)
+            foreach (AccountDto searchInAccount in listAccount)
             {
-                if(searchAccount.AccountNumber == accountNumber){
+                if(searchInAccount.AccountNumber == accountNumber){
                     Console.Write("Your Account Balance: ");
-                    Console.WriteLine(searchAccount.AccountBalance);
+                    Console.WriteLine(searchInAccount.AccountBalance);
                     Console.Write("Please enter the balance to deposit: ");
                     int accountBalance = int.Parse(Console.ReadLine());
-                    searchAccount.Deposit(accountBalance);
+                    searchInAccount.Deposit(accountBalance);
+                    Console.Write("Current Account Balance: ");
+                    Console.WriteLine(searchInAccount.AccountBalance);
                 }
             }
         }
@@ -160,15 +171,18 @@ namespace BankAccount
             Console.WriteLine("Account Withdraw");
             Console.Write("Please put your Account Number: ");
             int accountNumber = int.Parse(Console.ReadLine());
-            foreach (AccountDto searchAccount in listAccount)
+            foreach (AccountDto searchInAccount in listAccount)
             {
-                if(searchAccount.AccountNumber == accountNumber){
+                if(searchInAccount.AccountNumber == accountNumber){
                     Console.Write("Your Account Balance: ");
-                    Console.WriteLine(searchAccount.AccountBalance);
+                    Console.WriteLine(searchInAccount.AccountBalance);
 
                     Console.Write("Enter the balance to be withdrawn: ");
                     int accountBalance = int.Parse(Console.ReadLine());
-                    searchAccount.Withdrawal(accountBalance);
+                    searchInAccount.Withdrawal(accountBalance);
+
+                    Console.Write("Current Account Balance: ");
+                    Console.WriteLine(searchInAccount.AccountBalance);
                 }
             }
         }
