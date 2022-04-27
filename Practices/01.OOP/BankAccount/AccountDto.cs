@@ -14,7 +14,7 @@ namespace BankAccount
         }
 
         public void Withdrawal(int balanceWithdrawal){
-            if(AccountType == "Saving Account")
+            if(AccountType == "Saving")
             {
                 if(AccountBalance>=balanceWithdrawal)
                 {
@@ -24,20 +24,15 @@ namespace BankAccount
                     Console.WriteLine("Error. Not Enough Balance in your Account...");
                 }
             }
-            else if(AccountType == "Checking Account")
+            else if(AccountType == "Checking")
             {
-                if(AccountOverdraft<=balanceWithdrawal)
+                if(AccountBalance>=balanceWithdrawal-AccountOverdraft)
                 {   
-                    if (AccountBalance>=AccountOverdraft)
-                    {
-                     Console.WriteLine(AccountBalance);
-                     AccountBalance = AccountBalance-balanceWithdrawal;
-                    }
-                    else if (AccountBalance<AccountOverdraft)
-                    {
-                     Console.WriteLine("Error. Not Enough Balance in your Account...");
-                    }
-
+                    AccountBalance = AccountBalance-balanceWithdrawal;
+                }
+                else
+                {
+                    Console.WriteLine("Error. Not Enough Balance in your Account...");
                 }
             }
         }

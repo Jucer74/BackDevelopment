@@ -80,28 +80,31 @@ namespace BankAccount
             int accountNumber = int.Parse(Console.ReadLine());
             Console.Write("Set Place Holder: ");
             var accountPlaceHolder = Console.ReadLine();
-            Console.WriteLine("Set the Account type: ");
-            Console.WriteLine("1. Saving Account.");
-            Console.WriteLine("2. Checking Account.");
-            SideMenuOption = Console.ReadKey().KeyChar;
-            switch (SideMenuOption)
-            {
-                case '1':
-                    accountType = "Saving Account";
-                    Console.WriteLine("\nYou selected a "+ accountType);
-                    break;
-                case '2':                   
-                    accountType = "Checking Account";
-                    Console.WriteLine("\nYou selected a "+ accountType+"\n");
+            do{
+                Console.WriteLine("Set the Account type: ");
+                Console.WriteLine("1. Saving Account.");
+                Console.WriteLine("2. Checking Account.");
+                SideMenuOption = Console.ReadKey().KeyChar;
+            
+                switch (SideMenuOption)
+                {
+                    case '1':
+                        accountType = "Saving";
+                        Console.WriteLine("\nYou selected a "+ accountType + " account");
+                        break;
+                    case '2':                   
+                        accountType = "Checking";
+                        Console.WriteLine("\nYou selected a "+ accountType+ " account");
 
-                    Console.Write("\nSet the account Overdraft Amount: ");
-                    int setAccountOverdraft = int.Parse(Console.ReadLine());
-                    accountOverdraft = -(accountOverdraft + setAccountOverdraft);
-                    break;
-                default:
-                    Console.WriteLine("Account type not found. Try Again...");
-                    break;
-            }
+                        Console.Write("Set the account Overdraft Amount: ");
+                        int setAccountOverdraft = int.Parse(Console.ReadLine());
+                        accountOverdraft = accountOverdraft + setAccountOverdraft;
+                        break;
+                    default:
+                        Console.WriteLine("\n-------------\n ERROR...Account type not found. Try Again...\n--------------");
+                        break;
+                }
+            }while (accountType == " ");
             //Made By Juan Felipe Osorio
 
 
@@ -127,7 +130,7 @@ namespace BankAccount
             Console.WriteLine("---------------");
             Console.WriteLine("Account Balance");
             Console.WriteLine("---------------");
-            Console.Write("Please put your Account Number: ");
+            Console.Write("Please enter your Account Number: ");
             int accountNumber = int.Parse(Console.ReadLine());
             foreach (AccountDto searchInAccount in listAccount)
             {
@@ -138,8 +141,11 @@ namespace BankAccount
                     Console.WriteLine(searchInAccount.AccountBalance);
                     Console.Write("Account Type: ");
                     Console.WriteLine(searchInAccount.AccountType);
-                    Console.Write("Account Overdraft: ");
-                    Console.WriteLine(searchInAccount.AccountOverdraft);
+                    if(searchInAccount.AccountType == "Checking")
+                    {
+                        Console.Write("Account Overdraft: ");
+                        Console.WriteLine("-"+searchInAccount.AccountOverdraft);
+                    }
                 }
             }
         }
@@ -148,7 +154,7 @@ namespace BankAccount
             Console.WriteLine("----------------");
             Console.WriteLine("Account Deposit");
             Console.WriteLine("----------------");
-            Console.Write("Please put your Account Number: ");
+            Console.Write("Please enter your Account Number: ");
             int accountNumber = int.Parse(Console.ReadLine());
             
             foreach (AccountDto searchInAccount in listAccount)
@@ -169,7 +175,7 @@ namespace BankAccount
         {
             Console.Clear();
             Console.WriteLine("Account Withdraw");
-            Console.Write("Please put your Account Number: ");
+            Console.Write("Please enter your Account Number: ");
             int accountNumber = int.Parse(Console.ReadLine());
             foreach (AccountDto searchInAccount in listAccount)
             {
