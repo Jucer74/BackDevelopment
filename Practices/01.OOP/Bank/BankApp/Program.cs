@@ -12,7 +12,6 @@ namespace BankApp
         static void Main(string[] args)
         {
             string option;
-            int counter = 0;
             int searchAccountNumber = 0;
 
             bool isExit = false;
@@ -32,39 +31,15 @@ namespace BankApp
                 switch (option)
                 {
                     case "1":
-                        while (counter < 1)
-                        {
-                            Console.WriteLine("\n Select the type of bank account: ");
-                            int accountType = int.Parse(Console.ReadLine());
+                        Console.Clear();
+                        Console.WriteLine("\n Select the type of bank account: ");
+                        Console.WriteLine("   1. Saving Account");
+                        Console.WriteLine("   2. Checking Account");
+                        int accountType = int.Parse(Console.ReadLine());
+                        
+                        accountList.Add(CreateAccountType(accountType));
 
-                            if(accountType == 1)
-                            {
-                                SavingAccount savingAccount = new SavingAccount();
-
-                                Console.WriteLine("   - Enter the name of the account holder: ");
-                                savingAccount.PlaceHolder = Console.ReadLine();
-
-                                Console.WriteLine("   - Enter the bank account number: ");
-                                savingAccount.AccountNumber = int.Parse(Console.ReadLine());
-
-                                accountList.Add(savingAccount);
-                            }
-
-                            if(accountType == 2)
-                            {
-                                CheckingAccount checkingAccount = new CheckingAccount();
-
-                                Console.WriteLine("   - Enter the name of the account holder: ");
-                                checkingAccount.PlaceHolder = Console.ReadLine();
-
-                                Console.WriteLine("   - Enter the bank account number: ");
-                                checkingAccount.AccountNumber = int.Parse(Console.ReadLine());
-
-                                accountList.Add(checkingAccount);
-                            }
-
-                            counter++;
-                        }
+                        Console.WriteLine("\n **** The account was created successfully ***");
                     break;
 
                     case "2":
@@ -105,37 +80,74 @@ namespace BankApp
                     break;
 
                     case "4":
-                        Console.WriteLine("\n Enter the number account: ");
-                        searchAccountNumber = int.Parse(Console.ReadLine());
+                        Console.WriteLine("   - Enter the amount: ");
+                        int amount = int.Parse(Console.ReadLine());
 
-                        foreach (BankAccount account in accountList)
+                        if(amount > SearchBankAccount().BalanceAmount)
                         {
-                            if(account.AccountNumber == searchAccountNumber)
-                            {
-                                Console.WriteLine("   - Enter the amount: ");
-                                int amount = int.Parse(Console.ReadLine());
-
-                                if(amount > account.BalanceAmount)
-                                {
-                                    Console.WriteLine("Error: The amount exceeds the balance.");
-                                } else {
-                                    account.Withdrawal(amount);
-                                    Console.WriteLine("   ********** Your new balance is: " + account.BalanceAmount);
-                                }
-
-                            } else
-                            {
-                                Console.WriteLine("Error: Account not found, please try again.");
-                            }
+                            Console.WriteLine("Error: The amount exceeds the balance.");
+                        } else {
+                            account.Withdrawal(amount);
+                            Console.WriteLine("   ********** Your new balance is: " + account.BalanceAmount);
                         }
+
                     break;
 
                     case "5":
                         isExit = true;
                     break;
-                } // Switch  
+                } // Switch 
+                 
             }
-                     
         } // Main
+
+        public static BankAccount CreateAccountType(int accountType)
+        {
+            if(accountType == 1)
+            {
+                SavingAccount savingAccount = new SavingAccount();
+
+                Console.WriteLine("   - Enter the name of the account holder: ");
+                savingAccount.PlaceHolder = Console.ReadLine();
+
+                Console.WriteLine("   - Enter the bank account number: ");
+                savingAccount.AccountNumber = int.Parse(Console.ReadLine());
+
+                savingAccount.BalanceAmount = 0;
+
+                return savingAccount;
+            }else 
+            {
+                CheckingAccount checkingAccount = new CheckingAccount();
+
+                Console.WriteLine("   - Enter the name of the account holder: ");
+                checkingAccount.PlaceHolder = Console.ReadLine();
+
+                Console.WriteLine("   - Enter the bank account number: ");
+                checkingAccount.AccountNumber = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("   - Select the value of the amount for credit: ");
+                checkingAccount.BalanceAmount = int.Parse(Console.ReadLine());
+        
+                return checkingAccount;
+            }
+        }
+        
+        public static BankAccount SearchBankAccount()
+        {
+            Console.WriteLine("\n Enter the number account: ");
+            searchAccountNumber = int.Parse(Console.ReadLine());
+
+            foreach (BankAccount account in accountList)
+            {
+                if(account.AccountNumber == searchAccountNumber)
+                {
+                    return account;
+                } else
+                {
+                    Console.WriteLine("Error: Account not found, please try again.");
+                }
+            }
+        }
     } // Class Program
 }
