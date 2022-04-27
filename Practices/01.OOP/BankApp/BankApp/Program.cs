@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Juan Camilo Mayorca Puerto - 65059
+using System;
 using System.Collections.Generic;
 
 namespace BankApp
@@ -117,8 +118,6 @@ namespace BankApp
 
             Console.WriteLine("Enter Account Number");
             int accountNumber = int.Parse(Console.ReadLine());
-            
-            //se debe comparar el numero de cuenta con el de la lista
             foreach (CreateAccount searchAccount in listAccount)
             {
                 if(searchAccount.AccountNumber == accountNumber){
@@ -142,7 +141,6 @@ namespace BankApp
             Console.WriteLine("ENTER ACCOUNT NUMBER");
             int accountNumber = int.Parse(Console.ReadLine());
             
-            //se debe comparar el numero de cuenta con el de la lista
             foreach (CreateAccount searchAccount in listAccount)
             {
                 if(searchAccount.AccountNumber == accountNumber){
@@ -151,19 +149,14 @@ namespace BankApp
                 }
 
             }
-
-            //se debe retornar el balance de la cuenta
         }
 
   private static void WithdrawalAccount()
         {
             Console.Clear();
             Console.WriteLine("Withdraw Account");
-            //se verifica el numero de cuenta
             Console.WriteLine("ENTER ACCOUNT NUMBER");
             int accountNumber = int.Parse(Console.ReadLine());
-            
-            //se debe comparar el numero de cuenta con el de la lista
             foreach (CreateAccount searchAccount in listAccount)
             {
                 if(searchAccount.AccountNumber == accountNumber){

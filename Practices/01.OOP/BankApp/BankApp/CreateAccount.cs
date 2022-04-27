@@ -1,3 +1,4 @@
+//Juan Camilo Mayorca Puerto - 65059
 namespace BankApp{
     using System;
     public class CreateAccount{
@@ -5,7 +6,6 @@ namespace BankApp{
         public int AccountNumber {get; set;}
         public string PlaceHolder {get; set;}
         public string AccountType {get; set;}
-        //public double OverdraftAmount {get; set;}
         public double BalanceAmount {get; set;}
 
        public void Deposit(int balanceDeposit){
