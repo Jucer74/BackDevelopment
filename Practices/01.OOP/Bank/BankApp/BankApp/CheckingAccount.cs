@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 namespace BankApp
 {
     public class CheckingAccount : BankAccount

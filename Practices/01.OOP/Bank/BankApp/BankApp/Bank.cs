@@ -6,7 +6,7 @@ namespace BankApp
     public class Bank
     {
         private static List<BankAccount> accountList;
-        
+
         private static void Main(string[] args)
         {
             try
@@ -19,14 +19,16 @@ namespace BankApp
             }
         }
 
+
         private static void InsertAccount()
         {
+            UtilityAccountValidation utilityAccountValidation = new UtilityAccountValidation();
             Console.Clear();
             Console.WriteLine("Insert new Account");
             Console.WriteLine("-------------------");
             Console.WriteLine();
 
-            var account = SelectAccountType();
+            var account = utilityAccountValidation.SelectAccountType();
             accountList = new List<BankAccount>();
             accountList.Add(account);
 
@@ -39,70 +41,6 @@ namespace BankApp
                 Console.WriteLine("\nError created account\n");
             }
         }
-
-
-        public static CheckingAccount CreateCheckingAccount(string accountNumber, string placeHolder,
-       double balanceAmount, int accountType, double overdraftAmount)
-        {
-            var checkingAccount = new CheckingAccount
-            {
-                AccountNumber = accountNumber,
-                PlaceHolder = placeHolder,
-                BalanceAmount = balanceAmount,
-                AccountType = accountType,
-                OverDraftAmount = overdraftAmount
-            };
-
-            return checkingAccount;
-        }
-
-
-        private static SavingAccount CreateSavingAccount(string accountNumber, string placeHolder,
-            double balanceAmount, int accountType)
-        {
-            var savingAccount = new SavingAccount
-            {
-                AccountNumber = accountNumber,
-                PlaceHolder = placeHolder,
-                BalanceAmount = balanceAmount,
-                AccountType = accountType
-            };
-
-            return savingAccount;
-        }
-
-        private static BankAccount SelectAccountType()
-        {
-            BankAccount bankAccount = null;
-            Console.Write("Account Type                  : ");
-            int accountType = int.Parse(Console.ReadLine());
-            if (accountType == 1)
-            {
-                Console.Write("Account Number             : ");
-                var accountNumber = Console.ReadLine();
-                Console.Write("Place holder             : ");
-                var placeHolder = Console.ReadLine();
-                Console.Write("Balance amount : ");
-                double balanceAmount = double.Parse(Console.ReadLine());
-                bankAccount = CreateSavingAccount(accountNumber, placeHolder, balanceAmount, accountType);
-            }
-            else if (accountType == 2)
-            {
-                Console.Write("Account Number             : ");
-                var accountNumber = Console.ReadLine();
-                Console.Write("Place holder             : ");
-                var placeHolder = Console.ReadLine();
-                Console.Write("Balance amount : ");
-                double balanceAmount = double.Parse(Console.ReadLine());
-                Console.Write("Overdraft amount : ");
-                double overdraftAmount = double.Parse(Console.ReadLine());
-                bankAccount = CreateCheckingAccount(accountNumber, placeHolder, balanceAmount,
-                    accountType, overdraftAmount);
-            }
-
-            return bankAccount;
-        }
-
         private static void Menu()
         {
         var option = ' ';
