@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Collections.Generic;
 
 
 namespace BankApp
@@ -7,9 +8,12 @@ namespace BankApp
 
  internal class Program
   {
-   
+  private static List<BankAccount> accountList;
 static void Main(string[] args)
     {
+
+
+      
      Console.WriteLine("Bienvenido A ZothBank");
      Console.WriteLine("----------------------------------------");
      System.Threading.Thread.Sleep(1500);
