@@ -1,150 +1,177 @@
 ﻿using System;
+using System.Globalization;
+using System.Collections.Generic;
 
 namespace BankAccount
 {
     class BankApp
-
-    {
-        public int AccountNumber;
-        public string PlaceHolder;
-        public double BalanceAmount;
-        public int AccountType;
-
+    {   
+        
+        public static List<AccountDto> listAccount = new List<AccountDto>();    
         private static void Main(string[] args)
         {
-            Console.WriteLine("Starting...");
-            Menu();
-        }
-        private static void Menu()
-            {
-                
-            var option = ' ';
+           try
+           {
+               Menu();
+           }
+           catch(Exception e)
+           {
+               Console.WriteLine(e);
+           }
 
-            while (option != '0')
+        }
+
+        private static void Menu()
+        {
+            var menuOption =' ';
+
+            while(menuOption !='0')
             {
                 Console.Clear();
-                Console.WriteLine("     National Bank Services   ");
-                Console.WriteLine("------------------------------");
-                Console.WriteLine("1. Create a New Account");
-                Console.WriteLine("2. Get Balance Account");
-                Console.WriteLine("3. Deposit Account");
-                Console.WriteLine("4. Withdrawal Account");
+                Console.WriteLine("First World Bank App     ");
+                Console.WriteLine("---------------------");
+                Console.WriteLine("----Select an Option----");
+                Console.WriteLine("---------------------");
+                Console.WriteLine("1. Create a new account");
+                Console.WriteLine("2. Get the balance of your Account");
+                Console.WriteLine("3. Deposit cash in your Account");
+                Console.WriteLine("4. Cash withdrawals");
                 Console.WriteLine("0. Exit");
-                Console.WriteLine("Select Option:");
-                option = Console.ReadKey().KeyChar;
-                Console.WriteLine();        
+                menuOption = Console.ReadKey().KeyChar;
+                Console.WriteLine();
 
-                switch (option)
+                switch(menuOption)
                 {
-                case '0':
-                    Console.WriteLine("Exit");
-                    break;
-
-                case '1':
-                   Console.WriteLine("Create Account");
-                    break;
-
-                case '2':
-                    Console.WriteLine("Get Balance");
-                    break;
-
-                case '3':
-                    Console.WriteLine("Deposit");
-                    break;
-
-                case '4':
-                    Console.WriteLine("Withdrawal");
-                    break;
-
-                default:
-                    Console.WriteLine("Invalid Option");
-                    break;
+                    case '0':
+                        Console.WriteLine("Exit App...");
+                        break;
+                    case '1':
+                        InsertAccount();
+                        break;
+                    case '2':
+                        GetAccountBalance();
+                        break;
+                    case '3':
+                        AccountDeposit();
+                        break;
+                    case '4':
+                        AccountWithdrawal();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid Option, please try again.");
+                        break;
                 }
-
                 ;
 
-                Console.WriteLine("\nPress any key to continue... ");
+                Console.WriteLine("Press any key to continue");
                 Console.ReadKey();
             }
         }
-/*         public List<BankAccountInformation> AccountList()
+        private static void InsertAccount()
         {
-            var employees = new List<EmployeeDto>();
-
-            while (dataReader.Read())
+            var SideMenuOption = ' ';
+            var accountType = " ";
+            Console.Write("Set Account Number: ");
+            int accountNumber = int.Parse(Console.ReadLine());
+            Console.Write("Set Place Holder: ");
+            var accountPlaceHolder = Console.ReadLine();
+            Console.WriteLine("Set the Account type: ");
+            Console.WriteLine("1. Saving Account.");
+            Console.WriteLine("2. Checking Account.");
+            SideMenuOption = Console.ReadKey().KeyChar;
+            switch (SideMenuOption)
             {
-                var emp = new EmployeeDto
-                {
-                    Id = Convert.ToInt32(dataReader["Id"].ToString()),
-                    FirstName = dataReader["FirstName"].ToString(),
-                    LastName = dataReader["LastName"].ToString(),
-                    HireDate = Convert.ToDateTime(dataReader["HireDate"].ToString()),
-                    Email = dataReader["Email"].ToString(),
-                    Phone = dataReader["Phone"].ToString()
-                };
-
-                employees.Add(emp);
+                case '1':
+                    accountType = "Saving Account";
+                    Console.WriteLine("You selected a "+ accountType);
+                    break;
+                case '2':                   
+                    accountType = "Checking Account";
+                    Console.WriteLine("You selected a "+ accountType);
+                    break;
+                default:
+                    Console.WriteLine("Account type not found. Try Again...");
+                    break;
             }
-        } */
-        private static void CreateAccount()
+
+            Console.Write("\nSet the account Overdraft Amount: ");
+            int accountOverdraft = int.Parse(Console.ReadLine());
+            int accountBalance = 0;
+            accountBalance = accountBalance + accountOverdraft;
+
+            AccountDto newAccount = new AccountDto();
+            newAccount = CreateAccount(accountNumber, accountPlaceHolder, accountBalance, accountType);
+
+            listAccount.Add(newAccount);
+        }
+        private static AccountDto CreateAccount(int accountNumber, string accountPlaceHolder, int accountBalance, string accountType)
+        {
+           
+            AccountDto AccountDto = new AccountDto();
+            AccountDto.AccountNumber = accountNumber;
+            AccountDto.AccountPlaceHolder = accountPlaceHolder;
+            AccountDto.AccountType = accountType;
+            AccountDto.AccountBalance = accountBalance;
+
+        return AccountDto;
+        }
+        private static void GetAccountBalance()
+        {
+            Console.WriteLine("---------------");
+            Console.WriteLine("Account Balance");
+            Console.WriteLine("---------------");
+            Console.Write("Please put your Account Number: ");
+            int accountNumber = int.Parse(Console.ReadLine());
+            foreach (AccountDto searchAccount in listAccount)
+            {
+                if(searchAccount.AccountNumber == accountNumber){
+                    Console.Write("Account Place Holder: ");
+                    Console.WriteLine(searchAccount.AccountPlaceHolder);
+                    Console.Write("Your Account Balance: ");
+                    Console.WriteLine(searchAccount.AccountBalance);
+                    Console.Write("Account Type: ");
+                    Console.WriteLine(searchAccount.AccountType);
+                }
+            }
+        }
+        private static void AccountDeposit()
+        {
+            Console.WriteLine("----------------");
+            Console.WriteLine("Account Deposit");
+            Console.WriteLine("----------------");
+            Console.Write("Please put your Account Number: ");
+            int accountNumber = int.Parse(Console.ReadLine());
+            
+            foreach (AccountDto searchAccount in listAccount)
+            {
+                if(searchAccount.AccountNumber == accountNumber){
+                    Console.Write("Your Account Balance: ");
+                    Console.WriteLine(searchAccount.AccountBalance);
+                    Console.Write("Please enter the balance to deposit: ");
+                    int accountBalance = int.Parse(Console.ReadLine());
+                    searchAccount.Deposit(accountBalance);
+                }
+            }
+        }
+
+        private static void AccountWithdrawal()
         {
             Console.Clear();
-            Console.WriteLine("Insert new Employee");
-            Console.WriteLine("-------------------");
-             Console.WriteLine();
-
-             var employeeDto = CreateEmployeDto();
-
-             if (employeeData.InsertEmployee(employeeDto))
+            Console.WriteLine("Account Withdraw");
+            Console.Write("Please put your Account Number: ");
+            int accountNumber = int.Parse(Console.ReadLine());
+            foreach (AccountDto searchAccount in listAccount)
             {
-                Console.WriteLine("\nThe Employee was insert Successfully\n");
+                if(searchAccount.AccountNumber == accountNumber){
+                    Console.Write("Your Account Balance: ");
+                    Console.WriteLine(searchAccount.AccountBalance);
+
+                    Console.Write("Enter the balance to be withdrawn: ");
+                    int accountBalance = int.Parse(Console.ReadLine());
+                    searchAccount.Withdrawal(accountBalance);
+                }
             }
-            else
-            {
-                Console.WriteLine("\nThe Employee was not inserted\n");
-            }
         }
-
-        private static AccountDto CreateEmployeDto()
-        {
-            Console.Write("Account Number             : ");
-            var accountNumber = Console.ReadLine();
-            Console.Write("PlaceHolder              : ");
-            var placeHolder = Console.ReadLine();
-            Console.Write("Account Type : ");
-            var accountType = Console.ReadLine();
-            Console.Write("Balance Amount                  : ");
-            var balanceAmount = Console.ReadLine();
-            Console.Write("OverdraftAmount                  : ");
-            var overdraftAmount = Console.ReadLine();
-
-            var accountDto = new AccountDto
-            {
-                AccountNumber = accountNumber,
-                PlaceHolder = placeHolder,
-                AccountType = accountType,
-                BalanceAmount = balanceAmount,
-                OverdraftAmount = overdraftAmount,
-            };
-
-            return employeeDto;
-        }        
-
-         private static void GetBalance()
-        {
-            //AccountNumber
-        }
-         private static void DepositAccount()
-        {
-            //AccountNumber
-            //Amount
-        }
-
-        private static void WithdrawalAccount()
-        {
-            //AccountNumber
-            //Amount => Checking Amount
-        }
-
     }
 }
+

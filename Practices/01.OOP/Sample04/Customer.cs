@@ -1,4 +1,4 @@
-namespace Sample03
+namespace Sample04
 {
     public class Customer : Person
     {

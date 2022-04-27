@@ -1,20 +1,29 @@
 namespace BankAccount
 {
-  using System;
-  using System.ComponentModel.DataAnnotations;
+    using System;
 
-  [Serializable]
-  public class AccountDto
-  {
-    [Required] public int AccountNumber { get; set; }
+    public class AccountDto
+    {
+        public int AccountNumber { get; set;}
 
-    [Required] public string PlaceHolder { get; set; }
+        public string AccountPlaceHolder { get; set;}
 
-    [Required] public string AccountType { get; set; }
+        public string AccountType { get; set;}
 
-    [Required] public int BalanceAmount { get; set; }
+        public int AccountBalance { get; set;}
 
-    [Required] public int OverdraftAmount { get; set; }
+        public void Deposit(int balanceDeposit){
+            AccountBalance = AccountBalance+balanceDeposit;
+        }
 
-  }
+        public void Withdrawal(int balanceWithdrawal){
+            if(AccountBalance>=balanceWithdrawal){
+                AccountBalance = AccountBalance-balanceWithdrawal;
+            }else{
+                Console.WriteLine("Error. Not Enough Balance in your Account...");
+            }
+        }
+    }
+
+    
 }
