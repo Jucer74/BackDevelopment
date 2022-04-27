@@ -86,6 +86,7 @@ namespace BankApp
                     accountType = "Saving Account";
                     break;
                 case '2':
+                    Console.WriteLine("\nOverdraft Amount = 10000000");
                     accountType = "Checking Account";
                     break;
                 default:
@@ -94,11 +95,9 @@ namespace BankApp
                     break;
             }
 
-            Console.WriteLine("\nOverdraft Amount");
-            int overdraftAccount = int.Parse(Console.ReadLine());
-            int balanceAccount = 0;
-            balanceAccount = balanceAccount + overdraftAccount;
-
+            Console.WriteLine("Insert Balance Account");
+            int balanceAccount = int.Parse(Console.ReadLine());
+            
             AccountDto newAccount = new AccountDto();
             newAccount = CreateAccount(accountNumber, placeHolder, balanceAccount, accountType);
 
