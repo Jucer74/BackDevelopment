@@ -166,11 +166,11 @@ namespace BankApp
             double amount = 0.0;
             bool Op = true;
 
-            Console.Clear();
-            Console.WriteLine("Digite su numero de cuenta.");
-            Console.Write("Cuenta: ");
             do
             {
+                Console.Clear();
+                Console.WriteLine("Digite su numero de cuenta.");
+                Console.Write("Cuenta: ");
                 try
                 {
                     accountNumber = int.Parse(Console.ReadLine());
@@ -215,11 +215,11 @@ namespace BankApp
             bool iswithdrawal = false;
             char opcion = ' ';
 
-            Console.Clear();
-            Console.WriteLine("Digite su numero de cuenta.");
-            Console.Write("Cuenta: ");
             do
             {
+                Console.Clear();
+                Console.WriteLine("Digite su numero de cuenta.");
+                Console.Write("Cuenta: ");
                 try
                 {
                     accountNumber = int.Parse(Console.ReadLine());

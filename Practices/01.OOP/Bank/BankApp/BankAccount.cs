@@ -2,7 +2,7 @@ using System;
 
 namespace BankApp
 {
-    public class BankAccount
+    public abstract class BankAccount
     {
         public int AccountNumber { get; set; }
         public string PlaceHolder { get; set; }
@@ -17,21 +17,12 @@ namespace BankApp
             this.AccountNumber = accountNumber;
             this.PlaceHolder = placeHolder;
             this.BalanceAmount = balanceAmount;
-            this.AccountType = accountNumber;
+            this.AccountType = accountType;
         }
 
-        public void Deposit(double despositValue)
-        {
-
-        }
-        public double Balance()
-        {
-            return 0.0;
-        }
-        public void WithDrawal(double withdrawalValue)
-        {
-
-        }
+        public abstract void Deposit(double despositValue);
+        public abstract double Balance();
+        public abstract void WithDrawal(double withdrawalValue);
     }
     
 }

@@ -18,17 +18,17 @@ namespace BankApp
 
       }
 
-      public void Deposit(double despositValue)
+      public override void Deposit(double despositValue)
       {
         this.BalanceAmount = this.BalanceAmount + despositValue;
       }
 
-      public double Balance()
+      public override double Balance()
       {
         return this.BalanceAmount;
       }
 
-      public void WithDrawal(double withdrawalValue)
+      public override void WithDrawal(double withdrawalValue)
       {
         this.BalanceAmount = this.BalanceAmount - withdrawalValue;
       }
