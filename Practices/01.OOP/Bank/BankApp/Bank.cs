@@ -63,9 +63,18 @@ namespace BankApp
             }
         }
 
-        public void WithdrawalAccount()
+        public bool WithdrawalAccount(int accountType, decimal amount)
         {
-
+            try
+            {
+                BankAccount userAccount = GetThisAccount(accountType);
+                userAccount.WithDrawal(amount);
+                return true;
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
         }
 
         public BankAccount GetThisAccount(int accountType)
