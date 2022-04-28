@@ -9,11 +9,12 @@ namespace BankApp
     class Program
     {
         private static Bank bank = new Bank();
+        private static BankAccount bAccount = new BankAccount();
         static void Main(string[] args)
         {
 
             List<BankAccount> listBankAccounts = new List<BankAccount>();
-            BankAccount bAccount = new BankAccount();
+            
 
             try
             {
@@ -31,8 +32,8 @@ namespace BankApp
             {
                 if (bank.listBankAccounts[currentAccount].NumberAccount == numberInput)
                 {
-                    Console.WriteLine("Account of number "+ bank.listBankAccounts[currentAccount].NumberAccount
-                                    + "the Balance is: "+ bank.listBankAccounts[currentAccount].BalanceAmount);
+                    Console.WriteLine("Account of number '"+ bank.listBankAccounts[currentAccount].NumberAccount
+                                    + "' the Balance is: "+ bank.listBankAccounts[currentAccount].BalanceAmount);
                 }
             }
         }
@@ -59,6 +60,39 @@ namespace BankApp
                 else
                 {
                     Console.WriteLine("this AccountType is invalid");
+                }
+            }
+        }
+
+        private static void depositAmount()
+        {
+            Console.WriteLine("insert you numberAccount for deposit ");
+            string numberAccount = Console.ReadLine();
+
+            for (int currentAccount = 0; currentAccount < bank.listBankAccounts.Count; currentAccount++)
+            {
+                
+                if (numberAccount == bank.listBankAccounts[currentAccount].NumberAccount)
+                {
+                    Console.WriteLine("insert a Ammount to deposit");
+                    double ammount = double.Parse(Console.ReadLine());
+                    bank.listBankAccounts[currentAccount].BalanceAmount = bank.listBankAccounts[currentAccount].BalanceAmount+ammount;
+                }
+            }
+        }
+        private static void withdrawlAmount()
+        {
+            Console.WriteLine("insert you numberAccount for witdrawl ");
+            string numberAccount = Console.ReadLine();
+
+            for (int currentAccount = 0; currentAccount < bank.listBankAccounts.Count; currentAccount++)
+            {
+                
+                if (numberAccount == bank.listBankAccounts[currentAccount].NumberAccount)
+                {
+                    Console.WriteLine("insert a Ammount to witdrawl");
+                    double ammount = double.Parse(Console.ReadLine());
+                    bank.listBankAccounts[currentAccount].BalanceAmount = bank.listBankAccounts[currentAccount].BalanceAmount-ammount;
                 }
             }
         }
@@ -94,11 +128,10 @@ namespace BankApp
                         showBalanceAccount(consult);
                         break;
                     case '3':
-                        Console.WriteLine("\ndeposit in ");
-                        //createAccount();
+                        depositAmount();
                         break;
                     case '4':
-                        Console.WriteLine("\nwithDrawal Account");
+                        withdrawlAmount();
                         break;
                     case '5':
                         for (int currentAccount = 0; currentAccount < bank.listBankAccounts.Count; currentAccount++)

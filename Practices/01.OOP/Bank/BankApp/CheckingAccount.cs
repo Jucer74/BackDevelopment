@@ -4,7 +4,7 @@ namespace BankApp
 {
     public class CheckingAccount : BankAccount
     {
-        public bool OverdraftAmount { get; set; }
+        public double OverdraftAmount { get; set; }
 
         public CheckingAccount(): base()
         {
@@ -13,7 +13,7 @@ namespace BankApp
 
         public CheckingAccount(string numberAccount, string placeHolder, double balanceAmount, int accountType) : base(numberAccount, placeHolder, balanceAmount, accountType)
         {
-            this.OverdraftAmount = false;
+            this.OverdraftAmount = 0;
         }
     }
 }

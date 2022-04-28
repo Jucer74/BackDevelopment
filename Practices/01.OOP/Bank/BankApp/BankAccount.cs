@@ -1,10 +1,9 @@
 using System;
 namespace BankApp
 {
-    
-}
 public class BankAccount
 {
+    private static Bank bank = new Bank();
     public string NumberAccount { get; set; }
     public string PlaceHolder { get; set; }
     public double BalanceAmount { get; set; }
@@ -37,4 +36,5 @@ public class BankAccount
         return BalanceAmount;
     }
 
+}
 }
