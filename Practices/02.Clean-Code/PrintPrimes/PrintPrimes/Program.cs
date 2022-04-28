@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Text;
 
 namespace PrintPrimes
 {
   internal class Program
   {
+    private const int INITIAL_PRIME = 2;
     static void Main(string[] args)
     {
       PrintPrimes(13);
@@ -48,3 +50,4 @@ namespace PrintPrimes
     }
   }
 }
+

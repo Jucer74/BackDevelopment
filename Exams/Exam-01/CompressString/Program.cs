@@ -12,13 +12,19 @@
 
 using System;
 using System.Text;
+
 namespace CompressString
 {
-    public class Program
+  public class Program
+  {
+
+    private const int MAX_LENGTH = 255;
+
+    public static void Main()
     {
 
-        static int MAXIMO_CARACTERES = 255;
-        public static void Main()
+          int MAXIMO_CARACTERES = 255;
+          static void Main()
         {
             Compress("aabcccccaaa");
             // aabcccccaaa => a2b1c5a3
@@ -36,7 +42,7 @@ namespace CompressString
             // Error: Only alphabetic characters [A-Z,a-z] are allowed
         }
 
-        private static async void Compress(string input)
+          static async void Compress(string input)
         {
 
             // Variables
@@ -95,7 +101,7 @@ namespace CompressString
 
         }
 
-        public static bool esAlfabetico(string input)
+          static bool esAlfabetico(string input)
         {
             string cadenaEnMinuscula = input.ToLower();
             foreach (var caracter in cadenaEnMinuscula)
@@ -110,5 +116,6 @@ namespace CompressString
 
         }
     }
+  }
 }
  
