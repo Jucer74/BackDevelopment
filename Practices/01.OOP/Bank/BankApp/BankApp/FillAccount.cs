@@ -1,9 +1,9 @@
 ﻿namespace BankApp
 {
-    public class CreateAccount: ICreateAccount
+    public class FillAccount: IFillAccount
     {
         private BankAccountBuilder bankAccountBuilder = new BankAccountBuilder();
-        public CreateAccount()
+        public FillAccount()
         {
         }
 

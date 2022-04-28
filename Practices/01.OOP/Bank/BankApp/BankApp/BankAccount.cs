@@ -1,5 +1,4 @@
-﻿using System;
-namespace BankApp
+﻿namespace BankApp
 {
     public class BankAccount
     {

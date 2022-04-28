@@ -1,6 +1,6 @@
 ﻿namespace BankApp
 {
-    public interface ICreateAccount
+    public interface IFillAccount
     {
         CheckingAccount FillChekingAccountData(string accountNumber, string placeHolder, double balanceAmount,
                    int accountType, double overdraftAmount);
