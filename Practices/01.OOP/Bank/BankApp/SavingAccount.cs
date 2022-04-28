@@ -19,5 +19,14 @@ namespace BankApp
         }   
 
         //Methods
+        public override void Deposit(double amount)
+        {
+            this.BalanceAmount = BalanceAmount + amount;
+        }
+
+        public override void Withdrawal(double amount)
+        {
+            this.BalanceAmount = BalanceAmount - amount;
+        }
     }
 }

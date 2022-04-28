@@ -19,6 +19,7 @@ namespace BankApp
             while(isExit == false)
             {
                 //Menu
+                Console.Clear();
                 Console.WriteLine("\n BANK MENU");
                 Console.WriteLine("1. Create Account");
                 Console.WriteLine("2. Get Balance Account");

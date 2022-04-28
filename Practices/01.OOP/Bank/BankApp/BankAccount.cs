@@ -2,7 +2,7 @@ using System;
 
 namespace BankApp
 {
-    public class BankAccount
+    public abstract class BankAccount
     {
         //Atributos & Properties
         public int AccountNumber { get; set; }
@@ -24,14 +24,8 @@ namespace BankApp
         }
 
         //Methods
-        public void Deposit(double amount)
-        {
-            this.BalanceAmount = BalanceAmount + amount;
-        }
+        public abstract void Deposit(double amount);
 
-        public void Withdrawal(double amount)
-        {
-            this.BalanceAmount = BalanceAmount - amount;
-        }
+        public abstract void Withdrawal(double amount);
     }
 }
