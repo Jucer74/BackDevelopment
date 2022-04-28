@@ -101,12 +101,12 @@ namespace BankAccount
                         accountType = "Checking";
                         Console.WriteLine("\nYou selected a "+ accountType+ " account");
                         do{
-                            Console.WriteLine("Overdraft Limit: 1000000... ");
-                            Console.Write("Set the account Overdraft Amount: ");
+                            Console.WriteLine("Bank Overdraft Limit: 1000000... ");
+                            Console.Write("Set the account Overdraft Limit: ");
                             int setAccountOverdraft = int.Parse(Console.ReadLine());
                             overdraftLimit = setAccountOverdraft;
                             if(setAccountOverdraft > 1000000){
-                                Console.WriteLine("The Overdraft amount surpass the  limit...Try Again. ");
+                                Console.WriteLine("The Overdraft selected surpass the limit...Try Again. ");
                             }
                         }while(overdraftLimit > 1000000);
                         accountOverdraft = accountOverdraft + overdraftLimit;
@@ -154,7 +154,7 @@ namespace BankAccount
                     Console.WriteLine(searchInAccount.AccountType);
                     if(searchInAccount.AccountType == "Checking")
                     {
-                        Console.Write("Account Overdraft: $");
+                        Console.Write("Account Overdraft Limit: $");
                         Console.WriteLine("-"+searchInAccount.AccountOverdraft);
                     }
                 }
@@ -193,6 +193,11 @@ namespace BankAccount
                 if(searchInAccount.AccountNumber == accountNumber){
                     Console.Write("Your Account Balance: $");
                     Console.WriteLine(searchInAccount.AccountBalance);
+                    if(searchInAccount.AccountType == "Checking")
+                    {
+                        Console.Write("Your account Overdraft Limit: $");
+                        Console.WriteLine("-"+searchInAccount.AccountOverdraft);
+                    }
 
                     Console.Write("Enter the balance to be withdrawn: $");
                     int accountBalance = int.Parse(Console.ReadLine());
