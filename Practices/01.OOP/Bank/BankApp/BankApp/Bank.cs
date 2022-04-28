@@ -7,6 +7,10 @@ namespace BankApp
     {
         private static List<BankAccount> accountList;
 
+        private static TransactionAccount transactionAccount;
+
+        private static UtilityAccountValidation utilityAccountValidation;
+
         private static void Main(string[] args)
         {
             try
@@ -22,7 +26,7 @@ namespace BankApp
 
         private static void InsertAccount()
         {
-            UtilityAccountValidation utilityAccountValidation = new UtilityAccountValidation();
+            utilityAccountValidation = new UtilityAccountValidation();
             Console.Clear();
             Console.WriteLine("Insert new Account");
             Console.WriteLine("-------------------");
@@ -58,7 +62,7 @@ namespace BankApp
                 Console.WriteLine("Select Option:");
                 option = Console.ReadKey().KeyChar;
                 Console.WriteLine();
-                TransactionAccount transactionAccount = new TransactionAccount();
+                transactionAccount = new TransactionAccount();
                 switch (option)
                 {
                     case '0':
