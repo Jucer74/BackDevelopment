@@ -12,7 +12,6 @@ namespace BankApp
         static void Main(string[] args)
         {
             string option;
-            int accountNumber = 0;
 
             bool isExit = false;
             List<BankAccount> accountList = new List<BankAccount>();
@@ -54,7 +53,7 @@ namespace BankApp
             }
         } // 
         
-        public static BankAccount CreateAccount(List<BankAccount> accountList)
+        public static void CreateAccount(List<BankAccount> accountList)
         {
             Console.Clear();
             Console.WriteLine("\n Select the type of bank account: ");
@@ -67,7 +66,7 @@ namespace BankApp
             Console.WriteLine("\n **** The account was created successfully ***");
         }
 
-        public static BankAccount GetBalanceAccount(List<BankAccount> accountList)
+        public static void GetBalanceAccount(List<BankAccount> accountList)
         {
             Console.Clear();
             Console.WriteLine("\n Enter the number account: ");
@@ -86,15 +85,15 @@ namespace BankApp
             }
         }
 
-        public static BankAccount DepositAccount(List<BankAccount> accountList)
+        public static void DepositAccount(List<BankAccount> accountList)
         {
             Console.Clear();
             Console.WriteLine("\n Enter the number account: ");
-            searchAccountNumber = int.Parse(Console.ReadLine());
+            int accountNumber = int.Parse(Console.ReadLine());
 
             foreach (BankAccount account in accountList)
             {
-                if(account.AccountNumber == searchAccountNumber)
+                if(account.AccountNumber == accountNumber)
                 {
                     Console.WriteLine("   - Enter the amount: ");
                     int amount = int.Parse(Console.ReadLine());
@@ -108,15 +107,15 @@ namespace BankApp
             }
         }
 
-        public static BankAccount WithdrawalAccount(List<BankAccount> accountList)
+        public static void WithdrawalAccount(List<BankAccount> accountList)
         {
             Console.Clear();
             Console.WriteLine("\n Enter the number account: ");
-            searchAccountNumber = int.Parse(Console.ReadLine());
+            int accountNumber = int.Parse(Console.ReadLine());
 
             foreach (BankAccount account in accountList)
             {
-                if(account.AccountNumber == searchAccountNumber)
+                if(account.AccountNumber == accountNumber)
                 {
                     Console.WriteLine("   - Enter the amount: ");
                     int amount = int.Parse(Console.ReadLine());
@@ -128,8 +127,6 @@ namespace BankApp
                         account.Withdrawal(amount);
                         Console.WriteLine("   ********** Your new balance is: " + account.BalanceAmount);
                     }
-
-                    Console.WriteLine("   ********** Your new balance is: " + account.BalanceAmount);
                 } else
                 {
                     Console.WriteLine("Error: Account not found, please try again.");
@@ -166,20 +163,6 @@ namespace BankApp
                 checkingAccount.BalanceAmount = int.Parse(Console.ReadLine());
         
                 return checkingAccount;
-            }
-        }
-        
-        public static BankAccount SearchBankAccount(int accountNumber, List<BankAccount> accountList)
-        {
-            foreach (BankAccount account in accountList)
-            {
-                if(account.AccountNumber == accountNumber)
-                {
-                    return account;
-                } else
-                {
-                    return null;
-                }
             }
         }
     } // Class Program
