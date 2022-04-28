@@ -55,5 +55,21 @@ namespace BankApp
             return null;
         } 
 
+        public void Deposit(string accountNumber, double amount)
+        {
+            
+            BankAccount userAccount = GetAccount(accountNumber);
+            userAccount.Deposit(amount); 
+        }
+
+        
+
+        public void Withdrawal(string accountNumber, double amount)
+        {
+            
+            BankAccount userAccount = GetAccount(accountNumber);
+            userAccount.Deposit(amount); 
+        }
+
     }
 }

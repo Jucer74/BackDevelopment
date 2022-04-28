@@ -62,12 +62,12 @@ namespace BankApp
 
                     
                     case '3':
-                    Console.WriteLine("3");
+                    Deposit();
                     break;
 
                     
                     case '4':
-                    Console.WriteLine("4");
+                    Withdrawal();
                     break;
 
                     default:
@@ -151,6 +151,56 @@ namespace BankApp
             } while (option2);
 
         }// Obtener Balance
+
+        public static  void Deposit()
+        {
+            bool option2=true;
+            string accountNumber;
+            double amount = 0.0;
+
+             do{
+                Console.Clear();
+                Console.WriteLine("Depositar saldo en la cuenta");
+                Console.WriteLine("----------------------------");
+                Console.WriteLine("Digite el numero de la cuenta: ");
+                accountNumber = (Console.ReadLine());
+
+                Console.WriteLine("Digite el saldo a depositar en la cuenta: ");
+                amount = double.Parse(Console.ReadLine());
+
+                BankCompany.Deposit(accountNumber,amount);
+
+                Console.WriteLine("Su saldo ha sido actualizado!");
+
+                option2=false;
+
+            } while (option2);
+        } 
+
+
+        public static  void Withdrawal()
+        {
+            bool option2=true;
+            string accountNumber;
+            double amount = 0.0;
+
+             do{
+                Console.Clear();
+                Console.WriteLine("Rtirar saldo en la cuenta");
+                Console.WriteLine("----------------------------");
+                Console.WriteLine("Digite el numero de la cuenta: ");
+                accountNumber = (Console.ReadLine());
+
+                Console.WriteLine("Digite el saldo a retirar en la cuenta: ");
+                amount = double.Parse(Console.ReadLine());
+
+                BankCompany.Deposit(accountNumber,amount);
+                
+                Console.WriteLine("Su saldo ha sido actualizado!");
+                option2=false;
+
+            } while (option2);
+        } 
 
     }   
 } 

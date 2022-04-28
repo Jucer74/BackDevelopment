@@ -20,6 +20,27 @@ namespace BankApp
             return this.BalanceAmount;
         } 
         
+        public override void Deposit(double value)
+        {
+            this.BalanceAmount = this.BalanceAmount + value;
+           /*  if(checkOverdrafAmount()) 
+            {
+                OverdrafAmount = true;
+            } */
+        } 
 
+         public override void Withdrawal(double secondValue)
+        {
+            this.BalanceAmount = this.BalanceAmount - secondValue;
+           /*  if(checkOverdrafAmount()) 
+            {
+                OverdrafAmount = true;
+            } */
+        } 
+
+        public bool checkOverdrafAmount()
+        {
+            return this.BalanceAmount <= 0;
+        } 
     }
 }

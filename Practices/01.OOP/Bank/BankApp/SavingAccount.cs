@@ -20,5 +20,19 @@ namespace BankApp
         } 
 
 
+        public override void Deposit(double value)
+        {
+            this.BalanceAmount = this.BalanceAmount + value;
+        }
+
+        public override void Withdrawal(double secondValue)
+        {
+            this.BalanceAmount = this.BalanceAmount - secondValue;
+        }
+
+        
+
+      
+
     }
 }
