@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BankApp
 {
-    public class Program
+    public class Program 
     {
         
         private static Bank BankCompany = new Bank();
@@ -26,7 +26,7 @@ namespace BankApp
 
         public static void Menu()
         {
-           BankAccount bankAccount = new BankAccount();
+           /* BankAccount bankAccount = new BankAccount(); */
 
             var option = ' ';
 
@@ -41,14 +41,14 @@ namespace BankApp
                 Console.WriteLine("3. Depostiar en la cuenta");
                 Console.WriteLine("4. Retirar de la cuenta");
                 Console.WriteLine("0. Exit");
-                Console.WriteLine("\nSelect Option = ");
+                Console.WriteLine("\nSeleccione una opción = ");
                 option = Console.ReadKey().KeyChar; 
                 Console.WriteLine();
 
                 switch (option)
                 { 
                     case '0':
-                    Console.WriteLine("Salida");
+                    Console.WriteLine("---------Salida---------");
                     break;
 
                     case '1':
@@ -88,7 +88,7 @@ namespace BankApp
             bool option2 = true;
             string accountNumber;
             string placeHolder;
-            int balanceAmount = 0;
+            double balanceAmount;
             int accountType = 1 ;
            
 
@@ -100,11 +100,11 @@ namespace BankApp
             Console.WriteLine("\nDigite el nombre del titular de la cuenta: ");
             placeHolder = Console.ReadLine();
 
-            balanceAmount = 0;
+            balanceAmount = 0.0;
 
             do
             {
-                Console.WriteLine("Digite el tipo de cuenta: ");
+                Console.WriteLine("\nDigite el tipo de cuenta: ");
                 Console.WriteLine("1. Cuenta de ahorro");
                 Console.WriteLine("2. Cuenta corriente");
 
@@ -119,37 +119,38 @@ namespace BankApp
                     else
                     {
                         option2 = true;
-                        Console.WriteLine("ERORR Opción no válida");
+                        Console.WriteLine("\nERORR Opción no válida");
                     }
                 
                
             }while (option2);
 
-            List<BankAccount> listBankAccount = new List<BankAccount>();
+            BankCompany.CreateAccount(accountNumber,placeHolder,balanceAmount,accountType);
+
+            Console.WriteLine($"Su cuenta fue creada!, su numero de cuenta es: {accountNumber}");
             
-            accountNumber = listBankAccount(accountNumber); 
-            /* BankCompany.CreateAccount(accountNumber,placeHolder,balanceAmount,accountType); */
-            
-        } //crear cuenta
+        } //Crear cuenta
 
         public static void GetBalanceAccount() 
         {
 
+            bool option2=true;
             string accountNumber;
-            int balanceAmount = 0;
 
-            Console.Clear();
-            Console.WriteLine("Saldo de Cuenta");
-            Console.WriteLine("---------------");
-            Console.WriteLine("Digite el numero de la cuenta");
-            accountNumber = (Console.ReadLine());
-            List<BankAccount> listBankAccount = new List<BankAccount>();
-            
-            accountNumber = listBankAccount(accountNumber); 
-            Console.WriteLine("\nSu numero de cuenta es:");
-            Console.WriteLine(accountNumber);
-            Console.WriteLine(balanceAmount);
-        }
+            do{
+                Console.Clear();
+                Console.WriteLine("Saldo de Cuenta");
+                Console.WriteLine("---------------");
+                Console.WriteLine("Digite el numero de la cuenta");
+                accountNumber = (Console.ReadLine());
+
+                Console.WriteLine($"Su balance es: {BankCompany.GetBalanceAccount(accountNumber)}");
+
+                option2=false;
+
+            } while (option2);
+
+        }// Obtener Balance
 
     }   
 } 

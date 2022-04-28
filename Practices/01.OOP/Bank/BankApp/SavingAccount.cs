@@ -9,25 +9,16 @@ namespace BankApp
             
         }
         
-        public SavingAccount(string accountNumber, string placeHolder, int balanceAmount, int accountType) : base (accountNumber,placeHolder,balanceAmount,accountType)
+        public SavingAccount(string accountNumber, string placeHolder, double balanceAmount, int accountType) : base (accountNumber,placeHolder,balanceAmount,accountType)
         {
             
         }
-
-        /* public void Deposit(decimal despositValue)
-        {
-            this.BalanceAmount = this.BalanceAmount + despositValue;
-        }
-
-        public decimal Balance()
+        
+        public override double Balance()
         {
             return this.BalanceAmount;
-        }
+        } 
 
-        public void WithDrawal(decimal withdrawalValue)
-        {
-            this.BalanceAmount = this.BalanceAmount - withdrawalValue;
-        } */
 
     }
 }

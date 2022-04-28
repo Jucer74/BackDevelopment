@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace BankApp
 
 {
-     public class Bank : BankAccount
+     public class Bank
     {
     
 
@@ -15,7 +15,7 @@ namespace BankApp
             this.listBankAccount = new List<BankAccount>();
         }
 
-         public void CreateAccount(string accountNumber, string placeHolder, int balanceAmount, int accountType) {
+         public void CreateAccount(string accountNumber, string placeHolder, double balanceAmount, int accountType) {
 
             BankAccount newAccount;
             switch (accountType)
@@ -35,66 +35,25 @@ namespace BankApp
             this.listBankAccount.Add(newAccount);
         } 
 
-       /*  public static void GetBalanceAccount(string accountNumber) {
-
-            BankAccount userAccount = GetThisAccount(accountNumber);
-            return userAccount.Balance();
-        } */
-/* 
-         public void DepositAccount(int accountNumber, decimal amount) { 
-
-            BankAccount userAccount = GetThisAccount(accountNumber);
-            userAccount.Deposit(amount);
-        }
-
-
-        public bool WithdrawalAccount(int accountNumber, decimal amount)  {
-
-             BankAccount userAccount = GetThisAccount(accountNumber);
-              if(userAccount.AccountNumber == 1 && userAccount.Balance() >= amount)
-                {
-                    userAccount.WithDrawal(amount);
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-        } */
-
-
-
-       /*  private static void GetBalance()
-        {
-            Console.Clear();
-            Console.WriteLine("Balance Account");
-            Console.WriteLine("---------------");
-
-            Console.WriteLine("Enter the account number");
-            int accountNumber = int.Parse(Console.ReadLine());
-            List<newAccount> list = new List<newAccount>();
+         public double GetBalanceAccount(string accountNumber) {
             
-            int numberAccount = list.IndexOf(accountNumber);
-            Console.WriteLine(numberAccount);
-            
-        } */
-       
-      /*  private static void DepositAccount()
+            BankAccount userAccount = GetAccount(accountNumber);
+            return userAccount.Balance(); 
+      
+        } 
+
+        public BankAccount GetAccount(string accountNumber)
         {
-            Console.Clear();
-            Console.WriteLine("Deposit");
-            Console.WriteLine("---------------");
 
-            Console.WriteLine("Enter the account number");
-            int accountNumber = Console.ReadLine();
-
-            Console.WriteLine("Enter the balance to deposit");
-            int balanceAmount = Console.ReadLine();
-           
-        } */
-
-
-
+            foreach (BankAccount Account in listBankAccount)
+            {
+                if(Account.AccountNumber == accountNumber)
+                {
+                    return Account;
+                } 
+            } 
+            return null;
+        } 
 
     }
 }
