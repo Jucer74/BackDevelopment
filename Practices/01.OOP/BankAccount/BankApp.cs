@@ -59,6 +59,10 @@ namespace BankAccount
                     case '4':
                         AccountWithdrawal();
                         break;
+                    case '7':
+                        //Easter Egg
+                        Console.WriteLine("Code 64740");
+                        break;
                     default:
                         Console.WriteLine("Invalid Option, please try again.");
                         break;
@@ -75,6 +79,7 @@ namespace BankAccount
             var accountType = " ";
             int accountBalance = 0;
             int accountOverdraft = 0;
+            int overdraftLimit = 0;
 
             Console.Write("Set Account Number: ");
             int accountNumber = int.Parse(Console.ReadLine());
@@ -95,10 +100,16 @@ namespace BankAccount
                     case '2':                   
                         accountType = "Checking";
                         Console.WriteLine("\nYou selected a "+ accountType+ " account");
-
-                        Console.Write("Set the account Overdraft Amount: ");
-                        int setAccountOverdraft = int.Parse(Console.ReadLine());
-                        accountOverdraft = accountOverdraft + setAccountOverdraft;
+                        do{
+                            Console.WriteLine("Overdraft Limit: 1000000... ");
+                            Console.Write("Set the account Overdraft Amount: ");
+                            int setAccountOverdraft = int.Parse(Console.ReadLine());
+                            overdraftLimit = setAccountOverdraft;
+                            if(setAccountOverdraft > 1000000){
+                                Console.WriteLine("The Overdraft amount surpass the  limit...Try Again. ");
+                            }
+                        }while(overdraftLimit > 1000000);
+                        accountOverdraft = accountOverdraft + overdraftLimit;
                         break;
                     default:
                         Console.WriteLine("\n-------------\n ERROR...Account type not found. Try Again...\n--------------");
