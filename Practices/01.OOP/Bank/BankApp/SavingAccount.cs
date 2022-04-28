@@ -29,10 +29,6 @@ namespace BankApp
         {
             this.BalanceAmount = this.BalanceAmount - secondValue;
         }
-
         
-
-      
-
     }
 }

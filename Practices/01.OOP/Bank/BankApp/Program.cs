@@ -175,7 +175,7 @@ namespace BankApp
                 option2=false;
 
             } while (option2);
-        } 
+        } // Deporsitar
 
 
         public static  void Withdrawal()
@@ -186,7 +186,7 @@ namespace BankApp
 
              do{
                 Console.Clear();
-                Console.WriteLine("Rtirar saldo en la cuenta");
+                Console.WriteLine("Retirar saldo en la cuenta");
                 Console.WriteLine("----------------------------");
                 Console.WriteLine("Digite el numero de la cuenta: ");
                 accountNumber = (Console.ReadLine());
@@ -195,12 +195,12 @@ namespace BankApp
                 amount = double.Parse(Console.ReadLine());
 
                 BankCompany.Deposit(accountNumber,amount);
-                
+
                 Console.WriteLine("Su saldo ha sido actualizado!");
                 option2=false;
 
             } while (option2);
-        } 
+        } // Retirar
 
     }   
 } 

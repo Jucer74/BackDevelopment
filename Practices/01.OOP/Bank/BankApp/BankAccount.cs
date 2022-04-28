@@ -12,12 +12,10 @@ namespace BankApp
         public int AccountType { get; set; }
         
         
-        
         public BankAccount(){
            
         }
 
-        
         public BankAccount(string accountNumber, string placeHolder, double balanceAmount, int accountType){
             this.AccountNumber = accountNumber;
             this.PlaceHolder = placeHolder;
