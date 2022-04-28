@@ -6,7 +6,7 @@ namespace BankApp
     public class Program 
     {
         
-        private static Bank BankCompany = new Bank();
+        
 
 
         static void Main(string[] args)
@@ -23,6 +23,8 @@ namespace BankApp
             }
              
         }
+
+        private static Bank BankCompany = new Bank();
 
         public static void Menu()
         {
