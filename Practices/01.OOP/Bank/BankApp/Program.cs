@@ -107,10 +107,10 @@ namespace BankApp
         {
            
             AccountDto accountDto = new AccountDto();
-            accountDto.Accountnumber = accountNumber;
-            accountDto.Placeholder = placeHolder;
-            accountDto.Accountype = accountType;
-            accountDto.Balanceaccount = balanceAccount;
+            accountDto.AccountNumber= accountNumber;
+            accountDto.PlaceHolder = placeHolder;
+            accountDto.AccounType = accountType;
+            accountDto.BalanceAccount = balanceAccount;
 
         return accountDto;
         }
@@ -127,9 +127,9 @@ namespace BankApp
             //se debe comparar el numero de cuenta con el de la lista
             foreach (AccountDto searchAccount in listAccount)
             {
-                if(searchAccount.Accountnumber == accountNumber){
+                if(searchAccount.AccountNumber == accountNumber){
                     Console.WriteLine("BALANCE ACCOUNT:");
-                    Console.WriteLine(searchAccount.Balanceaccount);
+                    Console.WriteLine(searchAccount.BalanceAccount);
 
                     Console.WriteLine("Enter the balance to deposit");
                     int balanceAccount = int.Parse(Console.ReadLine());
@@ -152,9 +152,9 @@ namespace BankApp
             //se debe comparar el numero de cuenta con el de la lista
             foreach (AccountDto searchAccount in listAccount)
             {
-                if(searchAccount.Accountnumber == accountNumber){
+                if(searchAccount.AccountNumber == accountNumber){
                     Console.WriteLine("BALANCE ACCOUNT:");
-                    Console.WriteLine(searchAccount.Balanceaccount);
+                    Console.WriteLine(searchAccount.BalanceAccount);
                 }
 
             }
@@ -175,13 +175,13 @@ namespace BankApp
             //se debe comparar el numero de cuenta con el de la lista
             foreach (AccountDto searchAccount in listAccount)
             {
-                if(searchAccount.Accountnumber == accountNumber){
+                if(searchAccount.AccountNumber == accountNumber){
                     Console.WriteLine("BALANCE ACCOUNT:");
-                    Console.WriteLine(searchAccount.Balanceaccount);
+                    Console.WriteLine(searchAccount.BalanceAccount);
 
                     Console.WriteLine("Enter the balance to withdraw");
                     int balanceAccount = int.Parse(Console.ReadLine());
-                    var typeAccount = searchAccount.Accountype;
+                    var typeAccount = searchAccount.AccounType;
                     searchAccount.Withdrawal(balanceAccount, typeAccount);
                 }
 
