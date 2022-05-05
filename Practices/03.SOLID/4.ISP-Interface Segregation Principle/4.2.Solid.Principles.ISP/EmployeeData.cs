@@ -1,19 +1,18 @@
-﻿namespace Solid.Principles
+namespace Solid.Principles
 {
   using System;
   using System.Collections.Generic;
   using System.Data;
   using System.Data.SQLite;
-  using System.IO;
   using Define;
   using Dto;
   using SOLID.Common.SQLData;
 
-  public class ApplicationData
+  public class EmployeeData: IEmployeeData
   {
     private readonly SqlDatabase sqlDatabase;
 
-    public ApplicationData()
+    public EmployeeData()
     {
       sqlDatabase = new SqlDatabase(GetConnectionString());
     }

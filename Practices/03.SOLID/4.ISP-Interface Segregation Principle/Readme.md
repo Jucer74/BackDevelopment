@@ -128,7 +128,7 @@ namespace Solid.Principles
         var dataReader = sqlDatabase.ExecuteReader(command);
 
         var projects = new List<ProjectDto>();
-
+P
         while (dataReader.Read())
         {
           var prj = new ProjectDto
