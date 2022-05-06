@@ -21,7 +21,7 @@ dotnet build .\PrintPrimes.csproj
 dotnet run .\PrintPrimes.csproj
 ```
 # Notas
-## PrintPrimes (0.0)
+## PrintPrimes (0.0) - No Se Implemento
 - No tiene Errores Ni Warnings (0.5)      = 
 - No tiene Codigo Innecesario  (0.5)      = 
 - Funciona y Cumple con el Objetivo (1.5) = 
@@ -45,7 +45,7 @@ dotnet run .\PrintPrimes.csproj
   - Tieen Logica de Retorno directo y correcto o hay If para retornar = OK
   - No Existen Multiples If anidados o SI hay instrucciones Switch    = OK
 
-## Print Multiples (0.0)
+## Print Multiples (0.0) - No se Implemento
 - No tiene Errores Ni Warnings (0.5)      = 
 - No tiene Codigo Innecesario  (0.5)      = 
 - Funciona y Cumple con el Objetivo (1.5) = 
@@ -69,7 +69,7 @@ dotnet run .\PrintPrimes.csproj
   - Tieen Logica de Retorno directo y correcto o hay If para retornar = OK
   - No Existen Multiples If anidados o SI hay instrucciones Switch    = OK
 
-## Debugging (0.0)
+## Debugging (0.0) - No se Implemento
 - No tiene Errores Ni Warnings (0.5)      = 
 - No tiene Codigo Innecesario  (0.5)      = 
 - Funciona y Cumple con el Objetivo (1.5) = 

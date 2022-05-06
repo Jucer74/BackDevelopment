@@ -1,64 +1,66 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace Debugging
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
+    internal class Program
+  {
+    static void Main(string[] args) {
+/*
+     Console.WriteLine("");
+     for(int i = 1; i<= 13; i++){
+     Console.WriteLine(i+ ",");
+    */
+Console.WriteLine("Hello World!");
             string sProdName = "Widget";
             int iUnitQty = 100;
-            double  dUnitCost = 1.03;
+            double dUnitCost = 1.03;
 
-            Debug.WriteLine("Debug: Iniciando depuracion de producto");
-            Debug.Indent();
-            Debug.WriteLine("El Nombre del producto es: " + sProdName);
-            Debug.WriteLine("El numero de unidades es: " + iUnitQty.ToString());
-            Debug.WriteLine("El valor por unidad es: " + dUnitCost.ToString());
-
-            System.Xml.XmlDocument oxml = new System.Xml.XmlDocument();
-            Debug.WriteLine(oxml);
-
-            Debug.WriteLine("El Nombre del producto es: " + sProdName,"Categoria:");
-            Debug.WriteLine("El numero de unidades es: " + iUnitQty.ToString(),"Categoria:");
-            Debug.WriteLine("El valor por unidad es: " + dUnitCost.ToString(), "Categoria:");
-            Debug.WriteLine ("El Costo total es:" + (iUnitQty * dUnitCost),"Calculo");
-
-            Debug.WriteLineIf(iUnitQty > 50, "Este mensaje si aparecera");
-            Debug.WriteLineIf(iUnitQty < 50, "Este mensaje NO aparecera");
-
-            Debug.Assert(dUnitCost > 1, "Este mensaje no aparecera");
-            Debug.Assert(dUnitCost< 1, "Este mensaje aparece si dUnitcost < 1 es falso");
-
-            // TextWriterTraceListener tr1 = new TextWriterTraceListener(System.Console.Out);
-            // Debug.Listeners.Add(tr1);
-            // TextWriterTraceListener tr2 = new TextWriterTraceListener(System.IO.File.CreateText("Output.txt"));
-            // Debug.Listeners.Add(tr2);
             
-
-            Debug.WriteLine("El Nombre del producto es: " + sProdName);
-            Debug.WriteLine("El numero de unidades es: " + iUnitQty.ToString());
-            Debug.WriteLine("El valor por unidad es: " + dUnitCost.ToString());
-            Debug.Unindent();
-            Debug.WriteLine("Debug: Finaliza la informacion de producto");
-            Debug.Flush();
-
-            Trace.WriteLine("Trace: Iniciando Informacion de Producto");
-            Trace.Indent();
-
-            Trace.WriteLine("El nombre del producto es:"+sProdName);
-            Trace.WriteLine("El nombre del producto es:"+sProdName,"Categoria:" );
-            Trace.WriteLineIf(iUnitQty > 50, "Este mensaje si aparecera");
-            Trace.Assert(dUnitCost > 1, "Este mensaje no aparecera");
-
-            Trace.Unindent();
-            Trace.WriteLine("Trace: Finaliza la informacion de producto");
-
-            Trace.Flush();
-
-            Console.ReadLine();
+           PrintPrimes(13);
+            // 2,3,5,7,11,13
+            Console.WriteLine("\n");
+            PrintPrimes(10);
+            // 2,3,5,7
+            Console.WriteLine("\n");
+            PrintPrimes(0);
+            // Error: Invalid Number
+            Console.WriteLine("\n");
+            PrintPrimes(1);
+            // Error: 1 Is not Prime
+            Console.WriteLine("\n");
 
         }
+
+        private static void PrintPrimes(int NumeroParaRecorrer)
+        {    
+            // recorres todos los valores hasta el máximo a Recorrer
+            for (int NumeroaValidar = 0; NumeroaValidar <= NumeroParaRecorrer; NumeroaValidar++)
+            {
+                if (NumeroParaRecorrer <= 0){
+                    Console.Write("El Numero es invalido \n");
+
+                }
+
+                if(NumeroParaRecorrer <= 1){
+
+                  Console.WriteLine("Error, el número 1 no es primo \n");
+                }
+                else
+                {
+
+                    if (NumeroaValidar % 2 != 0)//el numero no es primo
+                    {
+                    
+                        Console.Write(NumeroaValidar + "  \n ");
+                    }
     }
-}
+  }
+  }
+  }
+  }
+
+
+  
+
+
+  

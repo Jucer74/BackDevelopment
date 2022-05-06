@@ -1,76 +1,61 @@
 ﻿using System;
 using System.Text;
-
 namespace PrintPrimes
 {
   internal class Program
   {
-    private const int INITIAL_PRIME = 2;
-    static void Main(string[] args)
-    {
-      PrintPrimes(13);
-      // 2,3,5,7,11,13
-      PrintPrimes(10);
-      // 2,3,5,7
-      PrintPrimes(0);
-      // Error: Invalid Number
-      PrintPrimes(1);
-      // Error: 1 Is not Prime
+    static void Main(string[] args) {
+/*
+     Console.WriteLine("");
+     for(int i = 1; i<= 13; i++){
+     Console.WriteLine(i+ ",");
+    */
 
-    }
+           PrintPrimes(13);
+            // 2,3,5,7,11,13
+            Console.WriteLine("\n");
+            PrintPrimes(10);
+            // 2,3,5,7
+            Console.WriteLine("\n");
+            PrintPrimes(0);
+            // Error: Invalid Number
+            Console.WriteLine("\n");
+            PrintPrimes(1);
+            // Error: 1 Is not Prime
+            Console.WriteLine("\n");
 
-    private static void PrintPrimes(int number)
-    {
-
-      if(number==0)
-      {
-        Console.WriteLine("Error: Invalid Number");
-        return;
-      }
-
-      if(number==1)
-      {
-        Console.WriteLine("Error: 1 Is not Prime");
-        return;
-      }
-
-      Console.WriteLine(GetPrimes(number));
-    }
-    private static bool IsMultipleOf(int currentNumber, int baseMultiple)
-    {
-      return currentNumber % baseMultiple == 0 && currentNumber != baseMultiple;
-    }
-
-    private static bool IsPrime(int currentNumber)
-    {
-        for (int baseMultiple = INITIAL_PRIME; baseMultiple <= currentNumber; baseMultiple++)
-        {
-          if (IsMultipleOf(currentNumber, baseMultiple))
-          {
-            return false;
-          }
         }
-        return true;
-    }
 
-    private static string GetPrimes(int number)
-    {
-      StringBuilder sbPrimes= new StringBuilder();
-
-      for (int currentNumber = INITIAL_PRIME; currentNumber <= number; currentNumber++)
-      {
-          if(IsPrime(currentNumber))
-          {
-            sbPrimes.Append(currentNumber);
-            if(currentNumber < number)
+        private static void PrintPrimes(int NumeroParaRecorrer)
+        {    
+            // recorres todos los valores hasta el máximo a Recorrer
+            for (int NumeroaValidar = 0; NumeroaValidar <= NumeroParaRecorrer; NumeroaValidar++)
             {
-              sbPrimes.Append(",");
-            }
-          }
-      }
+                if (NumeroParaRecorrer <= 0){
+                    Console.Write("El Numero es invalido \n");
 
-      return sbPrimes.ToString();
+                }
+
+                if(NumeroParaRecorrer <= 1){
+
+                  Console.WriteLine("Error, el número 1 no es primo \n");
+                }
+                else
+                {
+
+                    if (NumeroaValidar % 2 != 0)//el numero no es primo
+                    {
+                    
+                        Console.Write(NumeroaValidar + "  \n ");
+                    }
     }
   }
-}
+  }
+  }
+  }
 
+
+  
+
+
+  
