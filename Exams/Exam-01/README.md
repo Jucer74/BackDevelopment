@@ -49,26 +49,26 @@ Error: Only alphabetic characters [A-Z,a-z] are allowed
 # Nota
 RECUERDE SUBIR SU SOLUCIÓN A SU RAMA DE ESTE REPOSITORIO.
 
-# Notas (0.0)
-- No tiene Errores Ni Warnings (0.5)      = 
-- No tiene Codigo Innecesario  (0.5)      = 
-- Funciona y Cumple con el Objetivo (1.5) = 
-- El codigo Es Entendible (1.0)           = 
-- Cumple con el Codigo Limpio (1.5)       = 
+# Notas (1.2)
+- No tiene Errores Ni Warnings (0.5)      = 0.0 => No Compila (Lo corijo para calificar)
+- No tiene Codigo Innecesario  (0.5)      = 0.0 La condicion de fin de cadena no es necesaria
+- Funciona y Cumple con el Objetivo (1.5) = 0.0 => No funciona
+- El codigo Es Entendible (1.0)           = 0.5 => PArcialmente Entendible
+- Cumple con el Codigo Limpio (1.5)       = 0.7
   Los Nombres de las variables y Funciones: (0.1/ cada una)
-  - Revelan la intencion, es decir se sabe que hacen o que almacenan? = OK
-  - Los Nombres son claros o son confusos?                            = OK
+  - Revelan la intencion, es decir se sabe que hacen o que almacenan? = X
+  - Los Nombres son claros o son confusos?                            = X
   - Son Pronunciables                                                 = OK
   - Son buscables (Numero Magicos o No hay Constantes)?               = OK
   - tiene notaciones innecesarias IntCodigo, strData) ?               = OK
   - Usan Sustantivos para Clases y Verbos para Metodos?               = OK
   - Una sola palabra por concepto?                                    = OK
   - No usan combinaciones o juegos de palabras?                       = OK
-  - No tiene contexto adicional o superfluo?                          = OK
+  - No tiene contexto adicional o superfluo?                          = X
   - Usan Datos del dominio, del negocio, problema o solucion ?        = OK
-  - Cumplen con el Estandar de Pascal y Camel Case?                   = OK
+  - Cumplen con el Estandar de Pascal y Camel Case?                   = X
   Las Funciones                                                         
-  - Son pequeñas y su logica esta bien separada?                      = OK
-  - Las Funciones hacen una sola cosa?                                = OK
-  - Tieen Logica de Retorno directo y correcto o hay If para retornar = OK
-  - No Existen Multiples If anidados o SI hay instrucciones Switch    = OK
+  - Son pequeñas y su logica esta bien separada?                      = X
+  - Las Funciones hacen una sola cosa?                                = X
+  - Tieen Logica de Retorno directo y correcto o hay If para retornar = X
+  - No Existen Multiples If anidados o SI hay instrucciones Switch    = X

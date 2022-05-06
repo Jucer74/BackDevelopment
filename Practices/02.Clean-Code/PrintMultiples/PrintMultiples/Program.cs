@@ -1,18 +1,27 @@
-﻿/*
- * Write a program (C#) that prints the numbers from 1 to 100. 
- * But for multiples of three print “M-3” instead of the number and 
- * for the multiples of five print “M-5”. 
- * For numbers which are multiples of both three and five print “M-3-5”
- * */
-using System;
-
-namespace PrintMultiples
+﻿using System;
+					
+public class Program
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
-    }
+	public static void Main()
+	{
+			for(int number = 1; number < 101; number++){
+				
+				if(number % 3 == 0)
+				{
+					Console.WriteLine("M-3"+ "("+number+")\n");
+				}
+				else if(number % 5 == 0)
+				{
+					Console.WriteLine("M-5"+ "("+number+")\n");
+				}
+				else if(number % 15 == 0)
+				{
+					Console.WriteLine("M-3-5"+ "("+number+")\n");
+				}
+				else
+				{
+                     Console.WriteLine(number + "\n");
+                }				
+			}
+	}
 }

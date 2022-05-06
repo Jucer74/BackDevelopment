@@ -1,11 +1,9 @@
-﻿using System;
-using System.Text;
+using System;
 
 namespace PrintPrimes
 {
   internal class Program
   {
-    private const int INITIAL_PRIME = 2;
     static void Main(string[] args)
     {
       PrintPrimes(13);
@@ -21,56 +19,15 @@ namespace PrintPrimes
 
     private static void PrintPrimes(int number)
     {
-
-      if(number==0)
+      int contador = 0;
+      for(int i = 2; i < number; i++)
       {
-        Console.WriteLine("Error: Invalid Number");
-        return;
-      }
-
-      if(number==1)
-      {
-        Console.WriteLine("Error: 1 Is not Prime");
-        return;
-      }
-
-      Console.WriteLine(GetPrimes(number));
-    }
-    private static bool IsMultipleOf(int currentNumber, int baseMultiple)
-    {
-      return currentNumber % baseMultiple == 0 && currentNumber != baseMultiple;
-    }
-
-    private static bool IsPrime(int currentNumber)
-    {
-        for (int baseMultiple = INITIAL_PRIME; baseMultiple <= currentNumber; baseMultiple++)
+        if(number % i == 0)
         {
-          if (IsMultipleOf(currentNumber, baseMultiple))
-          {
-            return false;
-          }
+          contador++;
         }
-        return true;
-    }
-
-    private static string GetPrimes(int number)
-    {
-      StringBuilder sbPrimes= new StringBuilder();
-
-      for (int currentNumber = INITIAL_PRIME; currentNumber <= number; currentNumber++)
-      {
-          if(IsPrime(currentNumber))
-          {
-            sbPrimes.Append(currentNumber);
-            if(currentNumber < number)
-            {
-              sbPrimes.Append(",");
-            }
-          }
+        Console.WriteLine(contador);
       }
-
-      return sbPrimes.ToString();
     }
   }
 }
-

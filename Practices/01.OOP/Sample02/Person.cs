@@ -1,28 +1,28 @@
 public class Person
 {
-   // Properties
-   public int Id { get; private set; }
-   public string FirstName { get; set; }
-   public string LastName { get; set; }
-   public DateTime DateOfBirth { get; set; }
-   public char Sex { get; set; }
+    private int id;
+    private string firstName;
+    private string lastName;
+    private DateTime dateOfBirth;
+    private char sex;
 
-   // Constructors
-   public Person()
-   {
-      
-   }
+    public int Id { get; set; }
+    public string FirstName { get; set; }
 
-   public Person(int id, string firstName, string lastNane, DateTime dateOfBirth, char sex)
-   {
-      this.Id = id;
-      this.FirstName = firstName;
-      this.LastName = LastName;
-      this.DateOfBirth = dateOfBirth;
-      this.Sex = sex;
-   }
+    public string LastName { get; set; }
+    public char Sex { get; set; }
 
-   // Methods - Publicos
+    public Person()
+    {
 
-   // Mthos - Privates
+    }
+
+    public Person(int id, string firstName, string lastName, DateTime dateOfBirth, char sex)
+    {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.sex = sex;
+    }
 }
