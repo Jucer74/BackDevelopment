@@ -1,4 +1,4 @@
-namespace Bank.Dto
+namespace Bank
 {
   using System;
   using System.ComponentModel.DataAnnotations;
@@ -6,20 +6,19 @@ namespace Bank.Dto
   public class AccountDto
   {
     [Required]
-    public int accountNumber { get; set; }
+    public long AccountNumber { get; set; }
 
     [Required]
-    public string placeHolder { get; set; }
+    public string? PlaceHolder { get; set; }
 
     [Required]
-    public double balanceAmount { get; set; }
+    public string? AccountType { get; set; }
+ 
+    [Required]
+    public double? OverdraftAmount { get; set; }
 
     [Required]
-    public double overDraftAmount { get; set; }
-
-    [Required]
-    public int accountType { get; set; }
-
-
+    public double? BalanceAmount { get; set; }
+ 
   }
 }
