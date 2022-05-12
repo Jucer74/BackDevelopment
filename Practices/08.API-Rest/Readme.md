@@ -202,3 +202,5 @@ En este punto debe tener algo como esto:
 
 ![](https://github.com/Jucer74/BackDevelopment/blob/main/Practices/08.API-Rest/Img/NetBank.Api-01.png)
 
+# Implementemos la logica (Esto es lo que Veremos la siguiente clase)
+Implemente la Funcionalidad de validacion en una clase denominada **CreditCardService.cs**
