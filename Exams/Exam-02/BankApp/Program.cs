@@ -1,13 +1,17 @@
-namespace Bank
+﻿namespace Bank
 {
 
     using System;
     using System.Globalization;
-    using Dto;
+ 
 
     internal class Program
     {
-        private static readonly ApplicationData applicationData = new ApplicationData();
+        private static readonly AccountData accountData = new AccountData();
+
+        static ProgramAccount  programAccount = new ProgramAccount();
+    
+
         private static void Main(string[] args)
         {
             try
@@ -28,12 +32,13 @@ namespace Bank
             {
                 Console.Clear();
                 Console.WriteLine("     BankApp    ");
-                Console.WriteLine("------------------------------");
+                Console.WriteLine("---------------------");
                 Console.WriteLine("1. Create Account ");
                 Console.WriteLine("2. Get Balance Account");
                 Console.WriteLine("3. Deposit Account");
                 Console.WriteLine("4. Withdrawal Account");
                 Console.WriteLine("0. Exit");
+                Console.WriteLine("---------------------");
                 Console.WriteLine("Select Option:");
                 option = Console.ReadKey().KeyChar;
                 Console.WriteLine();
@@ -44,13 +49,13 @@ namespace Bank
                         Console.WriteLine("Exit");
                         break;
                     case '1':
-                        GetEmployees();
+                        Program.programAccount.ProcessAccount();
                         break;
                     case '2':
-                        GetEmployees();
+                         Program.programAccount.ProcessGetBalance();
                         break;
                     case '3':
-                        GetEmployees();
+                        Console.WriteLine("3. Deposit Account");
                         break;
                     default:
                         Console.WriteLine("Invalid Option");
@@ -64,22 +69,11 @@ namespace Bank
             }
         }
 
-        private static void GetEmployees()
-    {
-      Console.Clear();
-      Console.WriteLine("Employee List");
-      Console.WriteLine("-------------");
-      Console.WriteLine();
 
-      var employees = applicationData.GetEmployees();
+    
 
-      foreach (var emp in employees)
-      {
-        DisplayEmployee(emp);
-      }
+ 
 
-      Console.WriteLine("\n({0}) Rows Retrieved", employees.Count);
-      Console.WriteLine();
-    }
+ 
     }
 }

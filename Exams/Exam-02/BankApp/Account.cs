@@ -1,21 +1,22 @@
 namespace Bank
 {
-  using Bank.Define;
-  using Bank.Dto;
-  using System;
 
-  public class Account
+    using System;
+    using System.Globalization;
+
+    public class Account
   {
-    public virtual void ShowDetails(AccountDto projectDto)
+    public virtual void ShowDetails(AccountDto account)
     {
-      ProjectType projectType = projectDto.Type == (char)ProjectType.Internal? ProjectType.Internal: ProjectType.External;
-
-      Console.WriteLine("{0}", "".PadRight(100, '-'));
-      Console.WriteLine("Project Details");
-      Console.WriteLine("---------------");
-      Console.WriteLine($"Id : {projectDto.Id}\t\t\tType : {projectDto.Type}-{projectType.ToString()}\n");
-      Console.WriteLine($"Name : {projectDto.Name}\n");
-      Console.WriteLine($"Description :\n{projectDto.Description}\n");
+        Console.WriteLine($"Placeholder      : {account.PlaceHolder}");
+        Console.WriteLine($"Account number   : {account.AccountNumber}");
+        Console.WriteLine($"TypeAccount      : {account.AccountType}");
+        Console.WriteLine($"Balance amount   : {account.BalanceAmount}");
+        Console.WriteLine($"overdraftamounnt : {account.OverdraftAmount}");
     }
+
+ 
+
   }
-}
+
+}  
