@@ -1,22 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-/* public class Bank : Person
-{
-    public string AccountNumber{ get; set; }
-    public string AccountType { get; set; }
-
-    public Bank() : base()
-    {
-
-    }
-    public Bank(int id, string firstName, string lastName, DateTime dateOfBirth, char sex, string accountNumber, string accountType) : base(id, firstName, lastName, dateOfBirth, sex)
-    {
-        this.AccountNumber = accountNumber;
-        this.AccountType = accountType;
-    }
-
-} */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -78,6 +60,7 @@ namespace BankApp
 
                     case '4':
                         Console.WriteLine("You have chosen Withdrawal Account");
+                        bankAccount.Withdrawal();
                         break;
 
                     case '5':

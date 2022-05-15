@@ -87,5 +87,53 @@ namespace BankApp
                 }
             }
         }
+        public void Withdrawal()
+        {
+            string accountNumber = "0";
+            double newAmountWithdrawal = 0.0;
+
+            Console.WriteLine("\nPlease enter your account number");
+            accountNumber = Console.ReadLine();
+
+            for (int i = 0; i < Bankaccount.Count; i++)
+            {
+                if(accountType == "1")
+                {
+                    if (accountNumber == Bankaccount[i].AccountNumber)
+                    {
+                        Console.WriteLine("\nHow much money you wish to Withdrawal?");
+                        newAmountWithdrawal = Convert.ToDouble(Console.ReadLine());
+
+                        Bankaccount[i].Balance -= newAmountWithdrawal;
+
+                        Console.WriteLine("Your new balance is: " + Bankaccount[i].Balance);
+                        break;
+                    }
+                
+                }else
+                {
+                    if (accountNumber == Bankaccount[i].AccountNumber)
+                    {
+                        if (Bankaccount[i].Balance<=-1000.001)
+                        {
+                            Console.WriteLine("\nYou can no longer withdraw, you have exceeded the overdraft amount");
+                            
+                        }else
+                        {
+                            Console.WriteLine("\nHow much money you wish to Withdrawal?");
+                            newAmountWithdrawal = Convert.ToDouble(Console.ReadLine());
+
+                            Bankaccount[i].Balance -= newAmountWithdrawal;
+
+                            Console.WriteLine("Your new balance is: " + Bankaccount[i].Balance);
+                            break;
+                            
+                        }
+                        
+                    }
+                    
+                }         
+            }
+        }
     }
 }
