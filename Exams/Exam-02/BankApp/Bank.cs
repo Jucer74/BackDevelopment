@@ -28,7 +28,6 @@ namespace BankApp
 
                 default:
                     throw new ArgumentException("ERROR: Account not found");
-                    break;
             }
             this.listBankAccounts.Add(AccountToCreate);
         }
