@@ -1,10 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
-public class AplicactioBank
+public class BankAccount
 {
 
-    private double clientBalance;
-    private string Account;
-    private string TypeAccount;
+    private double AccountNumber;
+    private string PlaceHolder;
+    private double BalanceAmount;
+    private int AccountType;
 
     public double Balance
     {
