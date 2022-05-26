@@ -81,7 +81,7 @@ si se presenta un error Inesperado y no controlado
 
 ```json
 {
-	"issuingNetwork" : "Internal Server Eror",
+	"issuingNetwork" : "Internal Server Error",
 	"Valid" : false
 }
 ```
@@ -98,7 +98,7 @@ Para Obtener y validar la Red Emisore puede utilizar la siguiente tabla:
 | InstaPayment                | 637, 638, 639                                            | 16                          |
 | JCB                         | 3528 to 3589                                             | 16-19                       |
 | Maestro                     | 5018, 5020, 5038, 5893, 6304, 6759, 6761, 6762, 6763     | 16-19                       |
-| MasterCard                  | 51, 52, 53, 54, 55, 222100-272099                        | 16                          |
+| MasterCard                  | 51, 52, 53, 54, 55, 222100 to 272099                     | 16                          |
 | Visa                        | 4                                                        | 13-16-19                    |
 | Visa Electron               | 4026, 417500, 4508, 4844, 4913, 4917                     | 16                          |
 
@@ -259,8 +259,83 @@ namespace NetBank.Api.Utilities
 }
 ```
 
-## adicionesmos los Modelos
-Cree una nueva carpeta llamada **Models** y adiciones alli un archivo llamado **CreditCardResult.cs** para crar la estructura de respuesta segun las validaciones así:
+## Adicionemos los datos de las Tarjetas
+Cree un archivo llamado **IssuingNetworkData.json** en el raiz de los archivos y adicione la siguiente informacion
+
+```json
+[
+   {
+      "IssuingNetworkName": "American Express",
+      "StartsWithNumbers": [ 34, 37],
+      "InRange": null
+   },
+   {
+      "IssuingNetworkName": "Diners Club - Carte Blanche",
+      "StartsWithNumbers": [ 300, 301, 302, 303, 304, 305],
+      "InRange": null
+   },
+   {
+      "IssuingNetworkName": "Diners Club - International",
+      "StartsWithNumbers": [ 36],
+      "InRange": null
+   },
+   {
+      "IssuingNetworkName": "Diners Club - USA & Canada",
+      "StartsWithNumbers": [ 34],
+      "InRange": null
+   },
+   {
+      "IssuingNetworkName": "Discover",
+      "StartsWithNumbers": [ 6011, 644, 645, 646, 647, 648, 649, 65],
+      "InRange": {
+         "MinValue": 622126,
+         "MaxValue": 622925
+      }
+   },
+   {
+      "IssuingNetworkName": "InstaPayment",
+      "StartsWithNumbers": [ 637, 638, 639],
+      "InRange": null
+   },
+   {
+      "IssuingNetworkName": "JCB",
+      "StartsWithNumbers": [],
+      "InRange": {
+         "MinValue": 3528 ,
+         "MaxValue": 3589
+      }   
+   },
+   {
+      "IssuingNetworkName": "Maestro",
+      "StartsWithNumbers": [ 5018, 5020, 5038, 5893, 6304, 6759, 6761, 6762, 6763],
+      "InRange": null
+   },
+   {
+      "IssuingNetworkName": "MasterCard",
+      "StartsWithNumbers": [51, 52, 53, 54, 55],
+      "InRange": {
+         "MinValue": 222100 ,
+         "MaxValue": 272099
+      }   
+   },
+   {
+      "IssuingNetworkName": "Visa",
+      "StartsWithNumbers": [4],
+      "InRange": null
+   },    
+   {
+      "IssuingNetworkName": "Visa Electron",
+      "StartsWithNumbers": [ 4026, 417500, 4508, 4844, 4913, 4917],
+      "InRange": null
+   }
+]
+```
+
+
+## Adicionemos los Modelos
+Cree una nueva carpeta llamada **Models** y adicione alli los siguientes archivos: <br>
+
+**CreditCardResult.cs** para crear la estructura de respuesta segun las validaciones así:
 
 ```csharp
 using System;
@@ -275,7 +350,256 @@ namespace NetBank.Api.Models
 }
 ```
 
+**RangeNumber.cs** para los rangos de numeros permitidos en algunas tarjetas
+```csharp
+using System;
 
-## adicionemos los servicios
-Crre una nueva carpeta llamada **Services** y adicione alli un nuevo archivo llamado **CrediCardServices.cs**, para que implementemos la logica de Validacion
+namespace NetBank.Api.Models
+{
 
+   public class RangeNumber
+   {
+      public int MinValue { get; set; }
+      public int MaxValue { get; set; }
+
+   }
+}
+```
+
+**IssuingNetworkData.cs** para cargar los datos de las tarjetas
+```csharp
+using System;
+using System.Collections.Generic;
+
+namespace NetBank.Api.Models
+{
+
+   public class IssuingNetworkData
+   {
+      public string IssuingNetworkName { get; set; }
+      public List<int> StartsWithNumbers { get; set; }
+      public RangeNumber InRange {get; set;}
+   }
+}
+```
+
+## Adicionemos Structuras y definiciones
+Cree una carpeta llamda **Define** y adiciones un archivo Llamado **CreditCardDefine.cs** para agregar los tipos de resultados de la validacion así:
+
+```csharp
+using System;
+
+namespace NetBank.Api.Define
+{
+   public enum ValidationResultType 
+   {
+      Ok,
+      BadRequest,
+      NotFound,
+      InternalServerEror
+   }
+}
+```
+
+## Adicionemos los servicios
+Crre una nueva carpeta llamada **Services** y adicione alli un nuevo archivo llamado **CrediCardServices.cs**, para que implementemos la logica de Validacion así:
+
+```csharp
+using System;
+using System.Text.RegularExpressions;
+using System.Text.Json;
+using NetBank.Api.Models;
+using NetBank.Api.Define;
+using System.IO;
+using System.Collections.Generic;
+using NetBank.Api.Utilities;
+
+namespace NetBank.Api.Services
+{
+   public class CreditCardService
+   {
+      private const string NUMBER_REGEX = "^[0-9]*$";
+      private List<IssuingNetworkData> IssuingNetworkDataList = LoadIssuingNetworkData();
+      
+      public CreditCardResult Result { get; set; }
+
+
+      public ValidationResultType Validate(string creditCardNumber)
+      {
+         if (!IsNumber(creditCardNumber))
+         {
+            Result = BadRequetResult();
+            return ValidationResultType.BadRequest;
+         }
+
+         string issuingNetwork = GetIssuingNetworkName(creditCardNumber);
+
+         if(issuingNetwork is null)
+         {
+            Result = NotFoundResult();
+            return ValidationResultType.NotFound;
+         }
+
+         Result = new CreditCardResult( issuingNetwork, CreditCardValidator.IsValid(creditCardNumber));
+         return ValidationResultType.Ok;
+
+      }
+
+      private static List<IssuingNetworkData> LoadIssuingNetworkData()
+      {
+         StreamReader r = new StreamReader("IssuingNetworkData.json");
+         string jsonString = r.ReadToEnd();
+         return JsonSerializer.Deserialize<List<IssuingNetworkData>>(jsonString);
+      }
+
+      private static bool IsNumber(string creditCardNumber)
+      {
+		  if(string.IsNullOrEmpty(creditCardNumber))
+			  return false;
+		  
+         return new Regex(NUMBER_REGEX).IsMatch(creditCardNumber);
+      }	
+
+      private string GetIssuingNetworkName(string creditCardNumber)
+      {
+         string issuingNetworkName = null;
+
+         foreach (var issuingNetworkItem in IssuingNetworkDataList)
+         {
+            if(IsValidStartsWithNumbers(issuingNetworkItem.StartsWithNumbers, creditCardNumber))
+               return issuingNetworkItem.IssuingNetworkName;
+
+            if(IsValidInRange(issuingNetworkItem.InRange, creditCardNumber))
+               return issuingNetworkItem.IssuingNetworkName;
+         }
+
+         return issuingNetworkName;
+      }
+
+      private bool IsValidInRange(RangeNumber inRange, string creditCardNumber)
+      {
+         if (inRange is null)
+            return false;
+         
+         string startsWithNumberToValid = string.Empty;
+         int startsWithNumberItemLength = 0;
+
+         for (int i = inRange.MinValue; i <= inRange.MaxValue; i++)
+         {
+            startsWithNumberToValid = i.ToString();
+            startsWithNumberItemLength = startsWithNumberToValid.Length;
+
+            if(creditCardNumber.Substring(0, startsWithNumberItemLength).Equals(startsWithNumberToValid))
+               return true;
+         }
+         return false;
+      }
+
+      private bool IsValidStartsWithNumbers(List<int> startsWithNumbers, string creditCardNumber)
+      {
+         if(startsWithNumbers.Count == 0)
+            return false;
+
+         string startsWithNumberToValid = string.Empty;
+         int startsWithNumberItemLength = 0;
+
+         foreach (var startsWithNumberItem in startsWithNumbers)
+         {
+            startsWithNumberToValid = startsWithNumberItem.ToString();
+            startsWithNumberItemLength = startsWithNumberToValid.Length;
+
+            if(creditCardNumber.Substring(0, startsWithNumberItemLength).Equals(startsWithNumberToValid))
+               return true;
+         }
+
+         return false;
+      }
+
+      private CreditCardResult BadRequetResult()
+      {
+         return new CreditCardResult("Bad Request", false);
+      }
+
+      private CreditCardResult NotFoundResult()
+      {
+         return new CreditCardResult("Not Found", false);
+      }
+
+   }
+}
+```
+
+
+
+## Agregar los Servicios al Scope
+Agregar la siguiente Linea a nivel del StartUp en la API y adicionar la referencia a lo servicios en la seccion de los Using. <br>
+
+Adiconar la libreria
+```csharp
+using NetBank.Api.Services;
+```
+<br>
+Adicionar el servicio al scope
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+
+      services.AddControllers();
+      services.AddSwaggerGen(c =>
+      {
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "NetBank.Api", Version = "v1" });
+      });
+
+      // Adicionar el Servicio al Scope
+      services.AddScoped<CreditCardService>();
+}
+```
+
+## Actualicemos el Controller
+A nivel del controlador realice los cambios para realizar el llamdo de los servicios así:
+
+```csharp
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using NetBank.Api.Define;
+using NetBank.Api.Models;
+using NetBank.Api.Services;
+
+namespace NetBank.Api.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class CreditCardController : ControllerBase
+    {
+        private readonly ILogger<CreditCardController> _logger;
+        private readonly CreditCardService _creditCardService;
+        public CreditCardController(CreditCardService creditCardService, ILogger<CreditCardController> logger)
+        {
+            _logger = logger;
+            _creditCardService = creditCardService;
+        }
+
+        [HttpGet("{creditcardNumber}")]
+        public IActionResult Get(string creditcardNumber)
+        {
+            var validateResult = _creditCardService.Validate(creditcardNumber);
+            var result = _creditCardService.Result;
+
+            switch (validateResult)
+            {
+                case ValidationResultType.Ok:
+                    return Ok(result);     
+                case ValidationResultType.BadRequest:
+                    return BadRequest(result);     
+                case ValidationResultType.NotFound:
+                    return NotFound(result);     
+                default:
+                    return StatusCode(StatusCodes.Status500InternalServerError, new CreditCardResult("Internal Server Error", false));
+            }
+        }
+    }
+}
+
+```

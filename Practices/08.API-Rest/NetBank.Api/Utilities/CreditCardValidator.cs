@@ -2,7 +2,7 @@ using System;
 using System.Text;
 namespace NetBank.Api.Utilities
 {
-   public class CreditCardValidator
+   public static class CreditCardValidator
    {
       private const int MAX_VALUE_DIGIT = 9;
       private const int MIN_LENGTH = 13;
