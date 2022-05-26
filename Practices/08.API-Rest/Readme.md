@@ -44,6 +44,7 @@ Response Types:
 
 **ValidationSuccess**
 Ok - Status Code: 200
+Si el Numero de la tarjeta es correcto y se identifica la red emisora
 
 ```json
 {
@@ -55,17 +56,18 @@ Ok - Status Code: 200
 **BadRequest**
 
 BadRequest - Status Code: 400
+Si lo que se recibe como numero de tarjeta no es un conjuntode numeros
 
 ```json
 {
-	"issuingNetwork" : "Bad REquest",
+	"issuingNetwork" : "Bad Request",
 	"Valid" : false
 }
 ```
 
 **Not Found**
 NotFoud -  Status Code: 404
-
+Si no es posible encontrar la red Emisora
 ```json
 {
 	"issuingNetwork" : "Not Found",
@@ -75,6 +77,7 @@ NotFoud -  Status Code: 404
 
 **Inernal Server Error**
 InernalServerError - Status code: 500
+si se presenta un error Inesperado y no controlado
 
 ```json
 {
@@ -121,10 +124,6 @@ Al final tendria un contenido como el siguietne, dentro del archivo **CreditCard
 
 
 ```csharp
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -141,8 +140,8 @@ namespace NetBank.Api.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("{creditcardNumber}")]
+        public IActionResult Get(string creditcardNumber)
         {
            return Ok();
         }
@@ -202,5 +201,81 @@ En este punto debe tener algo como esto:
 
 ![](https://github.com/Jucer74/BackDevelopment/blob/main/Practices/08.API-Rest/Img/NetBank.Api-01.jpg)
 
-# Implementemos la logica (Esto es lo que Veremos la siguiente clase)
-Implemente la Funcionalidad de validacion en una clase denominada **CreditCardService.cs**
+# Implementemos la logica 
+Cree una carpeta de llamada **Utilities** y adicione un archivo llamado **CreditCardValidator.cs** para agregar la validacion,
+craendo un metodo estatico así:
+
+```csharp
+using System;
+using System.Text;
+namespace NetBank.Api.Utilities
+{
+   public static class CreditCardValidator
+   {
+      private const int MAX_VALUE_DIGIT = 9;
+      private const int MIN_LENGTH = 13;
+      private const int MAX_LENGTH = 19;
+      private static int sum = 0;
+      private static int digit = 0;
+      private static int addend = 0;
+      private static bool timesTwo = false;
+
+      public static bool IsValid(string creditCardNumber)
+      {
+         var digitsOnly = GetDigits(creditCardNumber);
+
+         if (digitsOnly.Length > MAX_LENGTH || digitsOnly.Length < MIN_LENGTH) return false;
+
+         for (var i = digitsOnly.Length - 1; i >= 0; i--)
+         {
+            digit = int.Parse(digitsOnly.ToString(i, 1));
+            if (timesTwo)
+            {
+               addend = digit * 2;
+               if (addend > MAX_VALUE_DIGIT)
+                  addend -= MAX_VALUE_DIGIT;
+            }
+            else
+               addend = digit;
+
+            sum += addend;
+
+            timesTwo = !timesTwo;
+         }
+         return (sum % 10) == 0;
+      }
+
+      private static StringBuilder GetDigits(string creditCardNumber)
+      {
+         var digitsOnly = new StringBuilder();
+         foreach (var character in creditCardNumber)
+         {
+            if (char.IsDigit(character))
+               digitsOnly.Append(character);
+         }
+         return digitsOnly;
+      }      
+   }
+}
+```
+
+## adicionesmos los Modelos
+Cree una nueva carpeta llamada **Models** y adiciones alli un archivo llamado **CreditCardResult.cs** para crar la estructura de respuesta segun las validaciones así:
+
+```csharp
+using System;
+
+namespace NetBank.Api.Models
+{
+   public class CreditCardResult
+   {
+      public string IssuingNetwork { get; set; }
+      public bool Valid { get; set; }
+   }
+}
+```
+
+
+## adicionemos los servicios
+Crre una nueva carpeta llamada **Services** y adicione alli un nuevo archivo llamado **CrediCardServices.cs**, para que implementemos la logica de Validacion
+
