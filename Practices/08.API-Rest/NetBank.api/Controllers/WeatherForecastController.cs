@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace NetBank.api.Controllers
+namespace NetBank.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]

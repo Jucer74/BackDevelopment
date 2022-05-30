@@ -1,6 +1,6 @@
 using System;
 
-namespace NetBank.api
+namespace NetBank.Api
 {
     public class WeatherForecast
     {
