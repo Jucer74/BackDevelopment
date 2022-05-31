@@ -4,8 +4,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:59642",
-      "sslPort": 44362
+      "applicationUrl": "http://localhost:62316",
+      "sslPort": 44385
     }
   },
   "profiles": {
@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "NetBank.Api": {
+    "NetBank.api": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
