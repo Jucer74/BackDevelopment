@@ -1,15 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NetBank.Api.Define;
+using NetBank.Api.Models;
+using NetBank.Api.Services;
 
 namespace NetBank.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CreditCarController : ControllerBase
+    public class CreditCardController : ControllerBase
     {
         private readonly ILogger<CreditCardController> _logger;
         private readonly CreditCardService _creditCardService;
