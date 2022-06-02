@@ -1,5 +1,8 @@
+using CreditBank.Api.DataAccess;
+using CreditBank.Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,7 +27,10 @@ namespace CreditBank.Api
          {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "CreditBank.Api", Version = "v1" });
          });
-      }
+            services.AddDbContext<AppDbContext>(options => options.UseSqlite("Name=CreditBankDB"));
+            services.AddScoped<ReportedCardDataAccess>();
+            services.AddScoped<ReportedCardService>();
+        }
 
       // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
       public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
