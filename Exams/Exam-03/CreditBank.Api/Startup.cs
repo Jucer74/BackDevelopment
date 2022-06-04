@@ -24,6 +24,9 @@ namespace CreditBank.Api
          {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "CreditBank.Api", Version = "v1" });
          });
+         services.AddDbContext<AppDbContext>(options => options.UseSqlite("Name=CreditBankDB"));
+         services.AddScoped<ReportedCardDataAccess>();
+         services.AddScoped<ReportedCardService>();
       }
 
       // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
