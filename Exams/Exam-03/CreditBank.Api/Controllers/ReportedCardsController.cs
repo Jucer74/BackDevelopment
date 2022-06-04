@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 using CreditBank.Api.Models;
 using CreditBank.Api.Services;
 using CreditBank.Api.Define;
 
 namespace CreditBank.Api.Controllers
 {
-   [Route("api/v1.0/[controller]")]
    [ApiController]
+   [Route("api/v1.0/[controller]")]
    public class ReportedCardsController : ControllerBase
    {
       private readonly ILogger<ReportedCardsController> _logger;

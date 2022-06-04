@@ -1,4 +1,5 @@
-﻿namespace CreditBank.Api.Models
+﻿
+namespace CreditBank.Api.Models
 {
    public class ReportedCard
    {
