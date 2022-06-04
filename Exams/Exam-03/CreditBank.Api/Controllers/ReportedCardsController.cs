@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using CreditBank.Api.Models;
 using CreditBank.Api.Services;
+using CreditBank.Api.Define;
 
 namespace CreditBank.Api.Controllers
 {
@@ -9,9 +11,12 @@ namespace CreditBank.Api.Controllers
    [ApiController]
    public class ReportedCardsController : ControllerBase
    {
+      private readonly ILogger<ReportedCardsController> _logger;
       private readonly ReportedCardService _reportedCardService;
-      public ReportedCardsController(ReportedCardService reportedCardService)
+
+      public ReportedCardsController(ReportedCardService reportedCardService, ILogger<ReportedCardsController> logger)
       {
+         _logger = logger;
          _reportedCardService = reportedCardService;
       }
 

@@ -4,7 +4,7 @@
    {
       private readonly AppDbContext _dbContext;
 
-      public ReportedCardDA(AppDbContext dbContext)///---------
+      public ReportedCardDataAccess(AppDbContext dbContext)
       {
          _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
       }

@@ -7,7 +7,7 @@ namespace CreditBank.Api.Services
    {
       private readonly ReportedCardDataAccess _reportedCardDataAccess;
 
-      public ReportedCardService(ReportedCardDataAccess reportedCardDataAccess)///----------modifique
+      public ReportedCardService(ReportedCardDataAccess reportedCardDataAccess)
       {
          _reportedCardDataAccess = reportedCardDataAccess;
       }
