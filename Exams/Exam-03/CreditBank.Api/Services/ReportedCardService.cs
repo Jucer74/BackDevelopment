@@ -66,7 +66,32 @@ namespace CreditBank.Api.Services
 
       public async Task<string> GetCheckCreditCardDigit(string creditCardNumber)
       {
-         throw new NotImplementedException();
+         var Result;
+
+         if (!IsNumber(creditCardNumber))
+         {
+            Result = "Bad Request";
+            return Result;
+         }
+
+         if(CreditCardValidator.IsValid(creditCardNumber))
+         {
+            Result = "Credit Card is Valid";
+         }
+         else
+         {
+            Result = "Credit Card is NOT Valid";
+         }
+
+         return Result;
+      }
+
+      private static bool IsNumber(string creditCardNumber)
+      {
+		  if(string.IsNullOrEmpty(creditCardNumber))
+			  return false;
+		  
+         return new Regex(NUMBER_REGEX).IsMatch(creditCardNumber);
       }
 
       public ReportedCard NotFoundResult()
