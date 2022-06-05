@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using CreditBank.Api.Models;
 using CreditBank.Api.Services;
+
 using System.Collections.Generic;
 
 namespace CreditBank.Api.Controllers
@@ -32,19 +33,31 @@ namespace CreditBank.Api.Controllers
 
 
         // GET: api/v1.0/<ReportedCardsByIssuingNetworkName>
-          [HttpGet("issuingNetworkName")]
-         public async Task<ActionResult<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
-         {
-             return Ok(await _reportedCardService. GetAllReportedCardsByIssuingNetworkName(issuingNetworkName));
-         }
+        [HttpGet("issuingNetworkName")]
+        public async Task<ActionResult<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
+        {
+            return Ok(await _reportedCardService.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName));
+        }
 
-         // GET: api/v1.0/<ReportedCard>
-        /*   [HttpGet("reportedCard")]
-         public async Task<ActionResult<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
-         {
-             return Ok(await _reportedCardService. GetAllReportedCardsByIssuingNetworkName(issuingNetworkName));
-         } */
+        // GET: api/v1.0/<ReportedCard>
+        [HttpGet("{creditCardNumber}")]
+        public async Task<ActionResult<ReportedCard>> GetReportedCard(string creditCardNumber)
+        {
+            return Ok(await _reportedCardService.GetReportedCard(creditCardNumber));
+        }
 
+        // PUT: api/TodoItems/5
+        [HttpPut("{creditCardNumber}")]
+        public async Task<ActionResult<string>> PutCreditCardReactivated(string creditCardNumber)
+        {
+            return Ok(await _reportedCardService.PutCreditCardReactivated(creditCardNumber));
+        }
+
+       /*  [HttpGet("{creditCardNumber}")]
+        public async Task<ActionResult<ReportedCard>> GetCreditCardValidationStatus(string creditCardNumber)
+        {
+            return Ok(await _reportedCardService.CreditCardValidationStatus(creditCardNumber));
+        } */
 
     }
 }
