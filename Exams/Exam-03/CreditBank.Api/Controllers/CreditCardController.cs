@@ -10,9 +10,9 @@ namespace CreditBank.Api.Controllers
    [ApiController]
    public class CreditCardController : ControllerBase
    {
-      // GET api/v1.0/CreditCard/ValidationStatus/{creditCardNumber}
-      [HttpGet("ValidationStatus/{creditCardNumber}")]
-      public ActionResult<string> GEtCreditCardValidationStatus(string creditCardNumber)
+      // GET api/v1.0/CreditCard/CheckDigitStatus/{creditCardNumber}
+      [HttpGet("CheckDigitStatus/{creditCardNumber}")]
+      public ActionResult<string> GetCreditCardCheckDigitStatus(string creditCardNumber)
       {
          try
          {
