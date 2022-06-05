@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace CreditBank.Api.Utilities
 {
-   public static class CreditCardValidator
+    public class CreditCardValidator
    {
       private const int MAX_ADDEND = 9;
       private const int MAX_CREDIT_CARD_LENGTH = 19;
@@ -11,7 +12,16 @@ namespace CreditBank.Api.Utilities
       private const int MOD_10 = 10;
       private const int MULTIPLY_NUMBER = 2;
 
-      public static bool IsValid(string creditCardNumber)
+      private const string NUMBER_REGEX = "^[0-9]*$";
+
+      private const string LETTERS_REGEX = @"^[a-zA-Z]+$";
+
+        public CreditCardValidator()
+        {
+
+        }
+
+        public static bool IsValid(string creditCardNumber)
       {
          var digitsOnly = GetDigits(creditCardNumber);
 
@@ -42,7 +52,7 @@ namespace CreditBank.Api.Utilities
       }
 
       private static StringBuilder GetDigits(string creditCardNumber)
-      {
+        {
          var digitsOnly = new StringBuilder();
          foreach (char c in creditCardNumber.Where(c => char.IsDigit(c)))
          {
@@ -51,5 +61,21 @@ namespace CreditBank.Api.Utilities
 
          return digitsOnly;
       }
-   }
+
+        public static bool IsNumber(string creditCardNumber)
+        {
+            if (string.IsNullOrEmpty(creditCardNumber))
+                return false;
+
+            return new Regex(NUMBER_REGEX).IsMatch(creditCardNumber);
+        }
+
+        public static bool IsAlphabetic(string issuingNetworkName)
+        {
+            if (string.IsNullOrEmpty(issuingNetworkName))
+                return false;
+
+            return new Regex(LETTERS_REGEX).IsMatch(issuingNetworkName);
+        }
+    }
 }

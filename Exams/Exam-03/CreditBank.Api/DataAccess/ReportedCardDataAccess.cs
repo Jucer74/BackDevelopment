@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CreditBank.Api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CreditBank.Api.DataAccess
 {
@@ -16,22 +18,32 @@ namespace CreditBank.Api.DataAccess
 
         public async Task<IList<ReportedCard>> GetAllReportedCards()
         {
-            throw new NotImplementedException();
+            var findAllReportedCards = _dbContext.ReportedCards.ToList();
+            List<ReportedCard> listReportedCards = await Task.Run(() => findAllReportedCards);
+            return listReportedCards;
         }
 
         public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
         {
-            throw new NotImplementedException();
+            var findAllByIssuingNetwork = _dbContext.ReportedCards.Where(columnIssuingNetwork => columnIssuingNetwork.IssuingNetwork == issuingNetworkName).ToList();
+            List<ReportedCard> listReportedCardsIssuingNetwork = await Task.Run(() => findAllByIssuingNetwork);
+            return listReportedCardsIssuingNetwork;
         }
 
         public async Task<ReportedCard> GetReportedCard(string creditCardNumber)
         {
-            throw new NotImplementedException();
+            ReportedCard reportedCard = await _dbContext.ReportedCards.FirstOrDefaultAsync(columnCreditCardNumber => columnCreditCardNumber.CreditCardNumber == creditCardNumber);
+            return reportedCard;
         }
 
         public async Task<string> PutCreditCardReactivated(string creditCardNumber)
         {
-            throw new NotImplementedException();
+            var reportedCard = await GetReportedCard(creditCardNumber);
+            reportedCard.StatusCard = "Recovered";
+            reportedCard.LastUpdatedDate = DateTime.Now;
+            _dbContext.SaveChanges();
+            string messageUpdateCreditCardReactivated = "Credit Card Recovered";
+            return messageUpdateCreditCardReactivated;
         }
     }
 }

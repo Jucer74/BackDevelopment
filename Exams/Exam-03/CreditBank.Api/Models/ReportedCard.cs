@@ -14,7 +14,9 @@ namespace CreditBank.Api.Models
         [Required(ErrorMessage = "CreditCardNumber is required")]
         public string CreditCardNumber { get; set; }
 
+        [Required(ErrorMessage = "FirstName is required")]
         public string FirstName { get; set; }
+        [Required(ErrorMessage = "LastName is required")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "StatusCard is required")]
