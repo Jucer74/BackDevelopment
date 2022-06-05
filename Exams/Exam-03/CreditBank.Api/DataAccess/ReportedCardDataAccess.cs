@@ -37,6 +37,11 @@ namespace CreditBank.Api.DataAccess
       {
          var reportedCard = await _dbContext.ReportedCards.Where(item => item.CreditCardNumber==creditCardNumber).FirstOrDefaultAsync();
 
+         if(reportedCard.StatusCard == NEWSTATUSCARD)
+         {
+            return "Credit card has already been recovered";
+         }
+
          reportedCard.StatusCard = NEWSTATUSCARD;
          await _dbContext.SaveChangesAsync();
 

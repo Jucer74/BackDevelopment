@@ -29,7 +29,7 @@ namespace CreditBank.Api.Controllers
          return Ok(await _reportedCardService.GetAllReportedCards());
       }
 
-      // GET: api/v1.0/ReportedCards/IssuingNetwork
+      // GET: api/v1.0/ReportedCards/IssuingNetwork/{issuingNetworkName}
       [HttpGet("IssuingNetwork/{issuingNetworkName}")]
       public async Task<ActionResult<IList<ReportedCard>>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
       {
@@ -63,18 +63,21 @@ namespace CreditBank.Api.Controllers
          {
             return NotFound("Not Found");
          }
-         catch(ArgumentException)
-         {
-            return Ok("Credit card has already been recovered");
-         }
       }
 
-      /* //Post: api/v1.0/ReportedCards/{creditCardNumber}
-      [HttpGet("{creditCardNumber}")]
-      public async Task<ActionResult<string>> PutCreditCardReactivated(string creditCardNumber)
+      //Post: api/v1.0/ReportedCards/CheckCreditCardDigit/{creditCardNumber}
+      [HttpGet("CheckCreditCardDigit/{creditCardNumber}")]
+      public async Task<ActionResult<string>> GetCheckCreditCardDigit(string creditCardNumber)
       {
-         return Ok(await _reportedCardService.PutCreditCardReactivated(creditCardNumber));
-      } */
+         try
+         {
+            return Ok(await _reportedCardService.GetCheckCreditCardDigit(creditCardNumber));
+         }
+         catch (NotImplementedException)
+         {
+            return NotFound("Not Found");
+         }
+      }
 
       
       

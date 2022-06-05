@@ -59,13 +59,14 @@ namespace CreditBank.Api.Services
          {
             throw new NotImplementedException();
          }
-         else if(reportedCard.StatusCard == _reportedCardDataAccess.getstatusCard())
-         {
-            throw new ArgumentException();
-         }
 
          return await _reportedCardDataAccess.PutCreditCardReactivated(creditCardNumber);
 
+      }
+
+      public async Task<string> GetCheckCreditCardDigit()
+      {
+         throw new await NotImplementedException();
       }
 
       public ReportedCard NotFoundResult()
