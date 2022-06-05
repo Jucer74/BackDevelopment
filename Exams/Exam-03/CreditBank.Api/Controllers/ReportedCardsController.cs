@@ -40,15 +40,42 @@ namespace CreditBank.Api.Controllers
       [HttpGet("{creditCardNumber}")]
       public async Task<ActionResult<ReportedCard>> GetReportedCard(string creditCardNumber)
       {
-         return Ok(await _reportedCardService.GetReportedCard(creditCardNumber));
+         try
+         {
+            return Ok(await _reportedCardService.GetReportedCard(creditCardNumber));
+         }
+         catch (NotImplementedException)
+         {
+            
+            return NotFound(_reportedCardService.NotFoundResult());
+         }
       }
 
-      // Put: api/v1.0/ReportedCards/IssuingNetworkassadsad
+      // Put: api/v1.0/ReportedCards/{creditCardNumber}
       [HttpPut("{creditCardNumber}")]
       public async Task<ActionResult<string>> PutCreditCardReactivated(string creditCardNumber)
       {
-         return Ok(await _reportedCardService.PutCreditCardReactivated(creditCardNumber));
+         try
+         {
+            return Ok(await _reportedCardService.PutCreditCardReactivated(creditCardNumber));
+         }
+         catch (NotImplementedException)
+         {
+            return NotFound("Not Found");
+         }
+         catch(ArgumentException)
+         {
+            return Ok("Credit card has already been recovered");
+         }
       }
+
+      /* //Post: api/v1.0/ReportedCards/{creditCardNumber}
+      [HttpGet("{creditCardNumber}")]
+      public async Task<ActionResult<string>> PutCreditCardReactivated(string creditCardNumber)
+      {
+         return Ok(await _reportedCardService.PutCreditCardReactivated(creditCardNumber));
+      } */
+
       
       
    }

@@ -17,7 +17,14 @@ namespace CreditBank.Api.Services
 
       public async Task<IList<ReportedCard>> GetAllReportedCards()
       {
-         return await _reportedCardDataAccess.GetAllReportedCards();
+         var reportedCardList = await _reportedCardDataAccess.GetAllReportedCards();
+
+         if(reportedCardList == null || reportedCardList.Count == 0)
+         {
+            throw new NotImplementedException();
+         }
+
+         return reportedCardList;
       }
 
       public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
@@ -36,12 +43,34 @@ namespace CreditBank.Api.Services
       {
          var reportedCard = await _reportedCardDataAccess.GetReportedCard(creditCardNumber);
 
+         if(reportedCard == null)
+         {
+            throw new NotImplementedException();
+         }
+
          return reportedCard;
       }
 
       public async Task<string> PutCreditCardReactivated(string creditCardNumber)
       {
-         throw  new NotImplementedException();
+         var reportedCard = await _reportedCardDataAccess.GetReportedCard(creditCardNumber);
+
+         if(reportedCard == null)
+         {
+            throw new NotImplementedException();
+         }
+         else if(reportedCard.StatusCard == _reportedCardDataAccess.getstatusCard())
+         {
+            throw new ArgumentException();
+         }
+
+         return await _reportedCardDataAccess.PutCreditCardReactivated(creditCardNumber);
+
+      }
+
+      public ReportedCard NotFoundResult()
+      {
+         return new ReportedCard(-1, "Not Found","Not Found","Not Found","Not Found","Not Found");
       }
    }
 }

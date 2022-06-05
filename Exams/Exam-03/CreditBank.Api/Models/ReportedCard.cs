@@ -27,5 +27,16 @@ namespace CreditBank.Api.Models
       [Required(ErrorMessage = "LastUpdatedDate is required")]
       public DateTime LastUpdatedDate { get; set; }
 
+      public ReportedCard(int id, string issuingNetwork,string creditCardNumber, string firstName, string lastName, string statusCard)
+      {
+         Id = id;
+         IssuingNetwork = issuingNetwork;
+         CreditCardNumber = creditCardNumber;
+         FirstName = firstName;
+         LastName = lastName;
+         StatusCard = statusCard;
+
+      }
+
    }
 }

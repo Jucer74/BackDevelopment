@@ -10,6 +10,7 @@ namespace CreditBank.Api.DataAccess
    public class ReportedCardDataAccess
    {
       private readonly AppDbContext _dbContext;
+      public const string  NEWSTATUSCARD = "Recovered";
 
 
       public ReportedCardDataAccess(AppDbContext dbContext)
@@ -34,7 +35,17 @@ namespace CreditBank.Api.DataAccess
 
       public async Task<string> PutCreditCardReactivated(string creditCardNumber)
       {
-         throw new NotImplementedException();
+         var reportedCard = await _dbContext.ReportedCards.Where(item => item.CreditCardNumber==creditCardNumber).FirstOrDefaultAsync();
+
+         reportedCard.StatusCard = NEWSTATUSCARD;
+         await _dbContext.SaveChangesAsync();
+
+         return "Credit Card Recovered";
+      }
+
+      public string getstatusCard()
+      {
+         return NEWSTATUSCARD;
       }
 
    }
