@@ -384,7 +384,7 @@ Revise este [link](https://www.freeformatter.com/credit-card-number-generator-va
 | MasterCard                  | 51, 52, 53, 54, 55, 222100 to 272099                     | 16                          |
 | Visa                        | 4                                                        | 13-16-19                    |
 | Visa Electron               | 4026, 417500, 4508, 4844, 4913, 4917                     | 16                          |
-                   |
+
 
 [Algoritmo de Luhn en C#](https://github.com/marcrabadan/blog/tree/main/luhn/LuhnAlgorithm)
 
