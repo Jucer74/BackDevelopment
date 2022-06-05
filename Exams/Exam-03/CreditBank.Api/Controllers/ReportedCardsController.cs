@@ -12,15 +12,15 @@ namespace CreditBank.Api.Controllers
     [Route("api/v1.0/[controller]")]
     [ApiController]
 
-    
+
     public class ReportedCardsController : ControllerBase
     {
         private readonly ILogger<ReportedCardsController> _logger;
         private readonly ReportedCardService _reportedCardSevice;
-        public ReportedCardsController(ReportedCardService _reportedCardSevice ,ILogger<ReportedCardsController> logger)
+        public ReportedCardsController(ReportedCardService reportedCardService, ILogger<ReportedCardsController> logger)
         {
-           _logger = logger;
-           _reportedCardSevice = reportedCardService;
+            _logger = logger;
+            _reportedCardService = reportedCardService;
         }
 
         // GET: api/v1.0/<ReportedCardsController>
@@ -31,12 +31,12 @@ namespace CreditBank.Api.Controllers
         }
 
 
-         // GET: api/v1.0/<ReportedCardsByIssuingNetworkName>
-       /*   [HttpGet]
-        public async Task<ActionResult<IList<ReportedCardsByIssuingNetworkName>>> GetAllReportedCardsByIssuingNetworkName()
-        {
-            return Ok(await _reportedCardService. GetAllReportedCardsByIssuingNetworkName());
-        } */
+        // GET: api/v1.0/<ReportedCardsByIssuingNetworkName>
+        /*   [HttpGet]
+         public async Task<ActionResult<IList<ReportedCardsByIssuingNetworkName>>> GetAllReportedCardsByIssuingNetworkName()
+         {
+             return Ok(await _reportedCardService. GetAllReportedCardsByIssuingNetworkName());
+         } */
 
 
     }

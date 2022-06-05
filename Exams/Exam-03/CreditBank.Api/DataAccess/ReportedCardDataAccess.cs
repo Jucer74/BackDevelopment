@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using CreditBank.Api.Models;
+
 
 namespace CreditBank.Api.DataAccess
 
