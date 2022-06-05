@@ -12,7 +12,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using NetBank.Api.Services;
-using System.Collections.Generic;
 
 namespace NetBank.Api
 
@@ -35,10 +34,6 @@ namespace NetBank.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NetBank.Api", Version = "v1" });
             });
-
-            services.AddDbContext<AppDbContext>(options => options.UseSqlite("Name=CreditBankDB"));
-            services.AddScoped<ReportedCardDataAccess>();
-            services.AddScoped<ReportedCardService>();
 
             // Adicionar el Servicio al Scope
             services.AddScoped<CreditCardService>();
