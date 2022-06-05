@@ -1,8 +1,11 @@
-﻿using CreditBank.Api.Models;
+﻿using CreditBank.Api.Exceptions;
+using CreditBank.Api.Models;
 using CreditBank.Api.Services;
 using CreditBank.Api.Utilities;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace CreditBank.Api.Controllers
@@ -22,40 +25,100 @@ namespace CreditBank.Api.Controllers
       [HttpGet]
       public async Task<ActionResult<IList<ReportedCard>>> GetAllReportedCards()
       {
-         return Ok(await _reportedCardService.GetAllReportedCards());
+         try
+         {
+            return Ok(await _reportedCardService.GetAllReportedCards());
+         }
+         catch (InternalServerErrorException ex)
+         {
+            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+         }
+         catch (Exception ex)
+         {
+            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+         }
+         
       }
 
       // GET: api/v1.0/<ReportedCardsController>/IssuingNetwork/{issuingNetworkName}
       [HttpGet("IssuingNetwork/{issuingNetworkName}")]
       public async Task<ActionResult<IEnumerable<ReportedCard>>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
       {
-         return Ok(await _reportedCardService.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName));
+         try
+         {
+            return Ok(await _reportedCardService.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName));
+         }
+         catch (NotFoundException ex)
+         {
+            return NotFound(ex.Message);
+         }
+         catch (InternalServerErrorException ex)
+         {
+            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+         }
+         catch (Exception ex)
+         {
+            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+         }
       }
 
       // GET api/<ReportedCardsController>/{creditCardNumber}
       [HttpGet("{creditCardNumber}")]
       public async Task<ActionResult<ReportedCard>> GetReportedCard(string creditCardNumber)
       {
-         return Ok(await _reportedCardService.GetReportedCard(creditCardNumber));
+         try
+         {
+            return Ok(await _reportedCardService.GetReportedCard(creditCardNumber));
+         }
+         catch (InternalServerErrorException ex)
+         {
+            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+         }
+         catch (Exception ex)
+         {
+            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+         }
       }
 
       // POST api/v1.0/<ReportedCardsController>/{creditCardNumber}
       [HttpPost("{creditCardNumber}")]
       public ActionResult<string> PostCheckCreditCardDigit(string creditCardNumber)
       {
-         if (CreditCardValidator.IsValid(creditCardNumber))
+         try
          {
-            return Ok("Credit Card Is Valid");
-         }
+            if (CreditCardValidator.IsValid(creditCardNumber))
+            {
+               return Ok("Credit Card Is Valid");
+            }
 
-         return Ok("Credit Card Is NOT Valid");
+            return Ok("Credit Card Is NOT Valid");
+         }
+         catch (InternalServerErrorException ex)
+         {
+            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+         }
+         catch (Exception ex)
+         {
+            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+         }
       }
 
       // PUT api/v1.0/<ReportedCardsController>/{creditCardNumber}
       [HttpPut("{creditCardNumber}")]
       public async Task<ActionResult<string>> PutCreditCardReactivated(string creditCardNumber)
       {
-         return Ok(await _reportedCardService.PutCreditCardReactivated(creditCardNumber));
+         try
+         {
+            return Ok(await _reportedCardService.PutCreditCardReactivated(creditCardNumber));
+         }
+         catch (InternalServerErrorException ex)
+         {
+            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+         }
+         catch (Exception ex)
+         {
+            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+         }
       }
    }
 }
