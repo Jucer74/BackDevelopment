@@ -625,7 +625,7 @@ services.AddScoped<ReportedCardService>();
 ```
 
 ## El Controller (CreditCardController)
-1. Adicione el metodo **GetCreditCardCheckDigitStatus** par incluir la logica de validacion de la tarjeta.
+1. Adicione el metodo **GetCreditCardCheckDigitStatus** para incluir la logica de validacion de la tarjeta.
 
 ```csharp
 using CreditBank.Api.Utilities;
@@ -673,7 +673,7 @@ namespace CreditBank.Api.Controllers
 
 
 # Errores y Excepciones
-Para el manejo de errores y Excepciones, puede usar las excepciones de negocio de la carpeta de **Exceptions** dela siguiente forma.
+Para el manejo de errores y Excepciones, puede usar las excepciones de negocio de la carpeta de **Exceptions** de la siguiente forma.
 
 ## Acceso a Datos
 A nivel de Acceso a Datos no se efectua ninguna validacion, solo se ejecuta el metodo, por ejemplo:
@@ -686,7 +686,7 @@ public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(s
 ```
 
 ## Logica de Negocio
-En la Logica si se efectuan laas validaciones y se disparan las excepciones segun el flujo, por ejemplo:
+En la Logica si se efectuan las validaciones y se disparan las excepciones segun el flujo, por ejemplo:
 
 ```csharp
 public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
