@@ -340,7 +340,7 @@ El Numero de la tarjeta se recipe por parametro.
 Retorna el estado Success (Status Code 200) con el texto **Credit Card Recovered**.
 
 ---
-#### POST /api/v1.0/ReportedCards/{creditCardNumber}
+#### GET /api/v1.0/ReportedCards/{creditCardNumber}
 Validar si el Numero de una tarjeta es valido por su codigo de verificacion, utilizando el algoritmo de [Luhn](https://www.pcihispano.com/el-algoritmo-de-luhn-y-su-importancia-para-la-validacion-de-tarjetas-de-pago/#:~:text=El%20d%C3%ADgito%20de%20verificaci%C3%B3n%20es,el%20siguiente%20m%C3%BAltiplo%20de%2010.).
 
 Revise este [link](https://www.freeformatter.com/credit-card-number-generator-validator.html) par determinar lsa condiciones sobre los tipos de tarjetas.
@@ -600,6 +600,12 @@ services.AddScoped<ReportedCardService>();
  
 5. Limpie el proyecto, eliminando la referencia a controladores y modelos innecesarios, por ejemplo el controladore del clima (al controladore del clima (**WeatherForecastController**) y el modelo (**WeatherForecast**)
 6. Compile, ejecute y pruebe. Recuerde usar la Version de **CreditBank.Api** y no la version de IIS Express.
+
+# Errores y Excepciones
+Para el manejo de errores y Excepciones, puede usar las excepciones de negocio de la carpeta de **Exceptions**
+
+
+
 
 ## Recursos
 Estos son algunos recursos guia para desarrollar el ejercicio
