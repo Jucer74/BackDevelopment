@@ -23,13 +23,7 @@ namespace CreditBank.Api.DataAccess
 
       public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
       {
-         var reportedCardsList = await _dbContext.ReportedCards.Where(item => item.IssuingNetwork == issuingNetworkName).ToListAsync();
-
-         //if (reportedCardsList == null || reportedCardsList.Count == 0)
-         //{
-         //}
-
-         return reportedCardsList;
+         return await _dbContext.ReportedCards.Where(item => item.IssuingNetwork == issuingNetworkName).ToListAsync();
       }
 
       public async Task<ReportedCard> GetReportedCard(string creditCardNumber)

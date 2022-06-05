@@ -2,6 +2,7 @@
 using CreditBank.Api.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CreditBank.Api.Services
@@ -22,7 +23,14 @@ namespace CreditBank.Api.Services
 
       public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
       {
-         return await _reportedCardDataAccess.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName);
+
+         var reportedCardsList = await _reportedCardDataAccess.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName);
+
+         //if (reportedCardsList == null || reportedCardsList.Any())
+         //{
+         //}
+
+         return reportedCardsList;
       }
 
       public async Task<ReportedCard> GetReportedCard(string creditCardNumber)
