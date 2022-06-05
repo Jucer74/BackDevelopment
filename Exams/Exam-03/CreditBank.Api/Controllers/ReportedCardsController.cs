@@ -75,7 +75,7 @@ namespace CreditBank.Api.Controllers
          }
          catch (NotImplementedException)
          {
-            return NotFound("Not Found");
+            return NotFound("Not Implemented Exception");
          }
       }
 

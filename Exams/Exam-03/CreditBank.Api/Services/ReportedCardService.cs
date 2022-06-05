@@ -64,9 +64,9 @@ namespace CreditBank.Api.Services
 
       }
 
-      public async Task<string> GetCheckCreditCardDigit()
+      public async Task<string> GetCheckCreditCardDigit(string creditCardNumber)
       {
-         throw new await NotImplementedException();
+         throw new NotImplementedException();
       }
 
       public ReportedCard NotFoundResult()
