@@ -602,12 +602,73 @@ services.AddScoped<ReportedCardService>();
 6. Compile, ejecute y pruebe. Recuerde usar la Version de **CreditBank.Api** y no la version de IIS Express.
 
 # Errores y Excepciones
-Para el manejo de errores y Excepciones, puede usar las excepciones de negocio de la carpeta de **Exceptions**
+Para el manejo de errores y Excepciones, puede usar las excepciones de negocio de la carpeta de **Exceptions** dela siguiente forma.
+
+## Acceso a Datos
+A nivel de Acceso a Datos no se efectua ninguna validacion, solo se ejecuta el metodo, por ejemplo:
+
+```csharp
+public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
+{
+ return await _dbContext.ReportedCards.Where(item => item.IssuingNetwork == issuingNetworkName).ToListAsync();
+}
+```
+
+## Logica de Negocio
+En la Logica si se efectuan laas validaciones y se disparan las excepciones segun el flujo, por ejemplo:
+
+```csharp
+public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
+{
+ try
+ {
+    var reportedCardsList = await _reportedCardDataAccess.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName);
+
+    if (reportedCardsList.IsNullOrEmpty())
+    {
+       throw new NotFoundException($"{issuingNetworkName} Not Found");
+    }
+
+    return reportedCardsList;
+ }
+ catch (Exception ex)
+ {
+    throw new InternalServerErrorException("Internal Server Error", ex);
+ }
+}
+```
+
+## Controlador
+A nivel del controlador se capturan las excepciones y se retorna la respuesta indicada, por ejemplo:
+
+```csharp
+// GET: api/v1.0/<ReportedCardsController>/IssuingNetwork/{issuingNetworkName}
+[HttpGet("IssuingNetwork/{issuingNetworkName}")]
+public async Task<ActionResult<IEnumerable<ReportedCard>>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
+{
+ try
+ {
+    return Ok(await _reportedCardService.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName));
+ }
+ catch (NotFoundException ex)
+ {
+    return NotFound(ex.Message);
+ }
+ catch (InternalServerErrorException ex)
+ {
+    return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+ }
+ catch (Exception ex)
+ {
+    return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+ }
+}
+```
+
+De esta forma se controla todo el flujo te la aplicacion y se retornan los datos correctamente.
 
 
-
-
-## Recursos
+# Recursos
 Estos son algunos recursos guia para desarrollar el ejercicio
 * [Tutorial: Create a web API with ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-5.0&tabs=visual-studio#over-post)
 * [Learn ASP.NET Web API](https://www.tutorialsteacher.com/webapi)
