@@ -4,6 +4,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using CreditBank.Api.Models;
+using CreditBank.Api.Services;
+using CreditBank.Api.DataAccess;
+
 
 namespace CreditBank.Api
 {

@@ -1,4 +1,6 @@
-﻿using CreditBank.Api.Models;
+﻿using System;
+using CreditBank.Api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CreditBank.Api.DataAccess
 {

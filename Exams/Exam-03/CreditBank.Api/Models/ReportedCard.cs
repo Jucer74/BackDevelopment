@@ -1,4 +1,6 @@
-﻿
+﻿using System;
+using System.Threading.Tasks;
+
 namespace CreditBank.Api.Models
 {
    public class ReportedCard
