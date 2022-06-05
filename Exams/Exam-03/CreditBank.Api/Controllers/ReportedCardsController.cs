@@ -29,14 +29,14 @@ namespace CreditBank.Api.Controllers
          return Ok(await _reportedCardService.GetAllReportedCards());
       }
 
-      /* // PUT: api/v1.0/<ReportedCardsController>
+      /* // GET: api/v1.0/<ReportedCardsController>
       [HttpPut]
-      public async Task<ActionResult<IList<ReportedCard>>> GetAllReportedCards()
+      public async Task<ActionResult<IList<ReportedCard>>> GetAllReportedCardsByIssuingNetworkName()
       {
-         return Ok(await _reportedCardService.GetAllReportedCards());
-      }
+         return Ok(await _reportedCardService.GetAllReportedCardsByIssuingNetworkName());
+      } */
 
-      // POST: api/v1.0/<ReportedCardsController>
+      /*// POST: api/v1.0/<ReportedCardsController>
       [HttpGPost]
       public async Task<ActionResult<IList<ReportedCard>>> GetAllReportedCards()
       {
