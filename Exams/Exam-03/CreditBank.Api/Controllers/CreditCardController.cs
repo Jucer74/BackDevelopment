@@ -17,15 +17,15 @@ namespace CreditBank.Api.Controllers
          {
             if (!CreditCardValidator.IsNumericCard(creditCardNumber))
             {
-               return BadRequest("Credit Card Is NOT Numeric");
+               return BadRequest($"Credit Card [{creditCardNumber}] is NOT Numeric");
             }
 
             if (CreditCardValidator.IsValid(creditCardNumber))
             {
-               return Ok("Credit Card Is Valid");
+               return Ok($"Credit Card [{creditCardNumber}] is Valid");
             }
 
-            return Ok("Credit Card Is NOT Valid");
+            return Ok($"Credit Card [{creditCardNumber}] is NOT Valid");
          }
          catch (Exception ex)
          {
