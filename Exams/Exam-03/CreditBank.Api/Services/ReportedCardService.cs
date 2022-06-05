@@ -29,7 +29,7 @@ namespace CreditBank.Api.Services
 
         public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
         {
-            if (!CreditCardValidator.IsAlphabetic(issuingNetworkName))
+            if (!CreditCardValidator.IsAlphabeticIssuingNetworkName(issuingNetworkName))
             {
                 throw new BadRequestException("Issuing Network Name Accept Only Letters");
             }
@@ -44,7 +44,7 @@ namespace CreditBank.Api.Services
 
         public async Task<ReportedCard> GetReportedCard(string creditCardNumber)
         {
-            if (!CreditCardValidator.IsNumber(creditCardNumber))
+            if (!CreditCardValidator.IsNumericCard(creditCardNumber))
             {
                 throw new BadRequestException("Credit Card Number Is NOT Numeric");
             }
@@ -60,7 +60,7 @@ namespace CreditBank.Api.Services
         {
            await GetReportedCard(creditCardNumber);
            var messageUpdateCreditCard = await _reportedCardDataAccess.PutCreditCardReactivated(creditCardNumber);
-            return messageUpdateCreditCard;
+           return messageUpdateCreditCard;
         }
     }
 }

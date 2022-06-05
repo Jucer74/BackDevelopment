@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using NetBank.Api.Services;
 
 namespace CreditBank.Api
 {
@@ -30,6 +31,7 @@ namespace CreditBank.Api
             services.AddDbContext<AppDbContext>(options => options.UseSqlite("Name=CreditBankDB"));
             services.AddScoped<ReportedCardDataAccess>();
             services.AddScoped<ReportedCardService>();
+            services.AddScoped<CreditCardService>();
         }
 
       // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -62,7 +62,7 @@ namespace CreditBank.Api.Utilities
          return digitsOnly;
       }
 
-        public static bool IsNumber(string creditCardNumber)
+        public static bool IsNumericCard(string creditCardNumber)
         {
             if (string.IsNullOrEmpty(creditCardNumber))
                 return false;
@@ -70,7 +70,7 @@ namespace CreditBank.Api.Utilities
             return new Regex(NUMBER_REGEX).IsMatch(creditCardNumber);
         }
 
-        public static bool IsAlphabetic(string issuingNetworkName)
+        public static bool IsAlphabeticIssuingNetworkName(string issuingNetworkName)
         {
             if (string.IsNullOrEmpty(issuingNetworkName))
                 return false;
