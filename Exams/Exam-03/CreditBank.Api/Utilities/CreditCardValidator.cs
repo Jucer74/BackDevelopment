@@ -57,9 +57,10 @@ namespace CreditBank.Api.Utilities
 
        public static bool IsNumberCard(string creditCardNumber)
       {
-         Regex regEx = new Regex(NUMBER_REGEX);
+        if (string.IsNullOrEmpty(creditCardNumber))
+                return false;
 
-         return !string.IsNullOrEmpty(creditCardNumber) && regEx.IsMatch(creditCardNumber);
+            return new Regex(NUMBER_REGEX).IsMatch(creditCardNumber);
 
       }
    }
