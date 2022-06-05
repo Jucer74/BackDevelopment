@@ -337,6 +337,33 @@ El Numero de la tarjeta se recipe por parametro.
 | CreditCardNumbwer | string | Numero de la tarjeta |
 
 ##### Response
+Retorna el registro con los datos de la tarjeta recuperada
+
+| Property         | Type     | Description                                                                                      |
+|------------------|----------|--------------------------------------------------------------------------------------------------|
+| Id               | int      | Identificador del registro                                                                       |
+| IssuingNetwork   | string   | Nombre de la red emisora                                                                         |
+| CreditCardNumber | string   | Numero de la tarjeta de credito (sin caracteres ni separadores)                                  |
+| FirstName        | string   | Nombre del propietario de la tarjeta                                                             |
+| LastName         | string   | Apellido del propietario de la tarjeta                                                           |
+| StatusCard       | string   | Estado de la tarjeta (Stolen, Recovered), or defecto es Stolen                                   |
+| ReportedDate     | DateTime | Fecha cuando se reporta la tarjeta                                                               |
+| LastUpdatedDate  | DateTime | Fecha de la ultima actualizacion del registro. Inicialmente es igual a la misma fecha de reporte |
+
+##### Sample Response
+```json
+{
+  "id": 1,
+  "issuingNetwork": "mastercard",
+  "creditCardNumber": "5010120742586830",
+  "firstName": "Hammerman",
+  "lastName": "Blitzer",
+  "statusCard": "Credit Card Recovered",
+  "reportedDate": "12/30/2021",
+  "lastUpdatedDate": "12/31/2021"
+}
+```
+
 Retorna el estado Success (Status Code 200) con el texto **Credit Card Recovered**.
 
 ---
@@ -620,21 +647,14 @@ En la Logica si se efectuan laas validaciones y se disparan las excepciones segu
 ```csharp
 public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
 {
- try
- {
-    var reportedCardsList = await _reportedCardDataAccess.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName);
+ var reportedCardsList = await _reportedCardDataAccess.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName);
 
-    if (reportedCardsList.IsNullOrEmpty())
-    {
-       throw new NotFoundException($"{issuingNetworkName} Not Found");
-    }
-
-    return reportedCardsList;
- }
- catch (Exception ex)
+ if (reportedCardsList.IsNullOrEmpty())
  {
-    throw new InternalServerErrorException("Internal Server Error", ex);
+    throw new NotFoundException($"{issuingNetworkName} Not Found");
  }
+
+ return reportedCardsList;
 }
 ```
 
@@ -646,22 +666,18 @@ A nivel del controlador se capturan las excepciones y se retorna la respuesta in
 [HttpGet("IssuingNetwork/{issuingNetworkName}")]
 public async Task<ActionResult<IEnumerable<ReportedCard>>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
 {
- try
- {
-    return Ok(await _reportedCardService.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName));
- }
- catch (NotFoundException ex)
- {
-    return NotFound(ex.Message);
- }
- catch (InternalServerErrorException ex)
- {
-    return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
- }
- catch (Exception ex)
- {
-    return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
- }
+   try
+   {
+      return Ok(await _reportedCardService.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName));
+   }
+   catch (NotFoundException ex)
+   {
+      return NotFound(ex.Message);
+   }
+   catch (Exception ex)
+   {
+      return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+   }
 }
 ```
 
