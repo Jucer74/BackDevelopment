@@ -5,7 +5,7 @@ namespace CreditBank.Api.Controllers
 {
    [Route("api/v1.0/[controller]")]
    [ApiController]
-   public class ReportedCardsController : ControllerBase
+   public class CreditCardController : ControllerBase
    {
    }
 }
