@@ -12,7 +12,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using NetBank.Api.Services;
+using System.Collections.Generic;
+
 namespace NetBank.Api
+
 {
     public class Startup
     {

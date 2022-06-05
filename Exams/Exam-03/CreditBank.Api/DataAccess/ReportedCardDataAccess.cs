@@ -1,4 +1,9 @@
-﻿namespace CreditBank.Api.DataAccess
+﻿using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+
+namespace CreditBank.Api.DataAccess
+
 {
  public class ReportedCardDataAccess
    {

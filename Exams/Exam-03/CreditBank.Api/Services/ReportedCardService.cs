@@ -1,5 +1,9 @@
 ﻿using CreditBank.Api.Models;
 using CreditBank.Api.DataAccess;
+using System;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+
 
 namespace CreditBank.Api.Services
 {
@@ -7,7 +11,7 @@ namespace CreditBank.Api.Services
     {
         private readonly ReportedCardDataAccess _reportedCardDataAccess;
 
-        public ReportedCardBL(ReportedCardDataAccess reportedCardDataAccess) /*Ojo pa*/
+        public ReportedCardService(ReportedCardDataAccess reportedCardDataAccess) /*Ojo pa*/
         {
             _reportedCardDataAccess = reportedCardDataAccess;
         }
