@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace CreditBank.Api.Utilities
 {
@@ -10,6 +11,8 @@ namespace CreditBank.Api.Utilities
       private const int MIN_CREDIT_CARD_LENGTH = 13;
       private const int MOD_10 = 10;
       private const int MULTIPLY_NUMBER = 2;
+      private const string NUMBER_REGEX = "^[0-9]*$";
+
 
       public static bool IsValid(string creditCardNumber)
       {
@@ -50,6 +53,14 @@ namespace CreditBank.Api.Utilities
          }
 
          return digitsOnly;
+      }
+
+       public static bool IsNumberCard(string creditCardNumber)
+      {
+         Regex regEx = new Regex(NUMBER_REGEX);
+
+         return !string.IsNullOrEmpty(creditCardNumber) && regEx.IsMatch(creditCardNumber);
+
       }
    }
 }
