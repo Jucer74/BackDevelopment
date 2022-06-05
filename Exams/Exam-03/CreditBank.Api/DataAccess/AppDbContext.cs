@@ -12,6 +12,7 @@ namespace CreditBank.Api.DataAccess
 
       public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
       {
+         
       }
 
       public DbSet<ReportedCard> ReportedCards { get; set; }

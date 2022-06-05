@@ -30,7 +30,7 @@ namespace CreditBank.Api.Controllers
       }
 
       // GET: api/v1.0/ReportedCards/IssuingNetwork
-      [HttpGet("{issuingNetworkName}")]
+      [HttpGet("IssuingNetwork/{issuingNetworkName}")]
       public async Task<ActionResult<IList<ReportedCard>>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
       {
          return Ok(await _reportedCardService.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName));

@@ -17,12 +17,19 @@ namespace CreditBank.Api.Services
 
       public async Task<IList<ReportedCard>> GetAllReportedCards()
       {
-         throw  new NotImplementedException();
+         return await _reportedCardDataAccess.GetAllReportedCards();
       }
 
       public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
       {
-         throw   new NotImplementedException();
+         var reportedCardList = await _reportedCardDataAccess.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName);
+
+         if(reportedCardList == null || reportedCardList.Count == 0)
+         {
+            throw new NotImplementedException();
+         }
+
+         return reportedCardList;
       }
 
       public async Task<ReportedCard> GetReportedCard(string creditCardNumber)
