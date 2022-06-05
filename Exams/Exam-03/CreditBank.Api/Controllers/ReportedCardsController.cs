@@ -24,7 +24,7 @@ namespace CreditBank.Api.Controllers
             _reportedCardService = reportedCardService;
         }
 
-        [HttpGet("GetAllReportedCards")]
+        [HttpGet]
         public async Task<ActionResult<IList<ReportedCard>>> GetAllReportedCards()
         {
             _logger.LogInformation("Consulta todas las tarjetas reportadas");
@@ -65,7 +65,7 @@ namespace CreditBank.Api.Controllers
             }
         }
 
-        [HttpGet("GetReportedCard/{creditCardNumber}")]
+        [HttpGet("{creditCardNumber}")]
         public async Task<ActionResult<ReportedCard>> GetReportedCard(string creditCardNumber)
         {
             _logger.LogInformation("Consulta la tarjeta por numero");
@@ -87,7 +87,7 @@ namespace CreditBank.Api.Controllers
             }
         }
 
-        [HttpPut("CreditCardReactivated/{creditCardNumber}")]
+        [HttpPut("{creditCardNumber}")]
         public async Task<ActionResult> PutCreditCardReactivated(string creditCardNumber)
         {
             _logger.LogInformation("Reactiva la tarjeta");
