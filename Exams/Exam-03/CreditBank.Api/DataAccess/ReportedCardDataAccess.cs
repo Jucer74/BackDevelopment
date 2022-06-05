@@ -1,4 +1,5 @@
-﻿using CreditBank.Api.Models;
+﻿using CreditBank.Api.Exceptions;
+using CreditBank.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace CreditBank.Api.DataAccess
          return await _dbContext.ReportedCards.FirstOrDefaultAsync(item => item.CreditCardNumber == creditCardNumber);
       }
 
-      public async Task<string> PutCreditCardReactivated(string creditCardNumber)
+      public async Task<ReportedCard> PutCreditCardReactivated(string creditCardNumber)
       {
          var reportedCard = await _dbContext.ReportedCards.FirstOrDefaultAsync(item => item.CreditCardNumber == creditCardNumber);
 
@@ -41,10 +42,9 @@ namespace CreditBank.Api.DataAccess
             reportedCard.LastUpdatedDate = DateTime.Now;
 
             await _dbContext.SaveChangesAsync();
-            return "Credit Card Recovered";
          }
 
-         return "Credit Card Not Found";
+         return reportedCard;
       }
    }
 }

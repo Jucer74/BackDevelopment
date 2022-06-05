@@ -29,10 +29,6 @@ namespace CreditBank.Api.Controllers
          {
             return Ok(await _reportedCardService.GetAllReportedCards());
          }
-         catch (InternalServerErrorException ex)
-         {
-            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
-         }
          catch (Exception ex)
          {
             return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
@@ -51,10 +47,6 @@ namespace CreditBank.Api.Controllers
          catch (NotFoundException ex)
          {
             return NotFound(ex.Message);
-         }
-         catch (InternalServerErrorException ex)
-         {
-            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
          }
          catch (Exception ex)
          {
@@ -105,7 +97,7 @@ namespace CreditBank.Api.Controllers
 
       // PUT api/v1.0/<ReportedCardsController>/{creditCardNumber}
       [HttpPut("{creditCardNumber}")]
-      public async Task<ActionResult<string>> PutCreditCardReactivated(string creditCardNumber)
+      public async Task<ActionResult<ReportedCard>> PutCreditCardReactivated(string creditCardNumber)
       {
          try
          {

@@ -19,57 +19,43 @@ namespace CreditBank.Api.Services
 
       public async Task<IList<ReportedCard>> GetAllReportedCards()
       {
-         try
-         {
-            return await _reportedCardDataAccess.GetAllReportedCards();
-         }
-         catch (Exception ex)
-         {
-            throw new InternalServerErrorException("Internal Server Error", ex);
-         }
+         return await _reportedCardDataAccess.GetAllReportedCards();
       }
 
       public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
       {
-         try
-         {
-            var reportedCardsList = await _reportedCardDataAccess.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName);
+         var reportedCardsList = await _reportedCardDataAccess.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName);
 
-            if (reportedCardsList.IsNullOrEmpty())
-            {
-               throw new NotFoundException($"{issuingNetworkName} Not Found");
-            }
-
-            return reportedCardsList;
-         }
-         catch (Exception ex)
+         if (reportedCardsList.IsNullOrEmpty())
          {
-            throw new InternalServerErrorException("Internal Server Error", ex);
+            throw new NotFoundException($"{issuingNetworkName} Not Found");
          }
+
+         return reportedCardsList;
       }
 
       public async Task<ReportedCard> GetReportedCard(string creditCardNumber)
       {
-         try
+         var reportedCard = await _reportedCardDataAccess.GetReportedCard(creditCardNumber);
+
+         if (reportedCard == null)
          {
-            return await _reportedCardDataAccess.GetReportedCard(creditCardNumber);
+            throw new NotFoundException($"{creditCardNumber} Not Found");
          }
-         catch (Exception ex)
-         {
-            throw new InternalServerErrorException("Internal Server Error", ex);
-         }
+
+         return reportedCard;
       }
 
-      public async Task<string> PutCreditCardReactivated(string creditCardNumber)
+      public async Task<ReportedCard> PutCreditCardReactivated(string creditCardNumber)
       {
-         try
+         var reportedCard = await _reportedCardDataAccess.PutCreditCardReactivated(creditCardNumber);
+
+         if (reportedCard == null)
          {
-            return await _reportedCardDataAccess.PutCreditCardReactivated(creditCardNumber);
+            throw new NotFoundException($"{creditCardNumber} Not Found");
          }
-         catch (Exception ex)
-         {
-            throw new InternalServerErrorException("Internal Server Error", ex);
-         }
+
+         return reportedCard;
       }
    }
 }
