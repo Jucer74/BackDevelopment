@@ -16,26 +16,33 @@ namespace CreditBank.Api.Controllers
     public class ReportedCardsController : ControllerBase
     {
         private readonly ILogger<ReportedCardsController> _logger;
-        private readonly ReportedCardService _reportedCardSevice;
+        private readonly ReportedCardService _reportedCardService;
         public ReportedCardsController(ReportedCardService reportedCardService, ILogger<ReportedCardsController> logger)
         {
             _logger = logger;
-            _reportedCardSevice = reportedCardService;
+            _reportedCardService = reportedCardService;
         }
 
         // GET: api/v1.0/<ReportedCardsController>
         [HttpGet]
         public async Task<ActionResult<IList<ReportedCard>>> GetAllReportedCards()
         {
-            return Ok(await _reportedCardSevice.GetAllReportedCards());
+            return Ok(await _reportedCardService.GetAllReportedCards());
         }
 
 
         // GET: api/v1.0/<ReportedCardsByIssuingNetworkName>
-        /*   [HttpGet]
-         public async Task<ActionResult<IList<ReportedCardsByIssuingNetworkName>>> GetAllReportedCardsByIssuingNetworkName()
+          [HttpGet("issuingNetworkName")]
+         public async Task<ActionResult<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
          {
-             return Ok(await _reportedCardService. GetAllReportedCardsByIssuingNetworkName());
+             return Ok(await _reportedCardService. GetAllReportedCardsByIssuingNetworkName(issuingNetworkName));
+         }
+
+         // GET: api/v1.0/<ReportedCard>
+        /*   [HttpGet("reportedCard")]
+         public async Task<ActionResult<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
+         {
+             return Ok(await _reportedCardService. GetAllReportedCardsByIssuingNetworkName(issuingNetworkName));
          } */
 
 
