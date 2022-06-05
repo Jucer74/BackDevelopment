@@ -601,6 +601,12 @@ services.AddScoped<ReportedCardService>();
 5. Limpie el proyecto, eliminando la referencia a controladores y modelos innecesarios, por ejemplo el controladore del clima (al controladore del clima (**WeatherForecastController**) y el modelo (**WeatherForecast**)
 6. Compile, ejecute y pruebe. Recuerde usar la Version de **CreditBank.Api** y no la version de IIS Express.
 
+# Errores y Excepciones
+Para el manejo de errores y Excepciones, puede usar las excepciones de negocio de la carpeta de **Exceptions**
+
+
+
+
 ## Recursos
 Estos son algunos recursos guia para desarrollar el ejercicio
 * [Tutorial: Create a web API with ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-5.0&tabs=visual-studio#over-post)
