@@ -14,11 +14,11 @@ Utilizando los conocimientos adquiridos en clase, desarrolle el siguiente ejerci
 # Ejercicio
 Implemente una Web API que permita :
 
-1. Obtener la lista de todas las tarjetas
-2. Obtener la lista de las tarjetas por la red emisora
-3. Obtener los datos de la tarjeta por su numero
-4. Reactivar una tarjeta, marcandola como recuperada
-5. Validar si el Numero de una tarjeta es valido por su codigo de verificacion.
+1. Obtener la lista de todas las tarjetas reportadas
+2. Obtener la lista de las tarjetas reportadas por la red emisora
+3. Obtener los datos de la tarjeta reportada por su numero
+4. Reactivar una tarjeta reportada, marcandola como recuperada
+5. Validar si el Numero de una tarjeta es valido.
 
 # Pasos
 
@@ -44,7 +44,7 @@ CREATE TABLE ReportedCards (
 );
 ```
 
-2. Adicione el folder **Services** y cree la clase **ReportedCardService**, para incluir la logica de negocio y manejo de servicios para las tarjetas
+2. Adicione el folder **Services** y cree la clase **ReportedCardService**, para incluir la logica de negocio y manejo de servicios para las tarjetas reportadas.
 3. Adicione el folder **DataAccess** y cree la clase **ReportedCardDataAccess** para incluir la logica de Acceso a los datos.
 4. Adicione el folder **Utilities** y cree la clase **CreditCardValidator** para incluir la logica de validacion del digito de chequeo segun el [Algoritmo de Luhn](https://www.pcihispano.com/el-algoritmo-de-luhn-y-su-importancia-para-la-validacion-de-tarjetas-de-pago/#:~:text=El%20d%C3%ADgito%20de%20verificaci%C3%B3n%20es,el%20siguiente%20m%C3%BAltiplo%20de%2010.)
 5. Adicione al folder **Controllers** y cree el controlador **ReportedCardsController** para adicionar los endpoints que soporten los servicios necesarios para soportar las operaciones sobre las tarjetas reportadas y cree el controlador **CreditCardController** para soportar la validacion de las tarjetas por su digito de chequeo..
