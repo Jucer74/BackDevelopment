@@ -29,32 +29,27 @@ namespace CreditBank.Api.Controllers
          return Ok(await _reportedCardService.GetAllReportedCards());
       }
 
-      /* // GET: api/v1.0/<ReportedCardsController>
-      [HttpPut]
-      public async Task<ActionResult<IList<ReportedCard>>> GetAllReportedCardsByIssuingNetworkName()
+      // GET: api/v1.0/ReportedCards/IssuingNetwork
+      [HttpGet("{issuingNetworkName}")]
+      public async Task<ActionResult<IList<ReportedCard>>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
       {
-         return Ok(await _reportedCardService.GetAllReportedCardsByIssuingNetworkName());
-      } */
-
-      /*// POST: api/v1.0/<ReportedCardsController>
-      [HttpGPost]
-      public async Task<ActionResult<IList<ReportedCard>>> GetAllReportedCards()
-      {
-         return Ok(await _reportedCardService.GetAllReportedCards());
+         return Ok(await _reportedCardService.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName));
       }
 
-      // GET: api/v1.0/<ReportedCardsController>
-      [HttpGet]
-      public async Task<ActionResult<IList<ReportedCard>>> GetAllReportedCards()
+      // GET: api/v1.0/ReportedCards/creditCardNumber
+      [HttpGet("{creditCardNumber}")]
+      public async Task<ActionResult<ReportedCard>> GetReportedCard(string creditCardNumber)
       {
-         return Ok(await _reportedCardService.GetAllReportedCards());
+         return Ok(await _reportedCardService.GetReportedCard(creditCardNumber));
       }
 
-      // GET: api/v1.0/<ReportedCardsController>
-      [HttpGet]
-      public async Task<ActionResult<IList<ReportedCard>>> GetAllReportedCards()
+      // Put: api/v1.0/ReportedCards/IssuingNetworkassadsad
+      [HttpPut("{creditCardNumber}")]
+      public async Task<ActionResult<string>> PutCreditCardReactivated(string creditCardNumber)
       {
-         return Ok(await _reportedCardService.GetAllReportedCards());
-      } */
+         return Ok(await _reportedCardService.PutCreditCardReactivated(creditCardNumber));
+      }
+      
+      
    }
 }
