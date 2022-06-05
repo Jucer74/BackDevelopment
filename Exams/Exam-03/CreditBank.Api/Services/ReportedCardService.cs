@@ -34,7 +34,9 @@ namespace CreditBank.Api.Services
 
       public async Task<ReportedCard> GetReportedCard(string creditCardNumber)
       {
-         throw  new NotImplementedException();
+         var reportedCard = await _reportedCardDataAccess.GetReportedCard(creditCardNumber);
+
+         return reportedCard;
       }
 
       public async Task<string> PutCreditCardReactivated(string creditCardNumber)

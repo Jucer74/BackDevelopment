@@ -29,7 +29,7 @@ namespace CreditBank.Api.DataAccess
 
       public async Task<ReportedCard> GetReportedCard(string creditCardNumber)
       {
-         throw new NotImplementedException();
+         return await _dbContext.ReportedCards.Where(item => item.CreditCardNumber==creditCardNumber).FirstOrDefaultAsync();
       }
 
       public async Task<string> PutCreditCardReactivated(string creditCardNumber)
