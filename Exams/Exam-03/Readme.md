@@ -367,7 +367,7 @@ Retorna el registro con los datos de la tarjeta recuperada
 Retorna el estado Success (Status Code 200) con el texto **Credit Card Recovered**.
 
 ---
-#### GET /api/v1.0/ReportedCards/{creditCardNumber}
+#### GET /api/v1.0/CreditCard/ValidationStatus/{creditCardNumber}
 Validar si el Numero de una tarjeta es valido por su codigo de verificacion, utilizando el algoritmo de [Luhn](https://www.pcihispano.com/el-algoritmo-de-luhn-y-su-importancia-para-la-validacion-de-tarjetas-de-pago/#:~:text=El%20d%C3%ADgito%20de%20verificaci%C3%B3n%20es,el%20siguiente%20m%C3%BAltiplo%20de%2010.).
 
 Revise este [link](https://www.freeformatter.com/credit-card-number-generator-validator.html) par determinar lsa condiciones sobre los tipos de tarjetas.
@@ -495,7 +495,7 @@ public class ReportedCardDataAccess
 {
   private readonly AppDbContext _dbContext;
 
-  public ReportedCardDA(AppDbContext dbContext)
+  public ReportedCardDataAccess(AppDbContext dbContext)
   {
     _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
   }
@@ -544,7 +544,7 @@ public class ReportedCardService
 {
   private readonly ReportedCardDataAccess _reportedCardDataAccess;
 
-  public ReportedCardBL(ReportedCardDataAccess reportedCardDataAccess)
+  public ReportedCardService(ReportedCardDataAccess reportedCardDataAccess)
   {
     _reportedCardDataAccess = reportedCardDataAccess;
   }
@@ -590,8 +590,8 @@ using CreditBank.Api.Services;
 		- GetAllReportedCards
 		- GetAllReportedCardsByIssuingNetworkName
 		- GetReportedCard
-		- PostCheckCreditCardDigit
 		- PutCreditCardReactivated
+		- GetCreditCardValidationStatus
 	- Tenga presente que cada funcion debe ser una tarea asyncronica (**async Task<xxx>**)con una operacion de tipo **ActionResult**, por ejemplo: para el metodo **GetAllReportedCards** la definicion de la funcion seria usando esta definicion:
 ```csharp
 // GET: api/v1.0/<ReportedCardsController>
