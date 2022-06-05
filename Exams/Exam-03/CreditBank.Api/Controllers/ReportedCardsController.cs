@@ -1,7 +1,6 @@
 ﻿using CreditBank.Api.Exceptions;
 using CreditBank.Api.Models;
 using CreditBank.Api.Services;
-using CreditBank.Api.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -33,7 +32,6 @@ namespace CreditBank.Api.Controllers
          {
             return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
          }
-         
       }
 
       // GET: api/v1.0/<ReportedCardsController>/IssuingNetwork/{issuingNetworkName}
@@ -61,29 +59,6 @@ namespace CreditBank.Api.Controllers
          try
          {
             return Ok(await _reportedCardService.GetReportedCard(creditCardNumber));
-         }
-         catch (InternalServerErrorException ex)
-         {
-            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
-         }
-         catch (Exception ex)
-         {
-            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
-         }
-      }
-
-      // POST api/v1.0/<ReportedCardsController>/{creditCardNumber}
-      [HttpPost("{creditCardNumber}")]
-      public ActionResult<string> PostCheckCreditCardDigit(string creditCardNumber)
-      {
-         try
-         {
-            if (CreditCardValidator.IsValid(creditCardNumber))
-            {
-               return Ok("Credit Card Is Valid");
-            }
-
-            return Ok("Credit Card Is NOT Valid");
          }
          catch (InternalServerErrorException ex)
          {
