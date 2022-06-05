@@ -574,7 +574,7 @@ public class ReportedCardService
 	- Incluya la logica de validacion del numero de tarjeta, que implementa el algoritmo the Lunh, teniendo presente las longitudes maxima y minima que hay para todas las entidades.
 
 
-## El Controller
+## El Controller (ReportedCardsController)
 1. Referencie los proyectos de Models y de Logica de Negocio o de Servicios
 
 ```csharp
@@ -623,9 +623,17 @@ services.AddDbContext<AppDbContext>(options => options.UseSqlite("Name=CreditBan
 services.AddScoped<ReportedCardDataAccess>();
 services.AddScoped<ReportedCardService>();
 ```
- 
-5. Limpie el proyecto, eliminando la referencia a controladores y modelos innecesarios, por ejemplo el controladore del clima (al controladore del clima (**WeatherForecastController**) y el modelo (**WeatherForecast**)
-6. Compile, ejecute y pruebe. Recuerde usar la Version de **CreditBank.Api** y no la version de IIS Express.
+
+## El Controller (CreditCardController)
+1. Adicione el metodo **GetCreditCardCheckDigitStatus** par incluir la logica de validacion de la tarjeta.
+
+
+
+
+### Observaciones
+1. Limpie el proyecto, eliminando la referencia a controladores y modelos innecesarios, por ejemplo el controladore del clima (al controladore del clima (**WeatherForecastController**) y el modelo (**WeatherForecast**)
+2. Compile, ejecute y pruebe. Recuerde usar la Version de **CreditBank.Api** y no la version de IIS Express.
+
 
 # Errores y Excepciones
 Para el manejo de errores y Excepciones, puede usar las excepciones de negocio de la carpeta de **Exceptions** dela siguiente forma.
