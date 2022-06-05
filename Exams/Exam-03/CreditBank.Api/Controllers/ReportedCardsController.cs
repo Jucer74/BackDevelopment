@@ -20,14 +20,14 @@ namespace CreditBank.Api.Controllers
         public ReportedCardsController(ReportedCardService reportedCardService, ILogger<ReportedCardsController> logger)
         {
             _logger = logger;
-            _reportedCardService = reportedCardService;
+            _reportedCardSevice = reportedCardService;
         }
 
         // GET: api/v1.0/<ReportedCardsController>
         [HttpGet]
         public async Task<ActionResult<IList<ReportedCard>>> GetAllReportedCards()
         {
-            return Ok(await _reportedCardService.GetAllReportedCards());
+            return Ok(await _reportedCardSevice.GetAllReportedCards());
         }
 
 
