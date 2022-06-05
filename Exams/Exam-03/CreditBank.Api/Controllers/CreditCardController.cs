@@ -1,5 +1,4 @@
 ﻿using CreditBank.Api.Utilities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
@@ -16,6 +15,11 @@ namespace CreditBank.Api.Controllers
       {
          try
          {
+            if (!CreditCardValidator.IsNumericCard(creditCardNumber))
+            {
+               return BadRequest("Credit Card Is NOT Numeric");
+            }
+
             if (CreditCardValidator.IsValid(creditCardNumber))
             {
                return Ok("Credit Card Is Valid");
