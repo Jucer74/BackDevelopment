@@ -60,9 +60,13 @@ namespace CreditBank.Api.Controllers
          {
             return Ok(await _reportedCardService.GetReportedCard(creditCardNumber));
          }
-         catch (InternalServerErrorException ex)
+         catch (BadRequestException ex)
          {
-            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            return BadRequest(ex.Message);
+         }
+         catch (NotFoundException ex)
+         {
+            return NotFound(ex.Message);
          }
          catch (Exception ex)
          {
@@ -78,9 +82,13 @@ namespace CreditBank.Api.Controllers
          {
             return Ok(await _reportedCardService.PutCreditCardReactivated(creditCardNumber));
          }
-         catch (InternalServerErrorException ex)
+         catch (BadRequestException ex)
          {
-            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            return BadRequest(ex.Message);
+         }
+         catch (NotFoundException ex)
+         {
+            return NotFound(ex.Message);
          }
          catch (Exception ex)
          {

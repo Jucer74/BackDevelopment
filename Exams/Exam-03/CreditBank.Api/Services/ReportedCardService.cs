@@ -36,6 +36,11 @@ namespace CreditBank.Api.Services
 
       public async Task<ReportedCard> GetReportedCard(string creditCardNumber)
       {
+         if(!CreditCardValidator.IsNumericCard(creditCardNumber))
+         {
+            throw new BadRequestException($"{creditCardNumber} is NOT Numeric");
+         }
+
          var reportedCard = await _reportedCardDataAccess.GetReportedCard(creditCardNumber);
 
          if (reportedCard == null)
@@ -48,6 +53,11 @@ namespace CreditBank.Api.Services
 
       public async Task<ReportedCard> PutCreditCardReactivated(string creditCardNumber)
       {
+         if (!CreditCardValidator.IsNumericCard(creditCardNumber))
+         {
+            throw new BadRequestException($"{creditCardNumber} is NOT Numeric");
+         }
+
          var reportedCard = await _reportedCardDataAccess.PutCreditCardReactivated(creditCardNumber);
 
          if (reportedCard == null)
