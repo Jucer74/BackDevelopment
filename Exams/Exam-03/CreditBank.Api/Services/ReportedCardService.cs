@@ -1,8 +1,12 @@
 ﻿using System;
 using CreditBank.Api.Models;
 using CreditBank.Api.DataAccess;
+using CreditBank.Api.Utilities;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using CreditBank.Api.Exceptions;
+using System.Text.RegularExpressions;
+
 
 namespace CreditBank.Api.Services
 {
@@ -19,11 +23,6 @@ namespace CreditBank.Api.Services
       {
          var reportedCardList = await _reportedCardDataAccess.GetAllReportedCards();
 
-         if(reportedCardList == null || reportedCardList.Count == 0)
-         {
-            throw new NotImplementedException();
-         }
-
          return reportedCardList;
       }
 
@@ -33,7 +32,7 @@ namespace CreditBank.Api.Services
 
          if(reportedCardList == null || reportedCardList.Count == 0)
          {
-            throw new NotImplementedException();
+            throw new NotFoundException($"{issuingNetworkName} Not Found");
          }
 
          return reportedCardList;
@@ -45,7 +44,7 @@ namespace CreditBank.Api.Services
 
          if(reportedCard == null)
          {
-            throw new NotImplementedException();
+            throw new NotFoundException($"{creditCardNumber} Not Found");
          }
 
          return reportedCard;
@@ -57,41 +56,11 @@ namespace CreditBank.Api.Services
 
          if(reportedCard == null)
          {
-            throw new NotImplementedException();
+            throw new NotFoundException($"{creditCardNumber} Not Found");
          }
 
          return await _reportedCardDataAccess.PutCreditCardReactivated(creditCardNumber);
 
-      }
-
-      public async Task<string> GetCheckCreditCardDigit(string creditCardNumber)
-      {
-         var Result;
-
-         if (!IsNumber(creditCardNumber))
-         {
-            Result = "Bad Request";
-            return Result;
-         }
-
-         if(CreditCardValidator.IsValid(creditCardNumber))
-         {
-            Result = "Credit Card is Valid";
-         }
-         else
-         {
-            Result = "Credit Card is NOT Valid";
-         }
-
-         return Result;
-      }
-
-      private static bool IsNumber(string creditCardNumber)
-      {
-		  if(string.IsNullOrEmpty(creditCardNumber))
-			  return false;
-		  
-         return new Regex(NUMBER_REGEX).IsMatch(creditCardNumber);
       }
 
       public ReportedCard NotFoundResult()
