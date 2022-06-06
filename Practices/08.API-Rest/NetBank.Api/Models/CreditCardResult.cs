@@ -1,4 +1,3 @@
-using System;
 
 namespace NetBank.Api.Models
 {
