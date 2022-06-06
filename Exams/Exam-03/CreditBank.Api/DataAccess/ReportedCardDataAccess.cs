@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Linq;
+using CreditBank.Api.Models;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using CreditBank.Api.Models;
-using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace CreditBank.Api.DataAccess
@@ -18,22 +18,26 @@ namespace CreditBank.Api.DataAccess
 
         public async Task<IList<ReportedCard>> GetAllReportedCards()
         {
-            throw new NotImplementedException();
+            return await _dbContext.ReportedCards.ToListAsync();
         }
 
         public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
         {
-            throw new NotImplementedException();
+            return await _dbContext.ReportedCards.Where(item => item.IssuingNetwork == issuingNetworkName).ToListAsync();
         }
 
         public async Task<ReportedCard> GetReportedCard(string creditCardNumber)
         {
-            throw new NotImplementedException();
+            return await _dbContext.ReportedCards.Where(item => item.CreditCardNumber == creditCardNumber).FirstOrDefaultAsync();
         }
 
         public async Task<string> PutCreditCardReactivated(string creditCardNumber)
         {
-            throw new NotImplementedException();
+            var reportedCard = await GetReportedCard(creditCardNumber);
+            reportedCard.StatusCard = "Recovered";
+            _dbContext.SaveChanges();
+
+            return "Credit card recovered";
         }
     }
 }

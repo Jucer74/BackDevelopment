@@ -3,6 +3,8 @@ using CreditBank.Api.Models;
 using CreditBank.Api.DataAccess;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using CreditBank.Api.Exceptions;
 
 namespace CreditBank.Api.Services
 {
@@ -17,22 +19,40 @@ namespace CreditBank.Api.Services
 
         public async Task<IList<ReportedCard>> GetAllReportedCards()
         {
-            throw new NotImplementedException();
+            var reportedCardList = await _reportedCardDataAccess.GetAllReportedCards();
+
+            return reportedCardList;
         }
 
         public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
         {
-            throw new NotImplementedException();
-        }
+            var reportedCardList = await _reportedCardDataAccess.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName);
 
+            if (reportedCardList == null || reportedCardList.Count == 0)
+            {
+                throw new NotFoundException($"{issuingNetworkName} Not Found");
+            }
+
+            return reportedCardList;
+        }
+        
         public async Task<ReportedCard> GetReportedCard(string creditCardNumber)
         {
-            throw new NotImplementedException();
+            var reportedCard = await _reportedCardDataAccess.GetReportedCard(creditCardNumber);
+            if (reportedCard == null)
+            {
+                throw new NotFoundException($"{creditCardNumber} is not found");
+            }
+
+            return reportedCard;
         }
 
         public async Task<string> PutCreditCardReactivated(string creditCardNumber)
         {
-            throw new NotImplementedException();
+            await GetReportedCard(creditCardNumber);
+            var messageUpdateCreditCard = await _reportedCardDataAccess.PutCreditCardReactivated(creditCardNumber);
+
+            return messageUpdateCreditCard;
         }
     }
 }
