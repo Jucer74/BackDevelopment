@@ -36,7 +36,6 @@ namespace CreditBank.Api.DataAccess
         {
             var reportedCard = await GetReportedCard(creditCardNumber);
             reportedCard.StatusCard = "Recovered";
-            reportedCard.LastUpdatedDate = DateTime.Now;
             _dbContext.SaveChanges();
             
             return "Credit Card Recovered";
