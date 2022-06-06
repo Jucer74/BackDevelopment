@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32519.379
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetBank.Api", "NetBank.Api.csproj", "{8A63FED9-FC8C-411E-B58D-AA90932EDC82}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A63FED9-FC8C-411E-B58D-AA90932EDC82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A63FED9-FC8C-411E-B58D-AA90932EDC82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A63FED9-FC8C-411E-B58D-AA90932EDC82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A63FED9-FC8C-411E-B58D-AA90932EDC82}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B24A2DC0-34D0-4996-9449-BFA7A6080D2A}
+	EndGlobalSection
+EndGlobal

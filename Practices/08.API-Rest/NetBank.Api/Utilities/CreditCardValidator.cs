@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Text;
 namespace NetBank.Api.Utilities
 {
@@ -40,12 +41,12 @@ namespace NetBank.Api.Utilities
       private static StringBuilder GetDigits(string creditCardNumber)
       {
          var digitsOnly = new StringBuilder();
-         foreach (var character in creditCardNumber)
+         foreach (char c in creditCardNumber.Where(c => char.IsDigit(c)))
          {
-            if (char.IsDigit(character))
-               digitsOnly.Append(character);
+            digitsOnly.Append(c);
          }
+
          return digitsOnly;
-      }      
+      }
    }
 }
