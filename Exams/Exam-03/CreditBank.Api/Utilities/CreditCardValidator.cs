@@ -6,13 +6,15 @@ namespace CreditBank.Api.Utilities
 {
     public class CreditCardValidator
    {
-      private const int MAX_ADDEND = 9;
-      private const int MAX_CREDIT_CARD_LENGTH = 19;
-      private const int MIN_CREDIT_CARD_LENGTH = 13;
-      private const int MOD_10 = 10;
-      private const int MULTIPLY_NUMBER = 2;
+        private const int MAX_VALUE_DIGIT = 9;
+        private const int MIN_LENGTH = 13;
+        private const int MAX_LENGTH = 19;
+        private static int sum = 0;
+        private static int digit = 0;
+        private static int addend = 0;
+        private static bool timesTwo = false;
 
-      private const string NUMBER_REGEX = "^[0-9]*$";
+        private const string NUMBER_REGEX = "^[0-9]*$";
 
       private const string LETTERS_REGEX = @"^[a-zA-Z]+$";
 
@@ -22,47 +24,43 @@ namespace CreditBank.Api.Utilities
         }
 
         public static bool IsValid(string creditCardNumber)
-      {
-         var digitsOnly = GetDigits(creditCardNumber);
-
-         if (digitsOnly.Length > MAX_CREDIT_CARD_LENGTH || digitsOnly.Length < MIN_CREDIT_CARD_LENGTH) return false;
-
-         int sum = 0;
-         int digit = 0;
-         int addend = 0;
-         bool timesTwo = false;
-
-         for (var i = digitsOnly.Length - 1; i >= 0; i--)
-         {
-            digit = int.Parse(digitsOnly.ToString(i, 1));
-            if (timesTwo)
-            {
-               addend = digit * MULTIPLY_NUMBER;
-               if (addend > MAX_ADDEND)
-                  addend -= MAX_ADDEND;
-            }
-            else
-               addend = digit;
-
-            sum += addend;
-
-            timesTwo = !timesTwo;
-         }
-         return (sum % MOD_10) == 0;
-      }
-
-      private static StringBuilder GetDigits(string creditCardNumber)
         {
-         var digitsOnly = new StringBuilder();
-         foreach (char c in creditCardNumber.Where(c => char.IsDigit(c)))
-         {
-            digitsOnly.Append(c);
-         }
+            var digitsOnly = GetDigits(creditCardNumber);
 
-         return digitsOnly;
-      }
+            if (digitsOnly.Length > MAX_LENGTH || digitsOnly.Length < MIN_LENGTH) return false;
 
-        public static bool IsNumericCard(string creditCardNumber)
+            for (var i = digitsOnly.Length - 1; i >= 0; i--)
+            {
+                digit = int.Parse(digitsOnly.ToString(i, 1));
+                if (timesTwo)
+                {
+                    addend = digit * 2;
+                    if (addend > MAX_VALUE_DIGIT)
+                        addend -= MAX_VALUE_DIGIT;
+                }
+                else
+                    addend = digit;
+
+                sum += addend;
+
+                timesTwo = !timesTwo;
+            }
+            return (sum % 10) == 0;
+        }
+
+        private static StringBuilder GetDigits(string creditCardNumber)
+        {
+            var digitsOnly = new StringBuilder();
+            foreach (var character in creditCardNumber)
+            {
+                if (char.IsDigit(character))
+                    digitsOnly.Append(character);
+            }
+            return digitsOnly;
+        }
+    
+
+    public static bool IsNumericCard(string creditCardNumber)
         {
             if (string.IsNullOrEmpty(creditCardNumber))
                 return false;
