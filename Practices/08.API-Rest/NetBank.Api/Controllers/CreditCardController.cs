@@ -23,7 +23,7 @@ public class CreditCardController : ControllerBase
         _creditCardService = creditCardService;
     }
 
-    [HttpGet(Name = "creditCardNumber")]
+    [HttpGet("{creditCardNumber}")]
     public IActionResult Get(string creditCardNumber)
     {
         return Ok();
