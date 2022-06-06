@@ -10,6 +10,3 @@ namespace NetBank.Api.Define
       InternalServerEror
    }
 }
-
-
-
