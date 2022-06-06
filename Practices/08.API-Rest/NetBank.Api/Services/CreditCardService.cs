@@ -75,15 +75,18 @@ namespace NetBank.Api.Services
          
          string startsWithNumberToValid = string.Empty;
          int startsWithNumberItemLength = 0;
+            if (creditCardNumber.Length >= 6)
+            {
+                for (int i = inRange.MinValue; i <= inRange.MaxValue; i++)
+                {
+                    startsWithNumberToValid = i.ToString();
+                    startsWithNumberItemLength = startsWithNumberToValid.Length;
 
-         for (int i = inRange.MinValue; i <= inRange.MaxValue; i++)
-         {
-            startsWithNumberToValid = i.ToString();
-            startsWithNumberItemLength = startsWithNumberToValid.Length;
-
-            if(creditCardNumber.Substring(0, startsWithNumberItemLength).Equals(startsWithNumberToValid))
-               return true;
-         }
+                    if (creditCardNumber.Substring(0, startsWithNumberItemLength).Equals(startsWithNumberToValid))
+                        return true;
+                }
+            }
+        
          return false;
       }
 
@@ -94,15 +97,17 @@ namespace NetBank.Api.Services
 
          string startsWithNumberToValid = string.Empty;
          int startsWithNumberItemLength = 0;
+            if (creditCardNumber.Length >= 6)
+            {
+                foreach (var startsWithNumberItem in startsWithNumbers)
+                {
+                    startsWithNumberToValid = startsWithNumberItem.ToString();
+                    startsWithNumberItemLength = startsWithNumberToValid.Length;
 
-         foreach (var startsWithNumberItem in startsWithNumbers)
-         {
-            startsWithNumberToValid = startsWithNumberItem.ToString();
-            startsWithNumberItemLength = startsWithNumberToValid.Length;
-
-            if(creditCardNumber.Substring(0, startsWithNumberItemLength).Equals(startsWithNumberToValid))
-               return true;
-         }
+                    if (creditCardNumber.Substring(0, startsWithNumberItemLength).Equals(startsWithNumberToValid))
+                        return true;
+                }
+            }
 
          return false;
       }
