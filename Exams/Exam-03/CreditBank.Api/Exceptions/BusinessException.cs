@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
+using CreditBank.Api.Models;
 
 namespace CreditBank.Api.Exceptions
 {
