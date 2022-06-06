@@ -41,7 +41,6 @@ namespace CreditBank.Api.DataAccess
             
             return "Credit Card Recovered";
 
-          
         }
     }
 }

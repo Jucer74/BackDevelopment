@@ -21,21 +21,21 @@ namespace CreditBank.Api.Services
 
         public async Task<IList<ReportedCard>> GetAllReportedCards()
         {
-            var reportedCardList = await _reportedCardDataAccess.GetAllReportedCards();
+            var listReportedCards = await _reportedCardDataAccess.GetAllReportedCards();
 
-            return reportedCardList;
+            return listReportedCards;
         }
 
         public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
         {
-            var reportedCardList = await _reportedCardDataAccess.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName);
+            var listReportedCards = await _reportedCardDataAccess.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName);
 
-            if (reportedCardList == null || reportedCardList.Count == 0)
+            if (listReportedCards == null || listReportedCards.Count == 0)
             {
                 throw new NotFoundException($"{issuingNetworkName} Not Found");
             }
 
-            return reportedCardList;
+            return listReportedCards;
         }
 
         public async Task<ReportedCard> GetReportedCard(string creditCardNumber)

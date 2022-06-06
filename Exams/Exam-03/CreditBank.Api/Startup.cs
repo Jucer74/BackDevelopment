@@ -26,7 +26,8 @@ namespace CreditBank.Api
       public void ConfigureServices(IServiceCollection services)
       {
          services.AddDbContext<AppDbContext>(options => options.UseSqlite("Name=CreditBankDB"));
-          services.AddScoped<ReportedCardDataAccess>();
+         services.AddScoped<ReportedCardDataAccess>();
+         services.AddScoped<ReportedCardService>();
          services.AddControllers();
          services.AddSwaggerGen(c =>
          {
