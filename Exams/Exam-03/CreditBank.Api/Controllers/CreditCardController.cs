@@ -16,7 +16,7 @@ namespace CreditBank.Api.Controllers
       {
          try
          {
-            if (!CreditCardValidator.IsNumberCard(creditCardNumber))
+            if (!CreditCardValidator.IsNumericCard(creditCardNumber))
             {
                return BadRequest($"Credit Card [{creditCardNumber}] is NOT Numeric");
             }

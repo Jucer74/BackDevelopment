@@ -11,8 +11,7 @@ namespace CreditBank.Api.Utilities
       private const int MIN_CREDIT_CARD_LENGTH = 13;
       private const int MOD_10 = 10;
       private const int MULTIPLY_NUMBER = 2;
-      private const string NUMBER_REGEX = "^[0-9]*$";
-
+      private const string REGEX_NUMERIC_VALUE = "^[0-9]*$";
 
       public static bool IsValid(string creditCardNumber)
       {
@@ -30,7 +29,7 @@ namespace CreditBank.Api.Utilities
             digit = int.Parse(digitsOnly.ToString(i, 1));
             if (timesTwo)
             {
-               addend = digit * MULTIPLY_NUMBER;
+               addend = digit *MULTIPLY_NUMBER;
                if (addend > MAX_ADDEND)
                   addend -= MAX_ADDEND;
             }
@@ -44,6 +43,14 @@ namespace CreditBank.Api.Utilities
          return (sum % MOD_10) == 0;
       }
 
+      public static bool IsNumericCard(string creditCardNumber)
+      {
+         Regex regEx = new Regex(REGEX_NUMERIC_VALUE);
+
+         return !string.IsNullOrEmpty(creditCardNumber) && regEx.IsMatch(creditCardNumber);
+
+      }
+
       private static StringBuilder GetDigits(string creditCardNumber)
       {
          var digitsOnly = new StringBuilder();
@@ -53,15 +60,6 @@ namespace CreditBank.Api.Utilities
          }
 
          return digitsOnly;
-      }
-
-       public static bool IsNumberCard(string creditCardNumber)
-      {
-        if (string.IsNullOrEmpty(creditCardNumber))
-                return false;
-
-            return new Regex(NUMBER_REGEX).IsMatch(creditCardNumber);
-
       }
    }
 }
