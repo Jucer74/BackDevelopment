@@ -1,0 +1,511 @@
+{
+	"info": {
+		"_postman_id": "2d783e07-f371-4904-b5a8-88e549c006fd",
+		"name": "CreditBank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7220587"
+	},
+	"item": [
+		{
+			"name": "GetAllReportedCards_Success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200-Ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Count Records == 10\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length).to.eql(10);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/v1.0/ReportedCards",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1.0",
+						"ReportedCards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllReportedCardsByIssuingNetworkName_Success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200-Ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Count Records == 4\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length).to.eql(4);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/v1.0/ReportedCards/IssuingNetwork/visa",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1.0",
+						"ReportedCards",
+						"IssuingNetwork",
+						"visa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllReportedCardsByIssuingNetworkName_NotFound",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404-NotFound\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"Response == NONAME Not Found\", function () {\r",
+							"    var data = pm.response.text();\r",
+							"    console.log(data);\r",
+							"    pm.expect(data).to.eql(\"NONAME Not Found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/v1.0/ReportedCards/IssuingNetwork/NONAME",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1.0",
+						"ReportedCards",
+						"IssuingNetwork",
+						"NONAME"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetReportedCard_Success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200-Ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Valid Data\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(1);\r",
+							"    pm.expect(jsonData.issuingNetwork).to.eql(\"visa\");\r",
+							"    pm.expect(jsonData.creditCardNumber).to.eql(\"4024007124607606\");\r",
+							"    pm.expect(jsonData.firstName).to.eql(\"Van Arsdalen\");\r",
+							"    pm.expect(jsonData.lastName).to.eql(\"Mougeot\");\r",
+							"    pm.expect(jsonData.statusCard).to.eql(\"Recovered\");\r",
+							"    pm.expect(jsonData.reportedDate).to.eql(\"2021-07-27T00:00:00\");\r",
+							"    pm.expect(jsonData.lastUpdatedDate).to.eql(\"2021-07-29T00:00:00\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/v1.0/ReportedCards/4024007124607606",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1.0",
+						"ReportedCards",
+						"4024007124607606"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetReportedCard_BadRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400-BadRequest\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Response == NOCREDITNUMBER is NOT Numeric\", function () {\r",
+							"    var data = pm.response.text();\r",
+							"    console.log(data);\r",
+							"    pm.expect(data).to.eql(\"NOCREDITNUMBER is NOT Numeric\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/v1.0/ReportedCards/NOCREDITNUMBER",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1.0",
+						"ReportedCards",
+						"NOCREDITNUMBER"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetReportedCard_NotFound",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404-NotFound\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"Response == 4539367286110601 Not Found\", function () {\r",
+							"    var data = pm.response.text();\r",
+							"    console.log(data);\r",
+							"    pm.expect(data).to.eql(\"4539367286110601 Not Found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/v1.0/ReportedCards/4539367286110601",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1.0",
+						"ReportedCards",
+						"4539367286110601"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutCreditCardReactivated_Success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200-Ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Valid Data\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.eql(2);\r",
+							"    pm.expect(jsonData.issuingNetwork).to.eql(\"visa\");\r",
+							"    pm.expect(jsonData.creditCardNumber).to.eql(\"4485989469084883\");\r",
+							"    pm.expect(jsonData.firstName).to.eql(\"Natt\");\r",
+							"    pm.expect(jsonData.lastName).to.eql(\"Gellier\");\r",
+							"    pm.expect(jsonData.statusCard).to.eql(\"Recovered\");\r",
+							"    pm.expect(jsonData.reportedDate).to.eql(\"2022-01-06T00:00:00\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/v1.0/ReportedCards/4485989469084883",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1.0",
+						"ReportedCards",
+						"4485989469084883"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutCreditCardReactivated_BadRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400-BadRequest\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Response == NOCREDITNUMBER is NOT Numeric\", function () {\r",
+							"    var data = pm.response.text();\r",
+							"    console.log(data);\r",
+							"    pm.expect(data).to.eql(\"NOCREDITNUMBER is NOT Numeric\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/v1.0/ReportedCards/NOCREDITNUMBER",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1.0",
+						"ReportedCards",
+						"NOCREDITNUMBER"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutCreditCardReactivated_NotFound",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404-NotFound\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"pm.test(\"Response == 4024007156307232 Not Found\", function () {\r",
+							"    var data = pm.response.text();\r",
+							"    console.log(data);\r",
+							"    pm.expect(data).to.eql(\"4024007156307232 Not Found\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/v1.0/ReportedCards/4024007156307232",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1.0",
+						"ReportedCards",
+						"4024007156307232"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCreditCardCheckDigitStatus_Success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200-Ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response == Credit Card [5110064889268803] is Valid\", function () {\r",
+							"    var data = pm.response.text();\r",
+							"    console.log(data);\r",
+							"    pm.expect(data).to.eql(\"Credit Card [5110064889268803] is Valid\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/v1.0/CreditCard/CheckDigitStatus/5110064889268803",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1.0",
+						"CreditCard",
+						"CheckDigitStatus",
+						"5110064889268803"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCreditCardCheckDigitStatus_BadRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400-BadRequest\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"pm.test(\"Response == Credit Card [NOCREDITNUMBER] is NOT Numeric\", function () {\r",
+							"    var data = pm.response.text();\r",
+							"    console.log(data);\r",
+							"    pm.expect(data).to.eql(\"Credit Card [NOCREDITNUMBER] is NOT Numeric\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/v1.0/CreditCard/CheckDigitStatus/NOCREDITNUMBER",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1.0",
+						"CreditCard",
+						"CheckDigitStatus",
+						"NOCREDITNUMBER"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCreditCardCheckDigitStatus_Fail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200-Ok\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response == Credit Card [5110064889268800] is NOT Valid\", function () {\r",
+							"    var data = pm.response.text();\r",
+							"    console.log(data);\r",
+							"    pm.expect(data).to.eql(\"Credit Card [5110064889268800] is NOT Valid\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:5001/api/v1.0/CreditCard/CheckDigitStatus/5110064889268800",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"v1.0",
+						"CreditCard",
+						"CheckDigitStatus",
+						"5110064889268800"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
