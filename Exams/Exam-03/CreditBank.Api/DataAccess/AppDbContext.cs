@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+﻿using System;
+=======
 using System;
+>>>>>>> a0e0e556083d1804f7af31e82f39414ad4263ed2
 using CreditBank.Api.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,4 +20,8 @@ namespace CreditBank.Api.DataAccess
 
         public DbSet<ReportedCard> ReportedCards { get; set; }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a0e0e556083d1804f7af31e82f39414ad4263ed2
