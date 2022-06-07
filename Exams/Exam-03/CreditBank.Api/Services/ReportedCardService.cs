@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿using System;
-=======
 using System;
->>>>>>> a0e0e556083d1804f7af31e82f39414ad4263ed2
 using CreditBank.Api.Exceptions;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -62,8 +58,4 @@ namespace CreditBank.Api.Services
             return messageUpdateCreditCard;
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> a0e0e556083d1804f7af31e82f39414ad4263ed2
