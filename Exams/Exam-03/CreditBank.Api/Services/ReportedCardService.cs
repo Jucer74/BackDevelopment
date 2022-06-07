@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using CreditBank.Api.Exceptions;
+using CreditBank.Api.Utilities;
 
 namespace CreditBank.Api.Services
 {
