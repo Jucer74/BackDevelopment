@@ -26,4 +26,8 @@ namespace CreditBank.Api.Exceptions
         {
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a0e0e556083d1804f7af31e82f39414ad4263ed2
