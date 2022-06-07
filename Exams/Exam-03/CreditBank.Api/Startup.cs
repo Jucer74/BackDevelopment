@@ -4,6 +4,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using CreditBank.Api.Models;
+using CreditBank.Api.Services;
+using CreditBank.Api.DataAccess;
+using System;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace CreditBank.Api
 {
@@ -20,6 +26,9 @@ namespace CreditBank.Api
       public void ConfigureServices(IServiceCollection services)
       {
          services.AddControllers();
+         services.AddDbContext<AppDbContext>(options => options.UseSqlite("Name=CreditBankDB"));
+         services.AddScoped<ReportedCardDataAccess>();
+         services.AddScoped<ReportedCardService>();
          services.AddSwaggerGen(c =>
          {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "CreditBank.Api", Version = "v1" });
