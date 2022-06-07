@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿using System;
-=======
 using System;
->>>>>>> a0e0e556083d1804f7af31e82f39414ad4263ed2
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
@@ -33,8 +29,4 @@ namespace CreditBank.Api.Models
 
         public DateTime LastUpdatedDate { get; set; }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> a0e0e556083d1804f7af31e82f39414ad4263ed2
