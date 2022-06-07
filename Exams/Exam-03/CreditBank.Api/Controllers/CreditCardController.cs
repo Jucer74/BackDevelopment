@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+﻿using CreditBank.Api.Utilities;
+=======
 using CreditBank.Api.Utilities;
+>>>>>>> a0e0e556083d1804f7af31e82f39414ad4263ed2
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -34,4 +38,8 @@ namespace CreditBank.Api.Controllers
             }
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a0e0e556083d1804f7af31e82f39414ad4263ed2
