@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "gZ2UWyzFIfWE2qc1+Se35FzxyTVhcvRspeQWHZ0odl0=",
+  "Source": "CreditBank.Api",
+  "BasePath": "_content/CreditBank.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
