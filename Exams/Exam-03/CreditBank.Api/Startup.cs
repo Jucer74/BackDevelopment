@@ -11,51 +11,50 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-
 namespace CreditBank.Api
 {
-   public class Startup
-   {
-      public Startup(IConfiguration configuration)
-      {
-         Configuration = configuration;
-      }
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
-      public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }
 
-      // This method gets called by the runtime. Use this method to add services to the container.
-      public void ConfigureServices(IServiceCollection services)
-      {
-         services.AddDbContext<AppDbContext>(options => options.UseSqlite("Name=CreditBankDB"));
-         services.AddScoped<ReportedCardDataAccess>();
-         services.AddScoped<ReportedCardService>();
-         services.AddControllers();
-         services.AddSwaggerGen(c =>
-         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "CreditBank.Api", Version = "v1" });
-         });
-      }
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CreditBank.Api", Version = "v1" });
+            });
+            services.AddDbContext<AppDbContext>(options => options.UseSqlite("Name=CreditBankDB"));
+            services.AddScoped<ReportedCardDataAccess>();
+            services.AddScoped<ReportedCardService>();
+        }
 
-      // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-      public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-      {
-         if (env.IsDevelopment())
-         {
-            app.UseDeveloperExceptionPage();
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CreditBank.Api v1"));
-         }
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CreditBank.Api v1"));
+            }
 
-         app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
-         app.UseRouting();
+            app.UseRouting();
 
-         app.UseAuthorization();
+            app.UseAuthorization();
 
-         app.UseEndpoints(endpoints =>
-         {
-            endpoints.MapControllers();
-         });
-      }
-   }
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+        }
+    }
 }
