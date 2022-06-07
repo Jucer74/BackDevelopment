@@ -20,6 +20,9 @@ namespace CreditBank.Api
       public void ConfigureServices(IServiceCollection services)
       {
          services.AddControllers();
+         services.AddDbContext<AppDbContext>(options => options.UseSqlite("Name=CreditBankDB"));
+         services.AddScoped<ReportedCardDataAccess>();
+         services.AddScoped<ReportedCardService>();
          services.AddSwaggerGen(c =>
          {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "CreditBank.Api", Version = "v1" });

@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 
+
 namespace CreditBank.Api.Exceptions
 {
    [ExcludeFromCodeCoverage]
