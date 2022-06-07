@@ -3,13 +3,12 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Net;
-using System;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using System.Net;
+using CreditBank.Api.Models;
+using CreditBank.Api.Services;
+using CreditBank.Api.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 
 namespace CreditBank.Api.Controllers
