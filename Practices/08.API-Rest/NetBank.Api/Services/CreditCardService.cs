@@ -107,6 +107,7 @@ namespace NetBank.Api.Services
 
          return false;
       }
+//credit cart 
 
       private CreditCardResult BadRequetResult()
       {
