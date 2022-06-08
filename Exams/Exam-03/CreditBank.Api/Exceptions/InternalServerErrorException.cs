@@ -4,27 +4,25 @@ using System.Runtime.Serialization;
 
 namespace CreditBank.Api.Exceptions
 {
-   [ExcludeFromCodeCoverage]
-   [Serializable]
-   public class InternalServerErrorException : BusinessException
-   {
-      public InternalServerErrorException()
-      {
-      }
+    [ExcludeFromCodeCoverage]
+    [Serializable]
+    public class InternalServerErrorException : BusinessException
+    {
+        public InternalServerErrorException()
+        {
+        }
 
-      public InternalServerErrorException(string message) : base(message)
-      {
-      }
+        public InternalServerErrorException(string message) : base(message)
+        {
+        }
 
-      public InternalServerErrorException(string message, Exception innerException)
-          : base(message, innerException)
-      {
-      }
-
-      // Without this constructor, deserialization will fail
-      protected InternalServerErrorException(SerializationInfo info, StreamingContext context)
-          : base(info, context)
-      {
-      }
-   }
+        public InternalServerErrorException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
+        protected InternalServerErrorException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+    }
 }
