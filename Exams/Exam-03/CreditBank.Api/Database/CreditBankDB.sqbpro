@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/vapla/Downloads/BackDevelopment-2022-01-dancuebot/Exams/Exam-03/CreditBank.Api/Database/CreditBankDB.sqlite3" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="125"/><column_width id="3" width="4386"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,13:mainReportedCards"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">DELETE FROM ReportedCards;
+VACUUM;
+
+SELECT * FROM `sqlite_sequence`;
+UPDATE `sqlite_sequence` SET `seq` = 0 WHERE `name` = 'ReportedCards';
+
+INSERT INTO ReportedCards (IssuingNetwork, CreditCardNumber, FirstName, LastName, StatusCard, ReportedDate, LastUpdatedDate) 
+VALUES ('visa', '4024007124607606', 'Van Arsdalen', 'Mougeot', 'Recovered', '07/27/2021', '07/29/2021');
+INSERT INTO ReportedCards (IssuingNetwork, CreditCardNumber, FirstName, LastName, StatusCard, ReportedDate, LastUpdatedDate) 
+VALUES ('visa', '4485989469084883', 'Natt', 'Gellier', 'Stolen', '01/06/2022', '01/06/2022');
+INSERT INTO ReportedCards (IssuingNetwork, CreditCardNumber, FirstName, LastName, StatusCard, ReportedDate, LastUpdatedDate) 
+VALUES ('visa', '4716752774463791', 'Windybank', 'Matteo', 'Stolen', '05/22/2021', '05/22/2021');
+INSERT INTO ReportedCards (IssuingNetwork, CreditCardNumber, FirstName, LastName, StatusCard, ReportedDate, LastUpdatedDate) 
+VALUES ('visa', '4916898478434022', 'Heinicke', 'Parlot', 'Recovered', '08/29/2021', '09/05/2021');
+INSERT INTO ReportedCards (IssuingNetwork, CreditCardNumber, FirstName, LastName, StatusCard, ReportedDate, LastUpdatedDate) 
+VALUES ('mastercard', '5208437569456141', 'Martinson', 'Stanbridge', 'Stolen', '04/29/2021', '04/29/2021');
+INSERT INTO ReportedCards (IssuingNetwork, CreditCardNumber, FirstName, LastName, StatusCard, ReportedDate, LastUpdatedDate) 
+VALUES ('mastercard', '5186213093595662', 'Shervil', 'Kingsland', 'Stolen', '01/28/2022', '01/28/2022');
+INSERT INTO ReportedCards (IssuingNetwork, CreditCardNumber, FirstName, LastName, StatusCard, ReportedDate, LastUpdatedDate) 
+VALUES ('mastercard', '5268315740743370', 'Danson', 'O''Meara', 'Recovered', '12/30/2021', '01/04/2022');
+INSERT INTO ReportedCards (IssuingNetwork, CreditCardNumber, FirstName, LastName, StatusCard, ReportedDate, LastUpdatedDate) 
+VALUES ('americanexpress', '375798369127705', 'Hazelhurst', 'oldey', 'Stolen', '03/26/2021', '03/26/2021');
+INSERT INTO ReportedCards (IssuingNetwork, CreditCardNumber, FirstName, LastName, StatusCard, ReportedDate, LastUpdatedDate) 
+VALUES ('americanexpress', '378477541453522', 'Gilley', 'Bordis', 'Stolen', '10/25/2021', '10/25/2021');
+INSERT INTO ReportedCards (IssuingNetwork, CreditCardNumber, FirstName, LastName, StatusCard, ReportedDate, LastUpdatedDate) 
+VALUES ('americanexpress', '378511194973723', 'Burn', 'Loughren', 'Stolen', '05/04/2021', '05/04/2021');
+
+
+
+
+
+
+
+</sql><current_tab id="0"/></tab_sql></sqlb_project>
