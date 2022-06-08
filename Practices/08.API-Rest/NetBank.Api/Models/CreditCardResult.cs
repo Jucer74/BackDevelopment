@@ -11,7 +11,7 @@ namespace NetBank.Api.Models
       public CreditCardResult(string issuingNetwork, bool valid)
       {
          IssuingNetwork = issuingNetwork;
-         Valid = Valid;
+         Valid = valid;
       }
    }
 }
