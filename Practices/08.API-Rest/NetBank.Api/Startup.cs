@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using NetBank.Api.Services;
 
 namespace NetBank.Api
 {
@@ -32,6 +33,8 @@ namespace NetBank.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NetBank.Api", Version = "v1" });
             });
+
+            services.AddScoped<CreditCardService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
