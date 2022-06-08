@@ -36,14 +36,13 @@ namespace CreditBank.Api.DataAccess
             return reportedCard;
         }
 
-        public async Task<string> PutCreditCardReactivated(string creditCardNumber)
+        public async Task<ReportedCard> PutCreditCardReactivated(string creditCardNumber)
         {
             var reportedCard = await GetReportedCard(creditCardNumber);
             reportedCard.StatusCard = "Recovered";
             reportedCard.LastUpdatedDate = DateTime.Now;
             _dbContext.SaveChanges();
-            string messageUpdateCreditCardReactivated = "Credit Card Recovered";
-            return messageUpdateCreditCardReactivated;
+            return reportedCard;
         }
     }
 }

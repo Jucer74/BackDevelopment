@@ -88,7 +88,7 @@ namespace CreditBank.Api.Controllers
         }
 
         [HttpPut("{creditCardNumber}")]
-        public async Task<ActionResult> PutCreditCardReactivated(string creditCardNumber)
+        public async Task<ActionResult<ReportedCard>> PutCreditCardReactivated(string creditCardNumber)
         {
             _logger.LogInformation("Reactiva la tarjeta");
             try

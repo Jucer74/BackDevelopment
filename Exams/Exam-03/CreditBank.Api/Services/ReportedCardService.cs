@@ -56,11 +56,20 @@ namespace CreditBank.Api.Services
             return reportedCard;
         }
 
-        public async Task<string> PutCreditCardReactivated(string creditCardNumber)
+        public async Task<ReportedCard> PutCreditCardReactivated(string creditCardNumber)
         {
-           await GetReportedCard(creditCardNumber);
-           var messageUpdateCreditCard = await _reportedCardDataAccess.PutCreditCardReactivated(creditCardNumber);
-           return messageUpdateCreditCard;
+            if (!CreditCardValidator.IsNumericCard(creditCardNumber))
+            {
+                throw new BadRequestException($"{creditCardNumber} is NOT Numeric");
+            }
+            var reportedCard = await GetReportedCard(creditCardNumber);
+            
+            if (reportedCard == null)
+            {
+                throw new NotFoundException($"{creditCardNumber} Not Found");
+            }
+            reportedCard = await _reportedCardDataAccess.PutCreditCardReactivated(creditCardNumber);
+            return reportedCard;
         }
     }
 }

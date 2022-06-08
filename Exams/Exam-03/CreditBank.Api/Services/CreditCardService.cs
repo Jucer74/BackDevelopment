@@ -16,7 +16,6 @@ namespace NetBank.Api.Services
 
             if (!CreditCardValidator.IsValid(creditCardNumber))
             {
-                //return messageIsValid = messageIsValid = "Credit Card Is NOT Valid";
                 return messageIsValid = messageIsValid = $"Credit Card [{creditCardNumber}] is NOT Valid";
             }
             return messageIsValid = $"Credit Card [{creditCardNumber}] is Valid";
