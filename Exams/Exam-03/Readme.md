@@ -740,3 +740,4 @@ Estos son algunos recursos guia para desarrollar el ejercicio
 RECUERDE SUBIR SU SOLUCIÓN A SU RAMA DE ESTE REPOSITORIO.
 
 
+#Nota John: me falta implementar método de repordCard
