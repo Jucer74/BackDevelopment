@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 
 namespace CreditBank.Api.Exceptions
 {
+
    [ExcludeFromCodeCoverage]
    [Serializable]
    public class NotFoundException : BusinessException

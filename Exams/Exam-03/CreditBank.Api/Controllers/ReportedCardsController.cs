@@ -25,7 +25,6 @@ namespace CreditBank.Api.Controllers
             _reportedCardService = reportedCardService;
         }
 
-        // GET: api/v1.0/<ReportedCardsController>
         [HttpGet]
         public async Task<ActionResult<IList<ReportedCard>>> GetAllReportedCards()
         {
@@ -43,7 +42,6 @@ namespace CreditBank.Api.Controllers
             }
         }
 
-        // GET: api/v1.0/ReportedCards/IssuingNetwork/{issuingNetworkName}
         [HttpGet("IssuingNetwork/{issuingNetworkName}")]
         public async Task<ActionResult<IList<ReportedCard>>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
         {
@@ -61,14 +59,12 @@ namespace CreditBank.Api.Controllers
             }
         }
 
-        // GET: api/v1.0/<ReportedCard>/CrediCardNumber
         [HttpGet("{creditCardNumber}")]
         public async Task<ActionResult<ReportedCard>> GetReportedCard(string creditCardNumber)
         {
             return Ok(await _reportedCardService.GetReportedCard(creditCardNumber));
         }
 
-        // PUT: api/v1.0/ReportedCards/{creditCardNumber}
         [HttpPut("{creditCardNumber}")]
         public async Task<ActionResult<string>> PutCreditCardReactivated(string creditCardNumber)
         {
