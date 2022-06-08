@@ -43,7 +43,7 @@ namespace CreditBank.Api.Services
          var reportedCard = await _reportedCardDataAccess.GetReportedCard(creditCardNumber);
          if (reportedCard == null)
          {
-               throw new NotFoundException("Credit Card Not Found");
+            throw new NotFoundException("Credit Card Not Found");
          }
          return reportedCard;
       }
