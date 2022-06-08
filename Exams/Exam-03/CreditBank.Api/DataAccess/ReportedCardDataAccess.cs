@@ -13,15 +13,10 @@ namespace CreditBank.Api.DataAccess
     public class ReportedCardDataAccess
     {
         private readonly AppDbContext _dbContext;
- 
-        private readonly ReportedCardDataAccess _reportedCardDataAccess;
 
-        public ReportedCardDataAccess(AppDbContext dbContext,ReportedCardDataAccess reportedCardDataAccess)
+        public ReportedCardDataAccess(AppDbContext dbContext)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
-
-            _reportedCardDataAccess = reportedCardDataAccess ?? throw new ArgumentNullException(nameof(reportedCardDataAccess));
-
         }
         
 
