@@ -46,12 +46,12 @@ namespace CreditBank.Api.Services
         {
             if (!CreditCardValidator.IsNumericCard(creditCardNumber))
             {
-                throw new BadRequestException("Credit Card Number Is NOT Numeric");
+                throw new BadRequestException($"{creditCardNumber} is NOT Numeric");
             }
             var reportedCard = await _reportedCardDataAccess.GetReportedCard(creditCardNumber);
             if (reportedCard == null)
             {
-                throw new NotFoundException("Credit Card Not Found");
+                throw new NotFoundException($"{creditCardNumber} Not Found");
             }
             return reportedCard;
         }

@@ -11,14 +11,15 @@ namespace NetBank.Api.Services
       {
             if (!CreditCardValidator.IsNumericCard(creditCardNumber))
             {
-                throw new BadRequestException("Credit Card Is NOT Numeric");
+                throw new BadRequestException($"Credit Card [{creditCardNumber}] is NOT Numeric");
             }
 
             if (!CreditCardValidator.IsValid(creditCardNumber))
             {
-                return messageIsValid = messageIsValid = "Credit Card Is NOT Valid";
+                //return messageIsValid = messageIsValid = "Credit Card Is NOT Valid";
+                return messageIsValid = messageIsValid = $"Credit Card [{creditCardNumber}] is NOT Valid";
             }
-            return messageIsValid = "Credit Card Is Valid ";
+            return messageIsValid = $"Credit Card [{creditCardNumber}] is Valid";
         }
 
    }
