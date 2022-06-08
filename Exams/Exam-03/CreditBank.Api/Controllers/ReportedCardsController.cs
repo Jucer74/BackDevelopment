@@ -92,21 +92,21 @@ namespace CreditBank.Api.Controllers
         }
 
         [HttpPut("{creditCardNumber}")]
-        public async Task<ActionResult<string>> PutCreditCardReactivated(string creditCardNumber)
+        public async Task<ActionResult<ReportedCard>> PutCreditCardReactivated(string creditCardNumber)
         {
              try
             {
-                if (!CreditCardValidator.IsNumericCard(creditCardNumber))
+            if (!CreditCardValidator.IsNumericCard(creditCardNumber))
                 {
                     return BadRequest($"{creditCardNumber} is NOT Numeric");
                 }
 
-                if (CreditCardValidator.IsValid(creditCardNumber))
+            if (CreditCardValidator.IsValid(creditCardNumber))
                 {
                     return Ok(await _reportedCardService.PutCreditCardReactivated(creditCardNumber));
                 }
 
-                return Ok($"{creditCardNumber} is NOT Valid");
+            return Ok($"{creditCardNumber} is NOT Valid");
             }
             catch (NotFoundException ex)
             {
