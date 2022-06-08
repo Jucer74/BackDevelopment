@@ -1,0 +1,36 @@
+﻿using System;
+using System.Net;
+using CreditBank.Api.Utilities;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+namespace CreditBank.Api.Controllers
+{
+   [Route("api/v1.0/[controller]")]
+   [ApiController]
+   public class CreditCardController : ControllerBase
+   {
+      [HttpGet("CheckDigitStatus/{creditCardNumber}")]
+      public ActionResult<string> GetCreditCardCheckDigitStatus(string creditCardNumber)
+      {
+         try
+         {
+            if (!CreditCardValidator.IsNumericCard(creditCardNumber))
+            {
+               return BadRequest($"Credit Card [{creditCardNumber}] is NOT Numeric");
+            }
+
+            if (CreditCardValidator.IsValid(creditCardNumber))
+            {
+               return Ok($"Credit Card [{creditCardNumber}] is Valid");
+            }
+
+            return Ok($"Credit Card [{creditCardNumber}] is NOT Valid");
+         }
+         catch (Exception ex)
+         {
+            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+         }
+      }
+   }
+}
