@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using CreditBank.Api.Models;
 using CreditBank.Api.Services;
 using CreditBank.Api.Exceptions;
+using CreditBank.Api.Utilities;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -64,7 +65,17 @@ namespace CreditBank.Api.Controllers
         {
              try
             {
-                return Ok(await _reportedCardService.GetReportedCard(creditCardNumber));
+                if (!CreditCardValidator.IsNumericCard(creditCardNumber))
+                {
+                    return BadRequest($"{creditCardNumber} is NOT Numeric");
+                }
+
+                if (CreditCardValidator.IsValid(creditCardNumber))
+                {
+                    return Ok(await _reportedCardService.GetReportedCard(creditCardNumber));
+                }
+
+                return Ok($"{creditCardNumber} is NOT Valid");
             }
             catch (NotFoundException ex)
             {
@@ -83,9 +94,19 @@ namespace CreditBank.Api.Controllers
         [HttpPut("{creditCardNumber}")]
         public async Task<ActionResult<string>> PutCreditCardReactivated(string creditCardNumber)
         {
-            try
+             try
             {
-                return Ok(await _reportedCardService.PutCreditCardReactivated(creditCardNumber));
+                if (!CreditCardValidator.IsNumericCard(creditCardNumber))
+                {
+                    return BadRequest($"{creditCardNumber} is NOT Numeric");
+                }
+
+                if (CreditCardValidator.IsValid(creditCardNumber))
+                {
+                    return Ok(await _reportedCardService.PutCreditCardReactivated(creditCardNumber));
+                }
+
+                return Ok($"{creditCardNumber} is NOT Valid");
             }
             catch (NotFoundException ex)
             {
@@ -99,6 +120,7 @@ namespace CreditBank.Api.Controllers
             {
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
+            
         }
     }
 }
