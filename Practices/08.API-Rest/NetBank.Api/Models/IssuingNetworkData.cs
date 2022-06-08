@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace NetBank.Api.Models
 {
-
    public class IssuingNetworkData
    {
       public string IssuingNetworkName { get; set; }

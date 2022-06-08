@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+
 namespace NetBank.Api.Utilities
 {
    public static class CreditCardValidator

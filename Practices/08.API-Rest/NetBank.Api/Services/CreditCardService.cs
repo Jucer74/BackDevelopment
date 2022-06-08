@@ -9,6 +9,7 @@ using NetBank.Api.Utilities;
 
 namespace NetBank.Api.Services
 {
+   
    public class CreditCardService
    {
       private const string NUMBER_REGEX = "^[0-9]*$";
