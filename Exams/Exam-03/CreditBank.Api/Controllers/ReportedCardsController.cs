@@ -62,7 +62,22 @@ namespace CreditBank.Api.Controllers
         [HttpGet("{creditCardNumber}")]
         public async Task<ActionResult<ReportedCard>> GetReportedCard(string creditCardNumber)
         {
-            return Ok(await _reportedCardService.GetReportedCard(creditCardNumber));
+             try
+            {
+                return Ok(await _reportedCardService.GetReportedCard(creditCardNumber));
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (BadRequestException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            }
         }
 
         [HttpPut("{creditCardNumber}")]
