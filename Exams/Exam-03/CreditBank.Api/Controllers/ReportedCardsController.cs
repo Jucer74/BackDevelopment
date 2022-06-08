@@ -26,7 +26,6 @@ namespace CreditBank.Api.Controllers
             _reportedCardService = reportedCardService;
         }
 
-      // GET: api/v1.0/<ReportedCardsController>
       [HttpGet]
       public async Task<ActionResult<IList<ReportedCard>>> GetAllReportedCards()
       {
