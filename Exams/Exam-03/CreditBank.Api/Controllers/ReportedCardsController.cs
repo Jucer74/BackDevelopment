@@ -69,6 +69,8 @@ namespace CreditBank.Api.Controllers
         public async Task<ActionResult<ReportedCard>> GetReportedCard(string creditCardNumber)
         {
             return Ok(await _reportedCardService.GetReportedCard(creditCardNumber));
+
+            
         }
 
         // PUT: api/v1.0/ReportedCards/{creditCardNumber}
