@@ -4,20 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CreditBank.Api.DataAccess
 {
+    public class AppDbContext : DbContext
+    {
+        public AppDbContext()
+        {
+        }
 
-   public class AppDbContext : DbContext
-   {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+        }
 
-      public AppDbContext()
-      {
-      }
-
-      public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-      {
-      }
-      
-      public DbSet<ReportedCard> ReportedCards { get; set; }
-
-   }
-
+        public DbSet<ReportedCard> ReportedCards { get; set; }
+    }
 }

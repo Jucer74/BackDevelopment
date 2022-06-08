@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Net;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Net;
 using CreditBank.Api.Models;
 using CreditBank.Api.Services;
 using CreditBank.Api.Exceptions;

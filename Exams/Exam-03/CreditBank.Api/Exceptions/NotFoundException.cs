@@ -4,7 +4,6 @@ using System.Runtime.Serialization;
 
 namespace CreditBank.Api.Exceptions
 {
-
    [ExcludeFromCodeCoverage]
    [Serializable]
    public class NotFoundException : BusinessException
@@ -22,6 +21,7 @@ namespace CreditBank.Api.Exceptions
       {
       }
 
+      // Without this constructor, deserialization will fail
       protected NotFoundException(SerializationInfo info, StreamingContext context)
           : base(info, context)
       {
