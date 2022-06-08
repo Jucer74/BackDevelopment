@@ -1,11 +1,13 @@
 using System;
-using CreditBank.Api.Models;
-using CreditBank.Api.DataAccess;
+using CreditBank.Api.Exceptions;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using CreditBank.Api.Exceptions;
+using CreditBank.Api.Models;
+using CreditBank.Api.DataAccess;
 using CreditBank.Api.Utilities;
+
+
 
 namespace CreditBank.Api.Services
 {
@@ -42,13 +44,13 @@ namespace CreditBank.Api.Services
             var reportedCard = await _reportedCardDataAccess.GetReportedCard(creditCardNumber);
             if (reportedCard == null)
             {
-                throw new NotFoundException($"{creditCardNumber} is not found");
+                throw new NotFoundException($"{creditCardNumber} Not Found");
             }
 
             return reportedCard;
         }
 
-        public async Task<string> PutCreditCardReactivated(string creditCardNumber)
+        public async Task<ReportedCard> PutCreditCardReactivated(string creditCardNumber)
         {
             await GetReportedCard(creditCardNumber);
             var messageUpdateCreditCard = await _reportedCardDataAccess.PutCreditCardReactivated(creditCardNumber);
