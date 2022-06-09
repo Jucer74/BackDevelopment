@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Net;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using CreditBank.Api.Models;
 using CreditBank.Api.Services;
 using CreditBank.Api.Exceptions;
 using CreditBank.Api.Utilities;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 

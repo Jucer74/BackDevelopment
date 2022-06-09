@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
 using CreditBank.Api.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace CreditBank.Api.DataAccess
 {
