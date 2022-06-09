@@ -9,7 +9,7 @@ using CreditBank.Api.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-
+using CreditBank.Api.Utilities;
 
 namespace CreditBank.Api.Controllers
 {
@@ -66,8 +66,39 @@ namespace CreditBank.Api.Controllers
       [HttpGet("{creditCardNumber}")]
       public async Task<ActionResult<ReportedCard>> GetReportedCard(string creditCardNumber)
       {
-         return Ok(await _reportedCardService.GetReportedCard(creditCardNumber));
+         
+         try
+         {
+            
+            if (!CreditCardValidator.IsNumericCard(creditCardNumber))
+                {
+                    return BadRequest($"{creditCardNumber} is NOT Numeric");
+                }   
+
+           if (CreditCardValidator.IsValid(creditCardNumber))
+                {
+                    return Ok(await _reportedCardService.GetReportedCard(creditCardNumber));
+                }
+
+             return Ok($"{creditCardNumber} is NOT Valid");  
+         }
+         
+
+         catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (BadRequestException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            }
       }
+
+      
 
       // PUT: api/v1.0/ReportedCards/{creditCardNumber}
       [HttpPut("{creditCardNumber}")]
@@ -75,7 +106,17 @@ namespace CreditBank.Api.Controllers
       {
          try
          {
-               return Ok(await _reportedCardService.PutCreditCardReactivated(creditCardNumber));
+               if (!CreditCardValidator.IsNumericCard(creditCardNumber))
+                {
+                    return BadRequest($"{creditCardNumber} is NOT Numeric");
+                }
+
+            if (CreditCardValidator.IsValid(creditCardNumber))
+                {
+                    return Ok(await _reportedCardService.PutCreditCardReactivated(creditCardNumber));
+                }
+
+            return Ok($"{creditCardNumber} is NOT Valid");
          }
          catch (NotFoundException ex)
          {
