@@ -13,8 +13,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using CreditBank.Api.Services;
 using CreditBank.Api.DataAccess;
+using CreditBank.Api.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Sqlite;
+//using Microsoft.EntityFrameworkCore.Sqlite;
 
 namespace CreditBank.Api
 {
@@ -32,35 +33,34 @@ namespace CreditBank.Api
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CreditBank.Api", Version = "v1" });
-            });
-
-            services.AddDbContext<AppDbContext>(options => options.UseSqlite("Name=CreditBankDB"));
             services.AddScoped<ReportedCardDataAccess>();
+            services.AddDbContext<AppDbContext>(options => options.UseSqlite("Name=CreditBankDB"));
             services.AddScoped<ReportedCardService>();
+            services.AddSwaggerGen(c => 
+         {
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "CreditBank.Api", Version = "v1" });
+         });
+            
         }
+          public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+      {
+         if (env.IsDevelopment())
+         {
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CreditBank.Api v1"));
+         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CreditBank.Api v1"));
-            }
+         app.UseHttpsRedirection();
 
-            app.UseHttpsRedirection();
+         app.UseRouting();
 
-            app.UseRouting();
+         app.UseAuthorization();
 
-            app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-        }
-    }
+         app.UseEndpoints(endpoints =>
+         {
+            endpoints.MapControllers();
+         });
+      }
+   }
 }

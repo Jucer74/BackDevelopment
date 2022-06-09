@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using CreditBank.Api.Exceptions;
 using System.Linq;
- 
+ using System.Text.RegularExpressions;
+ using CreditBank.Api.Utilities;
 
 namespace CreditBank.Api.Services
 {
@@ -17,36 +18,42 @@ namespace CreditBank.Api.Services
     {
         _reportedCardDataAccess = reportedCardDataAccess;
     }
-
-    public async Task<IList<ReportedCard>> GetAllReportedCards()
-    {
-        throw   new NotImplementedException();
-    }
-
-    public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
-    {
-        var reportedCardsList = await _reportedCardDataAccess.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName);
-
-        string reportedCards = Convert.ToString(reportedCardsList);
-        
-        if (string.IsNullOrEmpty(reportedCards))
+ public async Task<IList<ReportedCard>> GetAllReportedCards()
         {
-            throw new NotFoundException($"{issuingNetworkName} Not Found");
+            var reportedCardList = await _reportedCardDataAccess.GetAllReportedCards();
+
+            return reportedCardList;
         }
 
-        return reportedCardsList;
+        public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
+        {
+            var reportedCardList = await _reportedCardDataAccess.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName);
 
-    }
+            if (reportedCardList == null || reportedCardList.Count == 0)
+            {
+                throw new NotFoundException($"{issuingNetworkName} Not Found");
+            }
 
-    public async Task<ReportedCard> GetReportedCard(string creditCardNumber)
-    {
-        throw  new NotImplementedException();
-    }
+            return reportedCardList;
+        }
+        
+        public async Task<ReportedCard> GetReportedCard(string creditCardNumber)
+        {
+            var reportedCard = await _reportedCardDataAccess.GetReportedCard(creditCardNumber);
+            if (reportedCard == null)
+            {
+                throw new NotFoundException($"{creditCardNumber} Not Found");
+            }
 
-    public async Task<string> PutCreditCardReactivated(string creditCardNumber)
-    {
-        throw  new NotImplementedException();
-    }
-    }
+            return reportedCard;
+        }
 
+        public async Task<ReportedCard> PutCreditCardReactivated(string creditCardNumber)
+        {
+            await GetReportedCard(creditCardNumber);
+            var messageUpdateCreditCard = await _reportedCardDataAccess.PutCreditCardReactivated(creditCardNumber);
+
+            return messageUpdateCreditCard;
+        }
+    }
 }

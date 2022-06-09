@@ -21,10 +21,9 @@ namespace CreditBank.Api.DataAccess
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
         
-
         public async Task<IList<ReportedCard>> GetAllReportedCards()
         {
-            throw  new NotImplementedException();
+            return await _dbContext.ReportedCards.ToListAsync();
         }
 
         public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
@@ -34,13 +33,17 @@ namespace CreditBank.Api.DataAccess
 
         public async Task<ReportedCard> GetReportedCard(string creditCardNumber)
         {
-            throw  new NotImplementedException();
+            return await _dbContext.ReportedCards.Where(item => item.CreditCardNumber == creditCardNumber).FirstOrDefaultAsync();
         }
 
-        public async Task<string> PutCreditCardReactivated(string creditCardNumber)
+        public async Task<ReportedCard> PutCreditCardReactivated(string creditCardNumber)
         {
-            throw   new NotImplementedException();
+            var reportedCard = await GetReportedCard(creditCardNumber);
+            reportedCard.StatusCard = "Recovered";
+            _dbContext.SaveChanges();
+
+            return reportedCard;
         }
-     
     }
 }
+
