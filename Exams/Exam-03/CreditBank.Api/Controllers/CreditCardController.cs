@@ -12,25 +12,28 @@ namespace CreditBank.Api.Controllers
     {
         // GET api/v1.0/CreditCard/CheckDigitStatus/{creditCardNumber}
         [HttpGet("CheckDigitStatus/{creditCardNumber}")]
-        public ActionResult<string> GetCreditCardCheckDigitStatus(string creditCardNumber)
-        {
-            try
-            {
-                if (!CreditCardValidator.IsNumericCard(creditCardNumber))
-                {
+        public ActionResult<string> GetCreditCardCheckDigitStatus(string creditCardNumber){
+
+            try{
+
+                if (!CreditCardValidator.IsNumericCard(creditCardNumber)){
+
                     return BadRequest($"Credit Card [{creditCardNumber}] is NOT Numeric");
+
                 }
 
-                if (CreditCardValidator.IsValid(creditCardNumber))
-                {
+                if (CreditCardValidator.IsValid(creditCardNumber)){
+
                     return Ok($"Credit Card [{creditCardNumber}] is Valid");
+
                 }
 
                 return Ok($"Credit Card [{creditCardNumber}] is NOT Valid");
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex){
+
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+                
             }
         }
     }
