@@ -65,7 +65,7 @@ namespace CreditBank.Api.Controllers
         {
              try
             {
-                if (!CreditCardValidator.IsNumericCard(creditCardNumber))
+                 if (!CreditCardValidator.IsNumericCard(creditCardNumber))
                 {
                     return BadRequest($"{creditCardNumber} is NOT Numeric");
                 }
@@ -92,11 +92,12 @@ namespace CreditBank.Api.Controllers
         }
 
         [HttpPut("{creditCardNumber}")]
-        public async Task<ActionResult<string>> PutCreditCardReactivated(string creditCardNumber)
+        public async Task<ActionResult<ReportedCard>> PutCreditCardReactivated(string creditCardNumber)
         {
              try
             {
-                return Ok(await _reportedCardService.PutCreditCardReactivated(creditCardNumber));
+                  return Ok(await _reportedCardService.PutCreditCardReactivated(creditCardNumber));
+                
             }
             catch (NotFoundException ex)
             {
