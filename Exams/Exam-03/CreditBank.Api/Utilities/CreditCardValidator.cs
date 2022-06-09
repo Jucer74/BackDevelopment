@@ -13,8 +13,9 @@ namespace CreditBank.Api.Utilities
       private const int MULTIPLY_NUMBER = 2;
       private const string REGEX_NUMERIC_VALUE = "^[0-9]*$";
 
-      public const string STATUS_CARD = "Stolen"; // Tarjeta robada
-
+      public const string STATUS_STOLEN_CARD = "Stolen"; // Tarjeta robada 
+      public const string STATUS_RECOVERED_CARD = "Credit Card Recovered"; // Tarjeta recuperada
+      
       public static bool IsValid(string creditCardNumber)
       {
          var digitsOnly = GetDigits(creditCardNumber);

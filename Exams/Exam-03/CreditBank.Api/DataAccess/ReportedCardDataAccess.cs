@@ -18,12 +18,11 @@ namespace CreditBank.Api.DataAccess
         public ReportedCardDataAccess(AppDbContext dbContext)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
-        }
-        
+        }        
 
         public async Task<IList<ReportedCard>> GetAllReportedCards()
         {
-            return await _dbContext.ReportedCards.Where(item => item.StatusCard == "Stolen").ToListAsync();
+            return await _dbContext.ReportedCards.Where(item => item.StatusCard == CreditCardValidator.STATUS_STOLEN_CARD).ToListAsync();
         }
 
         public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
@@ -39,11 +38,12 @@ namespace CreditBank.Api.DataAccess
         public async Task<string> PutCreditCardReactivated(string creditCardNumber)
         {   
             var reporteCard = await GetReportedCard(creditCardNumber);
-            reporteCard.StatusCard = "RENOVADO";
+
+            reporteCard.StatusCard = CreditCardValidator.STATUS_RECOVERED_CARD;
  
             _dbContext.SaveChanges();
 
-            return  "Credit card recovered";
+            return  reporteCard.StatusCard;
         }
      
     }

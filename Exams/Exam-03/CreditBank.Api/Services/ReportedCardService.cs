@@ -64,7 +64,7 @@ namespace CreditBank.Api.Services
         return reportedCard;
     }
 
-    public async Task<string> PutCreditCardReactivated(string creditCardNumber)
+    public async Task<ReportedCard> PutCreditCardReactivated(string creditCardNumber)
     {
         var reportedCard = await _reportedCardDataAccess.GetReportedCard(creditCardNumber);
 
@@ -75,10 +75,10 @@ namespace CreditBank.Api.Services
             throw new NotFoundException($"{creditCardNumber} Not Found");
         }
 
-
         var messageUpdateCard = await _reportedCardDataAccess.PutCreditCardReactivated(creditCardNumber);
+ 
 
-        return messageUpdateCard;
+        return await _reportedCardDataAccess.GetReportedCard(creditCardNumber);
     }
     }
 
