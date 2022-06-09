@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vapla\\OneDrive\\Escritorio\\Exam-3\\BackDevelopment\\Exams\\Exam-03\\CreditBank.Api\\CreditBank.Api.csproj": {}
+    "D:\\Documents\\Dropbox\\Personal\\Cursos\\Backend Development\\Repository\\Exams\\Exam-03\\CreditBank.Api\\CreditBank.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vapla\\OneDrive\\Escritorio\\Exam-3\\BackDevelopment\\Exams\\Exam-03\\CreditBank.Api\\CreditBank.Api.csproj": {
+    "D:\\Documents\\Dropbox\\Personal\\Cursos\\Backend Development\\Repository\\Exams\\Exam-03\\CreditBank.Api\\CreditBank.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vapla\\OneDrive\\Escritorio\\Exam-3\\BackDevelopment\\Exams\\Exam-03\\CreditBank.Api\\CreditBank.Api.csproj",
+        "projectUniqueName": "D:\\Documents\\Dropbox\\Personal\\Cursos\\Backend Development\\Repository\\Exams\\Exam-03\\CreditBank.Api\\CreditBank.Api.csproj",
         "projectName": "CreditBank.Api",
-        "projectPath": "C:\\Users\\vapla\\OneDrive\\Escritorio\\Exam-3\\BackDevelopment\\Exams\\Exam-03\\CreditBank.Api\\CreditBank.Api.csproj",
-        "packagesPath": "C:\\Users\\vapla\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vapla\\OneDrive\\Escritorio\\Exam-3\\BackDevelopment\\Exams\\Exam-03\\CreditBank.Api\\obj\\",
+        "projectPath": "D:\\Documents\\Dropbox\\Personal\\Cursos\\Backend Development\\Repository\\Exams\\Exam-03\\CreditBank.Api\\CreditBank.Api.csproj",
+        "packagesPath": "C:\\Users\\Jucer\\.nuget\\packages\\",
+        "outputPath": "D:\\Documents\\Dropbox\\Personal\\Cursos\\Backend Development\\Repository\\Exams\\Exam-03\\CreditBank.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\vapla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Jucer\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -67,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }
