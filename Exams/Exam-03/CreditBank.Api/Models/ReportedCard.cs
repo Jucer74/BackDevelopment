@@ -26,5 +26,7 @@ namespace CreditBank.Api.Models
 
       [Required(ErrorMessage = "LastUpdatedDate is required")]
       public DateTime LastUpdatedDate { get; set; }
+
+    
    }
 }

@@ -18,11 +18,23 @@ namespace CreditBank.Api.Services
         _reportedCardDataAccess = reportedCardDataAccess;
     }
 
+   // OK. mejorar el badRequest y el NotFound
     public async Task<IList<ReportedCard>> GetAllReportedCards()
     {
-        throw   new NotImplementedException();
+        var allReportedCardsList = await _reportedCardDataAccess.GetAllReportedCards();
+
+        string reportedCards = Convert.ToString(allReportedCardsList);
+        
+        if (string.IsNullOrEmpty(reportedCards))
+        {
+            throw new NotFoundException("Not Found");
+        }
+
+        return allReportedCardsList;
     }
 
+
+   // OK. mejorar el badRequest y el NotFound
     public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
     {
         var reportedCardsList = await _reportedCardDataAccess.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName);
@@ -40,12 +52,33 @@ namespace CreditBank.Api.Services
 
     public async Task<ReportedCard> GetReportedCard(string creditCardNumber)
     {
-        throw  new NotImplementedException();
+        var reportedCard = await _reportedCardDataAccess.GetReportedCard(creditCardNumber);
+
+        string converReportedCard = Convert.ToString(reportedCard);
+        
+        if (string.IsNullOrEmpty(converReportedCard))
+        {
+            throw new NotFoundException($"{creditCardNumber} Not Found");
+        }
+
+        return reportedCard;
     }
 
     public async Task<string> PutCreditCardReactivated(string creditCardNumber)
     {
-        throw  new NotImplementedException();
+        var reportedCard = await _reportedCardDataAccess.GetReportedCard(creditCardNumber);
+
+        string converReportedCard = Convert.ToString(reportedCard);
+        
+        if (string.IsNullOrEmpty(converReportedCard))
+        {
+            throw new NotFoundException($"{creditCardNumber} Not Found");
+        }
+
+
+        var messageUpdateCard = await _reportedCardDataAccess.PutCreditCardReactivated(creditCardNumber);
+
+        return messageUpdateCard;
     }
     }
 

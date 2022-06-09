@@ -29,6 +29,7 @@ namespace CreditBank.Api.Controllers
             _reportedCardService = reportedCardService;
         }
 
+      // GET: api/v1.0/<ReportedCardsController>/ReportedCard
       [HttpGet]
       public async Task<ActionResult<IList<ReportedCard>>> GetAllReportedCards()
       {
@@ -42,6 +43,40 @@ namespace CreditBank.Api.Controllers
          try
          {
             return Ok(await _reportedCardService.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName));
+         }
+         catch (NotFoundException ex)
+         {
+            return NotFound(ex.Message);
+         }
+         catch (Exception ex)
+         {
+            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+         }
+      }
+ 
+      [HttpGet("ReportedCards/{creditCardNumber}")]
+      public async Task<ActionResult<ReportedCard>> GetReportedCard(string creditCardNumber)
+      {
+         try
+         {
+            return Ok(await _reportedCardService.GetReportedCard(creditCardNumber));
+         }
+         catch (NotFoundException ex)
+         {
+            return NotFound(ex.Message);
+         }
+         catch (Exception ex)
+         {
+            return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+         }
+      }
+
+      [HttpPut("{creditCardNumber}")]
+      public async Task<ActionResult<string>> PutCreditCardReactivated(string creditCardNumber)
+         {
+         try
+         {
+            return Ok(await _reportedCardService.PutCreditCardReactivated(creditCardNumber));
          }
          catch (NotFoundException ex)
          {
