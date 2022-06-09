@@ -48,7 +48,7 @@ namespace CreditBank.Api.Services
          return reportedCard;
       }
 
-      public async Task<string> PutCreditCardReactivated(string creditCardNumber)
+      public async Task<ReportedCard> PutCreditCardReactivated(string creditCardNumber)
       {
          await GetReportedCard(creditCardNumber);
          var messageUpdateCreditCard = await _reportedCardDataAccess.PutCreditCardReactivated(creditCardNumber);
