@@ -22,7 +22,7 @@ namespace CreditBank.Api.DataAccess
 
         public async Task<IList<ReportedCard>> GetAllReportedCards()
         {
-            return await _dbContext.ReportedCards.Where(item => item.StatusCard == CreditCardValidator.STATUS_STOLEN_CARD).ToListAsync();
+            return await _dbContext.ReportedCards.ToListAsync();
         }
 
         public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)

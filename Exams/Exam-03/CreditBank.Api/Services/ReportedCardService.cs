@@ -38,10 +38,8 @@ namespace CreditBank.Api.Services
     public async Task<IList<ReportedCard>> GetAllReportedCardsByIssuingNetworkName(string issuingNetworkName)
     {
         var reportedCardsList = await _reportedCardDataAccess.GetAllReportedCardsByIssuingNetworkName(issuingNetworkName);
-
-        string reportedCards = Convert.ToString(reportedCardsList);
-        
-        if (string.IsNullOrEmpty(reportedCards))
+       
+        if (reportedCardsList == null || reportedCardsList.Count == 0)
         {
             throw new NotFoundException($"{issuingNetworkName} Not Found");
         }
