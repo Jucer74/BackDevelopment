@@ -14,19 +14,13 @@ namespace PrintMultiples
         {
             for (int i = 1; i <= 100; i++)
             {
-<<<<<<< Updated upstream
-                if (i % 3 == 0 & i % 5 == 0)
-                {
-                    Console.Write("M-3-5" + ",");
-                }
-                else if (i % 3 == 0)
-=======
+
                 if(i % 3 == 0 & i % 5 == 0)
                 {
                     Console.Write("M-3-5" + ",");
                 }
                 else if(i % 3 == 0)
->>>>>>> Stashed changes
+
                 {
                     Console.Write("M-3" + ",");
                 }
@@ -39,11 +33,7 @@ namespace PrintMultiples
                     Console.Write(i + ",");
                 }
             }
-<<<<<<< Updated upstream
 
-=======
-                 
->>>>>>> Stashed changes
         }
     }
 }
