@@ -17,21 +17,22 @@ namespace PrintMultiples
 
                 if(i % 3 == 0 & i % 5 == 0)
                 {
-                    Console.Write("M-3-5" + ",");
+                    Console.Write("M-3-5");
                 }
                 else if(i % 3 == 0)
 
                 {
-                    Console.Write("M-3" + ",");
+                    Console.Write("M-3");
                 }
                 else if (i % 5 == 0)
                 {
-                    Console.Write("M-5" + ",");
+                    Console.Write("M-5");
                 }
                 else
                 {
-                    Console.Write(i + ",");
+                    Console.Write(i);
                 }
+
             }
 
         }
