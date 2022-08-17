@@ -13,21 +13,21 @@ public class Program
 	public static void Main()
 	{
 
-		string exampleString = null;
-		string result = Compress(exampleString);
-		Console.WriteLine(result);
+		//string exampleString = null;
+		//string result = Compress(exampleString);
+		//Console.WriteLine(result);
 
-		string exampleString = "";
-		string result = Compress(exampleString);
-		Console.WriteLine(result);
+		//string exampleString = "";
+		//string result = Compress(exampleString);
+		//Console.WriteLine(result);
 
-        string exampleString = "aabbcc";
-        string result = Compress(exampleString);
-        Console.WriteLine(result);
+        //string exampleString = "aabbcc";
+        //string result = Compress(exampleString);
+        //Console.WriteLine(result);
 
-        string exampleString = "abbcca";
-        string result = Compress(exampleString);
-        Console.WriteLine(result);
+        //string exampleString = "abbcca";
+        //string result = Compress(exampleString);
+        //Console.WriteLine(result);
 
         string exampleString = "aabcccccaaa";
         string result = Compress(exampleString);
@@ -44,7 +44,7 @@ public class Program
     }
 
 
-	private static  Compress(string str)
+	private static  string Compress(string str)
 	{
 		if(str == null || str == "")
 		{
@@ -55,10 +55,10 @@ public class Program
 		char prevChar = str[0];
 		int stringCount = 1;
 
-		for(int i = i; i<str.Length; i++){
+		for(int i = 1; i<str.Length; i++){
 			if(str[i] == prevChar)
 			{
-				count++;
+				stringCount++;
 			}
 			else
 			{
