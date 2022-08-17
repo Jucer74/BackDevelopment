@@ -13,42 +13,27 @@ public class Program
 	public static void Main()
 	{
 
-		//string exampleString = null;
-		//string result = Compress(exampleString);
-		//Console.WriteLine(result);
-
-		//string exampleString = "";
-		//string result = Compress(exampleString);
-		//Console.WriteLine(result);
-
-        //string exampleString = "aabbcc";
-        //string result = Compress(exampleString);
-        //Console.WriteLine(result);
-
-        //string exampleString = "abbcca";
-        //string result = Compress(exampleString);
-        //Console.WriteLine(result);
-
-        string exampleString = "aabcccccaaa";
-        string result = Compress(exampleString);
-        Console.WriteLine(result);
-
-        //Compress("aabcccccaaa");
-        // aabcccccaaa => a2b1c5a3
-        //Compress("abbcca");
-        // abbcca => abbcca
-        //Compress("aabbcc");
-        // aabbcc => aabbcc
-        //Compress("");
-        // Error: Empty String
-    }
+		
+		string exampleString = Compress("aabcccccaaa");
+		Console.WriteLine(exampleString);
+		// aabcccccaaa => a2b1c5a3
+		exampleString = Compress("abbcca");
+		Console.WriteLine(exampleString);
+		// abbcca => abbcca
+		exampleString = Compress("aabbcc");
+		Console.WriteLine(exampleString);
+		// aabbcc => aabbcc
+		exampleString = Compress("");
+		Console.WriteLine(exampleString);
+		// Error: Empty String
+	}
 
 
-	private static  string Compress(string str)
+	private static string Compress(string str)
 	{
 		if(str == null || str == "")
 		{
-			return str;
+			return "Error: Empty String";
 		}
 
 		StringBuilder stringBuild = new StringBuilder();
