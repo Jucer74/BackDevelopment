@@ -6,23 +6,77 @@
 */
 
 using System;
+using System.Text;
 
 public class Program
 {
 	public static void Main()
 	{
-		Compress("aabcccccaaa");
-		// aabcccccaaa => a2b1c5a3
-		Compress("abbcca");
-		// abbcca => abbcca
-		Compress("aabbcc");
-		// aabbcc => aabbcc
-		Compress("");
-		// Error: Empty String
-	}
+
+		string exampleString = null;
+		string result = Compress(exampleString);
+		Console.WriteLine(result);
+
+		string exampleString = "";
+		string result = Compress(exampleString);
+		Console.WriteLine(result);
+
+        string exampleString = "aabbcc";
+        string result = Compress(exampleString);
+        Console.WriteLine(result);
+
+        string exampleString = "abbcca";
+        string result = Compress(exampleString);
+        Console.WriteLine(result);
+
+        string exampleString = "aabcccccaaa";
+        string result = Compress(exampleString);
+        Console.WriteLine(result);
+
+        //Compress("aabcccccaaa");
+        // aabcccccaaa => a2b1c5a3
+        //Compress("abbcca");
+        // abbcca => abbcca
+        //Compress("aabbcc");
+        // aabbcc => aabbcc
+        //Compress("");
+        // Error: Empty String
+    }
 
 
-	private static void Compress(string input)
+	private static  Compress(string str)
 	{
-	}
+		if(str == null || str == "")
+		{
+			return str;
+		}
+
+		StringBuilder stringBuild = new StringBuilder();
+		char prevChar = str[0];
+		int stringCount = 1;
+
+		for(int i = i; i<str.Length; i++){
+			if(str[i] == prevChar)
+			{
+				count++;
+			}
+			else
+			{
+				stringBuild.Append(prevChar);
+				stringBuild.Append(stringCount);
+				prevChar= str[i];
+				stringCount = 1;
+			}
+		}
+
+		stringBuild.Append(prevChar);
+        stringBuild.Append(stringCount);
+		string result = stringBuild.ToString();
+
+		if (result.Length >= str.Length)
+		{
+			return str;
+		}
+		return result;
+    }
 }
