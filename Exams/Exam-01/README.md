@@ -1,7 +1,7 @@
 # Evaluación Teórica (40%)
 Responda las preguntas del siguiente Enlace:
 
-[]("Evaluacion Teorica")
+[Examen](https://forms.gle/8zC2GBUhXTis8bFm8)
 
 # Ejercicio (60%)
 Implemente un programa que permita validar si una cadena es una fecha valida, segun su formato y un separador determinado
