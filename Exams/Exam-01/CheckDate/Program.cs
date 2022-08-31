@@ -65,7 +65,7 @@ namespace ValidateDate
     {
         static void Main(string[] args)
         {
-            string dateInput = "23/02/2022"; //dmy
+            string dateInput = "23022022"; //dmy
             Console.WriteLine(isValidDate(dateInput));
 
         }
