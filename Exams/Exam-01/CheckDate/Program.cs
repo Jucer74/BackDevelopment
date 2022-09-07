@@ -65,22 +65,29 @@ namespace ValidateDate
     {
         static void Main(string[] args)
         {
-            string dateInput = "23022022"; //dmy
-            Console.WriteLine(isValidDate(dateInput));
+         
 
         }
-
-       static Boolean isValidDate(string date)
+        
+        void CheckDate(string? input, string dateFormat, char dateSeparator = '/')
         {
-            if (date.All(char.IsLetterOrDigit))
+            if (string.IsNullOrEmpty(input))
             {
-                return true;
+                Console.WriteLine("The input can not be null or empty ");
+                return;
             }
-            else
+
+            if (!IsValidDateFormat(dateFormat))
             {
-                return false;
+                Console.Writeline("qwe is NOT a valid format date, only (dmy, mdy, ymd) are allowed");
+                return;
             }
+
+
         }
+
+       
+       }
     }
 }
 
