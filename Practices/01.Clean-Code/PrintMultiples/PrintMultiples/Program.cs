@@ -5,6 +5,7 @@
  * For numbers which are multiples of both three and five print “M-3-5”
  * */
 using System;
+using Internal;
 
 namespace PrintMultiples
 {
@@ -12,7 +13,29 @@ namespace PrintMultiples
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+
+            for (int i = 0; i <= 100; i = 1++)
+            {
+                if (i % 3 == 0 && i % 5 == 0){
+                    Console.Write("M-3-5");
+                }
+                else if (i % 3 == 0)
+                {
+                    Console.Write("M-3");
+                }
+                else if (i % 5 == 0)
+                {
+                    Console.Write("M-5");
+                }
+                else
+                {
+                    Console.Write(i);
+                }
+                    else if (i % 3 == 0)
+                {
+                    Console.Write("M-3");
+                }
+
+
+            }
         }
-    }
-}
