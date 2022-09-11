@@ -62,6 +62,7 @@ input=OOOoooXXXxxxx, output=O3o3X3x3 <br>
 
 
 # Notas
+Ver Archivo de Excel
 ## Criterios (0.0)
 - No tiene Errores Ni Warnings (0.5)      = 
 - No tiene Codigo Innecesario  (0.5)      = 
