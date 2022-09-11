@@ -1,40 +1,59 @@
 ﻿const string IS_VALID = "is";
 const string IS_NOT_VALID = "is not";
 
-String[] SeparateDate(string input, char dateSeparator)
-{
-   string[] dateSeparated = input.Split(dateSeparator);
-   return dateSeparated;
-}
-
-String GetValidDateResult(string input, string dateFormat, char dateSeparator)
-{
-   if (!IsValidDate(input, dateFormat, dateSeparator))
-   {
-      return IS_NOT_VALID;
-   }
-   return IS_VALID;
-}
-
 CheckDate("", "dmy");
+// The input can not be null or empty
+
 CheckDate(null, "dmy");
+// The input can not be null or empty
+
 CheckDate("01/01/2001", "qwe");
+// qwe is nos a valid format date, only (dmy, mdy, ymd) are allowed
+
 CheckDate("01/01/2001", "dmy", '!');
+// ! is nos a valid separator, only ('',  '.' ,  '/' , '-',  '_',  ',') are allowed
+
 //CheckDate("qwertyuiop", "dmy");
+// The input: qwertyuiop is not a Valid Date
+
 CheckDate("10/10/10", "dmy");
+// The input: 10/10/10 is not a valid date
+
 CheckDate("01,01,20001", "dmy");
+// The input 01,01,20001 is not a valid date
+
 CheckDate("112001", "dmy", '\0');
+// The input 112001 is not a valid date
+
 CheckDate("1012001", "dmy", '\0');
+// The input 1012001 is not a valid date
+
 CheckDate("0112001", "mdy", '\0');
+// The input 0112001 is not a valid date
+
 //CheckDate("01012001", "dmy", '\0');
+// The input 01012001 is not a valid date
+
 CheckDate("08/10/1974", "dmy");
+// The input: 08/10/1974 is a Valid Date
+
 CheckDate("07-27-1996", "mdy", '-');
+// The input: 27-07-1996 is a Valid Date
+
 CheckDate("1976.04.10", "ymd", '.');
+// The input: 1976.04.10 is a Valid Date
+
 CheckDate("4.10.1976", "mdy", '.');
+// The input: 4.10.1976 is a Valid Date
+
 CheckDate("30,02,1976", "dmy", ',');
+// The input: 30,02,1976 is not a Valid Date
+
 CheckDate("31/01/1986", "mdy", '/');
+// The input: 31/01/1986 is not a Valid Date
 
-
+CheckDate("1/1/1/1986", "mdy", '/');
+// The input: 31/01/1986 is not a Valid Date
 
 void CheckDate(string? input, string dateFormat, char dateSeparator = '/')
 {
@@ -61,26 +80,45 @@ void CheckDate(string? input, string dateFormat, char dateSeparator = '/')
 
 bool IsValidDateFormat(string dateFormat)
 {
-   if (dateFormat != "dmy" && dateFormat != "mdy" && dateFormat != "ymd")
-   {
-      return false;
-   }
-   return true;
+   //if (dateFormat != "dmy" && dateFormat != "mdy" && dateFormat != "ymd")
+   //{
+   //   return false;
+   //}
+   //return true;
+
+   return (dateFormat != "dmy" && dateFormat != "mdy" && dateFormat != "ymd");
 }
 
 bool IsValidDateSeparator(char dateSeparator)
 {
-   if (dateSeparator != '\0' && dateSeparator != '.' && dateSeparator != '/' && dateSeparator != '-' && dateSeparator != '_' && dateSeparator != ',')
-   {
-      return false;
-   }
-   return true;
+   //if (dateSeparator != '\0' && dateSeparator != '.' && dateSeparator != '/' && dateSeparator != '-' && dateSeparator != '_' && dateSeparator != ',')
+   //{
+   //   return false;
+   //}
+   //return true;
+
+   return (dateSeparator != '\0' && dateSeparator != '.' && dateSeparator != '/' && dateSeparator != '-' && dateSeparator != '_' && dateSeparator != ',');
 }
 
+String[] SeparateDate(string input, char dateSeparator)
+{
+   //string[] dateSeparated = input.Split(dateSeparator);
+   //return dateSeparated;
+
+   return input.Split(dateSeparator);
+}
+
+String GetValidDateResult(string input, string dateFormat, char dateSeparator)
+{
+   if (!IsValidDate(input, dateFormat, dateSeparator))
+   {
+      return IS_NOT_VALID;
+   }
+   return IS_VALID;
+}
 
 bool IsValidDate(string input, string dateFormat, char dateSeparator)
 {
-
    if (dateSeparator == '\0' && (!IsDateANumber(input) || input.Length != 8))
    {
       return false;
@@ -117,7 +155,6 @@ bool IsDateANumber(string input)
 
 int GetYear(string input, string dateFormat, char dateSeparator)
 {
-
    string[] dateSeparated = SeparateDate(input, dateSeparator);
    int year = 0;
 
@@ -125,7 +162,6 @@ int GetYear(string input, string dateFormat, char dateSeparator)
    {
       year = int.Parse(dateSeparated[2]);
    }
-
    else
    {
       year = int.Parse(dateSeparated[0]);
@@ -145,7 +181,6 @@ bool IsALeapYear(int year)
 
 int GetMonth(string input, string dateFormat, char dateSeparator)
 {
-
    string[] dateSeparated = SeparateDate(input, dateSeparator);
    int month = 0;
 
@@ -153,7 +188,6 @@ int GetMonth(string input, string dateFormat, char dateSeparator)
    {
       month = int.Parse(dateSeparated[1]);
    }
-
    else
    {
       month = int.Parse(dateSeparated[0]);
@@ -162,11 +196,8 @@ int GetMonth(string input, string dateFormat, char dateSeparator)
    return month;
 }
 
-
-
 bool IsAValidDay(string input, string dateFormat, char dateSeparator)
 {
-
    int year = GetYear(input, dateFormat, dateSeparator);
    int month = GetMonth(input, dateFormat, dateSeparator);
    int day = GetDay(input, dateFormat, dateSeparator);
