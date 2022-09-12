@@ -10,58 +10,58 @@ using System.Text;
 
 public class Program
 {
-	public static void Main()
-	{
-
-		
-		string exampleString = Compress("aabcccccaaa");
-		Console.WriteLine(exampleString);
-		// aabcccccaaa => a2b1c5a3
-		exampleString = Compress("abbcca");
-		Console.WriteLine(exampleString);
-		// abbcca => abbcca
-		exampleString = Compress("aabbcc");
-		Console.WriteLine(exampleString);
-		// aabbcc => aabbcc
-		exampleString = Compress("");
-		Console.WriteLine(exampleString);
-		// Error: Empty String
-	}
+    public static void Main()
+    {
 
 
-	private static string Compress(string str)
-	{
-		if(str == null || str == "")
-		{
-			return "Error: Empty String";
-		}
+        string exampleString = Compress("aabcccccaaa");
+        Console.WriteLine(exampleString);
+        // aabcccccaaa => a2b1c5a3
+        exampleString = Compress("abbcca");
+        Console.WriteLine(exampleString);
+        // abbcca => abbcca
+        exampleString = Compress("aabbcc");
+        Console.WriteLine(exampleString);
+        // aabbcc => aabbcc
+        exampleString = Compress("");
+        Console.WriteLine(exampleString);
+        // Error: Empty String
+    }
 
-		StringBuilder stringBuild = new StringBuilder();
-		char prevChar = str[0];
-		int stringCount = 1;
+    public static string Compress(string inputString)
+    {
+        if (inputString == null || inputString == "")
+        {
+            return "Error: Empty String";
+        }
 
-		for(int i = 1; i<str.Length; i++){
-			if(str[i] == prevChar)
-			{
-				stringCount++;
-			}
-			else
-			{
-				stringBuild.Append(prevChar);
-				stringBuild.Append(stringCount);
-				prevChar= str[i];
-				stringCount = 1;
-			}
-		}
+        StringBuilder stringBuild = new StringBuilder();
+        char previousCharInString = inputString[0];
+        int characterCount = 1;
 
-		stringBuild.Append(prevChar);
-        stringBuild.Append(stringCount);
-		string result = stringBuild.ToString();
+        for (int i = 1; i < inputString.Length; i++)
+        {
+            if (inputString[i] == previousCharInString)
+            {
+                characterCount++;
+            }
+            else
+            {
+                stringBuild.Append(previousCharInString);
+                stringBuild.Append(characterCount);
+                previousCharInString = inputString[i];
+                characterCount = 1;
+            }
+        }
 
-		if (result.Length >= str.Length)
-		{
-			return str;
-		}
-		return result;
+        stringBuild.Append(previousCharInString);
+        stringBuild.Append(characterCount);
+        string result = stringBuild.ToString();
+
+        if (result.Length >= inputString.Length)
+        {
+            return inputString;
+        }
+        return result;
     }
 }
