@@ -1,28 +1,32 @@
-public class Person
+namespace Sample03
 {
-   // Properties
-   public int Id { get; set; }
-   public string FirstName { get; set; }
-   public string LastName { get; set; }
-   public DateTime DateOfBirth { get; set; }
-   public char Sex { get; set; }
+    using System;
 
-   // Constructors
-   public Person()
-   {
-      
-   }
+    public class Person
+    {
+        [Required]
+        public int Id { get; private set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public char Sex { get; set; }
 
-   public Person(int id, string firstName, string lastNane, DateTime dateOfBirth, char sex)
-   {
-      this.Id = id;
-      this.FirstName = firstName;
-      this.LastName = LastName;
-      this.DateOfBirth = dateOfBirth;
-      this.Sex = sex;
-   }
+        public Person()
+        {
 
-   // Methods - Publicos
+        }
 
-   // Mthos - Privates
+        public Person(int id, string firstName, string lastName, DateTime dateOfBirth, char sex)
+        {
+            this.Id = id;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.DateOfBirth = dateOfBirth;
+            this.Sex = sex;
+        }
+
+
+
+
+    }
 }
