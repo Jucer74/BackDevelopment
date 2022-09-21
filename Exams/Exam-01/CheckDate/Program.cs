@@ -65,7 +65,7 @@ namespace ValidateDate
     {
         static void Main(string[] args)
         {
-         
+         CheckDate("", "dmy");
 
         }
         
@@ -77,18 +77,19 @@ namespace ValidateDate
                 return;
             }
 
-            if (!IsValidDateFormat(dateFormat))
-            {
-                Console.Writeline("qwe is NOT a valid format date, only (dmy, mdy, ymd) are allowed");
-                return;
-            }
+            //if (!IsValidDateFormat(dateFormat))
+            //{
+              //  Console.WriteLine("qwe is NOT a valid format date, only (dmy, mdy, ymd) are allowed");
+              //  return;
+           // }
+            
 
 
         }
 
-       
-       }
-    }
+    
+
+     }
 }
 
 
