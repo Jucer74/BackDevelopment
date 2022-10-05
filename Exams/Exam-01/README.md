@@ -1,7 +1,7 @@
 # Evaluación Teórica (40%)
 Responda las preguntas del siguiente Enlace:
 
-[]("Evaluacion Teorica")
+[Examen](https://forms.gle/8zC2GBUhXTis8bFm8)
 
 # Ejercicio (60%)
 Implemente un programa que permita validar si una cadena es una fecha valida, segun su formato y un separador determinado
@@ -33,7 +33,7 @@ El separador por defecto sera el sLASH ( / ), en caso de no pasarlo como paramet
 **CheckDate("112001", "dmy", '\0')** => The input 112001 is not a valid date<br>
 **CheckDate("1012001", "dmy", '\0')** => The input 1012001 is not a valid date<br>
 **CheckDate("0112001", "mdy", '\0')** => The input 0112001 is not a valid date<br>
-**CheckDate("01012001", "dmy", '\0')** => The input 01012001 is not a valid date<br>
+**CheckDate("01012001", "dmy", '\0')** => The input 01012001 is a valid date<br>
 **CheckDate("08/10/1974", "dmy")** => The input: 08/10/1974 is a Valid Date<br>
 **CheckDate("07-27-1996", "mdy", '-')** => The input: 27-07-1996 is a Valid Date<br>
 **CheckDate("1976.04.10", "mdy", '.')** => The input: 1976.04.10 is a Valid Date<br>
