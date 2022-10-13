@@ -21,7 +21,7 @@ Implemente una applicacion que permita :
 ## Reglas
 1. La Aplcacion de consola debe desplegar un menu con las opciones descritas
 2. Los datos necesarios para las operaciones de consulta o actualizacion deben ser validados (No Vacios y datos Validos)
-3. Tenga en cuenta los visto en ejercicios anteriores para realizar el proyecto.
+3. La aplicacion y los mensajes deben ser amigables con el usuario y brindarle informacion para ello Tenga en cuenta los visto en ejercicios anteriores. (Ej: Tarjeta no existe, Tarjeta invalida, No existen Registros para la consulta, Tarjeta Actualizada)
 
 ## Informacion
 Revise este [link](https://www.freeformatter.com/credit-card-number-generator-validator.html) par determinar lsa condiciones sobre los tipos de tarjetas.
