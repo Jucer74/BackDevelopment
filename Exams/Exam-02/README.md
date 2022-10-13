@@ -4,6 +4,19 @@ Responda las preguntas del siguiente Enlace:
 [Examen](https://forms.gle/NSrS5Xy1EnRRM3Pr5)
 
 # Ejercicio (60%)
+Utilizando los conocimientos adquiridos en clase, desarrolle el siguiente ejercicio.
+
+# Contexto
+**NetBank** es una empresa reguladora de tarjetas de credito a la cual todos los bancos le reportan las tarjetas robadas.
+
+# Ejercicio
+Implemente una applicacion que permita :
+
+1. Obtener la lista de todas las tarjetas
+2. Obtener la lista de las tarjetas por la red emisora
+3. Obtener los datos de la tarjeta por su numero
+4. Reactivar una tarjeta, marcandola como recuperada
+5. Validar si el Numero de una tarjeta es valido por su codigo de verificacion.
 
     
 # Requisitos
