@@ -19,6 +19,11 @@ Implemente una applicacion que permita :
 5. Validar si el Numero de una tarjeta es valido por su codigo de verificacion.
 
 ## Reglas
+1. La Aplcacion de consola debe desplegar un menu con las opciones descritas
+2. Los datos necesarios para las operaciones de consulta o actualizacion deben ser validados (No Vacios y datos Validos)
+3. Tenga en cuenta los visto en ejercicios anteriores para realizar el proyecto.
+
+## Informacion
 Revise este [link](https://www.freeformatter.com/credit-card-number-generator-validator.html) par determinar lsa condiciones sobre los tipos de tarjetas.
 
 | Credit Card Issuer          | Starts With ( IIN Range )                                | Length ( Number of digits ) |
@@ -39,7 +44,7 @@ Revise este [link](https://www.freeformatter.com/credit-card-number-generator-va
     
 # Requisitos
 1. Escriba el codigo teniendo en cuenta los conceptos de Clean Code
-2. Utilice como base el codigo de la solución del proyecto **CheckDate**
+2. Utilice como base el codigo de la solución del proyecto **NetBank**
 
 # Observaciones
 RECUERDE SUBIR SU SOLUCIÓN A SU RAMA DE ESTE REPOSITORIO.
