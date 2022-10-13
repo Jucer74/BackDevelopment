@@ -18,6 +18,7 @@ Implemente una applicacion que permita :
 4. Reactivar una tarjeta, marcandola como recuperada
 5. Validar si el Numero de una tarjeta es valido por su codigo de verificacion.
 
+
     
 # Requisitos
 1. Escriba el codigo teniendo en cuenta los conceptos de Clean Code
