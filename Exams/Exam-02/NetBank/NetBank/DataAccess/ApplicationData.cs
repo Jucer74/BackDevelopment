@@ -14,10 +14,6 @@ public class ApplicationData
       sqlDatabase = new SqlDatabase(connectionString);
    }
 
-   /// <summary>
-   /// Get the records from table
-   /// </summary>
-   /// <returns>a record List</returns>
    public List<ReportedCard> GetReportedCards()
    {
       try
@@ -39,8 +35,7 @@ public class ApplicationData
                FirstName = dataReader["FirstName"].ToString(),
                LastName = dataReader["LastName"].ToString(),
                StatusCard= dataReader["StatusCard"].ToString(),
-               //ReportedDate = Convert.ToDateTime(dataReader["ReportedDate"].ToString()),
-               //LastUpdatedDate = Convert.ToDateTime(dataReader["LastUpdatedDate"].ToString())
+           
             };
             
 
@@ -57,11 +52,7 @@ public class ApplicationData
       }
    }
 
-   /// <summary>
-   /// Update Record
-   /// </summary>
-   /// <param name="creditCardNumber">Credit Card Number to Mark</param>
-   /// <returns>Rows Affected</returns>
+ 
    public bool UpdateReportedCard(string creditCardNumber)
    {
       try
@@ -70,8 +61,17 @@ public class ApplicationData
 
          var command = sqlDatabase.CreateCommand(Constants.UpdateReportedCards);
 
-         sqlDatabase.AddInParameter(command, "StatusCard", "Recovered", 10, DbType.String);
-         sqlDatabase.AddInParameter(command, "CreditCardNumber", creditCardNumber, 50, DbType.String);
+         sqlDatabase.AddInParameter(command,
+            "StatusCard",
+            "Recovered",
+            10,
+            DbType.String);
+
+         sqlDatabase.AddInParameter(command,
+            "CreditCardNumber",
+            creditCardNumber,
+            50,
+            DbType.String);
 
          var rowsAffects = sqlDatabase.ExecuteNonQuery(command);
 
@@ -121,8 +121,7 @@ public class ApplicationData
                FirstName = dataReader["FirstName"].ToString(),
                LastName = dataReader["LastName"].ToString(),
                StatusCard= dataReader["StatusCard"].ToString(),
-               //ReportedDate = Convert.ToDateTime(dataReader["ReportedDate"].ToString()),
-               //LastUpdatedDate = Convert.ToDateTime(dataReader["LastUpdatedDate"].ToString())
+
             };
             if(reportedCard.IssuingNetwork == issuingNetwork)
             { 

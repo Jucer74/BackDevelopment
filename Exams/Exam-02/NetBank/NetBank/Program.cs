@@ -30,7 +30,12 @@ while (option != '0')
          var reportedCardsList = applicationData.GetReportedCards();
          foreach (var card in reportedCardsList)
          {
-            Console.WriteLine(card.Id + " " + card.IssuingNetwork + " " + card.CreditCardNumber + " " + card.FirstName + " " + card.LastName + " " + card.StatusCard);
+            Console.WriteLine(card.Id + " " +
+               card.IssuingNetwork + " " +
+               card.CreditCardNumber + " " +
+               card.FirstName + " " +
+               card.LastName + " " +
+               card.StatusCard);
          }
 
          break;
@@ -50,9 +55,14 @@ while (option != '0')
          {
             case '1':
                var AmericaExpressList = applicationData.GetReportedIssuingNetwork("americanexpress");
-               foreach (var card in AmericaExpressList)
+               foreach (var AmericanExpressCard in AmericaExpressList)
                {
-                  Console.WriteLine(card.Id + " " + card.IssuingNetwork + " " + card.CreditCardNumber + " " + card.FirstName + " " + card.LastName + " " + card.StatusCard);
+                  Console.WriteLine(AmericanExpressCard.Id + " " +
+                     AmericanExpressCard.IssuingNetwork + " " +
+                     AmericanExpressCard.CreditCardNumber + " " +
+                     AmericanExpressCard.FirstName + " " +
+                     AmericanExpressCard.LastName + " " +
+                     AmericanExpressCard.StatusCard);
                }
                break;
             case '2':
@@ -66,30 +76,50 @@ while (option != '0')
                {
                   case '1':
                      var dc_CarteBlancheList = applicationData.GetReportedIssuingNetwork("diners-club-carte-blanche");
-                     foreach (var card in dc_CarteBlancheList)
+                     foreach (var CarteBlancheCard in dc_CarteBlancheList)
                      {
-                        Console.WriteLine(card.Id + " " + card.IssuingNetwork + " " + card.CreditCardNumber + " " + card.FirstName + " " + card.LastName + " " + card.StatusCard);
+                        Console.WriteLine(CarteBlancheCard.Id + " " +
+                           CarteBlancheCard.IssuingNetwork + " " +
+                           CarteBlancheCard.CreditCardNumber + " " +
+                           CarteBlancheCard.FirstName + " " +
+                           CarteBlancheCard.LastName + " " +
+                           CarteBlancheCard.StatusCard);
                      }
                      break;
                   case '2':
                      var dc_International = applicationData.GetReportedIssuingNetwork("diners-club-international");
-                     foreach (var card in dc_International)
+                     foreach (var InternationalCard in dc_International)
                      {
-                        Console.WriteLine(card.Id + " " + card.IssuingNetwork + " " + card.CreditCardNumber + " " + card.FirstName + " " + card.LastName + " " + card.StatusCard);
+                        Console.WriteLine(InternationalCard.Id + " " +
+                           InternationalCard.IssuingNetwork + " " +
+                           InternationalCard.CreditCardNumber + " " +
+                           InternationalCard.FirstName + " " +
+                           InternationalCard.LastName + " " +
+                           InternationalCard.StatusCard);
                      }
                      break;
                   case '3':
                      var dc_US_CAList = applicationData.GetReportedIssuingNetwork("diners-club-us-ca");
-                     foreach (var card in dc_US_CAList)
+                     foreach (var dinnersUSCard in dc_US_CAList)
                      {
-                        Console.WriteLine(card.Id + " " + card.IssuingNetwork + " " + card.CreditCardNumber + " " + card.FirstName + " " + card.LastName + " " + card.StatusCard);
+                        Console.WriteLine(dinnersUSCard.Id + " " +
+                           dinnersUSCard.IssuingNetwork + " " +
+                           dinnersUSCard.CreditCardNumber + " " +
+                           dinnersUSCard.FirstName + " " +
+                           dinnersUSCard.LastName + " " +
+                           dinnersUSCard.StatusCard);
                      }
                      break;
                   case '4':
                      var dc_Enroute = applicationData.GetReportedIssuingNetwork("diners-club-enroute");
-                     foreach (var card in dc_Enroute)
+                     foreach (var dinersEnroutecard in dc_Enroute)
                      {
-                        Console.WriteLine(card.Id + " " + card.IssuingNetwork + " " + card.CreditCardNumber + " " + card.FirstName + " " + card.LastName + " " + card.StatusCard);
+                        Console.WriteLine(dinersEnroutecard.Id + " " +
+                           dinersEnroutecard.IssuingNetwork + " " +
+                           dinersEnroutecard.CreditCardNumber + " " +
+                           dinersEnroutecard.FirstName + " " +
+                           dinersEnroutecard.LastName + " " +
+                           dinersEnroutecard.StatusCard);
                      }
                      break;
                }
@@ -99,44 +129,74 @@ while (option != '0')
             case '3':
              
                var instapaymentList = applicationData.GetReportedIssuingNetwork("instapayment");
-               foreach (var paymentCard in instapaymentList)
+               foreach (var card in instapaymentList)
                {
-                  Console.WriteLine(paymentCard.Id + " " + paymentCard.IssuingNetwork + " " + paymentCard.CreditCardNumber + " " + paymentCard.FirstName + " " + paymentCard.LastName + " " + paymentCard.StatusCard);
+                  Console.WriteLine(card.Id + " " +
+                     card.IssuingNetwork + " " +
+                     card.CreditCardNumber + " " +
+                     card.FirstName + " " +
+                     card.LastName + " " +
+                     card.StatusCard);
                }
                break;
             case '4':
                var jcbList = applicationData.GetReportedIssuingNetwork("jcb");
                foreach (var card in jcbList)
                {
-                  Console.WriteLine(card.Id + " " + card.IssuingNetwork + " " + card.CreditCardNumber + " " + card.FirstName + " " + card.LastName + " " + card.StatusCard);
+                  Console.WriteLine(card.Id + " " +
+                     card.IssuingNetwork + " " +
+                     card.CreditCardNumber + " " +
+                     card.FirstName + " " +
+                     card.LastName + " " +
+                     card.StatusCard);
                }
                break;
             case '5':
                var maestroList = applicationData.GetReportedIssuingNetwork("maestro");
                foreach (var card in maestroList)
                {
-                  Console.WriteLine(card.Id + " " + card.IssuingNetwork + " " + card.CreditCardNumber + " " + card.FirstName + " " + card.LastName + " " + card.StatusCard);
+                  Console.WriteLine(card.Id + " " +
+                     card.IssuingNetwork + " " +
+                     card.CreditCardNumber + " " +
+                     card.FirstName + " " +
+                     card.LastName + " " +
+                     card.StatusCard);
                }
                break;
             case '6':
                var masterCardList = applicationData.GetReportedIssuingNetwork("mastercard");
                foreach (var card in masterCardList)
                {
-                  Console.WriteLine(card.Id + " " + card.IssuingNetwork + " " + card.CreditCardNumber + " " + card.FirstName + " " + card.LastName + " " + card.StatusCard);
+                  Console.WriteLine(card.Id + " " +
+                     card.IssuingNetwork + " " +
+                     card.CreditCardNumber + " " +
+                     card.FirstName + " " +
+                     card.LastName + " " +
+                     card.StatusCard);
                }
                break;
             case '7':
                var visaList = applicationData.GetReportedIssuingNetwork("visa");
                foreach (var card in visaList)
                {
-                  Console.WriteLine(card.Id + " " + card.IssuingNetwork + " " + card.CreditCardNumber + " " + card.FirstName + " " + card.LastName + " " + card.StatusCard);
+                  Console.WriteLine(card.Id + " " +
+                     card.IssuingNetwork + " " +
+                     card.CreditCardNumber + " " +
+                     card.FirstName + " " +
+                     card.LastName + " " +
+                     card.StatusCard);
                }
                break;
             case '8':
                var visaElectronList = applicationData.GetReportedIssuingNetwork("visa-electron");
                foreach (var card in visaElectronList)
                {
-                  Console.WriteLine(card.Id + " " + card.IssuingNetwork + " " + card.CreditCardNumber + " " + card.FirstName + " " + card.LastName + " " + card.StatusCard);
+                  Console.WriteLine(card.Id + " " +
+                     card.IssuingNetwork + " " +
+                     card.CreditCardNumber + " " +
+                     card.FirstName + " " +
+                     card.LastName + " " +
+                     card.StatusCard);
                }
                break;
          }
@@ -149,7 +209,12 @@ while (option != '0')
          {
             if (card.CreditCardNumber == cardNumber)
             {
-               Console.WriteLine(card.Id + " " + card.IssuingNetwork + " " + card.CreditCardNumber + " " + card.FirstName + " " + card.LastName + " " + card.StatusCard);
+               Console.WriteLine(card.Id + " " 
+               + card.IssuingNetwork + " " +
+               card.CreditCardNumber + " " 
+               + card.FirstName + " " +
+               card.LastName + " "
+                + card.StatusCard);
             }
          }
          break;
@@ -165,7 +230,12 @@ while (option != '0')
          {
             if (card.CreditCardNumber == cardNumber)
             {
-               Console.WriteLine(card.Id + " " + card.IssuingNetwork + " " + card.CreditCardNumber + " " + card.FirstName + " " + card.LastName + " " + card.StatusCard);
+               Console.WriteLine(card.Id + " " 
+               + card.IssuingNetwork + " " +
+               card.CreditCardNumber + " " +
+               card.FirstName +" " +
+               card.LastName + " " +
+               card.StatusCard);
             }
          }
          break;
