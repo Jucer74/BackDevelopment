@@ -13,9 +13,6 @@ var option = '1';
 string cardNumber = "12345";
 
 
-
-
-
 while (option != '0') 
 {
    Console.WriteLine("|--------------------NetBank01--------------------|");
