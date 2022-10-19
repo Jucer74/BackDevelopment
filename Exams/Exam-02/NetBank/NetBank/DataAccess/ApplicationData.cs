@@ -6,6 +6,7 @@ namespace NetBank.DataAccess;
 public class ApplicationData
 {
    private readonly SqlDatabase sqlDatabase;
+  
 
    public ApplicationData()
    {
@@ -38,12 +39,15 @@ public class ApplicationData
                FirstName = dataReader["FirstName"].ToString(),
                LastName = dataReader["LastName"].ToString(),
                StatusCard= dataReader["StatusCard"].ToString(),
-               ReportedDate = Convert.ToDateTime(dataReader["ReportedDate"].ToString()),
-               LastUpdatedDate  = Convert.ToDateTime(dataReader["LastUpdatedDate"].ToString())
+               //ReportedDate = Convert.ToDateTime(dataReader["ReportedDate"].ToString()),
+               //LastUpdatedDate = Convert.ToDateTime(dataReader["LastUpdatedDate"].ToString())
             };
+            
+
 
             reportedCardList.Add(reportedCard);
          }
+
 
          return reportedCardList;
       }
@@ -80,10 +84,6 @@ public class ApplicationData
    }
 
 
-   /// <summary>
-   /// Build the Connection String to the database
-   /// </summary>
-   /// <returns>Connection String</returns>
    private static string GetConnectionString()
    {
       if(File.Exists(Constants.DatabaseFileName))
@@ -98,4 +98,47 @@ public class ApplicationData
 
       return null;
    }
+
+   
+   public List<ReportedCard> GetReportedIssuingNetwork(string issuingNetwork)
+   { 
+       try
+      {
+         sqlDatabase.CreateAndOpenConnection();
+
+         var command = sqlDatabase.CreateCommand(Constants.SelectReportedCards);
+         var dataReader = sqlDatabase.ExecuteReader(command);
+
+         var reportedIssuingNetworkList = new List<ReportedCard>();
+
+         while (dataReader.Read())
+         {
+            var reportedCard = new ReportedCard
+            {
+               Id = Convert.ToInt32(dataReader["Id"].ToString()),
+               IssuingNetwork = dataReader["IssuingNetwork"].ToString(),
+               CreditCardNumber = dataReader["CreditCardNumber"].ToString(),
+               FirstName = dataReader["FirstName"].ToString(),
+               LastName = dataReader["LastName"].ToString(),
+               StatusCard= dataReader["StatusCard"].ToString(),
+               //ReportedDate = Convert.ToDateTime(dataReader["ReportedDate"].ToString()),
+               //LastUpdatedDate = Convert.ToDateTime(dataReader["LastUpdatedDate"].ToString())
+            };
+            if(reportedCard.IssuingNetwork == issuingNetwork)
+            { 
+               reportedIssuingNetworkList.Add(reportedCard);
+            }
+         }
+
+
+         return reportedIssuingNetworkList;
+      }
+      finally
+      {
+         sqlDatabase.CloseConnection();
+      }
+
+   }
+
 }
+
