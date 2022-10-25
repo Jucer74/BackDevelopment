@@ -12,6 +12,12 @@ Console.WriteLine("NetBank Application");
 var option = '1';
 string cardNumber = "12345";
 
+// Demasiado Codigo Spaguetti
+// No hay Funciones
+// No hay logica SEparada
+// No hay separacin de responsabilidades o responsabilidad unica
+// No hay retorno de datos
+// Demasiados Condicionales Anidados
 
 while (option != '0') 
 {
