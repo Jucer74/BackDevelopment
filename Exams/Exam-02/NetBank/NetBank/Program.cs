@@ -1,3 +1,26 @@
+<<<<<<< HEAD
+﻿using NetBank.DataAccess;
+using System.Collections.Generic;
+
+#region Variables
+
+ApplicationData applicationData = new();
+
+#endregion Variables
+
+Console.WriteLine("NetBank Application");
+
+
+
+var reportedCardsList = applicationData.GetReportedCards();
+ Console.WriteLine(reportedCardsList.Count);
+
+var result = applicationData.UpdateReportedCard("6376773337234061");
+Console.WriteLine(result);
+
+var isValid = CreditCardBL.IsValid("6376773337234061");
+Console.WriteLine(isValid);
+=======
 ﻿using NetBank.BusinessLogic;
 using NetBank.DataAccess;
 
@@ -12,6 +35,12 @@ Console.WriteLine("NetBank Application");
 var option = '1';
 string cardNumber = "12345";
 
+// Demasiado Codigo Spaguetti
+// No hay Funciones
+// No hay logica SEparada
+// No hay separacin de responsabilidades o responsabilidad unica
+// No hay retorno de datos
+// Demasiados Condicionales Anidados
 
 while (option != '0') 
 {
@@ -256,3 +285,4 @@ while (option != '0')
          break;
    }
 }
+>>>>>>> 01c705e5fbc171be2f54b5c6357cd66c0747908f
