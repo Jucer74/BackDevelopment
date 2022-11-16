@@ -6,6 +6,7 @@ namespace NetBank.DataAccess;
 public class ApplicationData
 {
    private readonly SqlDatabase sqlDatabase;
+  
 
    public ApplicationData()
    {
@@ -13,10 +14,6 @@ public class ApplicationData
       sqlDatabase = new SqlDatabase(connectionString);
    }
 
-   /// <summary>
-   /// Get the records from table
-   /// </summary>
-   /// <returns>a record List</returns>
    public List<ReportedCard> GetReportedCards()
    {
       try
@@ -38,12 +35,14 @@ public class ApplicationData
                FirstName = dataReader["FirstName"].ToString(),
                LastName = dataReader["LastName"].ToString(),
                StatusCard= dataReader["StatusCard"].ToString(),
-               ReportedDate = Convert.ToDateTime(dataReader["ReportedDate"].ToString()),
-               LastUpdatedDate  = Convert.ToDateTime(dataReader["LastUpdatedDate"].ToString())
+           
             };
+            
+
 
             reportedCardList.Add(reportedCard);
          }
+
 
          return reportedCardList;
       }
@@ -53,11 +52,7 @@ public class ApplicationData
       }
    }
 
-   /// <summary>
-   /// Update Record
-   /// </summary>
-   /// <param name="creditCardNumber">Credit Card Number to Mark</param>
-   /// <returns>Rows Affected</returns>
+ 
    public bool UpdateReportedCard(string creditCardNumber)
    {
       try
@@ -66,8 +61,17 @@ public class ApplicationData
 
          var command = sqlDatabase.CreateCommand(Constants.UpdateReportedCards);
 
-         sqlDatabase.AddInParameter(command, "StatusCard", "Recovered", 10, DbType.String);
-         sqlDatabase.AddInParameter(command, "CreditCardNumber", creditCardNumber, 50, DbType.String);
+         sqlDatabase.AddInParameter(command,
+            "StatusCard",
+            "Recovered",
+            10,
+            DbType.String);
+
+         sqlDatabase.AddInParameter(command,
+            "CreditCardNumber",
+            creditCardNumber,
+            50,
+            DbType.String);
 
          var rowsAffects = sqlDatabase.ExecuteNonQuery(command);
 
@@ -80,10 +84,6 @@ public class ApplicationData
    }
 
 
-   /// <summary>
-   /// Build the Connection String to the database
-   /// </summary>
-   /// <returns>Connection String</returns>
    private static string GetConnectionString()
    {
       if(File.Exists(Constants.DatabaseFileName))
@@ -98,4 +98,46 @@ public class ApplicationData
 
       return null;
    }
+
+   
+   public List<ReportedCard> GetReportedIssuingNetwork(string issuingNetwork)
+   { 
+       try
+      {
+         sqlDatabase.CreateAndOpenConnection();
+
+         var command = sqlDatabase.CreateCommand(Constants.SelectReportedCards);
+         var dataReader = sqlDatabase.ExecuteReader(command);
+
+         var reportedIssuingNetworkList = new List<ReportedCard>();
+
+         while (dataReader.Read())
+         {
+            var reportedCard = new ReportedCard
+            {
+               Id = Convert.ToInt32(dataReader["Id"].ToString()),
+               IssuingNetwork = dataReader["IssuingNetwork"].ToString(),
+               CreditCardNumber = dataReader["CreditCardNumber"].ToString(),
+               FirstName = dataReader["FirstName"].ToString(),
+               LastName = dataReader["LastName"].ToString(),
+               StatusCard= dataReader["StatusCard"].ToString(),
+
+            };
+            if(reportedCard.IssuingNetwork == issuingNetwork)
+            { 
+               reportedIssuingNetworkList.Add(reportedCard);
+            }
+         }
+
+
+         return reportedIssuingNetworkList;
+      }
+      finally
+      {
+         sqlDatabase.CloseConnection();
+      }
+
+   }
+
 }
+

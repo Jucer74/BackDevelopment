@@ -328,6 +328,7 @@ public class SqlDatabase : ISqlDatabase
 
       if (IsValidCommand(command))
       {
+
          dr = command.ExecuteReader();
       }
 
