@@ -43,6 +43,31 @@ namespace ProductsApi.Controllers
             return product;
         }
 
+        // GET: api/Products/ByPage
+        [HttpGet("{ByPage}")]
+        public async Task<IActionResult> GetProductsById([FromQuery] PaginationParagrams @params)
+        {
+            var product = await _context.Products
+                .OrderBy(e => e.Id)
+                .Where(e => e.Id > @params.Page)
+                .Take(@params.ItemsPerPage)
+                .ToListAsync();
+
+
+            var nextCursor = product.Any()
+                    ? product.LastOrDefault()?.Id
+                    : 0;
+
+            Response.Headers.Add("X-Pagination", $"Next Cursor={nextCursor}");
+
+
+
+
+
+        }
+
+
+
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
