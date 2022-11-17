@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductsApi.Context;
 using ProductsApi.Models;
+using static System.Net.WebRequestMethods;
 
 namespace ProductsApi.Controllers
 {
@@ -44,7 +47,7 @@ namespace ProductsApi.Controllers
         }
 
         // GET: api/Products/ByPage
-      
+
 
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -134,5 +137,45 @@ namespace ProductsApi.Controllers
             }));
         }
 
+        [HttpGet]
+        [Route("customers/pagelinkheaders", Name = "GetPageLinkHeaders")]
+        public HttpResponseMessage GetPageLinkHeaders(int pageNo = 1, int pageSize = 50)
+        {
+            // Determine the number of records to skip
+            
+
+            // Get total number of records
+            int total = _context.Products.Count();
+
+            // Select the customers based on paging parameters
+            var products = _context.Products
+                .OrderBy(c => c.Id)
+                .Take(pageSize)
+                .ToList();
+
+            // Get the page links
+            var linkBuilder = new PageLinkBuilder(Url, "GetPageLinkHeaders", "", pageNo, pageSize, total);
+
+            // Create the response
+            var response = Request.CreateResponse(HttpStatusCode.OK, products);
+            var LinkHeaderTemplate = "http://localhost:5001/api/v1.0/Products/ByPage?";
+
+            // Build up the link header
+            List<string> links = new List<string>();
+            if (linkBuilder.FirstPage != null)
+                links.Add(string.Format(LinkHeaderTemplate, linkBuilder.FirstPage, "first"));
+            if (linkBuilder.PreviousPage != null)
+                links.Add(string.Format(LinkHeaderTemplate, linkBuilder.PreviousPage, "previous"));
+            if (linkBuilder.NextPage != null)
+                links.Add(string.Format(LinkHeaderTemplate, linkBuilder.NextPage, "next"));
+            if (linkBuilder.LastPage != null)
+                links.Add(string.Format(LinkHeaderTemplate, linkBuilder.LastPage, "last"));
+
+            // Set the page link header
+            response.Headers.Add("Link", string.Join(", ", links));
+
+            // Return the response
+            return response;
+        }
     }
 }
