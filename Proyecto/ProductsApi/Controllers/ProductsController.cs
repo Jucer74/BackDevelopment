@@ -44,29 +44,7 @@ namespace ProductsApi.Controllers
         }
 
         // GET: api/Products/ByPage
-        [HttpGet("{ByPage}")]
-        public async Task<IActionResult> GetProductsById([FromQuery] PaginationParagrams @params)
-        {
-            var product = await _context.Products
-                .OrderBy(e => e.Id)
-                .Where(e => e.Id > @params.Page)
-                .Take(@params.ItemsPerPage)
-                .ToListAsync();
-
-
-            var nextCursor = product.Any()
-                    ? product.LastOrDefault()?.Id
-                    : 0;
-
-            Response.Headers.Add("X-Pagination", $"Next Cursor={nextCursor}");
-
-
-
-
-
-        }
-
-
+      
 
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -130,5 +108,31 @@ namespace ProductsApi.Controllers
         {
             return _context.Products.Any(e => e.Id == id);
         }
+
+        [HttpGet("ByPage")]
+        public async Task<IActionResult> GetPage([FromQuery] PaginationParagrams @params)
+        {
+            var product = await _context.Products
+                .OrderBy(e => e.Id)
+                .Where(e => e.Id > @params.Page - 1)
+                .Take(@params.ItemsPerPage)
+                .ToListAsync();
+
+            var nextCursor = product.Any()
+                ? product.LastOrDefault()?.Id
+                : 0;
+
+            Response.Headers.Add("X-Pagination", $"Next Cursor={nextCursor}");
+
+            return Ok(product.Select(e => new Product
+            {
+                Id = e.Id,
+                Name = e.Name,
+                Description = e.Description,
+                Price = e.Price,
+                ImageName = e.ImageName
+            }));
+        }
+
     }
 }
