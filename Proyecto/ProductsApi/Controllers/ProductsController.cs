@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Microsoft.AspNetCore.Http;
-using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductsApi.Context;
 using ProductsApi.Models;
-using static System.Net.WebRequestMethods;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Drawing.Printing;
+using System.Net;
+using System.Net.Http;
 
 namespace ProductsApi.Controllers
 {
@@ -137,12 +139,11 @@ namespace ProductsApi.Controllers
             }));
         }
 
-        [HttpGet]
-        [Route("customers/pagelinkheaders", Name = "GetPageLinkHeaders")]
-        public HttpResponseMessage GetPageLinkHeaders(int pageNo = 1, int pageSize = 50)
+        [HttpGet("{GetPageLinkHeaders")]
+        public Task<IActionResult> GetPageLinkHeaders(int pageNo = 1, int pageSize = 50)
         {
             // Determine the number of records to skip
-            
+
 
             // Get total number of records
             int total = _context.Products.Count();
@@ -157,7 +158,7 @@ namespace ProductsApi.Controllers
             var linkBuilder = new PageLinkBuilder(Url, "GetPageLinkHeaders", "", pageNo, pageSize, total);
 
             // Create the response
-            var response = Request.CreateResponse(HttpStatusCode.OK, products);
+            var response = HttpResponseMessage(HttpStatusCode.OK, products);
             var LinkHeaderTemplate = "http://localhost:5001/api/v1.0/Products/ByPage?";
 
             // Build up the link header
