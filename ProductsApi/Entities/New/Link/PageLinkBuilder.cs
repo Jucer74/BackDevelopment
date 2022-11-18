@@ -28,22 +28,18 @@ namespace ProductsApi.Entities.New.Link
             {"pageNo", pageCount},
             {"pageSize", pageSize}
         }));
-            if (pageNo > 1)
-            {
-                PreviousPage = new Uri(urlHelper.Link(routeName, new HttpRouteValueDictionary(routeValues)
+
+            PreviousPage = new Uri(urlHelper.Link(routeName, new HttpRouteValueDictionary(routeValues)
             {
                 {"pageNo", pageNo - 1},
                 {"pageSize", pageSize}
             }));
-            }
-            if (pageNo < pageCount)
-            {
-                NextPage = new Uri(urlHelper.Link(routeName, new HttpRouteValueDictionary(routeValues)
+
+            NextPage = new Uri(urlHelper.Link(routeName, new HttpRouteValueDictionary(routeValues)
             {
                 {"pageNo", pageNo + 1},
                 {"pageSize", pageSize}
             }));
-            }
         }
     }
 }
