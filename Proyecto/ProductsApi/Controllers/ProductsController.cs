@@ -98,7 +98,6 @@ namespace ProductsApi.Controllers
             return CreatedAtAction("GetProduct", new { id = product.Id }, product);
         }
 
-        // DELETE: api/Products/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
@@ -119,9 +118,6 @@ namespace ProductsApi.Controllers
             return _context.Products.Any(e => e.Id == id);
         }
 
-        // GET: by page
-
-        //[HttpGet("ByPage", Name = "GetPageLinkHeaders")]
         [HttpGet]
         [Route("ByPage", Name = "GetPageLinkHeaders")]
         public async Task<IActionResult> GetPage([FromQuery] PaginationParams @params)
@@ -132,10 +128,6 @@ namespace ProductsApi.Controllers
 
 
     
-            //var paginationMetadata = new PaginationMetadata(product.Count(),
-            //                            @params.Page, @params.ItemsPerPage);
-            //Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
-        
             
             var item = await _context.Products
                 .Skip((@params.Page - 1) * @params.ItemsPerPage)
@@ -147,19 +139,17 @@ namespace ProductsApi.Controllers
 
             var LinkHeaderTemplate = "http://localhost:5001/api/v1.0/Products/ByPage?";
 
-            // Build up the link header
-            List<string> links = new List<string>();
+            List<string> link = new List<string>();
             if (linkBuilder.FirstPage != null)
-                links.Add(string.Format(LinkHeaderTemplate, linkBuilder.FirstPage, "first"));
+                link.Add(string.Format(LinkHeaderTemplate, linkBuilder.FirstPage, "first"));
             if (linkBuilder.PreviousPage != null)
-                links.Add(string.Format(LinkHeaderTemplate, linkBuilder.PreviousPage, "previous"));
+                link.Add(string.Format(LinkHeaderTemplate, linkBuilder.PreviousPage, "previous"));
             if (linkBuilder.NextPage != null)
-                links.Add(string.Format(LinkHeaderTemplate, linkBuilder.NextPage, "next"));
+                link.Add(string.Format(LinkHeaderTemplate, linkBuilder.NextPage, "next"));
             if (linkBuilder.LastPage != null)
-                links.Add(string.Format(LinkHeaderTemplate, linkBuilder.LastPage, "last"));
+                link.Add(string.Format(LinkHeaderTemplate, linkBuilder.LastPage, "last"));
 
-            // Set the page link header
-            Response.Headers.Add("Link", string.Join(", ", links));
+            Response.Headers.Add("Link", string.Join(", ", link));
 
             return Ok(item.Select(e => new Product 
                         {
