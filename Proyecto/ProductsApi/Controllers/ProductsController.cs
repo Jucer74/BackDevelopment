@@ -7,11 +7,20 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductsApi.Context;
+using ProductsApi.Entities;
+using ProductsApi.Dto;
 using ProductsApi.Models;
+using ProductsApi.Entities.New;
+using ProductsApi.Entities.New.Meta;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Drawing.Printing;
+using ProductsApi.Entities.New.Link;
 using System.Net;
-using System.Net.Http;
+using System.Text.Json;
+using System.Web;
+using System.Security.Policy;
+using Microsoft.AspNetCore.Mvc.Routing;
+
 
 namespace ProductsApi.Controllers
 {
@@ -35,21 +44,17 @@ namespace ProductsApi.Controllers
 
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct([FromRoute] int id)
+        public async Task<ActionResult<Product>> GetProduct(int id)
         {
             var product = await _context.Products.FindAsync(id);
-
 
             if (product == null)
             {
                 return NotFound();
             }
 
-            return product;
+            return Ok(product);
         }
-
-        // GET: api/Products/ByPage
-
 
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -114,53 +119,33 @@ namespace ProductsApi.Controllers
             return _context.Products.Any(e => e.Id == id);
         }
 
-        [HttpGet("{ByPage}")]
-        public async Task<IActionResult> GetPage([FromQuery] PaginationParagrams @params)
-        {
-            var product = await _context.Products
-                .OrderBy(e => e.Id)
-                .Where(e => e.Id > @params.Page - 1)
+        // GET: by page
+
+        //[HttpGet("ByPage", Name = "GetPageLinkHeaders")]
+        [HttpGet]
+        [Route("ByPage", Name = "GetPageLinkHeaders")]
+        public async Task<IActionResult> GetPage([FromQuery] PaginationParams @params)
+            {
+
+            var product = _context.Products
+                .OrderBy(e => e.Id);
+
+
+    
+            //var paginationMetadata = new PaginationMetadata(product.Count(),
+            //                            @params.Page, @params.ItemsPerPage);
+            //Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
+        
+            
+            var item = await _context.Products
+                .Skip((@params.Page - 1) * @params.ItemsPerPage)
                 .Take(@params.ItemsPerPage)
                 .ToListAsync();
 
-            var nextCursor = product.Any()
-                ? product.LastOrDefault()?.Id
-                : 0;
+            var linkBuilder = new PageLinkBuilder(Url , "GetPageLinkHeaders", null, @params.Page, @params.ItemsPerPage, product.Count());
 
-            Response.Headers.Add("X-Pagination", $"Next Cursor={nextCursor}");
 
-            return Ok(product.Select(e => new Product
-            {
-                Id = e.Id,
-                Name = e.Name,
-                Description = e.Description,
-                Price = e.Price,
-                ImageName = e.ImageName
-            }));
-        }
-
-        [HttpGet]
-        [Route("customers/pagelinkheaders", Name = "GetPageLinkHeaders")]
-        public HttpResponseMessage GetPageLinkHeaders(int pageNo = 1, int pageSize = 50)
-        {
-            // Determine the number of records to skip
-       
-
-            // Get total number of records
-            int total = _dbContext.Customers.Count();
-
-            // Select the customers based on paging parameters
-            var customers = _dbContext.Customers
-                .OrderBy(c => c.Id)
-       
-                .Take(pageSize)
-                .ToList();
-
-            // Get the page links
-            var linkBuilder = new PageLinkBuilder(Url, "GetPageLinkHeaders", null, pageNo, pageSize, total);
-
-            // Create the response
-            var response = Request.CreateResponse(HttpStatusCode.OK, customers);
+            var LinkHeaderTemplate = "http://localhost:5001/api/v1.0/Products/ByPage?";
 
             // Build up the link header
             List<string> links = new List<string>();
@@ -174,10 +159,21 @@ namespace ProductsApi.Controllers
                 links.Add(string.Format(LinkHeaderTemplate, linkBuilder.LastPage, "last"));
 
             // Set the page link header
-            response.Headers.Add("Link", string.Join(", ", links));
+            Response.Headers.Add("Link", string.Join(", ", links));
 
-            // Return the response
-            return response;
+            return Ok(item.Select(e => new Product 
+                        {
+                Id = e.Id,
+                Name = e.Name,
+                Description = e.Description,
+                Price = e.Price,
+                ImageName = e.ImageName
+            }));;
         }
+
+
     }
 }
+
+
+
