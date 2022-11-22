@@ -1,4 +1,5 @@
-﻿using System.Web.Http.Routing;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Web.Http.Routing;
 
 
 namespace ProductsApi.Entities.New.Link
@@ -6,6 +7,13 @@ namespace ProductsApi.Entities.New.Link
 
     public class PageLinkBuilder
     {
+        private IUrlHelper url;
+        private string v1;
+        private object value;
+        private int page;
+        private int itemsPerPage;
+        private int v2;
+
         public Uri FirstPage { get; private set; }
         public Uri LastPage { get; private set; }
         public Uri NextPage { get; private set; }
@@ -46,6 +54,16 @@ namespace ProductsApi.Entities.New.Link
                 {"pageSize", pageSize}
             }));
             }
+        }
+
+        public PageLinkBuilder(IUrlHelper url, string v1, object value, int page, int itemsPerPage, int v2)
+        {
+            this.url = url;
+            this.v1 = v1;
+            this.value = value;
+            this.page = page;
+            this.itemsPerPage = itemsPerPage;
+            this.v2 = v2;
         }
     }
 }

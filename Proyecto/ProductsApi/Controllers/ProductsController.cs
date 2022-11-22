@@ -142,7 +142,7 @@ namespace ProductsApi.Controllers
                 .Take(@params.ItemsPerPage)
                 .ToListAsync();
 
-            var linkBuilder = new PageLinkBuilder(Url , "GetPageLinkHeaders", null, @params.Page, @params.ItemsPerPage, product.Count());
+            var linkBuilder = new PageLinkBuilder(Url , "GetPageLinkHeaders", "", @params.Page, @params.ItemsPerPage, product.Count());
 
 
             var LinkHeaderTemplate = "http://localhost:5001/api/v1.0/Products/ByPage?";
