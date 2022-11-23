@@ -2,11 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductsApi.Context;
+using ProductsApi.Entities;
+using ProductsApi.Dto;
 using ProductsApi.Models;
+using ProductsApi.Entities.New;
+using ProductsApi.Entities.New.Meta;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Drawing.Printing;
+using ProductsApi.Entities.New.Link;
+using System.Net;
+using System.Text.Json;
+using System.Web;
+using System.Security.Policy;
+using Microsoft.AspNetCore.Mvc.Routing;
+
 
 namespace ProductsApi.Controllers
 {
@@ -30,21 +44,17 @@ namespace ProductsApi.Controllers
 
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct([FromRoute] int id)
+        public async Task<ActionResult<Product>> GetProduct(int id)
         {
             var product = await _context.Products.FindAsync(id);
-
 
             if (product == null)
             {
                 return NotFound();
             }
 
-            return product;
+            return Ok(product);
         }
-
-        // GET: api/Products/ByPage
-      
 
         // PUT: api/Products/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -88,7 +98,6 @@ namespace ProductsApi.Controllers
             return CreatedAtAction("GetProduct", new { id = product.Id }, product);
         }
 
-        // DELETE: api/Products/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
@@ -108,31 +117,67 @@ namespace ProductsApi.Controllers
         {
             return _context.Products.Any(e => e.Id == id);
         }
-
-        [HttpGet("ByPage")]
-        public async Task<IActionResult> GetPage([FromQuery] PaginationParagrams @params)
+        //GET: api/Products
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<Product>>> Search(string text)
         {
-            var product = await _context.Products
-                .OrderBy(e => e.Id)
-                .Where(e => e.Id > @params.Page - 1)
+            IQueryable<Product> product = _context.Products;
+
+            if (!string.IsNullOrEmpty(text))
+            {
+                product = product.Where(p => p.Name.Contains(text)
+                || p.Description.Contains(text) || p.ImageName.Contains(text));
+            }
+
+            return Ok(product);
+        }
+
+        [HttpGet]
+        [Route("ByPage", Name = "GetPageLinkHeaders")]
+        public async Task<IActionResult> GetPage([FromQuery] PaginationParams @params)
+            {
+
+            var product = _context.Products
+                .OrderBy(e => e.Id);
+
+
+    
+            
+            var item = await _context.Products
+                .Skip((@params.Page - 1) * @params.ItemsPerPage)
                 .Take(@params.ItemsPerPage)
                 .ToListAsync();
 
-            var nextCursor = product.Any()
-                ? product.LastOrDefault()?.Id
-                : 0;
+            var linkBuilder = new PageLinkBuilder(Url , "GetPageLinkHeaders", "", @params.Page, @params.ItemsPerPage, product.Count());
 
-            Response.Headers.Add("X-Pagination", $"Next Cursor={nextCursor}");
 
-            return Ok(product.Select(e => new Product
-            {
+            var LinkHeaderTemplate = "http://localhost:5001/api/v1.0/Products/ByPage?";
+
+            List<string> link = new List<string>();
+            if (linkBuilder.FirstPage != null)
+                link.Add(string.Format(LinkHeaderTemplate, linkBuilder.FirstPage, "first"));
+            if (linkBuilder.PreviousPage != null)
+                link.Add(string.Format(LinkHeaderTemplate, linkBuilder.PreviousPage, "previous"));
+            if (linkBuilder.NextPage != null)
+                link.Add(string.Format(LinkHeaderTemplate, linkBuilder.NextPage, "next"));
+            if (linkBuilder.LastPage != null)
+                link.Add(string.Format(LinkHeaderTemplate, linkBuilder.LastPage, "last"));
+
+            Response.Headers.Add("Link", string.Join(", ", link));
+
+            return Ok(item.Select(e => new Product 
+                        {
                 Id = e.Id,
                 Name = e.Name,
                 Description = e.Description,
                 Price = e.Price,
                 ImageName = e.ImageName
-            }));
+            }));;
         }
+
 
     }
 }
+
+
+
