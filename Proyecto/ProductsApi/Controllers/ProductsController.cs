@@ -117,6 +117,20 @@ namespace ProductsApi.Controllers
         {
             return _context.Products.Any(e => e.Id == id);
         }
+        //GET: api/Products
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<Product>>> Search(string text)
+        {
+            IQueryable<Product> product = _context.Products;
+
+            if (!string.IsNullOrEmpty(text))
+            {
+                product = product.Where(p => p.Name.Contains(text)
+                || p.Description.Contains(text) || p.ImageName.Contains(text));
+            }
+
+            return Ok(product);
+        }
 
         [HttpGet]
         [Route("ByPage", Name = "GetPageLinkHeaders")]
