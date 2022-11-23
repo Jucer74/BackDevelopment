@@ -1,0 +1,10 @@
+INSERT INTO Products (Name, Description, Price, ImageName) VALUES ('Name0001', 'Description0001', 1000, 'Image0001');
+INSERT INTO Products (Name, Description, Price, ImageName) VALUES ('Name0002', 'Description0002', 1001, 'Image0002');
+INSERT INTO Products (Name, Description, Price, ImageName) VALUES ('Name0003', 'Description0003', 1002, 'Image0003');
+INSERT INTO Products (Name, Description, Price, ImageName) VALUES ('Name0004', 'Description0004', 1003, 'Image0004');
+INSERT INTO Products (Name, Description, Price, ImageName) VALUES ('Name0005', 'Description0005', 1004, 'Image0005');
+INSERT INTO Products (Name, Description, Price, ImageName) VALUES ('Name0006', null, 1005, 'Image0006');
+INSERT INTO Products (Name, Description, Price, ImageName) VALUES ('Name0007', null, 1006, 'Image0007');
+INSERT INTO Products (Name, Description, Price, ImageName) VALUES ('Name0008', null, 1007, 'Image0008');
+INSERT INTO Products (Name, Description, Price, ImageName) VALUES ('Name0009', null, 1008, 'Image0009');
+INSERT INTO Products (Name, Description, Price, ImageName) VALUES ('Name0010', null, 1009, 'Image0010');
