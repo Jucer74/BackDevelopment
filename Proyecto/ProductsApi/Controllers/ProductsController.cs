@@ -118,17 +118,18 @@ namespace ProductsApi.Controllers
             return _context.Products.Any(e => e.Id == id);
         }
 
-        // GET: api/Products
-        [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<Product>>> Search(string text)
+        [HttpGet("Search")]
+        public async Task<ActionResult<IEnumerable<Product>>> Search(string queryValue)
         {
             IQueryable<Product> product = _context.Products;
 
-            if (!string.IsNullOrEmpty(text))
+
+            if (string.IsNullOrEmpty(queryValue))
             {
-                product = product.Where(p => p.Name.Contains(text)
-                || p.Description.Contains(text) || p.ImageName.Contains(text));
+                return BadRequest();
             }
+            product = product.Where(p => p.Name.Contains(queryValue)
+            || p.Description.Contains(queryValue) || p.ImageName.Contains(queryValue));
 
             return Ok(product);
         }
