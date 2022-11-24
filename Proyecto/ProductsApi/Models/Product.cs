@@ -21,4 +21,4 @@ namespace ProductsApi.Models
         [StringLength(50, ErrorMessage = "La longitud maxima del Nombre de la Imagen es de 50 caracteres")]
         public string? ImageName { get; set; }
     }
-}
+}   
