@@ -1,41 +1,17 @@
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using NetBank.Api.Define;
-using NetBank.Api.Models;
-using NetBank.Api.Services;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace NetBank.Api.Controllers
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace NetBank.Api.Controllers;
+
+[Route("api/v1/[controller]")]
+[ApiController]
+public class CreditCardController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class CreditCardController : ControllerBase
+    // GET: api/<CreditCardController>/{creditcardNumber}
+    [HttpGet("{creditcardNumber}")]
+    public IActionResult Get(string creditcardNumber)
     {
-        private readonly ILogger<CreditCardController> _logger;
-        private readonly CreditCardService _creditCardService;
-        public CreditCardController(CreditCardService creditCardService, ILogger<CreditCardController> logger)
-        {
-            _logger = logger;
-            _creditCardService = creditCardService;
-        }
-
-        [HttpGet("{creditcardNumber}")]
-        public IActionResult Get(string creditcardNumber)
-        {
-            var validateResult = _creditCardService.Validate(creditcardNumber);
-            var result = _creditCardService.Result;
-
-            switch (validateResult)
-            {
-                case ValidationResultType.Ok:
-                    return Ok(result);     
-                case ValidationResultType.BadRequest:
-                    return BadRequest(result);     
-                case ValidationResultType.NotFound:
-                    return NotFound(result);     
-                default:
-                    return StatusCode(StatusCodes.Status500InternalServerError, new CreditCardResult("Internal Server Error", false));
-            }
-        }
+        throw new NotImplementedException();
     }
 }
