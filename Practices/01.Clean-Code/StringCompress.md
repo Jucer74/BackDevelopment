@@ -46,15 +46,23 @@ input=OOOoooXXXxxxx, output=O3o3X3x3 <br>
 
 ### Entrada Incorrecta: Cadena vacia 
 
-    Obtener el Numero mayor ordenado
-    ================================
-    Ingrese N= 
+    Comprimir cadena
+    ================
+    Ingrese la cadena=
     Error!!!: La longitud de la cadena ingresada debe ser mayor a cero y menor que 256
 
 
+
+### Entrada Incorrecta: Cadena vacia 
+
+    Comprimir cadena
+    ================
+    Ingrese la cadena=aaaaaaaaa....aaaaa (mas de 256 caracteres)
+    Error!!!: La longitud de la cadena ingresada debe ser mayor a cero y menor que 256
+
 ### Entrada Incorrecta: Cadena con carcteres no validos 
 
-    Obtener el Numero mayor ordenado
-    ================================
-    Ingrese N= a1b2c3d4
-    Error!!!: La cadena ingresada solo debe contener letras [Ä-Z,a-z] 
+    Comprimir cadena
+    ================
+    Ingrese la cadena= a1b1c1
+    Error!!!: La cadena ingresada solo debe contener letras [A-Z,a-z] 
