@@ -18,7 +18,7 @@ public class CharCompressor
 			if(LineFilter(lineToCompress)){ //Check if conditions are met for compression
 				string compressedString = CompressString(lineToCompress);//If so, compress it
 				string finalString = CompareOriginalAndCompressed(lineToCompress, compressedString); //Compare original and compressed string
-				PrintStringCompressed(finalString); //if shorter, output the compressed version. Otherwise output string recieved in input m 
+				PrintString(finalString); //if shorter, output the compressed version. Otherwise output string recieved in input
 				loop=false; //Exit while loop;
 			}
 		}while(loop==true);
@@ -69,7 +69,7 @@ public class CharCompressor
 		}
 	}
 	
-	public static void PrintStringCompressed(string finalLine)
+	public static void PrintString(string finalLine)
 	{
 		Console.WriteLine(finalLine);
 	}
