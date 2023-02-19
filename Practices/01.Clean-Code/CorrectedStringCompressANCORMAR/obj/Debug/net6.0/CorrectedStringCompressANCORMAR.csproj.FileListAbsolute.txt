@@ -1,0 +1,15 @@
+C:\Users\felip\Desktop\BACK END\CorrectedStringCompressANCORMAR\bin\Debug\net6.0\CorrectedStringCompressANCORMAR.exe
+C:\Users\felip\Desktop\BACK END\CorrectedStringCompressANCORMAR\bin\Debug\net6.0\CorrectedStringCompressANCORMAR.deps.json
+C:\Users\felip\Desktop\BACK END\CorrectedStringCompressANCORMAR\bin\Debug\net6.0\CorrectedStringCompressANCORMAR.runtimeconfig.json
+C:\Users\felip\Desktop\BACK END\CorrectedStringCompressANCORMAR\bin\Debug\net6.0\CorrectedStringCompressANCORMAR.dll
+C:\Users\felip\Desktop\BACK END\CorrectedStringCompressANCORMAR\bin\Debug\net6.0\CorrectedStringCompressANCORMAR.pdb
+C:\Users\felip\Desktop\BACK END\CorrectedStringCompressANCORMAR\obj\Debug\net6.0\CorrectedStringCompressANCORMAR.csproj.AssemblyReference.cache
+C:\Users\felip\Desktop\BACK END\CorrectedStringCompressANCORMAR\obj\Debug\net6.0\CorrectedStringCompressANCORMAR.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\felip\Desktop\BACK END\CorrectedStringCompressANCORMAR\obj\Debug\net6.0\CorrectedStringCompressANCORMAR.AssemblyInfoInputs.cache
+C:\Users\felip\Desktop\BACK END\CorrectedStringCompressANCORMAR\obj\Debug\net6.0\CorrectedStringCompressANCORMAR.AssemblyInfo.cs
+C:\Users\felip\Desktop\BACK END\CorrectedStringCompressANCORMAR\obj\Debug\net6.0\CorrectedStringCompressANCORMAR.csproj.CoreCompileInputs.cache
+C:\Users\felip\Desktop\BACK END\CorrectedStringCompressANCORMAR\obj\Debug\net6.0\CorrectedStringCompressANCORMAR.dll
+C:\Users\felip\Desktop\BACK END\CorrectedStringCompressANCORMAR\obj\Debug\net6.0\refint\CorrectedStringCompressANCORMAR.dll
+C:\Users\felip\Desktop\BACK END\CorrectedStringCompressANCORMAR\obj\Debug\net6.0\CorrectedStringCompressANCORMAR.pdb
+C:\Users\felip\Desktop\BACK END\CorrectedStringCompressANCORMAR\obj\Debug\net6.0\CorrectedStringCompressANCORMAR.genruntimeconfig.cache
+C:\Users\felip\Desktop\BACK END\CorrectedStringCompressANCORMAR\obj\Debug\net6.0\ref\CorrectedStringCompressANCORMAR.dll
