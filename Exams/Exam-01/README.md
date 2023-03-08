@@ -44,23 +44,23 @@ Dados el Numero **N**, deberiamos obtener el Mayor Ordenado (**MO**)
 
 # Ejemplos de la Ejecucion
 
-PrintMajorSortedNumber(3);
-3 -> 2
-
-PrintMajorSortedNumber(10);
-10 -> 9
-
-PrintMajorSortedNumber(20);
-20 -> 19
-
-PrintMajorSortedNumber(132);
-132 -> 129
-
-PrintMajorSortedNumber(1000);
-1000 -> 999
-
-PrintMajorSortedNumber(0);
-Error: The Input Number [0] must be between 1 and 1,000,000
-
-PrintMajorSortedNumber(1000001);
-Error: The Input Number [1000001] must be between 1 and 1,000,000
+PrintMajorSortedNumber(3);<br>
+3 -> 2<br>
+<br>
+PrintMajorSortedNumber(10);<br>
+10 -> 9<br>
+<br>
+PrintMajorSortedNumber(20);<br>
+20 -> 19<br>
+<br>
+PrintMajorSortedNumber(132);<br>
+132 -> 129<br>
+<br>
+PrintMajorSortedNumber(1000);<br>
+1000 -> 999<br>
+<br>
+PrintMajorSortedNumber(0);<br>
+Error: The Input Number [0] must be between 1 and 1,000,000<br>
+<br>
+PrintMajorSortedNumber(1000001);<br>
+Error: The Input Number [1000001] must be between 1 and 1,000,000<br>
