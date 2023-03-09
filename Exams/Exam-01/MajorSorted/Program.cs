@@ -41,5 +41,6 @@ public class Program
     private static void PrintMajorSortedNumber(int inputNumber)
     {
         // TODO: Complete the code
+        Console.WriteLine("Testing");
     }
 }

@@ -40,6 +40,22 @@ public class Program
 	
 	private static void PrintMajorSortedNumber(int inputNumber)
 	{
-      // TODO: Complete the code
+		// TODO: Complete the code
+		if (!RangeCheck(inputNumber))
+		{
+
+		}
+		
+	}
+
+	private static bool RangeCheck(int inputNumber)
+	{
+		int minimumAllowed = 1;
+		int maximumAllowed = 1000000;
+		if (minimumAllowed < inputNumber < maximumAllowed)
+		{
+			Console.WriteLine("Error: The Input Number [" + inputNumber + "] must be between " + minimumAllowed + " and " + maximumAllowed);
+			return false
+		}
 	}
 }
