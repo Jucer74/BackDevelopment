@@ -43,7 +43,7 @@ public class Program
 		// TODO: Complete the code
 		if (!RangeCheck(inputNumber))
 		{
-
+			Console.WriteLine
 		}
 		
 	}
