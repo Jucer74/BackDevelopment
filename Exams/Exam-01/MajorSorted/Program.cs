@@ -40,24 +40,57 @@ public class Program
 
     private static void PrintMajorSortedNumber(int inputNumber)
     {
-        // TODO: Complete the code
-        if (!RangeCheck(inputNumber))
+        if (RangeCheck(inputNumber))
         {
-            Console.WriteLine("proceed");
-
+            Console.WriteLine(inputNumber+" -> "+SearchForMayor(inputNumber));
         }
+
     }
 
     private static bool RangeCheck(int inputNumber)
     {
+        bool passCheck = true;
+
         int minimumAllowed = 1;
         int maximumAllowed = 1000000;
-        if (inputNumber <= minimumAllowed && inputNumber >= maximumAllowed)
+
+        if (inputNumber <= minimumAllowed || inputNumber >= maximumAllowed)
         {
             Console.WriteLine("Error: The Input Number [" + inputNumber + "] must be between " + minimumAllowed + " and " + maximumAllowed);
-            return false;
+            passCheck = false;
         }
 
-        return true;
+        return passCheck;
+    }
+
+    private static int SearchForMayor(int inputNumber)
+    {
+        int mayorSorted = inputNumber - 1;
+
+        while (!IsSorted(mayorSorted))
+        {
+            mayorSorted--;
+        }
+
+        return mayorSorted;
+    }
+
+    private static bool IsSorted(int currentSorted)
+    {
+        int predictedDigits = (int)Math.Log10(currentSorted);
+        for(int i=1; i<=predictedDigits; i++)
+        {
+
+            //int residue = currentSorted % 10;
+        }
+        //if (residue > previousResidue)
+        //{
+        //return true;
+        //}
+
+        return false;
+
+        //Welp, seems like I'm not cut out for back-end
+        //See you next semester in Front-End Julio
     }
 }
