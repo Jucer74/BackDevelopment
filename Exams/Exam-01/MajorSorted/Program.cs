@@ -49,15 +49,15 @@ public class Program
 
     private static bool RangeCheck(int inputNumber)
     {
-        bool passCheck = true;
+        bool passCheck = true; // Esta asignacion es Innecesaria
 
-        int minimumAllowed = 1;
+        int minimumAllowed = 1;         // Estos valores deberian ser constantes globales
         int maximumAllowed = 1000000;
 
         if (inputNumber <= minimumAllowed || inputNumber >= maximumAllowed)
         {
             Console.WriteLine("Error: The Input Number [" + inputNumber + "] must be between " + minimumAllowed + " and " + maximumAllowed);
-            passCheck = false;
+            passCheck = false; // Esta Funcion valida y ademas escribe mensaje
         }
 
         return passCheck;
@@ -88,7 +88,7 @@ public class Program
         //return true;
         //}
 
-        return false;
+        return false; // Se esta quedando en un ciclo infinito
 
         //Welp, seems like I'm not cut out for back-end
         //See you next semester in Front-End Julio
