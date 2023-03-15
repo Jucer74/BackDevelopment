@@ -33,9 +33,8 @@ void Main()
         var jsonObject = new { data = rows };
         string json = JsonConvert.SerializeObject(jsonObject);
         
-        // Imprimir el resultado
+        // Escribir el resultado
         Console.WriteLine(json);
-
         using (TextWriter writer = new StreamWriter(outputFileJson))
         {
             writer.WriteLine(json);
