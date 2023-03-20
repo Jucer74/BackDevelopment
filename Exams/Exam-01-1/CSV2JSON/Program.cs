@@ -34,7 +34,8 @@ List<string[]?> ReadCSV(string inputFileCsv){ //Leer CSV
     return new List<string[]?>(); //return empty list if exception catch, it will create an empty JSON file so delete it
 }
 
-void SetCSVDelimiter(TextFieldParser CsvParser, string DEFAULT_DELIMITER){
+void SetCSVDelimiter(TextFieldParser CsvParser, string DEFAULT_DELIMITER) // No se usar Constante como Parametro
+{
     CsvParser.TextFieldType = FieldType.Delimited;
     CsvParser.SetDelimiters(DEFAULT_DELIMITER);
 }
