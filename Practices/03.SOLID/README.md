@@ -30,13 +30,27 @@ El proyecto es una sencilla aplicación de consola, con las siguientes opciones:
 
 Cada una de la opciones realiza acciones sobre una pequeña base de datos SQLite con la siguiente estructura:
 
-![Modelo De Datos](https://github.com/Jucer74/BackDevelopment/blob/main/Practices/03.SOLID/Images/SOLIDDB-MER.png)
+![Modelo De Datos](https://github.com/Jucer74/SOLID/blob/main/Images/SOLIDDB-MER.png)
 
 El proyecto tiene la siguiente estructura:
 
-![Modelo De Datos](https://github.com/Jucer74/BackDevelopment/blob/main/Practices/03.SOLID/Images/Project-Structure.png)
+![Directorios](https://github.com/Jucer74/SOLID/blob/main/Images/Project-Structure.png)
 
-Cada folder tiene la versión inicial del proyecto antes de aplicar cada principio (ejemplo: #.1 Principio sin aplicar) la idea es que se tome este proyecto y copie en la cartepa #.2 y se aplique cada principio en esa versión.
+Cada folder tiene la descripcion de cada principios y la idea es aplicar los cambios necesarios en el proyecto mejorandolo con la aplicacion de cada principio.
+
+Cree una rama nueva a partir de la version de **main** y nombrela segun el siguiente formato:
+
+**Año-Periodo/Nickname**
+
+- **Año**: Año actual , por ejemplo 2023
+- **Periodo**: Se Refiere al semestre actual puede ser 01 o 02
+- **Nickname**: Se construye utilizando las siguientes reglas
+  - 3 primeras letras del primer Nombre
+  - 3 primeras letras del primer apellido
+  - 3 primeras letras del segundo apellido
+Por ejemplo el nickname de Julio Cesar Robles Uribe, seria julroburi. por consiguiente el nombre de la rama seria:
+
+Nueva Rama: **2023-03/julroburi**
 
 Dentro de cada folder se encuentra la explicación de cada principio y la forma de aplicarlo al proyecto.
 
@@ -44,4 +58,6 @@ Dentro de cada folder se encuentra la explicación de cada principio y la forma 
 - **Common/SqlDatabase**: Librería para realizar las operaciones sobre la base de datos.
 - **Images**: Imagenes relacionadas con la explicacion de estos principios.
 - **Reports**: Carpeta en donde se generan los reportes de la apliación.
-- **SOLIDDatabase**: Carpeta donde se encuentra la base de datos necesaria para ejecutar las opciones de este proyecto.
+- **Principles**: Folder que contiene uno a uno los principios que se deben aplicar
+- **SOLID.Database**: Carpeta donde se encuentra la base de datos necesaria para ejecutar las opciones de este proyecto.
+- **SOLID.Principles**: Proyecto donde se aplicaran los principios
