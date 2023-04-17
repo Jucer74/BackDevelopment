@@ -1,5 +1,4 @@
 # Evaluación Teórica (40%)
-
 Responda las preguntas del siguiente Enlace:
 
 [Examen]()
@@ -7,49 +6,48 @@ Responda las preguntas del siguiente Enlace:
 # Ejercicio (60%)
 Implemente la aplicacion para Soportar operaciones sobre Cuentas Bancarias, Teniendo en cuenta el siguiente diagrama de Clases:
 
- 
 ## Cuenta Bancaria
+Define las propiedades principales de la cuenta asi:
 
- **BankAcount** (Abstract class)
- - AccountNumber
- - PlaceHolder (Titular)
- - BalanceAmount
- - AccountType = 1) Saving , 2) Checking
+## IBankAcount 
+**Propiedades**
+ + AccountNumber  : string  => Numero de la Cuenta, Solo Digitos y longitud exacta de 10 digitos
+ + AccountOwner   : string   => Nombre del Titular de la cuenta y longitud menor o igual a 50 caracteres
+ + BalanceAmount  : decimal  => Valor Numerico mayor a cero
+ + AccountType    : AccountType => Tipo de cuenta (Ahorros o Corriente) de tipo enum AccountType
+                  1) Saving , 2) Checking
 
-## Metodos
- - Deposit
- - Withdrawal => CheckingAccount => Valor de Sobregiro (1000.000)
- - balance
-
-
-
+**Metodos**
+ + Deposit(amount: decimal) : void
+   Incrementa el valor del BalanceAmount con el valor pasado por parametro
+ + Withdrawal (amount: decimal) : void
+   Decrementa el valor del BalanceAmount, restando el valor pasado  por parametro
  
  ## Tipos de Cuentas Bancarias (Ahorros/Corriente)
- - SavingAccount : BankAccount
- - CheckingAccount: : BankAccount
-    - OverdraftAmount
+ Heredan de **IBankAccount** he implementan los metodos correspondientes
+ + SavingAccount : IBankAccount
+   Implementa las propiedades y Metodos de la Interface IBankAccount para manejar los datos de la cuenta de Ahorros
 
+ + CheckingAccount : IBankAccount
+    - OverdraftAmount: decimal => Valor de Sobregiro 
+
+   Implemente las propiedades y metodos de la interface IBankAccount para manejar los datos de la cuenta corriente, adicionando la propiedad de OverdraftAmount (Valor de sobregiro), cuyo valor minimo por defecto seria de un millon (MIN_OVERDRAFT_AMOUNT=1.000.000), por lo que al momento de crear una cuenta corriente el valor del saldo (BalanceAmount) sera igual al valor de la cuenta mas el valor minimo de siobregiro.
 
  **Bank**
- - CreateAccount => List<BankAcount> AcountList
-    - AccoutnNumber
-    - PlaceHolder
-    - AccountType
-    - OverdraftAmount
-    - BalanceAmount
-
+  - AcountList: List<IBankAcount> => Lista con todas las cuentas que se estan manejando por la aplicacion
 ## Metodos 
- - GetBalance 
-   -AccountNumber
-   
- - DepositAccount
-    - AccountNumber
-    - Amount
+
++ CreateAccount (accountNumber: IBankAccount) : static Void
+  Adiciona una nueva cuenta a la lista general de Cuentas, validando que no exista, en cuyo caso muestra un menaje de que la cuenta ya existe
+
++ GetBalance(accountNumber: string): static void
+  Obtiene el balance o saldo actual de la cuenta, validando primero que la cuenta exista, en cuyo caso de no existir , se muestra un menaje de error
+
++ DepositAccount(accountNumber: string, amount: decimal) 
+  Valida que la cuenta exista y adiciona el valor depositado al saldo de la cuenta. pero en caso de no existir la cuenta, se muestra un mensaje de que la cuenta no existe.
     
- - WithdrawalAccount
-    - AccountNumber
-    - Amount => CcheckingAmount => hasta el valor del Sobregiro
- 
+ - WithdrawalAccount(accountNumber: string, amount: decimal)
+   Valida que la cuenta exista y descuenta el valor del balance de la cuenta, teniendo presente que en caso tal de que la cuenta sea de tipo Corriente, el valor a retirar no debe soportar el valor de sobregiro, en caso de no tnener fondos.
 
 ## Aplicacion 
  1- Create Acount
