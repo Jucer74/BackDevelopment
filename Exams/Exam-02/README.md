@@ -29,9 +29,9 @@ Define las propiedades principales de la cuenta asi:
    Implementa las propiedades y Metodos de la Interface IBankAccount para manejar los datos de la cuenta de Ahorros
 
  + CheckingAccount : IBankAccount
-    - OverdraftAmount: decimal => Valor de Sobregiro 
+    + OverdraftAmount: decimal => Valor de Sobregiro 
 
-   Implemente las propiedades y metodos de la interface IBankAccount para manejar los datos de la cuenta corriente, adicionando la propiedad de OverdraftAmount (Valor de sobregiro), cuyo valor minimo por defecto seria de un millon (MIN_OVERDRAFT_AMOUNT=1.000.000), por lo que al momento de crear una cuenta corriente el valor del saldo (BalanceAmount) sera igual al valor de la cuenta mas el valor minimo de siobregiro.
+   Implemente las propiedades y metodos de la interface IBankAccount para manejar los datos de la cuenta corriente, adicionando la propiedad de OverdraftAmount (Valor de sobregiro), cuyo valor minimo por defecto seria de un millon (MIN_OVERDRAFT_AMOUNT=1.000.000), por lo que al momento de crear una cuenta corriente el valor del saldo (BalanceAmount) será igual al valor de la cuenta mas el valor minimo de siobregiro.
 
  **Bank**
   - AcountList: List<IBankAcount> => Lista con todas las cuentas que se estan manejando por la aplicacion
@@ -41,21 +41,24 @@ Define las propiedades principales de la cuenta asi:
   Adiciona una nueva cuenta a la lista general de Cuentas, validando que no exista, en cuyo caso muestra un menaje de que la cuenta ya existe
 
 + GetBalance(accountNumber: string): static void
-  Obtiene el balance o saldo actual de la cuenta, validando primero que la cuenta exista, en cuyo caso de no existir , se muestra un menaje de error
+  Obtiene el balance o saldo actual de la cuenta, validando primero que la cuenta exista, en cuyo caso de no existir , se muestra un mensaje de error
 
 + DepositAccount(accountNumber: string, amount: decimal) 
   Valida que la cuenta exista y adiciona el valor depositado al saldo de la cuenta. pero en caso de no existir la cuenta, se muestra un mensaje de que la cuenta no existe.
     
- - WithdrawalAccount(accountNumber: string, amount: decimal)
-   Valida que la cuenta exista y descuenta el valor del balance de la cuenta, teniendo presente que en caso tal de que la cuenta sea de tipo Corriente, el valor a retirar no debe soportar el valor de sobregiro, en caso de no tnener fondos.
++ WithdrawalAccount(accountNumber: string, amount: decimal)
+  Valida que la cuenta exista y descuenta el valor del balance de la cuenta, teniendo presente que en caso tal de que la cuenta sea de tipo Corriente, el valor a retirar no debe soportar el valor de sobregiro, en caso de no tnener fondos.
 
 ## Aplicacion 
- 1- Create Acount
+La aplicacion debe mostrar un Menu con las siguientes opciones:
+
+ 1- Create Account
  2- Get Balance Account
  3- Deposit Account
  4- Withdrawal Account
  0- Exit
 
+En cada Opcion se piden los datos y se validan que sean datos corectos, ya sea de contenido, de tipo o de longitud, antes de proceder a ejecutar la accion
 # Nota
 RECUERDE SUBIR SU SOLUCIÓN A SU RAMA DE ESTE REPOSITORIO.
 
@@ -71,7 +74,7 @@ RECUERDE SUBIR SU SOLUCIÓN A SU RAMA DE ESTE REPOSITORIO.
   - Los Nombres son claros o son confusos?                            
   - Son Pronunciables                                                 
   - Son buscables (Numero Magicos o No hay Constantes)?               
-  - tiene notaciones innecesarias IntCodigo, strData) ?               
+  - tiene notaciones innecesarias (IntCodigo, strData) ?               
   - Usan Sustantivos para Clases y Verbos para Metodos?               
   - Una sola palabra por concepto?                                    
   - No usan combinaciones o juegos de palabras?                       
