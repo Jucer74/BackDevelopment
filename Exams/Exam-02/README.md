@@ -6,6 +6,8 @@ Responda las preguntas del siguiente Enlace:
 # Ejercicio (60%)
 Implemente la aplicacion para Soportar operaciones sobre Cuentas Bancarias, Teniendo en cuenta el siguiente diagrama de Clases:
 
+![Diagrama](https://github.com/Jucer74/BackDevelopment/blob/main/Exams/Exam-02/Images/Calss-Diagram.png)
+
 ## Cuenta Bancaria
 Define las propiedades principales de la cuenta asi:
 
