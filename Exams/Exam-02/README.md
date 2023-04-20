@@ -56,13 +56,13 @@ Define las propiedades principales de la cuenta asi:
 
 ## Aplicacion 
 La aplicacion debe mostrar un Menu con las siguientes opciones:
-
+```
  1- Create Account
  2- Get Balance Account
  3- Deposit Account
  4- Withdrawal Account
  0- Exit
-
+```
 En cada Opcion se piden los datos y se validan que sean datos corectos, ya sea de contenido, de tipo o de longitud, antes de proceder a ejecutar la accion
 
 ## Acciones
