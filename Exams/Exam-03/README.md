@@ -95,8 +95,32 @@ Para realizar pruebas utilice el siguiente [Generador](https://www.freeformatter
 # Proyecto
 Use el Proyecto **NetBank.Api** como punto inicial, y adicione los componentes necesarios para implementar la solucion.
 
+# Base de Datos
+Utilice la base de datos en linea de [db4free.net](https://www.db4free.net/) utilizando los siguientes datos:
+
+- Database Name: netbankdb
+- UserName: netbankuser
+- Password: N3tB4nkUs3r*01
+- Email Address: Utilice su correo de la Universidad para evitar restricciones de dominio publico.
+
+Complete los datos del formulario de registro y luego confirme su registro en el enlace enviado a su correo electronico.
+Por Ultimo entre a la consola administrativa para ejecutar la creacion de tabla y la insercion de los datos, ejecutando los Scripts de:
+- 03_Tab_IssuingNetworks.sql
+- 04_Ins_IssuingNetworks.sql
+
+# Data 
+Utilice la clase la siguiente cadena de conexion en u sarchivo de **appsetting.json**
+
+```json
+  "ConnectionStrings": {
+    "CnnStr": "Server=db4free.net;Port=3306;Database=netbankdb;Uid=netbankuser;Pwd=N3tB4nkUs3r*01;"
+  }
+```
+
+
+
 ## Condiciones
-- Distribuya la logica en los componentes necesarios para completar la aplicacion, usando servicios y utilidades para ser utlizadas 
+- Distribuya la logica en los componentes necesarios para completar la aplicacion, usando servicios y utilidades para ser utilizadas dentro del proyecto.
 
 ## Calificacion
 - No tiene Errores Ni Warnings = (0.5)
@@ -124,12 +148,5 @@ Los Nombres de las variables y Funciones:
 - Tieen Logica de Retorno directo y correcto o hay If para retornar
 - No Existen Multiples If anidados o SI hay instrucciones Switch
 
-# Proceso
-Genere su rama utilizando la siguiente nomenclatura:
-- 3 primeras letras de su primer nombre
-- 3 primeras letras de primer apellido
-- 3 primeras letras de su segundo apellido.
-
-**Ejemplo:**</br>
-Si el nombre es Julio Cesar Robles Uribe , el Nombre de su rama seria **julroburi**
-
+# NOTAS
+Recuerde subir su codigo a su rama , en los directorios especificos, por favor no utilice otras rutas, de lo contratio **No podra ser calificado**
