@@ -8,7 +8,7 @@ public class IssuingNetwork
     public int Id { get; set; }
 
     [Required]
-    public string IssuingNetworkName { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
     public string? StartsWithNumbers { get; set; } = null!;
 
