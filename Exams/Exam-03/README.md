@@ -4,7 +4,7 @@ Responda las preguntas del siguiente Enlace:
 [Examen](https://forms.gle/8EEM6dCrw5DcGAqC8)
 
 # Evaluación Práctica (60%)
-Realice el Siguiente Ejercicio>
+Realice el Siguiente Ejercicio:
 
 # API Rest
 Una API es la forma en como se pueden integrar dos o mas aplicaciones y su uso en Web se conoce como WebApi, que se base en estilo Arquitectonico denominado REST, que a su vez utiliza los siguientes verbos como base para efectuar las operaciones.
