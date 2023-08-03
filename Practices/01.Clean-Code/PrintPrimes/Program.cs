@@ -1,4 +1,4 @@
-﻿﻿// Main
+// Main
 PrintPrimes();
 
 // Consts
