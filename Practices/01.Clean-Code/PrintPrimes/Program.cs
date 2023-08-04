@@ -41,11 +41,14 @@ void GetPrimes(int limit)
     {
         if (IsPrime(i)) 
         {
-            Console.Write(i);
-            if(i + 2 <= limit + 2)
+
+            // To avoid the comma at the end
+            if(i > PRIME_2 )
             {
                 Console.Write(",");
-            }            
+            }   
+
+            Console.Write(i);
         }
     }
 }
