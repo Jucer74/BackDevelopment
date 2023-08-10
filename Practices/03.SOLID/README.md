@@ -30,11 +30,11 @@ El proyecto es una sencilla aplicación de consola, con las siguientes opciones:
 
 Cada una de la opciones realiza acciones sobre una pequeña base de datos SQLite con la siguiente estructura:
 
-![Modelo De Datos](https://github.com/Jucer74/BackDevelopment/blob/main/Practices/03.SOLID/Images/SOLIDDB-MER.png)
+![Modelo De Datos](https://github.com/Jucer74/SOLID/blob/main/Images/SOLIDDB-MER.png)
 
 El proyecto tiene la siguiente estructura:
 
-![Directorios](https://github.com/Jucer74/BackDevelopment/blob/main/Practices/03.SOLID/Images/Project-Structure.png)
+![Directorios](https://github.com/Jucer74/SOLID/blob/main/Images/Project-Structure.png)
 
 Cada folder tiene la descripcion de cada principios y la idea es aplicar los cambios necesarios en el proyecto mejorandolo con la aplicacion de cada principio.
 
