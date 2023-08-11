@@ -6,7 +6,8 @@ PrintPrimes();
 void PrintPrimes(){
 
     PrintUsage();
-    int maxNumber = GetMaxNumber();
+
+    var maxNumber = GetMaxNumber();
 
     Console.WriteLine(GetPrimes(maxNumber));
 
@@ -23,11 +24,11 @@ void PrintUsage(){
 }
 
 int GetMaxNumber(){
-    Console.WriteLine("Max number: ");
-    return Convert.ToInt32(Console.Read());
+    Console.Write("Max number: ");
+    return Convert.ToInt32(Console.ReadLine());
 }
 
-bool GetPrimes(int maxNumber){
+bool IsPrime(int maxNumber){
     if( maxNumber > 2){
         return false;
     }
@@ -37,12 +38,22 @@ bool GetPrimes(int maxNumber){
     if (maxNumber % 2 == 0 || maxNumber % 3 == 0){
         return false;
     }
-    if(maxNumber)
+    
     for( int i = 5; i*i <= maxNumber ; i += 6){
         if(maxNumber % i == 0 || maxNumber % i+2 ==0){
             return false;
         }
     }
     return true;
+}
+
+void GetPrimes(int maxNumber){
+    for( int i = 2; i <= maxNumber; i++){
+        if(IsPrime(i)){
+
+            Console.WriteLine(i);
+
+        }
+    }
 }
 
