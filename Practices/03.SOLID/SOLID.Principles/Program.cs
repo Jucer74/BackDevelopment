@@ -1,11 +1,35 @@
-﻿using SOLID.Principles;
+﻿using SOLID.Common.SQLData.Interface;
+using SOLID.Common.SQLData;
+using SOLID.Principles;
+using SOLID.Principles.Define;
 using SOLID.Principles.Dto;
 using System.Globalization;
+using System.Data.SQLite;
+using System.IO;
+
 
 /***********/
 /*-- Main -*/
 /***********/
-ApplicationData applicationData = new ApplicationData();
+
+/// Build the Connection String to the database
+/// </summary>
+/// <returns>Connection String</returns>
+string GetConnectionString()
+{
+    var sqlConnectionStringBuilder = new SQLiteConnectionStringBuilder
+    {
+        DataSource = Constants.DatabaseFileName
+    };
+
+    return sqlConnectionStringBuilder.ToString();
+}
+
+ISqlDatabase sqlDatabase = new SqlDatabase(GetConnectionString());
+EmployeeData employeeData = new EmployeeData(sqlDatabase);
+ProjectData projectData = new ProjectData(sqlDatabase);
+
+
 
 try
 {
@@ -31,6 +55,7 @@ void Menu()
         Console.WriteLine("1. Insert new Employee");
         Console.WriteLine("2. Get Employee List");
         Console.WriteLine("3. Generate Employees Report");
+        Console.WriteLine("4. Show Projects");
         Console.WriteLine("0. Exit");
         Console.WriteLine("Select Option:");
         option = Console.ReadKey().KeyChar;
@@ -54,14 +79,48 @@ void Menu()
                 GenerateReport();
                 break;
 
+            case '4':
+                ShowProjects();
+                break;
+
             default:
                 Console.WriteLine("Invalid Option");
                 break;
         }
 
+      ;
+
         Console.WriteLine("\nPress any key to continue... ");
         Console.ReadKey();
     }
+}
+
+void ShowProjects()
+{
+    Console.Clear();
+    Console.WriteLine("Show Projects");
+    Console.WriteLine("-------------");
+    Console.WriteLine();
+
+    var projectList = projectData.GetProjects();
+
+    Project project = null!;
+
+    foreach (var prj in projectList)
+    {
+        if (prj.Type == (char)ProjectType.Internal)
+        {
+            project = new InternalProject();
+        }
+        if (prj.Type == (char)ProjectType.External)
+        {
+            project = new ExternalProject();
+        }
+
+        project.ShowDetails(prj);
+    }
+
+    Console.WriteLine();
 }
 
 void GetEmployees()
@@ -71,7 +130,7 @@ void GetEmployees()
     Console.WriteLine("-------------");
     Console.WriteLine();
 
-    var employees = applicationData.GetEmployees();
+    var employees = employeeData.GetEmployees();
 
     foreach (var emp in employees)
     {
@@ -96,7 +155,7 @@ void InsertEmployee()
 
     var employeeDto = CreateEmployeDto();
 
-    if (applicationData.InsertEmployee(employeeDto))
+    if (employeeData.InsertEmployee(employeeDto))
     {
         Console.WriteLine("\nThe Employee was insert Successfully\n");
     }
@@ -143,11 +202,33 @@ void GenerateReport()
     Console.WriteLine("---------------");
     Console.WriteLine();
 
-    Console.Write("Report File Name : ");
-
+    Console.Write("Report File Name         : ");
     var reportFileName = Console.ReadLine();
+    Console.Write("Report Type (1-CSV 2-XML): ");
+    var reportTypeOption = ' ';
+    while (reportTypeOption != (char)ReportType.CSV && reportTypeOption != (char)ReportType.XML)
+    {
+        reportTypeOption = Console.ReadKey().KeyChar;
+    }
 
-    applicationData.GenerateReport(reportFileName!);
+    Console.WriteLine();
+
+    var employees = employeeData.GetEmployees();
+
+    IReportGenerator reportGenerator = null!;
+    switch ((ReportType)reportTypeOption)
+    {
+        case ReportType.CSV:
+            reportGenerator = new ReportCSV();
+            break;
+
+        case ReportType.XML:
+            reportGenerator = new ReportXML();
+            break;
+    };
+
+    reportGenerator.Generate(reportFileName!, employees);
 
     Console.WriteLine("the report was generated.");
 }
+
