@@ -6,7 +6,7 @@ Responda las preguntas del siguiente Enlace:
 # Ejercicio (60%)
 Implemente la aplicacion para Soportar operaciones sobre Cuentas Bancarias, Teniendo en cuenta el siguiente diagrama de Clases:
 
-![Diagrama](https://github.com/Jucer74/BackDevelopment/blob/main/Exams/Exam-02/Images/Calss-Diagram.png)
+![Diagrama](https://github.com/Jucer74/BackDevelopment/blob/main/Exams/Exam-01/Images/Calss-Diagram.png)
 
 ## Cuenta Bancaria
 Define las propiedades principales de la cuenta asi:
@@ -57,11 +57,11 @@ Define las propiedades principales de la cuenta asi:
 ## Aplicacion 
 La aplicacion debe mostrar un Menu con las siguientes opciones:
 
- 1- Create Account
- 2- Get Balance Account
- 3- Deposit Account
- 4- Withdrawal Account
- 0- Exit
+ 1- Create Account<br>
+ 2- Get Balance Account<br>
+ 3- Deposit Account<br>
+ 4- Withdrawal Account<br>
+ 0- Exit<br>
 
 En cada Opcion se piden los datos y se validan que sean datos corectos, ya sea de contenido, de tipo o de longitud, antes de proceder a ejecutar la accion
 
