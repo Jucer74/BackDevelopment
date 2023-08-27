@@ -2,32 +2,47 @@
 using System.Linq.Expressions;
 
 try
+{
+    MenuSelect();
+}
+catch (Exception e)
+{
+    Console.WriteLine(e);
+}
+static int Menu()
+{
+    Console.Write("     Banking Operation       \n" + "--------------------------------\n");
+    Console.Write("1. Create Account\n" + "2. Get Balance\n" + "3. Deposit Amount\n" + "4. Withdrawal Amount\n");
+    Console.Write("0. Exit\n" + "Select Option:\n");
+    string? menuSelected = Console.ReadLine();
+    return Convert.ToInt32(menuSelected);
+}
+void MenuSelect()
+{   
+    int option = -1;
+    do
     {
-        Menu();
-    }catch (Exception e)
-    {
-        Console.WriteLine(e);
-    }
+        
+        option = Menu();
 
-    void Menu()
-    {
-        var option = 0;
-        while((Options)option != Options.Exit)
+        if ((Options)option == Options.CreateAccount)
         {
-        Console.Write("1. Create Account\n" + "2. Get Balance\n" + "3. Deposit Amount\n" + "4. Withdrawal Amount\n" + "0. Exit\n" + "Select Option:\n");
-        option = Console.Read();
-
-        if((Options)option == Options.CreateAccount)
-        {}
-        else if((Options)option == Options.GetBalance)
-        {}
-        else if((Options)option == Options.DepositAmount)
-        {}
-        else if((Options)option == Options.WithdrawalAmount)
-        {}
+            Console.WriteLine("Create Account");
         }
-
-    }
+        else if ((Options)option == Options.GetBalance)
+        { 
+            Console.WriteLine("Get Balance");
+        }
+        else if ((Options)option == Options.DepositAmount)
+        { 
+            Console.WriteLine("Deposit Amount");
+        }
+        else if ((Options)option == Options.WithdrawalAmount)
+        { 
+            Console.WriteLine("Withdrawal Amount");
+        }
+    }while ((Options)option != Options.Exit);
+}
 
 public enum Options
 {

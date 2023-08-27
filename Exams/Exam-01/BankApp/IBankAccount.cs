@@ -10,5 +10,9 @@ public interface IBankAccount
     void Deposit(decimal amount);
     void Withdrawal(decimal amount);
 }
-
+public enum AccountType
+{
+    Saving = 1,
+    Checking = 2
+}
 
