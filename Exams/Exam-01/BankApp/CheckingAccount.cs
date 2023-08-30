@@ -1,22 +1,38 @@
 public class CheckingAccount : IBankAccount
 {
-    public string acccountNumber => throw new NotImplementedException();
+    public string acccountNumber {get;set;}
 
-    public string accountOwner => throw new NotImplementedException();
+    public string accountOwner {get;set;}
 
-    public decimal balanceAmount => throw new NotImplementedException();
+    public decimal balanceAmount {get;set;}
 
-    public AccountType accountType => throw new NotImplementedException();
+    public AccountType accountType {get;set;}
 
-    public decimal overdraftAmount => throw new NotImplementedException();
+    public decimal overdraftAmount {get;set;}
 
+    public CheckingAccount(AccountType accountType, string acccountNumber, string accountOwner, decimal balanceAmount)
+    {
+        this.accountType = accountType;
+        this.accountOwner = accountOwner;
+        this.balanceAmount = balanceAmount;
+        this.acccountNumber = acccountNumber;
+        overdraftAmount = 0;
+
+    }
     public void Deposit(decimal amount)
     {
-        throw new NotImplementedException();
+        balanceAmount += amount;
     }
 
     public void Withdrawal(decimal amount)
     {
-        throw new NotImplementedException();
+        if (balanceAmount >= amount)
+        {
+            balanceAmount -= amount;
+        }
+        else
+        {
+            overdraftAmount = Math.Abs(balanceAmount);
+        }
     }
 }
