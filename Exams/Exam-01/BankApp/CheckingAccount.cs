@@ -10,13 +10,14 @@ public class CheckingAccount : IBankAccount
 
     public decimal overdraftAmount {get;set;} = 0;
 
-    public CheckingAccount(AccountType accountType, string acccountNumber, string accountOwner, decimal balanceAmount)
+    public CheckingAccount(AccountType accountType, string acccountNumber, string accountOwner, decimal balanceAmount, decimal overdraftAmount)
+
     {
         this.accountType = accountType;
         this.accountOwner = accountOwner;
         this.balanceAmount = balanceAmount;
         this.acccountNumber = acccountNumber;
-        overdraftAmount = 10;
+        this.overdraftAmount = overdraftAmount;
 
     }
     public void Deposit(decimal amount)

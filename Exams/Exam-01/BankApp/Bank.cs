@@ -19,7 +19,7 @@ static class Bank
 
     public static IBankAccount ReturnAccount(string accountNumber)
     {
-        IBankAccount accountVar = null;    
+        IBankAccount? accountVar = null;    
         bool found = false;
         foreach (var account in accountList)
         {

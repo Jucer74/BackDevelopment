@@ -3,7 +3,9 @@ using BankApp;
 
 public class Pogram
 {
-        public static void Main(string[] args)
+    private const decimal V = (decimal)0.10;
+
+    public static void Main(string[] args)
     {
         try
         {
@@ -173,6 +175,8 @@ public class Pogram
         string accountNumber = GetValidAccountNumber();
         string accountOwner = GetValidAccountOwner();
         decimal initialBalanceAmount = GetValidAmount("Initial Balance Amount");
+        decimal overdraftAmount;
+
 
         if (Bank.FindAccount(accountNumber))
         {
@@ -187,7 +191,9 @@ public class Pogram
             }
             else
             {
-                IBankAccount newAccount = new CheckingAccount(accountType, accountNumber, accountOwner, initialBalanceAmount);
+                overdraftAmount = initialBalanceAmount * V; 
+                
+                IBankAccount newAccount = new CheckingAccount(accountType, accountNumber, accountOwner, initialBalanceAmount, overdraftAmount);
                 Bank.CreateAccount(newAccount);
             }
         }

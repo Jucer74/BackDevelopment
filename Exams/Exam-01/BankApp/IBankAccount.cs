@@ -1,4 +1,8 @@
 
+
+
+using BankApp;
+
 public interface IBankAccount
 {
     string acccountNumber { get;set; }
@@ -12,15 +16,22 @@ public interface IBankAccount
     }
     void Withdrawal(decimal amount)
     {
-        if (balanceAmount >= amount)
-        {
-                balanceAmount = balanceAmount - amount;
+        SavingAccount savingAccount = null;
+        CheckingAccount checkingAccount = null;
 
-        }else
+        if (balanceAmount >= amount && AccountType.Saving == accountType)
+        { 
+            savingAccount.Withdrawal(amount: amount);
+        }else if(balanceAmount >= amount && AccountType.Checking == accountType)
         {
+            checkingAccount.Withdrawal(amount: amount);
+        }else{
             Console.WriteLine("No puede sacar mas de lo que tiene");
         }
     }
 }
+
+
+
 
 
