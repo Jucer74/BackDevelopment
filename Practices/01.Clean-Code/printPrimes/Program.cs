@@ -1,88 +1,82 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// Main
+PrintPrimes();
 
-class PrimeNumbers{
+// Consts
+const int PRIME_2 = 2;
+const int PRIME_3 = 3;
+const int INIT_LOOP_PRIME = 5;
+const int MULTIPLY_2_3 = 6;
 
-    private static int finalNumber;
-    private static readonly int INIT_LOOP_PRIME=5;
-    private static readonly int INIT_LOOP_PRIME_INCREASE=6;
-    private static readonly int MIN_PRIME_2=2;
-    private static readonly int MIN_PRIME_3=3;
+// Fucntions
+void PrintPrimes()
+{
+    PrintUsage();
 
-    private static void DataReader(){
-        Console.WriteLine("Welcome to prime numbers calculator");
-        bool salir;
-        do{
-            Console.WriteLine("enter the final number for calculation");
-            salir = int.TryParse(Console.ReadLine(), out int finalNumberOut);
-            finalNumber =finalNumberOut;
-        } while(!salir);
+    var limit = GetLimitNumber();
+
+    GetPrimes(limit);
+
+}
+
+void PrintUsage()
+{
+    Console.WriteLine("*** Print Primes ***");
+    Console.WriteLine("This Application writes the Primes Numbers less than a Limit Number input by Console");
+    Console.WriteLine("");
+    Console.WriteLine("Example:");
+    Console.WriteLine("Limit = 10");
+    Console.WriteLine("2,3,5,7");
+    Console.WriteLine("");
+}
+
+int GetLimitNumber()
+{
+    Console.Write("Limit = ");
+    return Convert.ToInt32(Console.ReadLine());
+}
+
+void GetPrimes(int limit)
+{
+    for (int i = PRIME_2; i < limit; i++)
+    {
+        if (IsPrime(i)) 
+        {
+
+            // To avoid the comma at the end
+            if(i > PRIME_2 )
+            {
+                Console.Write(",");
+            }   
+
+            Console.Write(i);
+        }
+    }
+}
+
+
+bool IsPrime(int number)
+{
+    if (number < PRIME_2) {
+        return false;
     }
 
-    private static bool IsDivisibleFor(int numberToTest, int divisor){
-        return numberToTest%divisor==0;
-    }
-
-    private static bool IsPrimeNumber(int numberToTest){
-
-        if (numberToTest <= 1)
-        {
-            return false;
-        }
-
-        if (numberToTest == MIN_PRIME_2 || numberToTest == MIN_PRIME_3)
-        {
-            return true;
-        }
-
-        if (numberToTest % MIN_PRIME_2 == 0 || numberToTest % MIN_PRIME_3 == 0)
-        {
-            return false;
-        }
-        for(int i=INIT_LOOP_PRIME;i*i<=numberToTest;i+=INIT_LOOP_PRIME_INCREASE){
-            if(IsDivisibleFor(numberToTest,i) || IsDivisibleFor(numberToTest,i+2)){
-                return false;
-            }
-        }
+    if (number == PRIME_2 || number == PRIME_3) {
         return true;
     }
+
+    if (IsMultipleOf(number, PRIME_2) || IsMultipleOf(number, PRIME_3)) {
+        return false;
+    }
     
-    private static String GetPrimeNumberList(){
-            StringBuilder primeNumbers = new();
-            for(int i=0; i<=finalNumber;i++) {
-                if(IsPrimeNumber(i)){
-                    primeNumbers.Append(i.ToString()+",");
-                }
-            }
-        return primeNumbers.ToString().Remove(primeNumbers.Length-1);
+    for (int i = INIT_LOOP_PRIME; i * i <= number; i += MULTIPLY_2_3) {
+        if (IsMultipleOf(number, i) || IsMultipleOf(number, (i + 2))) {
+            return false;
+        }
     }
+    return true;   
+}
 
-    private static void CalculatePrimeNumbers(){
-        string exitInput;
-        do{
-            //LEEMOS LOS DATOS DE ENTRADA
-            DataReader();
-            //HACEMOS EL CÁLCULO
-            string primeNumbers = GetPrimeNumberList();
-            //MOSTRAMOS LA SALIDA
-            DataWriter(primeNumbers);
-            do{
-                Console.WriteLine("Do you want calculate again? Y/N");
-                exitInput = Console.ReadLine()!;
-            } while(!(exitInput=="Y" || exitInput=="N"));
-            
-        } while(exitInput=="Y");
-        Console.WriteLine("Good bye");
-    }
-
-    private static void DataWriter(string data){
-        Console.WriteLine(data);
-    }
-
-
-    public static void Main (string[] args){
-        CalculatePrimeNumbers();
-    }
-
+bool IsMultipleOf(int number, int multipleBase)
+{
+    return (number % multipleBase ) == 0;
 }
