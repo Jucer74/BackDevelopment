@@ -53,10 +53,10 @@ static class Bank
         { 
             IBankAccount bankAccount = ReturnAccount(accountNumber);
             Console.WriteLine(
-                $"{bankAccount.acccountNumber}\n" +
-                $"{bankAccount.accountOwner}\n" +
-                $"{bankAccount.accountType}\n" +
-                $"{bankAccount.balanceAmount}\n");
+                $"Account Number: {bankAccount.acccountNumber}\n" +
+                $"Account Type: {bankAccount.accountOwner}\n" +
+                $"Placeholder: {bankAccount.accountType}\n" +
+                $"Balance Amount: {bankAccount.balanceAmount}\n");
         }
         else
         {
@@ -91,16 +91,18 @@ static class Bank
         if (!accountSearch)
         {
             Console.WriteLine($"Account : {accountNumber} doesn't exist");
+
         }
         else
         {
             accountDeposit = ReturnAccount(accountNumber);
+            
         }
-        if (accountDeposit.balanceAmount > amountValue)
-        {
-            Console.WriteLine($"Insufficient Funds");
-            return;
-        }
+            if (accountDeposit.balanceAmount < amountValue)
+            {
+                Console.WriteLine($"Insufficient Funds");
+                return;
+            }
 
         accountDeposit.Withdrawal(amountValue);
         Console.WriteLine($"Withdrawal Success\n-----------\nNew Available Balance= {accountDeposit.balanceAmount}");

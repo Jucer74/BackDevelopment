@@ -20,14 +20,14 @@ namespace BankApp{
 
         public void Deposit(decimal amount)
         {
-            balanceAmount += balanceAmount;
+            balanceAmount = amount + balanceAmount;
         }
 
         public void Withdrawal(decimal amount)
         {
             if (balanceAmount >= amount)
             {
-                balanceAmount -= amount;
+                balanceAmount = balanceAmount - amount;
             }
             else
             {

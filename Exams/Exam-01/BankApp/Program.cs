@@ -7,44 +7,60 @@ public class Pogram
     {
         try
         {
-            MenuSelect();
+            Menu();
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
         }
     }
+    public static void Menu()
+    {
+        Options option = Options.Invalid;
 
-    static int Menu()
-    {
-        Console.Write("     Banking Operation       \n" + "--------------------------------\n");
-        Console.Write("1. Create Account\n" + "2. Get Balance\n" + "3. Deposit Amount\n" + "4. Withdrawal Amount\n");
-        Console.Write("0. Exit\n" + "Select Option:\n");
-        string? menuSelected = Console.ReadLine();
-        return Convert.ToInt32(menuSelected);
-    }
-    public static void MenuSelect()
-    {
-        int option = Menu();
-        do
+        while (option != Options.Exit)
         {
-            if ((Options)option == Options.CreateAccount)
-            {
+            Console.Clear();
+            Console.WriteLine("     Bank Options    ");
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("1. Create Account");
+            Console.WriteLine("2. Get Balance Account");
+            Console.WriteLine("3. Deposit Account");
+            Console.WriteLine("4. Withdrawal Account");
+            Console.WriteLine("0. Exit");
+            Console.WriteLine("Select Option:");
 
-            }
-            else if ((Options)option == Options.GetBalance)
+             // Lee el carácter del usuario y lo convierte a una opción válida
+            if (Enum.TryParse(Console.ReadKey().KeyChar.ToString(), out option))
             {
-                Console.WriteLine("Get Balance");
+                Console.Clear();
+
+                switch (option)
+                {
+                    case Options.Exit:
+                        Console.WriteLine("Exiting Bank App...");
+                        break;
+                    case Options.CreateAccount:
+                        CreateAccount();
+                        break;
+                    case Options.GetBalance:
+                        GetBalance();
+                        break;
+                    case Options.DepositAmount:
+                        DepositAmount();
+                        break;
+                    case Options.WithdrawalAmount:
+                        WithdrawalAmount();
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid Option");
+                        break;
+                }
             }
-            else if ((Options)option == Options.DepositAmount)
-            {
-                Console.WriteLine("Deposit Amount");
-            }
-            else if ((Options)option == Options.WithdrawalAmount)
-            {
-                Console.WriteLine("Withdrawal Amount");
-            }
-        } while ((Options)option != Options.Exit);
+            Console.WriteLine("\nPress any key to continue... ");
+            Console.ReadKey();
+        }
     }
     public static bool IsValidAccountNumber(string accountNumber)
     {   
@@ -53,7 +69,7 @@ public class Pogram
 
     public static bool IsValidAmount(decimal inputAmount)
     {
-        return inputAmount < 0;
+        return inputAmount > 0;
     }
 
     public static bool IsValidAccountOwner(string accountOwner)
@@ -142,7 +158,7 @@ public class Pogram
         Bank.DepositAmount(accountNumber, amount);
     }
 
-    public static void GetBalanceAccount()
+    public static void GetBalance()
     {
         Console.WriteLine("Get Balance Amount\n" + "\"-----------------\"");
         string accountNumber = GetValidAccountNumber();
@@ -183,5 +199,6 @@ public enum Options
     GetBalance = 2,
     DepositAmount = 3,
     WithdrawalAmount = 4,
-    Exit = 0
+    Exit = 0,
+    Invalid = -1
 }
