@@ -48,6 +48,7 @@ bool IsPrime(int maxNumber){
     return true;
 }
 
+<<<<<<< HEAD
 void GetPrimes(int maxNumber){
     for( int i = 2; i <= maxNumber; i++){
         if(IsPrime(i)){
@@ -58,6 +59,8 @@ void GetPrimes(int maxNumber){
     }
 }
 
+=======
+>>>>>>> 918f5e97891852a758b761da993078e19ea1afbc
 =======
 ﻿// Main
 PrintPrimes();
