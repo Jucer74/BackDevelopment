@@ -1,4 +1,10 @@
+using Microsoft.EntityFrameworkCore;
+using MoneyBankAPI.Context;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Add DBContext
+builder.Services.AddDbContext<AppDbContext>(options => options.UseMySQL(builder.Configuration.GetConnectionString("CnnStr")!));
 
 // Add services to the container.
 
