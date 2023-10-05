@@ -21,6 +21,7 @@ namespace MoneyBankAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Account>>> GetAccounts()
         {
+
             if (_context.Accounts == null)
             {
                 return NotFound();
@@ -32,6 +33,12 @@ namespace MoneyBankAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Account>> GetAccount(int id)
         {
+            var accountExists = _context.Accounts.FirstOrDefault(c => c.Id == id);
+            if(accountExists == null)
+            {
+                return BadRequest($"La Cuenta {id} no Existe");
+            }
+
             if (_context.Accounts == null)
             {
                 return NotFound();
@@ -52,17 +59,35 @@ namespace MoneyBankAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAccount(int id, Account account)
         {
-            var accountExists = _context.Accounts.FirstOrDefault(c => c.AccountNumber == account.AccountNumber);
-            if(accountExists != null)
+            Transaction transaction = new();
+            var accountExists = _context.Accounts.FirstOrDefault(c => c.Id == account.Id);
+            if(accountExists == null)
             {
-                return BadRequest($"La Cuenta {account.AccountNumber} ya Existe");
+                return BadRequest($"La Cuenta {account.Id} no Existe");
             }
+            var accountTypeSelect = account.AccountType;
 
             if (id != account.Id)
             {
                 return BadRequest();
             }
 
+            if (account.AccountType == 'A')
+            {
+                account.BalanceAmount += transaction.ValueAmount;
+            }else if(account.AccountType == 'C')
+            {
+                account.BalanceAmount += transaction.ValueAmount;
+                if(account.OverdraftAmount > 0 & account.BalanceAmount < (Decimal) Constans.MAX_OVERDRAFT)
+                {
+                    account.OverdraftAmount = (Decimal) Constans.MAX_OVERDRAFT - account.BalanceAmount;
+                }
+            }
+
+            if(accountTypeSelect == 'C')
+            {
+                account.BalanceAmount = account.BalanceAmount + account.OverdraftAmount;
+            }
             _context.Entry(account).State = EntityState.Modified;
 
             try
@@ -89,6 +114,13 @@ namespace MoneyBankAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Account>> PostAccount(Account account)
         {
+            
+            var accountExists = _context.Accounts.FirstOrDefault(c => c.AccountNumber == account.AccountNumber);
+            if(accountExists != null)
+            {
+                return BadRequest($"La Cuenta {account.AccountNumber} ya Existe");
+            }
+
             if (_context.Accounts == null)
             {
                 return Problem("Entity set 'AppdbContext.Accounts'  is null.");
@@ -103,6 +135,11 @@ namespace MoneyBankAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAccount(int id)
         {
+            var accountExists = _context.Accounts.FirstOrDefault(c => c.Id == id);
+            if(accountExists == null)
+            {
+                return BadRequest($"La Cuenta {id} no Existe");
+            }
             if (_context.Accounts == null)
             {
                 return NotFound();
