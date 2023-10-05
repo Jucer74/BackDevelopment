@@ -72,21 +72,28 @@ namespace MoneyBankAPI.Controllers
                 return BadRequest();
             }
 
-            if (account.AccountType == 'A')
+            if (account.AccountType == Constants.ACCOUNT_TYPE_SAVINGS)
             {
                 account.BalanceAmount += transaction.ValueAmount;
-            }else if(account.AccountType == 'C')
+            }else if(account.AccountType == Constants.ACCOUNT_TYPE_CHEKING)
             {
                 account.BalanceAmount += transaction.ValueAmount;
-                if(account.OverdraftAmount > 0 & account.BalanceAmount < (Decimal) Constans.MAX_OVERDRAFT)
+                if(account.OverdraftAmount > Constants.ZERO & account.BalanceAmount < (Decimal) Constants.MAX_OVERDRAFT)
                 {
-                    account.OverdraftAmount = (Decimal) Constans.MAX_OVERDRAFT - account.BalanceAmount;
+                    account.OverdraftAmount = (Decimal) Constants.MAX_OVERDRAFT - account.BalanceAmount;
                 }
             }
 
-            if(accountTypeSelect == 'C')
+            if(accountTypeSelect == Constants.ACCOUNT_TYPE_CHEKING)
             {
                 account.BalanceAmount = account.BalanceAmount + account.OverdraftAmount;
+            }
+
+            //Debe retornar un BadRequest con el Mensaje de "Fondos Insificientes" si al momento de retirar el valor de 
+            //Retiro es superior al Valor actual del Balance
+            if(transaction.ValueAmount > account.BalanceAmount)
+            {
+                return BadRequest();
             }
             _context.Entry(account).State = EntityState.Modified;
 
