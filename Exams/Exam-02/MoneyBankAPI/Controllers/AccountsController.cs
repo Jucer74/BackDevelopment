@@ -16,6 +16,8 @@ namespace MoneyBankAPI.Controllers
     {
         private readonly AppDbContext _context;
 
+        private const decimal MAX_OVERDRAFT = 1000000M;
+
         public AccountsController(AppDbContext context)
         {
             _context = context;
@@ -25,10 +27,10 @@ namespace MoneyBankAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Account>>> GetAccounts()
         {
-          if (_context.Accounts == null)
-          {
-              return NotFound();
-          }
+            if (_context.Accounts == null)
+            {
+                return NotFound();
+            }
             return await _context.Accounts.ToListAsync();
         }
 
@@ -36,10 +38,10 @@ namespace MoneyBankAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Account>> GetAccount(int id)
         {
-          if (_context.Accounts == null)
-          {
-              return NotFound();
-          }
+            if (_context.Accounts == null)
+            {
+                return NotFound();
+            }
             var account = await _context.Accounts.FindAsync(id);
 
             if (account == null)
@@ -68,7 +70,7 @@ namespace MoneyBankAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AccountExists(id))
+                if (!AccountExist(id))
                 {
                     return NotFound();
                 }
@@ -81,7 +83,7 @@ namespace MoneyBankAPI.Controllers
             return NoContent();
         }
 
-        private bool AccountExists(int id)
+        private bool AccountExist(int id)
         {
             throw new NotImplementedException();
         }
@@ -101,11 +103,16 @@ namespace MoneyBankAPI.Controllers
                 return BadRequest($"La cuenta {account.AccountNumber} ya existe.");
             }
 
-            if ( account.BalanceAmount <= 0)
+            if (account.BalanceAmount <= 0)
             {
                 return BadRequest("El balance debe ser mayor que 0.");
-            } 
-            
+            }
+
+            if (account.AccountType == 'C')
+            {
+                account.BalanceAmount += MAX_OVERDRAFT;
+            }
+
             _context.Accounts.Add(account);
             await _context.SaveChangesAsync();
 
@@ -120,7 +127,9 @@ namespace MoneyBankAPI.Controllers
             {
                 return NotFound();
             }
+
             var account = await _context.Accounts.FindAsync(id);
+
             if (account == null)
             {
                 return NotFound();
@@ -135,34 +144,29 @@ namespace MoneyBankAPI.Controllers
         // DEPOSITO: PUT/api/Accounts/{id}/Deposit
 
         [HttpPut("{id}/Deposit")]
-        public async Task<IActionResult> Deposit(int id, Transaction transaction)
+        public async Task<IActionResult> Deposit(int id, Transaction depositTransaction)
         {
             var account = await _context.Accounts.FindAsync(id);
 
             if (account == null)
             {
-                return NotFound();
+                return NotFound($"La cuenta con ID {id} no existe.");
             }
 
-            if (transaction.ValueAmount <= 0)
+            if (account.AccountNumber != depositTransaction.AccountNumber)
+            {
+                return BadRequest($"La cuenta {depositTransaction.AccountNumber} no existe.");
+            }
+
+            if (depositTransaction.ValueAmount <= 0)
             {
                 return BadRequest("El monto del depósito debe ser mayor que 0.");
             }
 
-            if (!AccountExists(transaction.AccountNumber))
-            {
-                return BadRequest($"La cuenta {transaction.AccountNumber} no existe.");
-            }
+            account.BalanceAmount += depositTransaction.ValueAmount;
 
-            // Verificar el tipo de cuenta y aplicar la lógica de depósito correspondiente
-            if (account.AccountType == 'A')
+            if (account.AccountType == 'C')
             {
-                
-                account.BalanceAmount += transaction.ValueAmount;
-            }
-            else if (account.AccountType == 'C')
-            {
-               
                 if (account.OverdraftAmount > 0 && account.BalanceAmount < MAX_OVERDRAFT)
                 {
                     account.OverdraftAmount = MAX_OVERDRAFT - account.BalanceAmount;
@@ -171,12 +175,6 @@ namespace MoneyBankAPI.Controllers
                 {
                     account.OverdraftAmount = 0;
                 }
-
-                account.BalanceAmount += transaction.ValueAmount;
-            }
-            else
-            {
-                return BadRequest("Tipo de cuenta no válido.");
             }
 
             try
@@ -185,14 +183,7 @@ namespace MoneyBankAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AccountExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
@@ -202,37 +193,39 @@ namespace MoneyBankAPI.Controllers
 
         // RETIRO: PUT/api/Accounts/{id}/Withdrawal
         [HttpPut("{id}/Withdrawal")]
-        public async Task<IActionResult> Withdrawal(int id, [FromBody] Transaction transaction)
+        public async Task<IActionResult> Withdrawal(int id, Transaction withdrawalTransaction)
         {
             var account = await _context.Accounts.FindAsync(id);
 
             if (account == null)
             {
-                return NotFound();
+                return NotFound($"La cuenta con ID {id} no existe.");
             }
 
-            if (transaction.ValueAmount <= 0)
+            if (!AccountExists(withdrawalTransaction.AccountNumber))
+            {
+                return BadRequest($"La cuenta {withdrawalTransaction.AccountNumber} no existe.");
+            }
+
+            if (withdrawalTransaction.ValueAmount <= 0)
             {
                 return BadRequest("El monto del retiro debe ser mayor que 0.");
             }
 
-            if (!AccountExists(transaction.AccountNumber))
+            if (withdrawalTransaction.ValueAmount <= account.BalanceAmount)
             {
-                return BadRequest($"La cuenta {transaction.AccountNumber} no existe.");
+                account.BalanceAmount -= withdrawalTransaction.ValueAmount;
+
+                if (account.AccountType == 'C' && account.BalanceAmount < MAX_OVERDRAFT)
+                {
+                    account.OverdraftAmount = MAX_OVERDRAFT - account.BalanceAmount;
+                }
+            }
+            else
+            {
+                return BadRequest("Fondos insuficientes.");
             }
 
-            // Verifica si la cuenta asociada a la transacción es correcta
-            if (account.AccountNumber != transaction.AccountNumber)
-            {
-                return BadRequest("El número de cuenta no coincide con la transacción.");
-            }
-
-            if (account.BalanceAmount < transaction.ValueAmount)
-            {
-                return BadRequest("El saldo de la cuenta no es suficiente para realizar el retiro.");
-            }
-
-            account.BalanceAmount -= transaction.ValueAmount;
 
             try
             {
@@ -240,26 +233,18 @@ namespace MoneyBankAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AccountExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
         }
 
 
-
-
-        private bool AccountExists(string accountNumber)
+    private bool AccountExists(string accountNumber)
         {
             return (_context.Accounts?.Any(e => e.AccountNumber == accountNumber)).GetValueOrDefault();
         }
 
     }
 }
+
