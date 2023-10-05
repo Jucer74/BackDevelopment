@@ -1,0 +1,716 @@
+{
+	"info": {
+		"_postman_id": "787719e6-82e2-43d4-a53e-71437227129f",
+		"name": "BankApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17760505"
+	},
+	"item": [
+		{
+			"name": "GetAllAccounts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200-Ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Reponse length\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(Object.keys(jsonData).length).to.eql(3);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/Accounts",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllAccountById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200-Ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Reponse length\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(1);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/Accounts/1",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Accounts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllAccountByIdNotFound",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404-Not found\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Reponse length\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/Accounts/14",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Accounts",
+						"14"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostAccountOK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201-created\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Reponse Assertion\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.collectionVariables.set(\"TeamId\",jsonData.id);",
+							"    pm.expect(jsonData.id).to.eql(4);",
+							"    pm.expect(jsonData.accountType).to.eql(\"C\");",
+							"    pm.expect(jsonData.accountNumber).to.eql(\"1007741255\");",
+							"    pm.expect(jsonData.ownerName).to.eql(\"Diego Armando Ibarra Pastrana\");",
+							"    pm.expect(jsonData.balanceAmount).to.eql(1500000);",
+							"    pm.expect(jsonData.overdraftAmount).to.eql(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 4,\n    \"accountType\": \"C\",\n    \"creationDate\": \"2023-08-25T00:00:00\",\n    \"accountNumber\": \"1007741255\",\n    \"ownerName\": \"Diego Armando Ibarra Pastrana\",\n    \"balanceAmount\": 500000,\n    \"overdraftAmount\": 0\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Accounts",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteAccount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204-No content\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/Accounts/{{AccountId}}",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Accounts",
+						"{{AccountId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostAccountAmmountNotValid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400-bad request\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Reponse Assertion\", function () {",
+							"    pm.expect(pm.response.text()).to.eql(\"el balance debe ser mayor a 0\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 4,\n    \"accountType\": \"C\",\n    \"creationDate\": \"2023-08-25T00:00:00\",\n    \"accountNumber\": \"1007741255\",\n    \"ownerName\": \"Diego Armando Ibarra Pastrana\",\n    \"balanceAmount\": 0,\n    \"overdraftAmount\": 0\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Accounts",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostAccountAmmountFieldRequired",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400-bad request\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Reponse Assertion\", function () {",
+							"    pm.expect(pm.response.json().errors.Account[0]).to.eql(\"The Account field is required.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 4,\n    \"accountType\": \"\",\n    \"creationDate\": \"2023-08-25T00:00:00\",\n    \"accountNumber\": \"1007741255\",\n    \"ownerName\": \"Diego Armando Ibarra Pastrana\",\n    \"balanceAmount\": 500000,\n    \"overdraftAmount\": 0\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Accounts",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostAccountAmmountValidationRegularExpression",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400-bad request\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Reponse Assertion\", function () {",
+							"    pm.expect(pm.response.json().errors.AccountType[0]).to.eql(\"El campo tipo de cuenta solo acepta valores (A,C)\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 4,\n    \"accountType\": \"T\",\n    \"creationDate\": \"2023-08-25T00:00:00\",\n    \"accountNumber\": \"1007741255\",\n    \"ownerName\": \"Diego Armando Ibarra Pastrana\",\n    \"balanceAmount\": 500000,\n    \"overdraftAmount\": 0\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Accounts",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutAccountOk",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204-No Content\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"accountType\": \"C\",\n    \"creationDate\": \"2023-06-30T00:00:00\",\n    \"accountNumber\": \"3016892501\",\n    \"ownerName\": \"Yurle Orejuela Ramirez\",\n    \"balanceAmount\": 1500000,\n    \"overdraftAmount\": 0\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Accounts/1",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Accounts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutAccountIlegalBalance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400-bad request\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Reponse Assertion\", function () {",
+							"    pm.expect(pm.response.text()).to.eql(\"el balance debe ser mayor a 0\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"accountType\": \"C\",\n    \"creationDate\": \"2023-06-30T00:00:00\",\n    \"accountNumber\": \"3016892501\",\n    \"ownerName\": \"Yurle Orejuela Ramirez\",\n    \"balanceAmount\": 0,\n    \"overdraftAmount\": 0\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Accounts/1",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Accounts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutAccountFieldRequired",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400-bad request\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Reponse Assertion\", function () {",
+							"    pm.expect(pm.response.json().errors.Account[0]).to.eql(\"The Account field is required.\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"accountType\": \"\",\n    \"creationDate\": \"2023-06-30T00:00:00\",\n    \"accountNumber\": \"3016892501\",\n    \"ownerName\": \"Yurle Orejuela Ramirez\",\n    \"balanceAmount\": 1500000,\n    \"overdraftAmount\": 0\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Accounts/1",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Accounts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutAccountValidateRegularExpresion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400-bad request\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Reponse Assertion\", function () {",
+							"    pm.expect(pm.response.json().errors.AccountType[0]).to.eql(\"El campo tipo de cuenta solo acepta valores (A,C)\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"accountType\": \"T\",\n    \"creationDate\": \"2023-06-30T00:00:00\",\n    \"accountNumber\": \"3016892501\",\n    \"ownerName\": \"Yurle Orejuela Ramirez\",\n    \"balanceAmount\": 1500000,\n    \"overdraftAmount\": 0\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Accounts/1",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Accounts",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DepositOK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204-No Content\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 1,\n  \"accountNumber\": \"3016892501\",\n  \"valueAmount\": 500000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Accounts/1/Deposit",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Accounts",
+						"1",
+						"Deposit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WithDrawalOK",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204-No Content\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 1,\n  \"accountNumber\": \"3016892501\",\n  \"valueAmount\": 500000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Accounts/1/Deposit",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Accounts",
+						"1",
+						"Deposit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DepositAccountNotFound",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400-Bad request \", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Reponse Assertion\", function () {",
+							"    pm.expect(pm.response.text()).to.eql(\"La cuenta 3016892502 no existe\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 1,\n  \"accountNumber\": \"3016892502\",\n  \"valueAmount\": 500000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Accounts/1/Deposit",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Accounts",
+						"1",
+						"Deposit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WithDrawalAccountNotFound",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400-Bad request \", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Reponse Assertion\", function () {",
+							"    pm.expect(pm.response.text()).to.eql(\"La cuenta 3016892502 no existe\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 1,\n  \"accountNumber\": \"3016892502\",\n  \"valueAmount\": 500000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/Accounts/1/WithDrawal",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"Accounts",
+						"1",
+						"WithDrawal"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseUrl",
+			"value": "https://localhost:5001/api",
+			"type": "string"
+		},
+		{
+			"key": "AccountId",
+			"value": "4",
+			"type": "string"
+		},
+		{
+			"key": "TeamId",
+			"value": "",
+			"disabled": true
+		},
+		{
+			"key": "TeamId",
+			"value": ""
+		}
+	]
+}
