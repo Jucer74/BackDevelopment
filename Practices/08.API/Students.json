@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "students": [
     {
       "id": 1,
@@ -8002,3 +8003,12 @@
     }
   ]
 }
+=======
+   "id": 0,
+   "firstName": "John",
+   "lastName": "Doe",
+   "email": "john.doe@email.com",
+   "sex": "M",
+   "dateOfBirth": "2001-03-21"
+},
+>>>>>>> main
