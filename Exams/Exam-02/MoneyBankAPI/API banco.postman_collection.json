@@ -1,0 +1,135 @@
+{
+	"info": {
+		"_postman_id": "99af9f43-880e-4445-9cf2-d9b43dd55531",
+		"name": "API banco",
+		"description": "estas son las pruebas del Postman.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30297946"
+	},
+	"item": [
+		{
+			"name": "todas las cuentas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://localhost:5001/api/Accounts"
+			},
+			"response": []
+		},
+		{
+			"name": "cuenta corriente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://localhost:5001/api/Accounts/8"
+			},
+			"response": []
+		},
+		{
+			"name": "cuenta Ahorro",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://localhost:5001/api/Accounts/9"
+			},
+			"response": []
+		},
+		{
+			"name": "creación de nueva cuenta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AccountType\": \"A\",\r\n    \"AccountNumber\": \"0123456789\",\r\n    \"OwnerName\": \"Angela Lastro\",\r\n    \"BalanceAmount\": 500000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:5001/api/Accounts"
+			},
+			"response": []
+		},
+		{
+			"name": "Deposito corriente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AccountNumber\": \"1234567890\",\r\n    \"ValueAmount\": 200000\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:5001/api/Accounts/8/Deposit"
+			},
+			"response": []
+		},
+		{
+			"name": "Deposito Ahorro",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AccountNumber\": \"0123456789\",\r\n    \"ValueAmount\": 200000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:5001/api/Accounts/9/Deposit"
+			},
+			"response": []
+		},
+		{
+			"name": "Retiro Corriente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AccountNumber\": \"1234567890\",\r\n    \"ValueAmount\": 200000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:5001/api/Accounts/8/Withdrawal"
+			},
+			"response": []
+		},
+		{
+			"name": "Retiro Ahorro",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AccountNumber\": \"0123456789\",\r\n    \"ValueAmount\": 200000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:5001/api/Accounts/9/Withdrawal"
+			},
+			"response": []
+		}
+	]
+}
