@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MoneyBankAPI.Models;
 using MoneyBankAPI.Context;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace MoneyBankAPI.Controllers
 {
@@ -51,6 +52,12 @@ namespace MoneyBankAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAccount(int id, Account account)
         {
+            var accountExists = _context.Accounts.FirstOrDefault(c => c.AccountNumber == account.AccountNumber);
+            if(accountExists != null)
+            {
+                return BadRequest($"La Cuenta {account.AccountNumber} ya Existe");
+            }
+
             if (id != account.Id)
             {
                 return BadRequest();
