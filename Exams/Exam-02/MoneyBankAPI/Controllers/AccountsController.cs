@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -12,67 +11,43 @@ namespace MoneyBankAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountsController : ControllerBase
+    public class BankAccounts : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _ctx;
+        private const decimal MaxOverdraft = 1000000M;
 
-        // Define el valor máximo de sobregiro
-        private const decimal MAX_OVERDRAFT = 1000000.00M;
-
-        public AccountsController(AppDbContext context)
+        public BankAccounts(AppDbContext ctx)
         {
-            _context = context;
+            _ctx = ctx;
         }
 
-        // GET: api/Accounts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Account>>> GetAccounts()
+        public async Task<ActionResult> ListAccounts()
         {
-            if (_context.Accounts == null)
-            {
-                return NotFound();
-            }
-            return await _context.Accounts.ToListAsync();
+            var accounts = await _ctx.Accounts.ToListAsync();
+            return accounts.Any() ? Ok(accounts) : NotFound();
         }
 
-        // GET: api/Accounts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Account>> GetAccount(int id)
+        public async Task<ActionResult> GetAccount(int id)
         {
-            if (_context.Accounts == null)
-            {
-                return NotFound();
-            }
-            var account = await _context.Accounts.FindAsync(id);
-
-            if (account == null)
-            {
-                return NotFound();
-            }
-
-            return account;
+            var account = await _ctx.Accounts.FindAsync(id);
+            return account != null ? Ok(account) : NotFound();
         }
 
-        // PUT: api/Accounts/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAccount(int id, Account account)
+        public async Task<IActionResult> UpdateAccount(int id, Account account)
         {
-            if (!AccountExists(id))
-            {
-                return BadRequest($"La Cuenta {id} No Existe");
-            }
-
             if (id != account.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(account).State = EntityState.Modified;
+            _ctx.Entry(account).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _ctx.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -80,85 +55,151 @@ namespace MoneyBankAPI.Controllers
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
-
-            return NoContent();
-        }
-
-        // POST: api/Accounts
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Account>> PostAccount(Account account)
-        {
-            if (_context.Accounts == null)
-            {
-                return Problem("Entity set 'AppDbContext.Accounts' is null.");
-            }
-
-            if (account.BalanceAmount <= 0)
-            {
-                return BadRequest("El Balance debe ser mayor a cero");
-            }
-
-            var existingAccount = await _context.Accounts.FirstOrDefaultAsync(a => a.AccountNumber == account.AccountNumber);
-            if (existingAccount != null)
-            {
-                return BadRequest($"La Cuenta {account.AccountNumber} ya Existe");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            // Realizar operaciones adicionales según el tipo de cuenta
-            if (account.AccountType == 'A')
-            {
-                // Cuenta de Ahorros
-                // El Valor del Balance es igual al valor inicial de la apertura
-                account.BalanceAmount = account.BalanceAmount;
-            }
-            else if (account.AccountType == 'C')
-            {
-                // Cuenta Corriente
-                // El valor del Balance inicial es igual al Valor Ingresado más el Valor Maximo de sobregiro
-                account.BalanceAmount = account.BalanceAmount + MAX_OVERDRAFT;
-            }
-
-            _context.Accounts.Add(account);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetAccount", new { id = account.Id }, account);
-        }
-
-        // DELETE: api/Accounts/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAccount(int id)
-        {
-            if (!AccountExists(id))
-            {
-                return BadRequest($"La Cuenta {id} No Existe");
-            }
-
-            var account = await _context.Accounts.FindAsync(id);
-            if (account == null)
-            {
-                return NotFound();
-            }
-
-            _context.Accounts.Remove(account);
-            await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
         private bool AccountExists(int id)
         {
-            return (_context.Accounts?.Any(e => e.Id == id)).GetValueOrDefault();
+            return _ctx.Accounts.Any(e => e.Id == id);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateAccount(Account account)
+        {
+            if (AccountExists(account.AccountNumber))
+            {
+                return BadRequest($"Cuenta {account.AccountNumber} ya existe.");
+            }
+
+            if (account.BalanceAmount <= 0)
+            {
+                return BadRequest("Balance debe ser mayor que 0.");
+            }
+
+            if (account.AccountType == 'C')
+            {
+                account.BalanceAmount += MaxOverdraft;
+            }
+
+            _ctx.Accounts.Add(account);
+            await _ctx.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetAccount), new { id = account.Id }, account);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAccount(int id)
+        {
+            var account = await _ctx.Accounts.FindAsync(id);
+            if (account == null)
+            {
+                return NotFound();
+            }
+
+            _ctx.Accounts.Remove(account);
+            await _ctx.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpPut("{id}/Deposit")]
+        public async Task<IActionResult> DepositFunds(int id, Transaction depositTransaction)
+        {
+            var account = await _ctx.Accounts.FindAsync(id);
+
+            if (account == null)
+            {
+                return NotFound($"Cuenta con ID {id} no existe.");
+            }
+
+            if (account.AccountNumber != depositTransaction.AccountNumber)
+            {
+                return BadRequest($"Cuenta {depositTransaction.AccountNumber} no existe.");
+            }
+
+            if (depositTransaction.ValueAmount <= 0)
+            {
+                return BadRequest("Monto del depósito debe ser mayor que 0.");
+            }
+
+            account.BalanceAmount += depositTransaction.ValueAmount;
+
+            if (account.AccountType == 'C')
+            {
+                if (account.OverdraftAmount > 0 && account.BalanceAmount < MaxOverdraft)
+                {
+                    account.OverdraftAmount = MaxOverdraft - account.BalanceAmount;
+                }
+                else
+                {
+                    account.OverdraftAmount = 0;
+                }
+            }
+
+            try
+            {
+                await _ctx.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+
+            return NoContent();
+        }
+
+        [HttpPut("{id}/Withdrawal")]
+        public async Task<IActionResult> WithdrawFunds(int id, Transaction withdrawalTransaction)
+        {
+            var account = await _ctx.Accounts.FindAsync(id);
+
+            if (account == null)
+            {
+                return NotFound($"Cuenta con ID {id} no existe.");
+            }
+
+            if (!AccountExists(withdrawalTransaction.AccountNumber))
+            {
+                return BadRequest($"Cuenta {withdrawalTransaction.AccountNumber} no existe.");
+            }
+
+            if (withdrawalTransaction.ValueAmount <= 0)
+            {
+                return BadRequest("Monto del retiro debe ser mayor que 0.");
+            }
+
+            if (withdrawalTransaction.ValueAmount <= account.BalanceAmount)
+            {
+                account.BalanceAmount -= withdrawalTransaction.ValueAmount;
+
+                if (account.AccountType == 'C' && account.BalanceAmount < MaxOverdraft)
+                {
+                    account.OverdraftAmount = MaxOverdraft - account.BalanceAmount;
+                }
+            }
+            else
+            {
+                return BadRequest("Fondos insuficientes.");
+            }
+
+            try
+            {
+                await _ctx.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+
+            return NoContent();
+        }
+
+        private bool AccountExists(string accountNumber)
+        {
+            return _ctx.Accounts.Any(e => e.AccountNumber == accountNumber);
         }
     }
 }
