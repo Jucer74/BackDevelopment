@@ -78,7 +78,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseMySQL(builder.
 Agregue el controlador **AccountsController** de tipo **API**, adicionando Acciones de Entity Framework, utilizando el Modelo de **Account** y el contexto de **AppDbContext**.
 
 
-**Nota:** (Asegurese no NO seleccionar **API** en lugar de MVC)
+**Nota:** (Asegurese seleccionar **API** en lugar de MVC)
 
 # EndPoints
 Al seleccionar el Controlador con acciones que usan Entity Framework se crean las acciones principales de CRUD para las cuentas, en este punto ya es posible probrar estas acciones y confirmar su correcta ejecucion.
