@@ -197,6 +197,11 @@ namespace MoneyBankAPI.Controllers
             return NoContent();
         }
 
+        private bool AccountExists(object accountNumber)
+        {
+            throw new NotImplementedException();
+        }
+
         private bool AccountExists(string accountNumber)
         {
             return _ctx.Accounts.Any(e => e.AccountNumber == accountNumber);
