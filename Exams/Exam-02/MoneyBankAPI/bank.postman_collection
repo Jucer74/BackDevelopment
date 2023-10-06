@@ -1,0 +1,135 @@
+{
+	"info": {
+		"_postman_id": "d0261aab-6285-4b43-a733-6f126d4997bc",
+		"name": "API bank",
+		"description": "estas son las pruebas del Postman.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29576877"
+	},
+	"item": [
+		{
+			"name": "cuentas totales",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": "https://localhost:5001/api/Accounts"
+			},
+			"response": []
+		},
+		{
+			"name": "corriente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://localhost:5001/api/Accounts/8"
+			},
+			"response": []
+		},
+		{
+			"name": "ahorro",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://localhost:5001/api/Accounts/9"
+			},
+			"response": []
+		},
+		{
+			"name": "crear cuenta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AccountType\": \"A\",\r\n    \"AccountNumber\": \"1111111111\",\r\n    \"OwnerName\": \"Jose Ortiz\",\r\n    \"BalanceAmount\": 900000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:5001/api/Accounts"
+			},
+			"response": []
+		},
+		{
+			"name": "mandar corriente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AccountNumber\": \"1234567890\",\r\n    \"ValueAmount\": 200000\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:5001/api/Accounts/8/Deposit"
+			},
+			"response": []
+		},
+		{
+			"name": "mandar ahorro",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AccountNumber\": \"0123456789\",\r\n    \"ValueAmount\": 200000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:5001/api/Accounts/9/Deposit"
+			},
+			"response": []
+		},
+		{
+			"name": "retiro corriente",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AccountNumber\": \"1234567890\",\r\n    \"ValueAmount\": 200000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:5001/api/Accounts/8/Withdrawal"
+			},
+			"response": []
+		},
+		{
+			"name": "retiro ahorro",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"AccountNumber\": \"0123456789\",\r\n    \"ValueAmount\": 200000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:5001/api/Accounts/9/Withdrawal"
+			},
+			"response": []
+		}
+	]
+}
