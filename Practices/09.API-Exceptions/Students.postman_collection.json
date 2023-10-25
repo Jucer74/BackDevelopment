@@ -1,24 +1,41 @@
 {
 	"info": {
-		"_postman_id": "a5ff8f9a-d975-4c8d-b528-890b3ddc21ac",
+		"_postman_id": "15fe3f98-88c2-4304-a776-ad7893381210",
 		"name": "Students",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "7220587"
+		"_exporter_id": "17760505"
 	},
 	"item": [
 		{
 			"name": "GetAllStudents",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200-Ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Reponse length\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(Object.keys(jsonData).length).to.eql(1000);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{BaseUrl}}/students/",
+					"raw": "{{BaseUrl}}/Students",
 					"host": [
 						"{{BaseUrl}}"
 					],
 					"path": [
-						"students",
-						""
+						"Students"
 					]
 				}
 			},
@@ -26,6 +43,24 @@
 		},
 		{
 			"name": "GetStudentById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200-Ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Reponse length\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(5);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -43,13 +78,116 @@
 			"response": []
 		},
 		{
+			"name": "GetStudentByIdNotFound",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404-Not found\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Reponse length\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.ErrorType).to.eql(\"Not Found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/students/8000",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"students",
+						"8000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "PostStudent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201-created\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Reponse Assertion\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.collectionVariables.set(\"TeamId\",jsonData.id);",
+							"    pm.expect(jsonData.id).to.eql(1001);",
+							"    pm.expect(jsonData.firstName).to.eql(\"Julio\");",
+							"    pm.expect(jsonData.lastName).to.eql(\"Robles\");",
+							"    pm.expect(jsonData.email).to.eql(\"jucer74@hotmail.com\");",
+							"    pm.expect(jsonData.sex).to.eql(\"M\");",
+							"    pm.expect(jsonData.dateOfBirth).to.eql(\"1974-10-08T00:00:00\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 0,\r\n    \"firstName\": \"Julio\",\r\n    \"lastName\": \"Robles\",\r\n    \"email\": \"jucer74@hotmail.com\",\r\n    \"sex\": \"M\",\r\n    \"dateOfBirth\": \"1974-10-08\"\r\n}",
+					"raw": "{\r\n    \"id\": 1001,\r\n    \"firstName\": \"Julio\",\r\n    \"lastName\": \"Robles\",\r\n    \"email\": \"jucer74@hotmail.com\",\r\n    \"sex\": \"M\",\r\n    \"dateOfBirth\": \"1974-10-08\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/students",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"students"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostStudentFieldRequired",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400-bad request\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Reponse Assertion\", function () {",
+							"    pm.expect(pm.response.json().errors.FirstName[0]).to.eql(\"El Nombre es requerido\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1001,\r\n    \"lastName\": \"Robles\",\r\n    \"email\": \"jucer74@hotmail.com\",\r\n    \"sex\": \"M\",\r\n    \"dateOfBirth\": \"1974-10-08\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -70,6 +208,19 @@
 		},
 		{
 			"name": "PutStudent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204-no content\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -96,7 +247,144 @@
 			"response": []
 		},
 		{
+			"name": "PutStudentFieldRequired",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400-bad request\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Reponse Assertion\", function () {",
+							"    pm.expect(pm.response.json().errors.FirstName[0]).to.eql(\"El Nombre es requerido\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1001,\r\n    \"lastName\": \"Robles Uribe\",\r\n    \"email\": \"jucer74@hotmail.com\",\r\n    \"sex\": \"M\",\r\n    \"dateOfBirth\": \"1974-10-08\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/students/1001",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"students",
+						"1001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutStudentErrorIdDistintos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400-bad request\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Reponse Assertion\", function () {",
+							"    pm.expect(pm.response.json().Errors[0]).to.eql(\"El id 1001 no corresponde al student.id 1002\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1002,\r\n    \"firstName\": \"Julio Cesar\",\r\n    \"lastName\": \"Robles Uribe\",\r\n    \"email\": \"jucer74@hotmail.com\",\r\n    \"sex\": \"M\",\r\n    \"dateOfBirth\": \"1974-10-08\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/students/1001",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"students",
+						"1001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteStudentNotFound",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404-not found\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Reponse length\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.ErrorType).to.eql(\"Not Found\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/students/1004",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"students",
+						"1004"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "DeleteStudent",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204-no content\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -137,8 +425,12 @@
 	"variable": [
 		{
 			"key": "BaseUrl",
-			"value": "http://localhost:3000",
+			"value": "https://localhost:3001/api",
 			"type": "string"
+		},
+		{
+			"key": "TeamId",
+			"value": ""
 		}
 	]
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentsAPI.Context;
+using StudentsAPI.Exceptions;
 using StudentsAPI.Models;
 
 namespace StudentsAPI.Controllers
@@ -22,7 +23,7 @@ namespace StudentsAPI.Controllers
         {
             if (_context.Students == null)
             {
-                return NotFound();
+                throw new NotFoundException("Students not found");
             }
             return await _context.Students.ToListAsync();
         }
@@ -33,13 +34,13 @@ namespace StudentsAPI.Controllers
         {
             if (_context.Students == null)
             {
-                return NotFound();
+                throw new BadRequestException("The id cannot be null or empty");
             }
             var student = await _context.Students.FindAsync(id);
 
             if (student == null)
             {
-                return NotFound();
+                throw new NotFoundException($"Student with id {id} not found");
             }
             
 
@@ -53,7 +54,7 @@ namespace StudentsAPI.Controllers
         {
             if (id != student.Id)
             {
-                return BadRequest();
+                throw new BadRequestException($"El id {id} no corresponde al student.id {student.Id}");
             }
 
             _context.Entry(student).State = EntityState.Modified;
@@ -66,11 +67,11 @@ namespace StudentsAPI.Controllers
             {
                 if (!StudentExists(id))
                 {
-                    return NotFound();
+                    throw new NotFoundException($"Student with id {id} not found");
                 }
                 else
                 {
-                    throw;
+                    throw new InternalServerErrorException();
                 }
             }
 
@@ -84,7 +85,7 @@ namespace StudentsAPI.Controllers
         {
             if (_context.Students == null)
             {
-                return Problem("Entity set 'AppdbContext.Students'  is null.");
+                throw new InternalServerErrorException("Entity set 'AppdbContext.Students'  is null.");
             }
             _context.Students.Add(student);
             await _context.SaveChangesAsync();
@@ -98,12 +99,12 @@ namespace StudentsAPI.Controllers
         {
             if (_context.Students == null)
             {
-                return NotFound();
+                throw new NotFoundException($"Student with id {id} not found");
             }
             var student = await _context.Students.FindAsync(id);
             if (student == null)
             {
-                return NotFound();
+                throw new NotFoundException($"Student with id {id} not found");
             }
 
             _context.Students.Remove(student);
