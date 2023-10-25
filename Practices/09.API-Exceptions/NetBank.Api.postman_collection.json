@@ -1,0 +1,632 @@
+{
+	"info": {
+		"_postman_id": "8efa3dac-bc9c-47c7-861f-a7568e031c79",
+		"name": "NetBank.Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7220587"
+	},
+	"item": [
+		{
+			"name": "Networks",
+			"item": [
+				{
+					"name": "Validate_Succces_American_Express",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200-Ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Valid Data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.issuingNetwork).to.eql(\"American Express\");\r",
+									"    pm.expect(jsonData.valid).to.eql(true);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/CreditCard/372993382858419",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"CreditCard",
+								"372993382858419"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate_Succces_Diners_Club",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200-Ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Valid Data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.issuingNetwork).to.eql(\"Diners Club\");\r",
+									"    pm.expect(jsonData.valid).to.eql(true);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/CreditCard/30381166653533",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"CreditCard",
+								"30381166653533"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate_Succces_Diners_Club_International",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200-Ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Valid Data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.issuingNetwork).to.eql(\"Diners Club - International\");\r",
+									"    pm.expect(jsonData.valid).to.eql(true);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/CreditCard/36661845380259",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"CreditCard",
+								"36661845380259"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate_Succces_Discover",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200-Ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Valid Data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.issuingNetwork).to.eql(\"Discover\");\r",
+									"    pm.expect(jsonData.valid).to.eql(true);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/CreditCard/6011668966830850026",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"CreditCard",
+								"6011668966830850026"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate_Succces_InstaPayment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200-Ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Valid Data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.issuingNetwork).to.eql(\"InstaPayment\");\r",
+									"    pm.expect(jsonData.valid).to.eql(true);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/CreditCard/6376483809704159",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"CreditCard",
+								"6376483809704159"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate_Succces_JCB",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200-Ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Valid Data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.issuingNetwork).to.eql(\"JCB\");\r",
+									"    pm.expect(jsonData.valid).to.eql(true);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/CreditCard/3534041243778241",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"CreditCard",
+								"3534041243778241"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate_Succces_Maestro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200-Ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Valid Data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.issuingNetwork).to.eql(\"Maestro\");\r",
+									"    pm.expect(jsonData.valid).to.eql(true);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/CreditCard/6763166143288903",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"CreditCard",
+								"6763166143288903"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate_Succces_MasterCard",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200-Ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Valid Data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.issuingNetwork).to.eql(\"MasterCard\");\r",
+									"    pm.expect(jsonData.valid).to.eql(true);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/CreditCard/5293426909331417",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"CreditCard",
+								"5293426909331417"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate_Succces_Visa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200-Ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Valid Data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.issuingNetwork).to.eql(\"Visa\");\r",
+									"    pm.expect(jsonData.valid).to.eql(true);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/CreditCard/4716562775262677283",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"CreditCard",
+								"4716562775262677283"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate_Succces_Visa_Electron",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200-Ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Valid Data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.issuingNetwork).to.eql(\"Visa Electron\");\r",
+									"    pm.expect(jsonData.valid).to.eql(true);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/CreditCard/4508810791747166",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"CreditCard",
+								"4508810791747166"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cards",
+			"item": [
+				{
+					"name": "Validate_Fails_Invalid_Digit",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200-Ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Valid Data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.issuingNetwork).to.eql(\"American Express\");\r",
+									"    pm.expect(jsonData.valid).to.eql(false);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/CreditCard/347460114965311",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"CreditCard",
+								"347460114965311"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate_Fails_Invalid_Length_Min",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200-Ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Valid Data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.issuingNetwork).to.eql(\"Visa\");\r",
+									"    pm.expect(jsonData.valid).to.eql(false);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/CreditCard/471656277526267",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"CreditCard",
+								"471656277526267"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate_Fails_Invalid_Length_Max",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200-Ok\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Valid Data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.issuingNetwork).to.eql(\"Visa\");\r",
+									"    pm.expect(jsonData.valid).to.eql(false);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/CreditCard/47165627752626772831",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"CreditCard",
+								"47165627752626772831"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate_BadRequest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400-BadRequest\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Valid Data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.issuingNetwork).to.eql(\"Bad Request\");\r",
+									"    pm.expect(jsonData.valid).to.eql(false);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/CreditCard/NOCREDITCARD",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"CreditCard",
+								"NOCREDITCARD"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate_NotFound",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404-NotFound\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Valid Data\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.issuingNetwork).to.eql(\"Not Found\");\r",
+									"    pm.expect(jsonData.valid).to.eql(false);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/CreditCard/7532040459797630",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"CreditCard",
+								"7532040459797630"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseUrl",
+			"value": "https://localhost:5001/api/v1",
+			"type": "string"
+		}
+	]
+}
