@@ -62,6 +62,7 @@ namespace MoneyBankAPI.Controllers
                 return BadRequest();
             }
 
+            // ESto Podria ir en otra Funcion por que ademas Rompe SOLID
             _context.Entry(account).State = EntityState.Modified;
 
             try
@@ -108,6 +109,7 @@ namespace MoneyBankAPI.Controllers
                 return BadRequest("El balance debe ser mayor que 0.");
             }
 
+            // El Crear Cuenta deberia ir en Otra Funcion, Adicional Rompe SOLID
             if (account.AccountType == 'C')
             {
                 account.BalanceAmount += MAX_OVERDRAFT;
@@ -163,6 +165,7 @@ namespace MoneyBankAPI.Controllers
                 return BadRequest("El monto del depósito debe ser mayor que 0.");
             }
 
+            // Esto deberia ir en Otra Funcion 
             account.BalanceAmount += depositTransaction.ValueAmount;
 
             if (account.AccountType == 'C')
@@ -212,6 +215,7 @@ namespace MoneyBankAPI.Controllers
                 return BadRequest("El monto del retiro debe ser mayor que 0.");
             }
 
+            // Esta Lofica deberia ir en Ora Funcion, Tambien Rompe SOLID
             if (withdrawalTransaction.ValueAmount <= account.BalanceAmount)
             {
                 account.BalanceAmount -= withdrawalTransaction.ValueAmount;
