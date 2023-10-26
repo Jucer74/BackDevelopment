@@ -72,6 +72,7 @@ namespace MoneyBankAPI.Controllers
                 return BadRequest();
             }
 
+            // Esta Logica podria ir en otra Funcion
             if (account.AccountType == Constants.ACCOUNT_TYPE_SAVINGS)
             {
                 account.BalanceAmount += transaction.ValueAmount;
@@ -95,6 +96,8 @@ namespace MoneyBankAPI.Controllers
             {
                 return BadRequest();
             }
+
+            // Esto rompe SOLId, deberia ir en otra Funcion
             _context.Entry(account).State = EntityState.Modified;
 
             try
@@ -132,6 +135,8 @@ namespace MoneyBankAPI.Controllers
             {
                 return Problem("Entity set 'AppdbContext.Accounts'  is null.");
             }
+
+            // Esto Rompe SOLId, deberi en otra Funcion
             _context.Accounts.Add(account);
             await _context.SaveChangesAsync();
 

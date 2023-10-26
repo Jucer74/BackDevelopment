@@ -16,7 +16,8 @@ namespace MoneyBankAPI.Models
         public char AccountType { get; set; } = Constants.ACCOUNT_TYPE_SAVINGS;
 
         [Required(ErrorMessage = "Fecha de apertura de cuenta requerido")]
-        [StringLength(Constants.DATETIME_LENGTH, ErrorMessage ="La Longitud Maxima del Nombre es de 19 Caracteres")]
+        //Esta Anotacion es incorrecta
+        //[StringLength(Constants.DATETIME_LENGTH, ErrorMessage ="La Longitud Maxima del Nombre es de 19 Caracteres")]
         public DateTime CreationDate { get; set; } = DateTime.Now;
 
         [Required(ErrorMessage = "Numero de cuenta requerido")]
@@ -28,11 +29,13 @@ namespace MoneyBankAPI.Models
         public string OwnerName { get; set; } = null!;
 
         [Required(ErrorMessage = "Balance de la cuenta requerido")]
-        [Range(Constants.MIN_RANGE, int.MaxValue, ErrorMessage = "El valor debe ser mayor a 0")]
+        // El Valor es un Decimal, No se uede usar in IN.MAXVALUE por que es un valor Entero
+        //[Range(Constants.MIN_RANGE, int.MaxValue, ErrorMessage = "El valor debe ser mayor a 0")]
         public decimal BalanceAmount { get; set; }
 
         [Required(ErrorMessage = "Credito disponible requerido")]
-        [Range(Constants.MIN_RANGE, Constants.MAX_OVERDRAFT, ErrorMessage = "El valor debe ser mayor a 0")]
+        // Igual que el Valor Anterior
+        //[Range(Constants.MIN_RANGE, Constants.MAX_OVERDRAFT, ErrorMessage = "El valor debe ser mayor a 0")]
         public decimal OverdraftAmount { get; set; }
 
         
