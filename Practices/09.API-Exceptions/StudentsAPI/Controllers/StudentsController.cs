@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using StudentsAPI.Context;
 using StudentsAPI.Models;
+using StudentsAPI.Exceptions;
 
 namespace StudentsAPI.Controllers
 {
@@ -22,7 +23,7 @@ namespace StudentsAPI.Controllers
         {
             if (_context.Students == null)
             {
-                return NotFound();
+                throw new BusinessException($"List of students void");
             }
             return await _context.Students.ToListAsync();
         }
@@ -66,7 +67,7 @@ namespace StudentsAPI.Controllers
             {
                 if (!StudentExists(id))
                 {
-                    return NotFound();
+                    throw new NotFoundException($"Student: {id} not Found");
                 }
                 else
                 {
@@ -98,12 +99,12 @@ namespace StudentsAPI.Controllers
         {
             if (_context.Students == null)
             {
-                return NotFound();
+                throw new BadRequestException($"Context void");
             }
             var student = await _context.Students.FindAsync(id);
             if (student == null)
             {
-                return NotFound();
+                throw new BadRequestException($"Student void");
             }
 
             _context.Students.Remove(student);
