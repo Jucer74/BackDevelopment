@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentsAPI.Context;
+using StudentsAPI.Exceptions;
 using StudentsAPI.Models;
 
 namespace StudentsAPI.Controllers
@@ -22,7 +23,9 @@ namespace StudentsAPI.Controllers
         {
             if (_context.Students == null)
             {
-                return NotFound();
+                //return NotFound();
+                throw new InvalidOperationException("The Students DbSet is not initialized.");
+
             }
             return await _context.Students.ToListAsync();
         }
@@ -33,16 +36,17 @@ namespace StudentsAPI.Controllers
         {
             if (_context.Students == null)
             {
-                return NotFound();
+                //return NotFound();
+                throw new InvalidOperationException("The Students DbSet is not initialized.");
             }
             var student = await _context.Students.FindAsync(id);
 
             if (student == null)
             {
-                return NotFound();
+                //return NotFound();
+                throw new NotFoundException($"Student:{id} was not found.");
             }
-            
-
+           
             return student;
         }
 
@@ -53,7 +57,13 @@ namespace StudentsAPI.Controllers
         {
             if (id != student.Id)
             {
-                return BadRequest();
+                //return BadRequest();
+                throw new BadRequestException("Student ID does not match the provided data.");
+            }
+
+            if (!StudentExists(id))
+            {
+                throw new NotFoundException($"Student:{id} was not found.");
             }
 
             _context.Entry(student).State = EntityState.Modified;
@@ -62,16 +72,10 @@ namespace StudentsAPI.Controllers
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException ex)
             {
-                if (!StudentExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                // Este bloque se activará si hay un conflicto de concurrencia real
+                throw new Exception("A concurrency error occurred.", ex);
             }
 
             return NoContent();
@@ -84,7 +88,8 @@ namespace StudentsAPI.Controllers
         {
             if (_context.Students == null)
             {
-                return Problem("Entity set 'AppdbContext.Students'  is null.");
+                //return NotFound();
+                throw new InvalidOperationException("The Students DbSet is not initialized.");
             }
             _context.Students.Add(student);
             await _context.SaveChangesAsync();
@@ -98,12 +103,15 @@ namespace StudentsAPI.Controllers
         {
             if (_context.Students == null)
             {
-                return NotFound();
+                //return NotFound();
+                throw new InvalidOperationException("The Students DbSet is not initialized.");
             }
             var student = await _context.Students.FindAsync(id);
+
             if (student == null)
             {
-                return NotFound();
+                //return NotFound();
+                throw new NotFoundException($"Student:{id} was not found.");
             }
 
             _context.Students.Remove(student);
