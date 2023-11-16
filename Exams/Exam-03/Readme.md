@@ -666,7 +666,7 @@ namespace CreditBank.Api.Controllers
 ### Observaciones
 1. Limpie el proyecto, eliminando la referencia a controladores y modelos innecesarios, por ejemplo el controladore del clima (al controladore del clima (**WeatherForecastController**) y el modelo (**WeatherForecast**)
 2. Compile, ejecute y pruebe. Recuerde usar la Version de **CreditBank.Api** y no la version de IIS Express.
-
+3. La PI debe funcionar en un Contenedor y la Base de datos debe funcionar en otro contenedor y ambos deben poder verse por medio de una Network dentro de Docker, para ello debe crear el archivo Docker-Compose.yml y hacerlo parte de la entrega de este proyecto.
 
 # Errores y Excepciones
 Para el manejo de errores y Excepciones, puede usar las excepciones de negocio de la carpeta de **Exceptions** de la siguiente forma.
@@ -724,12 +724,14 @@ public async Task<ActionResult<IEnumerable<ReportedCard>>> GetAllReportedCardsBy
 De esta forma se controla todo el flujo te la aplicacion y se retornan los datos correctamente.
 
 
+
 # Recursos
 Estos son algunos recursos guia para desarrollar el ejercicio
 * [Tutorial: Create a web API with ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-5.0&tabs=visual-studio#over-post)
 * [Learn ASP.NET Web API](https://www.tutorialsteacher.com/webapi)
 * [Entity Framework Tutorial](https://www.entityframeworktutorial.net/)
-* [Docker Compose Network] (https://docs.docker.com/compose/networking/)
+* [Docker Compose Network](https://docs.docker.com/compose/networking/)
+* 
 
 # NOTA
 RECUERDE SUBIR SU SOLUCIÓN A SU RAMA DE ESTE REPOSITORIO.
