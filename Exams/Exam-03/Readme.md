@@ -729,7 +729,7 @@ Estos son algunos recursos guia para desarrollar el ejercicio
 * [Tutorial: Create a web API with ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-5.0&tabs=visual-studio#over-post)
 * [Learn ASP.NET Web API](https://www.tutorialsteacher.com/webapi)
 * [Entity Framework Tutorial](https://www.entityframeworktutorial.net/)
-
+* [Docker Compose Network] (https://docs.docker.com/compose/networking/)
 
 # NOTA
 RECUERDE SUBIR SU SOLUCIÓN A SU RAMA DE ESTE REPOSITORIO.
