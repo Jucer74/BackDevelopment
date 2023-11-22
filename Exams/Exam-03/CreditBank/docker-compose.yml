@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: diegoPASTRANA7725
+    ports:
+      - '3307:3306'
+    expose:
+      - '3307'
+    volumes:
+      - my-db:/var/lib/mysql
+    networks:
+      - network
+  creditbankapi:
+    image: ${DOCKER_REGISTRY-}creditbankapi
+    ports:
+      - '2001:443'
+      - '2000:80'
+    expose:
+      - '2000'
+      - '2001'
+    build:
+      context: .
+      dockerfile: CreditBank/Dockerfile
+    networks:
+      - network
+volumes:
+  my-db:
+networks:
+  network:
+    driver: bridge
+    
+ 
